@@ -3,18 +3,22 @@ import Nav from "./components/Nav";
 import Card from "./components/Card";
 import "./index.css";
 import Results from "./components/Results";
+import MyList from "./components/MyList";
 
 const App = () => {
   // const [homeList, setHomeList] = useState([]);
-  // const [myList, setMyList] = useState([]);
+
+  const [myList, setMyList] = useState([]);
+  const [myListCards, setMyListCards] = useState([]);
+  const [isMyListActive, setMyListActive] = useState(false);
+
 
   const [results, setResults] = useState([]);
   const [resultCards, setResultCards] = useState([]);
   const [isResultsActive, setResultsActive] = useState(false);
 
   // const [isHomeActive, setHomeActive] = useState(true);
-  // const [isMyListActive, setMyListActive] = useState(false);
-  // const [isResultsActive, setResultsActive] = useState(true);
+
 
   const searchTvShow = async (value) => {
     try {
@@ -23,12 +27,7 @@ const App = () => {
         { mode: "cors" }
       );
       const tvShows = await response.json();
-      // return tvShows;
       setResults(tvShows);
-      console.log(tvShows);
-      // return tvShows.map((show) => (
-      //   <Card key={show.show.id} showData={show.show} setMyList={setMyList} />
-      // ));
     } catch (error) {
       console.error("Error:API", error);
     }
@@ -40,11 +39,23 @@ const App = () => {
         <Card
           key={show.show.id}
           showData={show.show}
+          setMyList={setMyList}
+        />
+      ))
+    );
+
+    setMyListCards(
+      myList.map((show) => (
+        <Card
+          key={show.id}
+          showData={show}
           // setMyList={setMyList}
         />
       ))
     );
-  }, [results]);
+  }, [myList, results]);
+
+  
 
   // const hompageTvShows = async () => {
   //   try {
@@ -62,10 +73,12 @@ const App = () => {
     <div className="App">
       <Nav
         searchTvShow={searchTvShow}
+        setMyListActive={setMyListActive}
         setResults={setResults}
         setResultsActive={setResultsActive}
       />
       <h1>Results:</h1>
+      <MyList myListCards={myListCards} isMyListActive={isMyListActive} />
       <Results resultCards={resultCards} isResultsActive={isResultsActive} />
     </div>
   );

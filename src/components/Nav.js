@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Nav = (props) => {
-  const { setResults, setResultsActive, searchTvShow } = props;
+  const { setMyListActive, setResultsActive, searchTvShow } = props;
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearchInput = (e) => {
@@ -9,14 +9,20 @@ const Nav = (props) => {
   };
 
   const handleSearch = () => {
-    // setResults([]);
     searchTvShow(searchInput);
+    setMyListActive(false); 
     setResultsActive(true);
   };
+
+  const handleMyList = () => {
+    setMyListActive(true); 
+    setResultsActive(false);
+  }
+
   return (
     <div className="Nav">
       <button className="homeBtn">Home</button>
-      <button className="myListBtn">My List</button>
+      <button onClick={handleMyList} className="myListBtn">My List</button>
       <label htmlFor="search">Search</label>
       <input
         onChange={handleSearchInput}
