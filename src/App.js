@@ -1,10 +1,11 @@
+import "./index.css";
 import React, { useState, useEffect } from "react";
 import Nav from "./components/Nav";
 import Card from "./components/Card";
-import "./index.css";
 import Results from "./components/Results";
 import MyList from "./components/MyList";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [home, setHome] = useState([]);
@@ -38,7 +39,6 @@ const App = () => {
         mode: "cors",
       });
       const tvShows = await response.json();
-      console.log(tvShows[0].rating);
       setHome(
         tvShows.sort(
           (show1, show2) => show2.rating.average - show1.rating.average
@@ -58,7 +58,12 @@ const App = () => {
 
     setMyListCards(
       myList.map((show) => (
-        <Card key={show.id} showData={show} setMyList={setMyList} />
+        <Card
+          key={show.id}
+          showData={show}
+          setMyList={setMyList}
+          isMyListActive={isMyListActive}
+        />
       ))
     );
 
@@ -67,7 +72,7 @@ const App = () => {
         <Card key={show.id} showData={show} setMyList={setMyList} />
       ))
     );
-  }, [home, myList, results]);
+  }, [home, myList, results, isMyListActive]);
 
   return (
     <div className="App">
@@ -81,6 +86,7 @@ const App = () => {
       <Home homeCards={homeCards} isHomeActive={isHomeActive} />
       <MyList myListCards={myListCards} isMyListActive={isMyListActive} />
       <Results resultCards={resultCards} isResultsActive={isResultsActive} />
+      <Footer />
     </div>
   );
 };
