@@ -1,5 +1,6 @@
 import "./index.css";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import Card from "./components/Card";
 import Results from "./components/Results";
@@ -10,15 +11,12 @@ import Footer from "./components/Footer";
 const App = () => {
   const [home, setHome] = useState([]);
   const [homeCards, setHomeCards] = useState([]);
-  const [isHomeActive, setHomeActive] = useState(true);
 
   const [myList, setMyList] = useState([]);
   const [myListCards, setMyListCards] = useState([]);
-  const [isMyListActive, setMyListActive] = useState(false);
 
   const [results, setResults] = useState([]);
   const [resultCards, setResultCards] = useState([]);
-  const [isResultsActive, setResultsActive] = useState(false);
 
   const searchTvShow = async (value) => {
     try {
@@ -45,7 +43,7 @@ const App = () => {
         )
       );
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:API", error);
     }
   };
 
@@ -62,7 +60,6 @@ const App = () => {
           key={show.id}
           showData={show}
           setMyList={setMyList}
-          isMyListActive={isMyListActive}
         />
       ))
     );
@@ -72,22 +69,42 @@ const App = () => {
         <Card key={show.id} showData={show} setMyList={setMyList} />
       ))
     );
-  }, [home, myList, results, isMyListActive]);
+
+    // localStorage.setItem('myShows', JSON.stringify(myList));
+
+  }, [home, myList, results ]);
+
+  // useEffect(() => {
+  //   const myShows = JSON.parse(localStorage.getItem('myShows'));
+    
+  //   if (myShows) {
+  //     setMyListCards(
+  //       myShows.map((show) => (
+  //         <Card
+  //           key={show.id}
+  //           showData={show}
+  //           setMyList={setMyList}
+  //           isMyListActive={isMyListActive}
+  //         />
+  //       ))
+  //     );
+  //   }
+  // })
+
+  // homeTvShows();
 
   return (
-    <div className="App">
-      <Nav
-        homeTvShows={homeTvShows}
-        searchTvShow={searchTvShow}
-        setHomeActive={setHomeActive}
-        setMyListActive={setMyListActive}
-        setResultsActive={setResultsActive}
-      />
-      <Home homeCards={homeCards} isHomeActive={isHomeActive} />
-      <MyList myListCards={myListCards} isMyListActive={isMyListActive} />
-      <Results resultCards={resultCards} isResultsActive={isResultsActive} />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Nav homeTvShows={homeTvShows} searchTvShow={searchTvShow} />
+        <Routes>
+          <Route path="/" element={ <Home homeCards={homeCards} />} />
+          <Route path="/my-list" element={ <MyList myListCards={myListCards} />} />
+          <Route path="/results" element={ <Results resultCards={resultCards} />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 };
 

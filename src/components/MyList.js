@@ -2,7 +2,7 @@ import React from "react";
 
 const MyList = (props) => {
   return (
-    <div className={props.isMyListActive ? "myList" : "hidden"}>
+    <div className={"myList"}>
       <h1>My List</h1>
       <div className="cardGrid">{props.myListCards}</div>
     </div>

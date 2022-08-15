@@ -80,6 +80,7 @@ input {
 }
 
 .home, .myList, .searchResults {
+  margin: 0 100px;
   opacity: 1;
   visibility: visible;
   overflow: auto;
