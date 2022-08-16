@@ -2,21 +2,47 @@ import "./index.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
-import Card from "./components/Card";
-import Results from "./components/Results";
-import MyList from "./components/MyList";
 import Home from "./components/Home";
+import Results from "./components/Results";
+import ListPage from "./components/ListPage";
+import Card from "./components/Card";
 import Footer from "./components/Footer";
 
 const App = () => {
   const [home, setHome] = useState([]);
   const [homeCards, setHomeCards] = useState([]);
 
-  const [myList, setMyList] = useState([]);
-  const [myListCards, setMyListCards] = useState([]);
-
   const [results, setResults] = useState([]);
   const [resultCards, setResultCards] = useState([]);
+
+  const [watchingList, setWatchingList] = useState([]);
+  const [watchingCards, setWatchingCards] = useState([]);
+
+  const [wantToWatchList, setWantToWatchList] = useState([]);
+  const [wantToWatchCards, setwantToWatchCards] = useState([]);
+
+  const [completedList, setCompletedList] = useState([]);
+  const [completedCards, setCompletedCards] = useState([]);
+
+  const [droppedList, setDroppedList] = useState([]);
+  const [droppedCards, setDroppedCards] = useState([]);
+
+  const homeTvShows = async () => {
+    try {
+      const response = await fetch("https://api.tvmaze.com/shows", {
+        mode: "cors",
+      });
+      const tvShows = await response.json();
+      console.log(tvShows);
+      setHome(
+        tvShows.sort(
+          (show1, show2) => show2.rating.average - show1.rating.average
+        )
+      );
+    } catch (error) {
+      console.error("Error:API", error);
+    }
+  };
 
   const searchTvShow = async (value) => {
     try {
@@ -31,60 +57,106 @@ const App = () => {
     }
   };
 
-  const homeTvShows = async () => {
-    try {
-      const response = await fetch("https://api.tvmaze.com/shows", {
-        mode: "cors",
-      });
-      const tvShows = await response.json();
-      setHome(
-        tvShows.sort(
-          (show1, show2) => show2.rating.average - show1.rating.average
-        )
-      );
-    } catch (error) {
-      console.error("Error:API", error);
-    }
-  };
-
   useEffect(() => {
-    setResultCards(
-      results.map((show) => (
-        <Card key={show.show.id} showData={show.show} setMyList={setMyList} />
-      ))
-    );
-
-    setMyListCards(
-      myList.map((show) => (
+    setHomeCards(
+      home.map((show) => (
         <Card
           key={show.id}
           showData={show}
-          setMyList={setMyList}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
         />
       ))
     );
 
-    setHomeCards(
-      home.map((show) => (
-        <Card key={show.id} showData={show} setMyList={setMyList} />
+    setResultCards(
+      results.map((show) => (
+        <Card
+          key={show.show.id}
+          showData={show.show}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+        />
       ))
     );
 
-    // localStorage.setItem('myShows', JSON.stringify(myList));
+    setWatchingCards(
+      watchingList.map((show) => (
+        <Card
+          key={show.id}
+          showData={show}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+        />
+      ))
+    );
 
-  }, [home, myList, results ]);
+    setwantToWatchCards(
+      wantToWatchList.map((show) => (
+        <Card
+          key={show.id}
+          showData={show}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+        />
+      ))
+    );
+
+    setCompletedCards(
+      completedList.map((show) => (
+        <Card
+          key={show.id}
+          showData={show}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+        />
+      ))
+    );
+
+    setDroppedCards(
+      droppedList.map((show) => (
+        <Card
+          key={show.id}
+          showData={show}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+        />
+      ))
+    );
+
+    // localStorage.setItem('myShows', JSON.stringify(ListPage));
+  }, [
+    home,
+    results,
+    watchingList,
+    wantToWatchList,
+    completedList,
+    droppedList,
+  ]);
 
   // useEffect(() => {
   //   const myShows = JSON.parse(localStorage.getItem('myShows'));
-    
+
   //   if (myShows) {
-  //     setMyListCards(
+  //     setListPageCards(
   //       myShows.map((show) => (
   //         <Card
   //           key={show.id}
   //           showData={show}
-  //           setMyList={setMyList}
-  //           isMyListActive={isMyListActive}
+  //           setListPage={setListPage}
+  //           isListPageActive={isListPageActive}
   //         />
   //       ))
   //     );
@@ -98,9 +170,38 @@ const App = () => {
       <div className="App">
         <Nav homeTvShows={homeTvShows} searchTvShow={searchTvShow} />
         <Routes>
-          <Route path="/" element={ <Home homeCards={homeCards} />} />
-          <Route path="/my-list" element={ <MyList myListCards={myListCards} />} />
-          <Route path="/results" element={ <Results resultCards={resultCards} />} />
+          <Route path="/" element={<Home homeCards={homeCards} />} />
+          <Route
+            path="/results"
+            element={<Results resultCards={resultCards} />}
+          />
+          <Route
+            path="/currently-watching"
+            element={
+              <ListPage
+                listCards={watchingCards}
+                title={"Currently Watching"}
+              />
+            }
+          />
+          <Route
+            path="/want-to-watch"
+            element={
+              <ListPage listCards={wantToWatchCards} title={"Want To Watch"} />
+            }
+          />
+          <Route
+            path="/completed"
+            element={
+              <ListPage listCards={completedCards} title={"Completed Shows"} />
+            }
+          />
+          <Route
+            path="/dropped"
+            element={
+              <ListPage listCards={droppedCards} title={"Dropped Shows"} />
+            }
+          />
         </Routes>
         <Footer />
       </div>

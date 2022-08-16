@@ -21,21 +21,43 @@ const Nav = (props) => {
   };
 
   const handleEnterKey = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       searchTvShow(searchInput); //Needs to know to switch route
     }
-  }
+  };
 
   return (
     <nav className="nav">
-      <div className="pageTabs">
-        <Link to={"/"} onClick={handleHome} className="homeBtn">
-          <img src={homeIcon} alt="home button"></img>Home
-        </Link>
-        <Link to="/my-list" className="myListBtn">
-          My List
-        </Link>
-      </div>
+      {/* <div className="pageTabs"> */}
+      <ul className="pageTabs">
+        <li>
+          <Link to={"/"} onClick={handleHome} className="homeBtn">
+            {/* <img src={homeIcon} alt="home button"></img> */}
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/currently-watching" className="myListBtn">
+            Currently Watching
+          </Link>
+        </li>
+        <li>
+          <Link to="/want-to-watch" className="myListBtn">
+            Want To Watch
+          </Link>
+        </li>
+        <li>
+          <Link to="/completed" className="myListBtn">
+            Completed
+          </Link>
+        </li>
+        <li>
+          <Link to="/dropped" className="myListBtn">
+            Dropped
+          </Link>
+        </li>
+      </ul>
+      {/* </div> */}
       <div className="searchSection">
         <label htmlFor="search">Search</label>
         <input
@@ -44,7 +66,7 @@ const Nav = (props) => {
           id="search"
           type="text"
           value={searchInput}
-          placeholder={"Search TV Show"}
+          placeholder={"Search TV Shows"}
         ></input>
         <Link to="/results" onClick={handleSearch} className="searchBtn">
           <img src={searchIcon} alt="search button"></img>

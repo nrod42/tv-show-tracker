@@ -1,18 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import Collapsible from "react-collapsible";
-import "../index.css";
 import defaultImg from "../img/defaultImg.webp";
 
 const Card = (props) => {
-  const { image, name, rating, summary } = props.showData;
-  const { setMyList, isMyListActive } = props;
+  const [popupClass, setPopupClass] = useState(false);
 
-  const handleAddToList = () => {
-    setMyList((prevState) => [...prevState, props.showData]);
+  const { image, name, rating, summary } = props.showData;
+  const {
+    setWatchingList,
+    setWantToWatchList,
+    setCompletedList,
+    setDroppedList,
+  } = props;
+
+  const handleAddToWatching = () => {
+    setWatchingList((prevState) => [...prevState, props.showData]);
+  };
+
+  const handleAddToWanted = () => {
+    setWantToWatchList((prevState) => [...prevState, props.showData]);
+  };
+
+  const handleAddToCompleted = () => {
+    setCompletedList((prevState) => [...prevState, props.showData]);
+  };
+
+  const handleAddToDropped = () => {
+    setDroppedList((prevState) => [...prevState, props.showData]);
+  };
+
+  const toggleListPopup = () => {
+    setPopupClass((prevState) => !prevState);
   };
 
   return (
     <div className="card">
+      {/* <div className="listBtns"> */}
+      <div onClick={toggleListPopup} className={"addToListBtn"}>
+        Add
+        <ul className={popupClass ? "listPopup show" : "listPopup"}>
+          <li>
+            <button onClick={handleAddToWatching}>Currently Watching</button>
+          </li>
+          <li>
+            <button onClick={handleAddToWanted}>Want to Watch</button>
+          </li>
+          <li>
+            <button onClick={handleAddToCompleted}>Completed</button>
+          </li>
+          <li>
+            <button onClick={handleAddToDropped}>Dropped</button>
+          </li>
+        </ul>
+      </div>
+      {/* <button className={"removeFromListBtn"}>Remove</button> */}
+      {/* </div> */}
+
       <Collapsible
         trigger={
           <div className="mainCardContent">
@@ -31,15 +74,6 @@ const Card = (props) => {
           dangerouslySetInnerHTML={{ __html: summary }}
         ></div>
       </Collapsible>
-      <button
-        onClick={handleAddToList}
-        className={isMyListActive ? "hidden" : "addToListBtn"}
-      >
-        Add
-      </button>
-      <button className={isMyListActive ? "removeFromListBtn" : "hidden"}>
-        Remove
-      </button>
     </div>
   );
 };
