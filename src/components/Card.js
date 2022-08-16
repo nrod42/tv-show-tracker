@@ -36,7 +36,35 @@ const Card = (props) => {
   return (
     <div className="card">
       {/* <div className="listBtns"> */}
-      <div onClick={toggleListPopup} className={"addToListBtn"}>
+      {/* <div onClick={toggleListPopup} className={"addToListBtn"}>
+        Add
+        <ul className={popupClass ? "listPopup show" : "listPopup"}>
+          <li>
+            <button onClick={handleAddToWatching}>Currently Watching</button>
+          </li>
+          <li>
+            <button onClick={handleAddToWanted}>Want to Watch</button>
+          </li>
+          <li>
+            <button onClick={handleAddToCompleted}>Completed</button>
+          </li>
+          <li>
+            <button onClick={handleAddToDropped}>Dropped</button>
+          </li>
+        </ul>
+      </div> */}
+      {/* <button className={"removeFromListBtn"}>Remove</button> */}
+      {/* </div> */}
+
+      <Collapsible
+        trigger={
+          <div className="mainCardContent">
+            <img
+              className="cardImg"
+              src={image !== null ? image.medium : defaultImg}
+              alt={`${name} poster`}
+            ></img>
+                  <div onClick={toggleListPopup} className={"addToListBtn"}>
         Add
         <ul className={popupClass ? "listPopup show" : "listPopup"}>
           <li>
@@ -53,17 +81,6 @@ const Card = (props) => {
           </li>
         </ul>
       </div>
-      {/* <button className={"removeFromListBtn"}>Remove</button> */}
-      {/* </div> */}
-
-      <Collapsible
-        trigger={
-          <div className="mainCardContent">
-            <img
-              className="cardImg"
-              src={image !== null ? image.medium : defaultImg}
-              alt={`${name} poster`}
-            ></img>
             <h3 className="title">{name}</h3>
             <p className="rating">Rating: {rating.average}/10</p>
           </div>

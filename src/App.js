@@ -163,6 +163,10 @@ const App = () => {
   //   }
   // })
 
+  useEffect(() => {
+    homeTvShows();
+  }, [])
+
   // homeTvShows();
 
   return (
@@ -175,8 +179,9 @@ const App = () => {
             path="/results"
             element={<Results resultCards={resultCards} />}
           />
+          
           <Route
-            path="/currently-watching"
+            path="/lists/currently-watching"
             element={
               <ListPage
                 listCards={watchingCards}
@@ -185,19 +190,19 @@ const App = () => {
             }
           />
           <Route
-            path="/want-to-watch"
+            path="/lists/want-to-watch"
             element={
               <ListPage listCards={wantToWatchCards} title={"Want To Watch"} />
             }
           />
           <Route
-            path="/completed"
+            path="/lists/completed"
             element={
               <ListPage listCards={completedCards} title={"Completed Shows"} />
             }
           />
           <Route
-            path="/dropped"
+            path="/lists/dropped"
             element={
               <ListPage listCards={droppedCards} title={"Dropped Shows"} />
             }

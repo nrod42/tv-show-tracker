@@ -63,14 +63,14 @@ li:hover{
 
 li a {
   text-decoration: none;
- 
+  color: #fff;
   padding: 10px;
   display: block;
   text-align: center;
   padding: 14px 16px;
 }
 
-li a:visited, li a:active {
+li a:visited, li a:active, li a:focus {
   color: #fff;
 }
 
@@ -93,6 +93,7 @@ li a:visited, li a:active {
 }
 
 .nav {
+  opacity: 0.85;
   background: #05445E;
   position: sticky;
   top: 0;
@@ -188,7 +189,9 @@ li a:visited, li a:active {
 } */
 
 .addToListBtn {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
   display: inline-block;
   cursor: pointer;
   background: #05445E;
