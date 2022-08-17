@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import homeIcon from "../img/home_icon.svg";
+// import homeIcon from "../img/home_icon.svg";
 import searchIcon from "../img/search_icon.svg";
 
 const Nav = (props) => {
