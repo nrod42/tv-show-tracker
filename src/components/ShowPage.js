@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 const ShowPage = (props) => {
-  const { title, ratings, image, plot, cast, year } = props;
+  const { Title, imdbRating, Poster, Plot, Actors, year } = props.showInfo;
+  console.log(props.showInfo)
 
   return (
     <div className="showPage">
       <div className="topHalf">{/* <img></img> */}</div>
-      <div className="showPagePoster">{image}</div>
-      <h2>{title}</h2>
+      <div className="showPagePoster"><img src = {Poster}/></div>
+      <h2>{Title}</h2>
       <p>{year}</p>
-      <p>{ratings}</p>
-      <p>{cast}</p>
-      <p>{plot}</p>
+      <p>{imdbRating}</p>
+      <p>{Actors}</p>
+      <p>{Plot}</p>
     </div>
   );
 };

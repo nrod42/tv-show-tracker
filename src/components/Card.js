@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import Collapsible from "react-collapsible";
+// import Collapsible from "react-collapsible"; uninstall
 import defaultImg from "../img/defaultImg.webp";
 
 const Card = (props) => {
   const [popupClass, setPopupClass] = useState(false);
-  //   const summary = "lorem wdinwfi wnfwifw fwfwf";
-  const { image, title, imDbRating, id } = props.showData;
+  const { Poster, Title, imdbRating, imdbID } = props.showData;
   const {
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
     setDroppedList,
-    setShowPageId,
+    getTvShow,
+
   } = props;
 
   const handleAddToWatching = () => {
@@ -35,23 +35,18 @@ const Card = (props) => {
     setPopupClass((prevState) => !prevState);
   };
 
-  //   const showShowPage = () => {
-  //     setShowPageId(id);
-
-  //   }
+const handleShowPage = () => {
+  getTvShow(imdbID)
+};
 
   return (
     <div className="card">
-      {/* <Collapsible */}
-      {/* trigger={ */}
-      {/* <Link to={`/shows/id:${id}`}> */}
-      <div className="mainCardContent" onClick={() => setShowPageId(id)}>
-        {/* <Link to={`/shows/id:${id}`} /> */}
-        <Link to={`/shows/id:${id}`}>
+      <div className="mainCardContent" onClick={handleShowPage}>
+        <Link to={`/shows/id:${imdbID}`}>
           <img
             className="cardImg"
-            src={image !== null ? image : defaultImg}
-            alt={`${title} poster`}
+            src={Poster !== null ? Poster : defaultImg}
+            alt={`${Title} poster`}
           ></img>
         </Link>
         <div onClick={toggleListPopup} className={"addToListBtn"}>
@@ -71,17 +66,9 @@ const Card = (props) => {
             </li>
           </ul>
         </div>
-        <h3 className="title">{title}</h3>
-        <p className="rating">Rating: {imDbRating}/10</p>
+        <h3 className="title">{Title}</h3>
+        <p className="rating">Rating: {imdbRating}/10</p>
       </div>
-      {/* </Link> */}
-      {/* } */}
-      {/* > */}
-      {/* <div
-          className="summary"
-          dangerouslySetInnerHTML={{ __html: summary }}
-        ></div> */}
-      {/* </Collapsible> */}
     </div>
   );
 };

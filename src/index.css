@@ -219,6 +219,12 @@ li a:visited, li a:active, li a:focus {
   width: 100%;
 }
 
+.showPage {
+height: auto;
+  width: 100%;
+
+}
+
 .footer {
   background: #189AB4;
   padding: 5px 0;
