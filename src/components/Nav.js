@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import searchIcon from "../img/search_icon.svg";
 
 const Nav = (props) => {
-  const { homeTvShows, searchTvShow } = props;
+  const { getTopRatedTvShows, searchTvShow } = props;
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -13,7 +13,7 @@ const Nav = (props) => {
   };
 
   const handleHome = () => {
-    homeTvShows();
+    getTopRatedTvShows();
   };
 
   const handleSearch = () => {
@@ -28,7 +28,6 @@ const Nav = (props) => {
 
   return (
     <nav className="nav">
-      {/* <div className="pageTabs"> */}
       <ul className="pageTabs">
         <li>
           <Link to={"/"} onClick={handleHome} className="homeBtn">
@@ -57,7 +56,6 @@ const Nav = (props) => {
           </Link>
         </li>
       </ul>
-      {/* </div> */}
       <div className="searchSection">
         <label htmlFor="search">Search</label>
         <input

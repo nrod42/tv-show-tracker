@@ -31,17 +31,18 @@ const App = () => {
   const [showPage, setShowPage] = useState("");
   
 
-  const homeTvShows = async () => {
+  const getTopRatedTvShows = async () => {
     try {
       const response = await fetch(
-        // "https://imdb-api.com/en/API/MostPopularTVs/k_cham8dk3",
-        {
-          mode: "cors",
-        }
+        "https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=2",
+        {mode: "cors"}
       );
-      const tvShows = await response.json();
-      // console.log(tvShows);
-      setHome(tvShows.items);
+
+      const topRatedTv = await response.json();
+
+      const topTvShows = topRatedTv.results.map((show) => ({ id: show.id, poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`, title: show.name, year: show.first_air_date, rating: show.vote_average}))
+      console.log(topTvShows)
+      setHome(topTvShows);
     } catch (error) {
       console.error("Error:API", error);
     }
@@ -50,15 +51,13 @@ const App = () => {
   const searchTvShow = async (value) => {
     try {
       const response = await fetch(
-        // `https://imdb-api.com/en/API/SearchSeries/k_cham8dk3/${value}`,
         `https://www.omdbapi.com/?apikey=e746e10c&s=${value}&plot=full`,
         { mode: "cors" }
       );
       const tvShows = await response.json();
-      // console.log(tvShows.Search);
-      setResults(tvShows.Search); //instead of making array of objects, just make array of id's, then for each card, call the api and get the relevant info from the show poge which has much more info
-      //to make things etter, we can make the state objects custom, grabbing everything we need, that way, all the componenets only need to ref the same custom made object
-      //... properties. THen, if we ever change api or use multiple different api's, we only have to edit the custom obj made here in this function 
+      const searchResults = tvShows.Search.map((show) => ({ id: show.imdbID, poster: show.Poster, title: show.Title, year: show.Year, rating: show.imdbRating}))
+      setResults(searchResults); //instead of making array of objects, just make array of id's, then for each card, call the api and get the relevant info from the show poge which has much more info
+      
     } catch (error) {
       console.error("Error:API", error);
     }
@@ -67,15 +66,14 @@ const App = () => {
   const getTvShow = async (showId) => {
     try {
       const response = await fetch(
-        // `https://imdb-api.com/en/API/Title/k_cham8dk3/${showId}/Ratings`,
         `https://www.omdbapi.com/?apikey=e746e10c&i=${showId}&plot=full`,
         {
           mode: "cors",
         }
       );
       const tvShow = await response.json();
-      // console.log(tvShow);
-      setShowPage(tvShow);
+      const show = { id: tvShow.imdbID, poster: tvShow.Poster, title: tvShow.Title, rating: tvShow.imdbRating, actors:tvShow.Actors, plot:tvShow.Plot, year:tvShow.Year }
+      setShowPage(show);
     } catch (error) {
       console.error("Error:API", error);
     }
@@ -91,7 +89,6 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          // setShowPageId={setShowPageId}
           getTvShow={getTvShow}
 
         />
@@ -101,13 +98,12 @@ const App = () => {
     setResultCards(
       results.map((show) => (
         <Card
-          key={show.imdbID}
+          key={show.id}
           showData={show}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          // setShowPageId={setShowPageId}
           getTvShow={getTvShow}
 
         />
@@ -123,7 +119,6 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          // setShowPageId={setShowPageId}
           getTvShow={getTvShow}
 
         />
@@ -139,7 +134,6 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          // setShowPageId={setShowPageId}
           getTvShow={getTvShow}
 
         />
@@ -155,7 +149,6 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          // setShowPageId={setShowPageId}
           getTvShow={getTvShow}
 
         />
@@ -171,7 +164,6 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          // setShowPageId={setShowPageId}
           getTvShow={getTvShow}
           
           
@@ -180,7 +172,6 @@ const App = () => {
     );
 
     // localStorage.setDroppedList("droppedShowsList", JSON.stringify(droppedList));
-    // console.log(showPage)
   }, [
     home,
     results,
@@ -208,22 +199,19 @@ const App = () => {
   // })
 
   useEffect(() => {
-    homeTvShows();
+    getTopRatedTvShows();
   }, []);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav homeTvShows={homeTvShows} searchTvShow={searchTvShow} />
-        {/* <Nav></Nav> */}
+        <Nav getTopRatedTvShows={getTopRatedTvShows} searchTvShow={searchTvShow} />
         <Routes>
           <Route path="/" element={<Home homeCards={homeCards} />} />
           <Route
             path="/results"
             element={<Results resultCards={resultCards} />}
           />
-          {/* <Nav></Nav> */}
-          {/* <Route path="/lists" element={<ListTabPage />} /> */}
           <Route
             path="/lists/currently-watching"
             element={
@@ -252,7 +240,7 @@ const App = () => {
             }
           />
           <Route
-            path={`/shows/id:${showPage.imdbID}`}
+            path={`/shows/id:${showPage.id}`}
             element={
               <ShowPage
               showInfo={showPage}

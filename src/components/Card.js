@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import Collapsible from "react-collapsible"; uninstall
 import defaultImg from "../img/defaultImg.webp";
 
 const Card = (props) => {
   const [popupClass, setPopupClass] = useState(false);
-  const { Poster, Title, imdbRating, imdbID } = props.showData;
+  const { id, poster, title, rating, year } = props.showData;
   const {
     setWatchingList,
     setWantToWatchList,
@@ -35,18 +34,18 @@ const Card = (props) => {
     setPopupClass((prevState) => !prevState);
   };
 
-const handleShowPage = () => {
-  getTvShow(imdbID)
-};
+  const handleShowPage = () => {
+    getTvShow(id)
+  };
 
   return (
     <div className="card">
       <div className="mainCardContent" onClick={handleShowPage}>
-        <Link to={`/shows/id:${imdbID}`}>
+        <Link to={`/shows/id:${id}`}>
           <img
             className="cardImg"
-            src={Poster !== null ? Poster : defaultImg}
-            alt={`${Title} poster`}
+            src={poster !== null ? poster : defaultImg}
+            alt={`${title} poster`}
           ></img>
         </Link>
         <div onClick={toggleListPopup} className={"addToListBtn"}>
@@ -66,8 +65,9 @@ const handleShowPage = () => {
             </li>
           </ul>
         </div>
-        <h3 className="title">{Title}</h3>
-        <p className="rating">Rating: {imdbRating}/10</p>
+        <h3 className="title">{title}</h3>
+        <p>({year})</p>
+        <p className="rating">Rating: {rating}/10</p>
       </div>
     </div>
   );
