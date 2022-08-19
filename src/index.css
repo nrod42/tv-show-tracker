@@ -135,6 +135,10 @@ li a:visited, li a:active, li a:focus {
   gap: 20px;
 }
 
+.pageNavBtns {
+  display: flex;
+}
+
 .cardGrid {
   display: grid;
   gap: 20px;
@@ -191,7 +195,7 @@ li a:visited, li a:active, li a:focus {
 .addToListBtn {
   position: absolute;
   top: 0;
-  right: 0;
+  /* right: 50%; */
   display: inline-block;
   cursor: pointer;
   background: #05445E;
@@ -233,4 +237,26 @@ height: auto;
   text-align: center;
   margin-top: auto;
   margin-bottom: 0;
+}
+
+.showPagePoster {
+  position: relative;
+}
+
+.addToListBtnShowPage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  cursor: pointer;
+  background: #05445E;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.backdropImg {
+  width: 100%;
+  height: auto;
 }

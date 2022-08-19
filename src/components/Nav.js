@@ -36,23 +36,8 @@ const Nav = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/lists/currently-watching" className="myListBtn">
-            Currently Watching
-          </Link>
-        </li>
-        <li>
-          <Link to="/lists/want-to-watch" className="myListBtn">
-            Want To Watch
-          </Link>
-        </li>
-        <li>
-          <Link to="/lists/completed" className="myListBtn">
-            Completed
-          </Link>
-        </li>
-        <li>
-          <Link to="/lists/dropped" className="myListBtn">
-            Dropped
+          <Link to="/lists/" className="myListBtn">
+            Lists
           </Link>
         </li>
       </ul>

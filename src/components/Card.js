@@ -1,41 +1,19 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import defaultImg from "../img/defaultImg.webp";
+import AddToListBtn from "./AddToListBtn";
 
 const Card = (props) => {
-  const [popupClass, setPopupClass] = useState(false);
   const { id, poster, title, rating, year } = props.showData;
   const {
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
     setDroppedList,
-    getTvShow,
-
+    setShowPage,
   } = props;
 
-  const handleAddToWatching = () => {
-    setWatchingList((prevState) => [...prevState, props.showData]);
-  };
-
-  const handleAddToWanted = () => {
-    setWantToWatchList((prevState) => [...prevState, props.showData]);
-  };
-
-  const handleAddToCompleted = () => {
-    setCompletedList((prevState) => [...prevState, props.showData]);
-  };
-
-  const handleAddToDropped = () => {
-    setDroppedList((prevState) => [...prevState, props.showData]);
-  };
-
-  const toggleListPopup = () => {
-    setPopupClass((prevState) => !prevState);
-  };
-
   const handleShowPage = () => {
-    getTvShow(id)
+    setShowPage(props.showData);
   };
 
   return (
@@ -48,23 +26,15 @@ const Card = (props) => {
             alt={`${title} poster`}
           ></img>
         </Link>
-        <div onClick={toggleListPopup} className={"addToListBtn"}>
-          Add
-          <ul className={popupClass ? "listPopup show" : "listPopup"}>
-            <li>
-              <button onClick={handleAddToWatching}>Currently Watching</button>
-            </li>
-            <li>
-              <button onClick={handleAddToWanted}>Want to Watch</button>
-            </li>
-            <li>
-              <button onClick={handleAddToCompleted}>Completed</button>
-            </li>
-            <li>
-              <button onClick={handleAddToDropped}>Dropped</button>
-            </li>
-          </ul>
-        </div>
+
+        <AddToListBtn
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+          showData={props.showData}
+        />
+
         <h3 className="title">{title}</h3>
         <p>({year})</p>
         <p className="rating">Rating: {rating}/10</p>

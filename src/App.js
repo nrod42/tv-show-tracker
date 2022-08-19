@@ -8,10 +8,12 @@ import ListPage from "./components/ListPage";
 import Card from "./components/Card";
 import Footer from "./components/Footer";
 import ShowPage from "./components/ShowPage";
+import Lists from "./components/Lists";
 
 const App = () => {
   const [home, setHome] = useState([]);
   const [homeCards, setHomeCards] = useState([]);
+  const [homePage, setHomePage] = useState(1);
 
   const [results, setResults] = useState([]);
   const [resultCards, setResultCards] = useState([]);
@@ -29,20 +31,27 @@ const App = () => {
   const [droppedCards, setDroppedCards] = useState([]);
 
   const [showPage, setShowPage] = useState("");
-  
 
   const getTopRatedTvShows = async () => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=2",
-        {mode: "cors"}
+        `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
+        { mode: "cors" }
       );
-
       const topRatedTv = await response.json();
 
-      const topTvShows = topRatedTv.results.map((show) => ({ id: show.id, poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`, title: show.name, year: show.first_air_date, rating: show.vote_average}))
-      console.log(topTvShows)
-      setHome(topTvShows);
+      setHome(
+        topRatedTv.results.map((show) => ({
+          id: show.id,
+          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+          backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+          title: show.name,
+          rating: show.vote_average,
+          year: show.first_air_date,
+          plot: show.overview,
+          genre: show.genre_ids,
+        }))
+      );
     } catch (error) {
       console.error("Error:API", error);
     }
@@ -51,33 +60,30 @@ const App = () => {
   const searchTvShow = async (value) => {
     try {
       const response = await fetch(
-        `https://www.omdbapi.com/?apikey=e746e10c&s=${value}&plot=full`,
+        `https://api.themoviedb.org/3/search/tv?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1&query=${value}&include_adult=true`,
         { mode: "cors" }
       );
       const tvShows = await response.json();
-      const searchResults = tvShows.Search.map((show) => ({ id: show.imdbID, poster: show.Poster, title: show.Title, year: show.Year, rating: show.imdbRating}))
-      setResults(searchResults); //instead of making array of objects, just make array of id's, then for each card, call the api and get the relevant info from the show poge which has much more info
-      
+      setResults(
+        tvShows.results.map((show) => ({
+          id: show.id,
+          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+          backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+          title: show.name,
+          rating: show.vote_average,
+          year: show.first_air_date,
+          plot: show.overview,
+          genre: show.genre_ids,
+        }))
+      );
     } catch (error) {
       console.error("Error:API", error);
     }
   };
 
-  const getTvShow = async (showId) => {
-    try {
-      const response = await fetch(
-        `https://www.omdbapi.com/?apikey=e746e10c&i=${showId}&plot=full`,
-        {
-          mode: "cors",
-        }
-      );
-      const tvShow = await response.json();
-      const show = { id: tvShow.imdbID, poster: tvShow.Poster, title: tvShow.Title, rating: tvShow.imdbRating, actors:tvShow.Actors, plot:tvShow.Plot, year:tvShow.Year }
-      setShowPage(show);
-    } catch (error) {
-      console.error("Error:API", error);
-    }
-  };
+  useEffect(() => {
+    getTopRatedTvShows();
+  }, [homePage]);
 
   useEffect(() => {
     setHomeCards(
@@ -89,11 +95,11 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          getTvShow={getTvShow}
-
+          setShowPage={setShowPage}
         />
       ))
     );
+    // );
 
     setResultCards(
       results.map((show) => (
@@ -104,8 +110,7 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          getTvShow={getTvShow}
-
+          setShowPage={setShowPage}
         />
       ))
     );
@@ -119,8 +124,7 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          getTvShow={getTvShow}
-
+          setShowPage={setShowPage}
         />
       ))
     );
@@ -134,8 +138,7 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          getTvShow={getTvShow}
-
+          setShowPage={setShowPage}
         />
       ))
     );
@@ -149,8 +152,7 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          getTvShow={getTvShow}
-
+          setShowPage={setShowPage}
         />
       ))
     );
@@ -164,9 +166,7 @@ const App = () => {
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
           setDroppedList={setDroppedList}
-          getTvShow={getTvShow}
-          
-          
+          setShowPage={setShowPage}
         />
       ))
     );
@@ -179,39 +179,26 @@ const App = () => {
     wantToWatchList,
     completedList,
     droppedList,
+    homePage,
   ]);
-
-  // useEffect(() => {
-  //   const myShows = JSON.parse(localStorage.getItem('myShows'));
-
-  //   if (myShows) {
-  //     setListPageCards(
-  //       myShows.map((show) => (
-  //         <Card
-  //           key={show.id}
-  //           showData={show}
-  //           setListPage={setListPage}
-  //           isListPageActive={isListPageActive}
-  //         />
-  //       ))
-  //     );
-  //   }
-  // })
-
-  useEffect(() => {
-    getTopRatedTvShows();
-  }, []);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav getTopRatedTvShows={getTopRatedTvShows} searchTvShow={searchTvShow} />
+        <Nav
+          getTopRatedTvShows={getTopRatedTvShows}
+          searchTvShow={searchTvShow}
+        />
         <Routes>
-          <Route path="/" element={<Home homeCards={homeCards} />} />
+          <Route
+            path="/"
+            element={<Home setHomePage={setHomePage} homeCards={homeCards} />}
+          />
           <Route
             path="/results"
             element={<Results resultCards={resultCards} />}
           />
+          <Route path="/lists" element={<Lists />}></Route>
           <Route
             path="/lists/currently-watching"
             element={
@@ -243,7 +230,11 @@ const App = () => {
             path={`/shows/id:${showPage.id}`}
             element={
               <ShowPage
-              showInfo={showPage}
+                showPage={showPage}
+                setWatchingList={setWatchingList}
+                setWantToWatchList={setWantToWatchList}
+                setCompletedList={setCompletedList}
+                setDroppedList={setDroppedList}
               />
             }
           />
