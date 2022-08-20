@@ -1,7 +1,7 @@
 import defaultImg from "../img/defaultImg.webp";
 
 const SeasonCard = (props) => {
-  const { season_number, episode_count, poster_path } = props.seasonInfo;
+  const { season_number, episode_count, poster_path } = props.s;
 
   return (
     <div className="seasonCard">

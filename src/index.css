@@ -267,3 +267,12 @@ li a:visited, li a:active, li a:focus {
   display: flex;
   gap: 20px;
 }
+
+.trailer {
+  /* position: absolute; */
+  top: 50%;
+  left: 50%;
+  height: 300px;
+  width: 400px;
+  border: none;
+}

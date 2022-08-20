@@ -230,7 +230,7 @@ const App = () => {
             path={`/shows/id:${showPage.id}`}
             element={
               <ShowPage
-                showPage={showPage}
+                id={showPage.id}
                 setWatchingList={setWatchingList}
                 setWantToWatchList={setWantToWatchList}
                 setCompletedList={setCompletedList}
