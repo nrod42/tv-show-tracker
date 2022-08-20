@@ -58,7 +58,7 @@ li {
 }
 
 li:hover{
-  filter: brightness(85%);
+  filter: brightness(50%);
 }
 
 li a {
@@ -159,9 +159,9 @@ li a:visited, li a:active, li a:focus {
   /* visibility: visible;
 } */
 
-.Collapsible {
+/* .Collapsible {
   position: relative;
-}
+} */
 
 .mainCardContent {
   width: 100%;
@@ -187,15 +187,10 @@ li a:visited, li a:active, li a:focus {
   position: relative;
 }
 
-/* .listBtns {
-  width: 100%;
-  height: auto;
-} */
-
 .addToListBtn {
   position: absolute;
   top: 0;
-  /* right: 50%; */
+  left: 0;
   display: inline-block;
   cursor: pointer;
   background: #05445E;
@@ -203,6 +198,7 @@ li a:visited, li a:active, li a:focus {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 5px;
+  z-index: 5;
 }
 
 .addToListBtn .listPopup {
@@ -211,7 +207,7 @@ li a:visited, li a:active, li a:focus {
   color: #fff;
   text-align: center;
   position: absolute;
-  z-index: 2;
+  z-index: 5;
 }
 
 .addToListBtn .show {
@@ -224,8 +220,9 @@ li a:visited, li a:active, li a:focus {
 }
 
 .showPage {
-height: auto;
-  width: 100%;
+  height: auto;
+  max-width: 100%;
+  width: 100vw;
 
 }
 
@@ -257,6 +254,16 @@ height: auto;
 }
 
 .backdropImg {
-  width: 100%;
   height: auto;
+  width: 100%;
+}
+
+.posterWrapper {
+  position: relative;
+  width: auto;
+}
+
+.showInfoContainer {
+  display: flex;
+  gap: 20px;
 }

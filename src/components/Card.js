@@ -19,21 +19,22 @@ const Card = (props) => {
   return (
     <div className="card">
       <div className="mainCardContent" onClick={handleShowPage}>
-        <Link to={`/shows/id:${id}`}>
-          <img
-            className="cardImg"
-            src={poster !== null ? poster : defaultImg}
-            alt={`${title} poster`}
-          ></img>
-        </Link>
-
-        <AddToListBtn
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          showData={props.showData}
-        />
+        <div className="posterWrapper">
+          <Link to={`/shows/id:${id}`}>
+            <img
+              className="cardImg"
+              src={poster !== null ? poster : defaultImg}
+              alt={`${title} poster`}
+            ></img>
+          </Link>
+          <AddToListBtn
+            setWatchingList={setWatchingList}
+            setWantToWatchList={setWantToWatchList}
+            setCompletedList={setCompletedList}
+            setDroppedList={setDroppedList}
+            showData={props.showData}
+          />
+        </div>
 
         <h3 className="title">{title}</h3>
         <p>({year})</p>
