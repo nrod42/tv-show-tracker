@@ -4,6 +4,10 @@ const AddToListBtn = (props) => {
   const [popupClass, setPopupClass] = useState(false);
 
   const {
+    // watchingList,
+    // wantToWatchList,
+    // completedList,
+    // droppedList,
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
@@ -14,6 +18,12 @@ const AddToListBtn = (props) => {
   const handleAddToWatching = () => {
     setWatchingList((prevState) => [...prevState, showData]);
   };
+
+  // const handleAddToWatching = () => {
+  //   const newState = watchingList.filter((show) =>).map((show) => show.id === showData.id ? showData : show)
+  //   setWatchingList(newState);
+  // };
+
 
   const handleAddToWanted = () => {
     setWantToWatchList((prevState) => [...prevState, showData]);

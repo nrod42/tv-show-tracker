@@ -55,7 +55,7 @@ const Nav = (props) => {
           <img src={searchIcon} alt="search button"></img>
         </Link>
       </div>
-      <Link to="/profile">Profile</Link>
+      {/* <Link to="/profile">Profile</Link> */}
     </nav>
   );
 };

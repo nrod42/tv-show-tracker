@@ -12,7 +12,7 @@ const Home = (props) => {
   };
   return (
     <div className={"home"}>
-      <h1>Top Rated</h1>
+      <h1>Popular</h1>
       <div className="cardGrid">{homeCards}</div>
       <div className="pageNavBtns">
         <button onClick={handlePrevPage}>Previous</button>

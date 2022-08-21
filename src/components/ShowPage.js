@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import AddToListBtn from "./AddToListBtn";
+import RemoveFromListBtn from "./RemoveFromListBtn";
 
 const ShowPage = (props) => {
   const [showInfo, setShowInfo] = useState("");
   const [trailer, setTrailer] = useState("");
+  const [cast, setCast] = useState([]);
+  const [crew, setCrew] = useState([]);
 
   const {
     id,
@@ -65,7 +68,10 @@ const ShowPage = (props) => {
         }
       );
       const credits = await response.json();
-      console.log(credits)
+      setCast(credits.cast)
+      setCrew(credits.crew)
+      console.log(credits.cast)
+      console.log(credits.crew)
     } catch (error) {
       console.error("Error:API", error);
     }
@@ -86,8 +92,6 @@ const ShowPage = (props) => {
       console.error("Error:API", error);
     }
   };
-
-
 
   useEffect(() => {
     getShowDetails(id)
@@ -114,6 +118,13 @@ const ShowPage = (props) => {
             setDroppedList={setDroppedList}
             showData={showInfo}
           />
+                    <RemoveFromListBtn 
+            setWatchingList={setWatchingList}
+            setWantToWatchList={setWantToWatchList}
+            setCompletedList={setCompletedList}
+            setDroppedList={setDroppedList}
+            showData={props.showData}
+          />
         </div>
         <div className="showInfo">
           <h2>{title}</h2>
@@ -122,13 +133,13 @@ const ShowPage = (props) => {
           <p>Seasons: {seasonNum}</p>
           <p>Episodes: {episodeNum}</p>
           <p>Rating: {rating}</p>
-          {/* <p>Staring: {actors}</p> */}
+          <p>Staring: {cast.map((actor) => actor.name)}</p>
           <p>{plot}</p>
         </div>
       </div>
       <iframe className='trailer'
                 title='Youtube player'
-                sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
+                allowFullScreen="allowfullscreen"
                 src={`https://youtube.com/embed/${trailer}?autoplay=0`}>
         </iframe>
     </div>

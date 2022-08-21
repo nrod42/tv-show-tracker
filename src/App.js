@@ -15,6 +15,9 @@ const App = () => {
   const [homeCards, setHomeCards] = useState([]);
   const [homePage, setHomePage] = useState(1);
 
+  const [popular, setPopular] = useState([]);
+
+
   const [results, setResults] = useState([]);
   const [resultCards, setResultCards] = useState([]);
 
@@ -35,13 +38,13 @@ const App = () => {
   const getTopRatedTvShows = async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
+        `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
         { mode: "cors" }
       );
       const topRatedTv = await response.json();
 
       setHome(
-        topRatedTv.results.map((show) => ({
+        topRatedTv.results.filter((show) => show.original_language === "en").map((show) => ({
           id: show.id,
           poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
           backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
@@ -56,6 +59,33 @@ const App = () => {
       console.error("Error:API", error);
     }
   };
+
+  // const getPopularShows = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       ` https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1`,
+  //       { mode: "cors" }
+  //     );
+  //     const popular = await response.json();
+
+  //     setPopular(
+  //       popular.results.map((show) => ({
+  //         id: show.id,
+  //         poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+  //         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+  //         title: show.name,
+  //         rating: show.vote_average,
+  //         year: show.first_air_date,
+  //         plot: show.overview,
+  //         genre: show.genre_ids,
+  //       }))
+  //     );
+  //   } catch (error) {
+  //     console.error("Error:API", error);
+  //   }
+  // };
+
+
 
   const searchTvShow = async (value) => {
     try {
@@ -91,6 +121,10 @@ const App = () => {
         <Card
           key={show.id}
           showData={show}
+          watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -106,6 +140,10 @@ const App = () => {
         <Card
           key={show.id}
           showData={show}
+          watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -120,6 +158,10 @@ const App = () => {
         <Card
           key={show.id}
           showData={show}
+          watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -134,6 +176,10 @@ const App = () => {
         <Card
           key={show.id}
           showData={show}
+          watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -148,6 +194,10 @@ const App = () => {
         <Card
           key={show.id}
           showData={show}
+          watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -162,6 +212,10 @@ const App = () => {
         <Card
           key={show.id}
           showData={show}
+          watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -198,7 +252,16 @@ const App = () => {
             path="/results"
             element={<Results resultCards={resultCards} />}
           />
-          <Route path="/lists" element={<Lists />}></Route>
+          <Route path="/lists" element={
+            <Lists           
+              watchingList={watchingList}
+              wantToWatchList={wantToWatchList}
+              completedList={completedList}
+              droppedList={droppedList}
+            />
+          }
+          >
+          </Route>
           <Route
             path="/lists/currently-watching"
             element={

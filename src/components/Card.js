@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import defaultImg from "../img/defaultImg.webp";
 import AddToListBtn from "./AddToListBtn";
+import RemoveFromListBtn from "./RemoveFromListBtn";
 
 const Card = (props) => {
   const { id, poster, title, rating, year } = props.showData;
   const {
+    watchingList,
+    wantToWatchList,
+    completedList,
+    droppedList,
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
@@ -28,6 +33,17 @@ const Card = (props) => {
             ></img>
           </Link>
           <AddToListBtn
+            watchingList={watchingList}
+            wantToWatchList={wantToWatchList}
+            completedList={completedList}
+            droppedList={droppedList}
+            setWatchingList={setWatchingList}
+            setWantToWatchList={setWantToWatchList}
+            setCompletedList={setCompletedList}
+            setDroppedList={setDroppedList}
+            showData={props.showData}
+          />
+          <RemoveFromListBtn 
             setWatchingList={setWatchingList}
             setWantToWatchList={setWantToWatchList}
             setCompletedList={setCompletedList}
