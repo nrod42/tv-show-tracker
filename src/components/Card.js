@@ -6,10 +6,6 @@ import RemoveFromListBtn from "./RemoveFromListBtn";
 const Card = (props) => {
   const { id, poster, title, rating, year } = props.showData;
   const {
-    watchingList,
-    wantToWatchList,
-    completedList,
-    droppedList,
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
@@ -22,8 +18,8 @@ const Card = (props) => {
   };
 
   return (
-    <div className="card">
-      <div className="mainCardContent" onClick={handleShowPage}>
+    <div className="card" onClick={handleShowPage}>
+      {/* <div className="mainCardContent" onClick={handleShowPage}> */}
         <div className="posterWrapper">
           <Link to={`/shows/id:${id}`}>
             <img
@@ -33,10 +29,6 @@ const Card = (props) => {
             ></img>
           </Link>
           <AddToListBtn
-            watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
             setWatchingList={setWatchingList}
             setWantToWatchList={setWantToWatchList}
             setCompletedList={setCompletedList}
@@ -55,7 +47,7 @@ const Card = (props) => {
         <h3 className="title">{title}</h3>
         <p>({year})</p>
         <p className="rating">Rating: {rating}/10</p>
-      </div>
+      {/* </div> */}
     </div>
   );
 };

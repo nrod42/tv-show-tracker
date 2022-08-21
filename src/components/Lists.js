@@ -10,6 +10,7 @@ const Lists = (props) => {
 
   return (
     <div>
+      <h1>Lists</h1>
       <div>
         <Link to="/lists/currently-watching" className="myListBtn">
           Currently Watching
@@ -19,7 +20,7 @@ const Lists = (props) => {
           <p>Series: {watchingList.length}</p>
         </div>
       </div>
-      <div className="">
+      <div>
         <Link to="/lists/want-to-watch" className="myListBtn">
           Want To Watch
         </Link>

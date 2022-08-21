@@ -11,12 +11,14 @@ import ShowPage from "./components/ShowPage";
 import Lists from "./components/Lists";
 
 const App = () => {
-  const [home, setHome] = useState([]);
-  const [homeCards, setHomeCards] = useState([]);
+
   const [homePage, setHomePage] = useState(1);
 
-  const [popular, setPopular] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+  const [topRatedCards, setTopRatedCards] = useState([]);
 
+  const [popular, setPopular] = useState([]);
+  const [popularCards, setPopularCards] = useState([]);
 
   const [results, setResults] = useState([]);
   const [resultCards, setResultCards] = useState([]);
@@ -35,22 +37,22 @@ const App = () => {
 
   const [showPage, setShowPage] = useState("");
 
-  const getTopRatedTvShows = async () => {
+  const getTopShows = async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
+        `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
         { mode: "cors" }
       );
-      const topRatedTv = await response.json();
+      const topShows = await response.json();
 
-      setHome(
-        topRatedTv.results.filter((show) => show.original_language === "en").map((show) => ({
+      setTopRated(
+        topShows.results.filter((show) => show.original_language === "en").map((show) => ({
           id: show.id,
           poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
           backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
           title: show.name,
           rating: show.vote_average,
-          year: show.first_air_date,
+          year: show.first_air_date.split("-")[0],
           plot: show.overview,
           genre: show.genre_ids,
         }))
@@ -60,30 +62,30 @@ const App = () => {
     }
   };
 
-  // const getPopularShows = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       ` https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1`,
-  //       { mode: "cors" }
-  //     );
-  //     const popular = await response.json();
+  const getPopularShows = async () => {
+    try {
+      const response = await fetch(
+           `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
+          { mode: "cors" }
+      );
+      const popular = await response.json();
 
-  //     setPopular(
-  //       popular.results.map((show) => ({
-  //         id: show.id,
-  //         poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-  //         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-  //         title: show.name,
-  //         rating: show.vote_average,
-  //         year: show.first_air_date,
-  //         plot: show.overview,
-  //         genre: show.genre_ids,
-  //       }))
-  //     );
-  //   } catch (error) {
-  //     console.error("Error:API", error);
-  //   }
-  // };
+      setPopular(
+        popular.results.filter((show) => show.original_language === "en").map((show) => ({
+          id: show.id,
+          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+          backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+          title: show.name,
+          rating: show.vote_average,
+          year: show.first_air_date.split("-")[0],
+          plot: show.overview,
+          genre: show.genre_ids,
+        }))
+      );
+    } catch (error) {
+      console.error("Error:API", error);
+    }
+  };
 
 
 
@@ -95,7 +97,7 @@ const App = () => {
       );
       const tvShows = await response.json();
       setResults(
-        tvShows.results.map((show) => ({
+        tvShows.results.filter((show) => show.original_language === "en").map((show) => ({
           id: show.id,
           poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
           backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
@@ -112,19 +114,38 @@ const App = () => {
   };
 
   useEffect(() => {
-    getTopRatedTvShows();
+    getTopShows();
+    getPopularShows();
   }, [homePage]);
 
   useEffect(() => {
-    setHomeCards(
-      home.map((show) => (
+    setTopRatedCards(
+      topRated.map((show) => (
         <Card
           key={show.id}
           showData={show}
           watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
+          setWatchingList={setWatchingList}
+          setWantToWatchList={setWantToWatchList}
+          setCompletedList={setCompletedList}
+          setDroppedList={setDroppedList}
+          setShowPage={setShowPage}
+        />
+      ))
+    );
+
+    setPopularCards(
+      popular.map((show) => (
+        <Card
+          key={show.id}
+          showData={show}
+          watchingList={watchingList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -227,7 +248,8 @@ const App = () => {
 
     // localStorage.setDroppedList("droppedShowsList", JSON.stringify(droppedList));
   }, [
-    home,
+    popular,
+    topRated,
     results,
     watchingList,
     wantToWatchList,
@@ -240,13 +262,14 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
         <Nav
-          getTopRatedTvShows={getTopRatedTvShows}
+          getTopShows={getTopShows}
+          getPopularShows={getPopularShows}
           searchTvShow={searchTvShow}
         />
         <Routes>
           <Route
             path="/"
-            element={<Home setHomePage={setHomePage} homeCards={homeCards} />}
+            element={<Home setHomePage={setHomePage} topRatedCards={topRatedCards} popularCards={popularCards} />}
           />
           <Route
             path="/results"

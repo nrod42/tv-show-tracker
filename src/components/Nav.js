@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import searchIcon from "../img/search_icon.svg";
 
 const Nav = (props) => {
-  const { getTopRatedTvShows, searchTvShow } = props;
+  const { getTopShows, getPopularShows, searchTvShow } = props;
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -13,7 +13,9 @@ const Nav = (props) => {
   };
 
   const handleHome = () => {
-    getTopRatedTvShows();
+    getTopShows();
+    getPopularShows();
+
   };
 
   const handleSearch = () => {
