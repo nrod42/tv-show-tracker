@@ -1,4 +1,3 @@
-
 const RemoveFromListBtn = (props) => {
   const {
     setWatchingList,
@@ -9,12 +8,19 @@ const RemoveFromListBtn = (props) => {
   } = props;
 
   const handleRemove = () => {
-    setWatchingList((prevState) => prevState.filter((show) => show.id !== showData.id));
-    setWantToWatchList((prevState) => prevState.filter((show) => show.id !== showData.id));
-    setCompletedList((prevState) => prevState.filter((show) => show.id !== showData.id));
-    setDroppedList((prevState) => prevState.filter((show) => show.id !== showData.id));
+    setWatchingList((prevState) =>
+      prevState.filter((show) => show.id !== showData.id)
+    );
+    setWantToWatchList((prevState) =>
+      prevState.filter((show) => show.id !== showData.id)
+    );
+    setCompletedList((prevState) =>
+      prevState.filter((show) => show.id !== showData.id)
+    );
+    setDroppedList((prevState) =>
+      prevState.filter((show) => show.id !== showData.id)
+    );
   };
-
 
   return (
     <div onClick={handleRemove} className={"removeFromListBtn"}>

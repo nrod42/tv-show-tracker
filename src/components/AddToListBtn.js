@@ -12,20 +12,35 @@ const AddToListBtn = (props) => {
   } = props;
 
   const handleAddToWatching = () => {
-    setWatchingList((prevState) => prevState.some((show) => (show.id === showData.id)) ? prevState : [...prevState, showData])
+    setWatchingList((prevState) =>
+      prevState.some((show) => show.id === showData.id)
+        ? prevState
+        : [...prevState, showData]
+    );
   };
 
-
   const handleAddToWanted = () => {
-    setWantToWatchList((prevState) => prevState.some((show) => (show.id === showData.id)) ? prevState : [...prevState, showData]);
+    setWantToWatchList((prevState) =>
+      prevState.some((show) => show.id === showData.id)
+        ? prevState
+        : [...prevState, showData]
+    );
   };
 
   const handleAddToCompleted = () => {
-    setCompletedList((prevState) => prevState.some((show) => (show.id === showData.id)) ? prevState : [...prevState, showData]);
+    setCompletedList((prevState) =>
+      prevState.some((show) => show.id === showData.id)
+        ? prevState
+        : [...prevState, showData]
+    );
   };
 
   const handleAddToDropped = () => {
-    setDroppedList((prevState) => prevState.some((show) => (show.id === showData.id)) ? prevState : [...prevState, showData]);
+    setDroppedList((prevState) =>
+      prevState.some((show) => show.id === showData.id)
+        ? prevState
+        : [...prevState, showData]
+    );
   };
 
   const toggleListPopup = () => {

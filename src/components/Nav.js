@@ -15,7 +15,6 @@ const Nav = (props) => {
   const handleHome = () => {
     getTopShows();
     getPopularShows();
-
   };
 
   const handleSearch = () => {
@@ -40,6 +39,18 @@ const Nav = (props) => {
         <li>
           <Link to="/lists/" className="myListBtn">
             Lists
+          </Link>
+        </li>
+        <li>
+          <Link to={"/movies"} className="Movies">
+            {/* <img src={homeIcon} alt="home button"></img> */}
+            Movies
+          </Link>
+        </li>
+        <li>
+          <Link to={"/series"} className="Series">
+            {/* <img src={homeIcon} alt="home button"></img> */}
+            Series
           </Link>
         </li>
       </ul>

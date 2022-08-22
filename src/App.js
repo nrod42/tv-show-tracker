@@ -11,9 +11,6 @@ import ShowPage from "./components/ShowPage";
 import Lists from "./components/Lists";
 
 const App = () => {
-
-  const [homePage, setHomePage] = useState(1);
-
   const [topRated, setTopRated] = useState([]);
   const [topRatedCards, setTopRatedCards] = useState([]);
 
@@ -37,57 +34,67 @@ const App = () => {
 
   const [showPage, setShowPage] = useState("");
 
+  // Gets first two pages worth of top rated shows which will be added to the home page top rated carousel.
   const getTopShows = async () => {
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
-        { mode: "cors" }
-      );
-      const topShows = await response.json();
+    const urls = [
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=2`,
+    ];
+    Promise.all(urls.map((url) => fetch(url).then((res) => res.json())))
+      .then((allResponses) => {
+        const results = allResponses.map((response) => response.results);
+        const topShows = [].concat.apply([], results);
 
-      setTopRated(
-        topShows.results.filter((show) => show.original_language === "en").map((show) => ({
-          id: show.id,
-          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-          backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-          title: show.name,
-          rating: show.vote_average,
-          year: show.first_air_date.split("-")[0],
-          plot: show.overview,
-          genre: show.genre_ids,
-        }))
-      );
-    } catch (error) {
-      console.error("Error:API", error);
-    }
+        setTopRated(
+          topShows
+            .filter((show) => show.original_language === "en")
+            .map((show) => ({
+              id: show.id,
+              poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+              backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+              title: show.name,
+              rating: show.vote_average,
+              year: show.first_air_date.split("-")[0],
+              plot: show.overview,
+              genre: show.genre_ids,
+            }))
+        );
+      })
+      .catch((error) => {
+        console.error("Error:API", error);
+      });
   };
 
+  // Gets first two pages worth of most popular shows which will be added to the home page most popular carousel.
   const getPopularShows = async () => {
-    try {
-      const response = await fetch(
-           `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${homePage}`,
-          { mode: "cors" }
-      );
-      const popular = await response.json();
+    const urls = [
+      `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=2`,
+    ];
+    Promise.all(urls.map((url) => fetch(url).then((res) => res.json())))
+      .then((allResponses) => {
+        const results = allResponses.map((response) => response.results);
+        const popular = [].concat.apply([], results);
 
-      setPopular(
-        popular.results.filter((show) => show.original_language === "en").map((show) => ({
-          id: show.id,
-          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-          backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-          title: show.name,
-          rating: show.vote_average,
-          year: show.first_air_date.split("-")[0],
-          plot: show.overview,
-          genre: show.genre_ids,
-        }))
-      );
-    } catch (error) {
-      console.error("Error:API", error);
-    }
+        setPopular(
+          popular
+            .filter((show) => show.original_language === "en")
+            .map((show) => ({
+              id: show.id,
+              poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+              backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+              title: show.name,
+              rating: show.vote_average,
+              year: show.first_air_date.split("-")[0],
+              plot: show.overview,
+              genre: show.genre_ids,
+            }))
+        );
+      })
+      .catch((error) => {
+        console.error("Error:API", error);
+      });
   };
-
-
 
   const searchTvShow = async (value) => {
     try {
@@ -97,16 +104,18 @@ const App = () => {
       );
       const tvShows = await response.json();
       setResults(
-        tvShows.results.filter((show) => show.original_language === "en").map((show) => ({
-          id: show.id,
-          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-          backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-          title: show.name,
-          rating: show.vote_average,
-          year: show.first_air_date,
-          plot: show.overview,
-          genre: show.genre_ids,
-        }))
+        tvShows.results
+          .filter((show) => show.original_language === "en")
+          .map((show) => ({
+            id: show.id,
+            poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+            backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
+            title: show.name,
+            rating: show.vote_average,
+            year: show.first_air_date,
+            plot: show.overview,
+            genre: show.genre_ids,
+          }))
       );
     } catch (error) {
       console.error("Error:API", error);
@@ -116,7 +125,7 @@ const App = () => {
   useEffect(() => {
     getTopShows();
     getPopularShows();
-  }, [homePage]);
+  }, []);
 
   useEffect(() => {
     setTopRatedCards(
@@ -162,9 +171,9 @@ const App = () => {
           key={show.id}
           showData={show}
           watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -180,9 +189,9 @@ const App = () => {
           key={show.id}
           showData={show}
           watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -198,9 +207,9 @@ const App = () => {
           key={show.id}
           showData={show}
           watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -216,9 +225,9 @@ const App = () => {
           key={show.id}
           showData={show}
           watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -234,9 +243,9 @@ const App = () => {
           key={show.id}
           showData={show}
           watchingList={watchingList}
-            wantToWatchList={wantToWatchList}
-            completedList={completedList}
-            droppedList={droppedList}
+          wantToWatchList={wantToWatchList}
+          completedList={completedList}
+          droppedList={droppedList}
           setWatchingList={setWatchingList}
           setWantToWatchList={setWantToWatchList}
           setCompletedList={setCompletedList}
@@ -255,7 +264,6 @@ const App = () => {
     wantToWatchList,
     completedList,
     droppedList,
-    homePage,
   ]);
 
   return (
@@ -269,22 +277,25 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<Home setHomePage={setHomePage} topRatedCards={topRatedCards} popularCards={popularCards} />}
+            element={
+              <Home topRatedCards={topRatedCards} popularCards={popularCards} />
+            }
           />
           <Route
             path="/results"
             element={<Results resultCards={resultCards} />}
           />
-          <Route path="/lists" element={
-            <Lists           
-              watchingList={watchingList}
-              wantToWatchList={wantToWatchList}
-              completedList={completedList}
-              droppedList={droppedList}
-            />
-          }
-          >
-          </Route>
+          <Route
+            path="/lists"
+            element={
+              <Lists
+                watchingList={watchingList}
+                wantToWatchList={wantToWatchList}
+                completedList={completedList}
+                droppedList={droppedList}
+              />
+            }
+          ></Route>
           <Route
             path="/lists/currently-watching"
             element={
