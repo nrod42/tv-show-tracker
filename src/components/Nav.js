@@ -41,12 +41,12 @@ const Nav = (props) => {
             Lists
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to={"/movies"} className="Movies">
-            {/* <img src={homeIcon} alt="home button"></img> */}
+            <img src={homeIcon} alt="home button"></img>
             Movies
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to={"/series"} className="Series">
             {/* <img src={homeIcon} alt="home button"></img> */}

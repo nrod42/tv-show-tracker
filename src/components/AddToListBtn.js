@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { SetListsContext } from "../App";
 
 const AddToListBtn = (props) => {
-  const [popupClass, setPopupClass] = useState(false);
-
   const {
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
     setDroppedList,
-    showData,
-  } = props;
+  } = useContext(SetListsContext);
+
+  const [popupClass, setPopupClass] = useState(false);
+
+  const { showData } = props;
 
   const handleAddToWatching = () => {
     setWatchingList((prevState) =>

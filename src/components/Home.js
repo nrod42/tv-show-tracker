@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import TvCard from "./TvCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const Home = (props) => {
-  const { topRatedCards, popularCards } = props;
+  const { topRatedTV, popularTV } = props;
 
   const responsive = {
     desktop: {
@@ -20,34 +21,51 @@ const Home = (props) => {
     },
   };
 
+  const [topRatedCards, setTopRatedCards] = useState([]);
+  const [popularCards, setPopularCards] = useState([]);
+
+  useEffect(() => {
+    setTopRatedCards(
+      topRatedTV.map((show) => <TvCard key={show.id} showData={show} />)
+    );
+
+    setPopularCards(
+      popularTV.map((show) => <TvCard key={show.id} showData={show} />)
+    );
+  }, [topRatedTV, popularTV]);
+
   return (
     <div className={"home"}>
-      <h1>Popular</h1>
-      <Carousel
-        containerClass="carousel-container"
-        responsive={responsive}
-        swipeable={true}
-        draggable={true}
-        infinite={true}
-        // autoPlay={true}
-        // autoPlaySpeed={2000}
-        // transitionDuration={500}
-      >
-        {popularCards}
-      </Carousel>
-      <h1>Top Rated</h1>
-      <Carousel
-        containerClass="carousel-container"
-        responsive={responsive}
-        swipeable={true}
-        draggable={true}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={2000}
-        transitionDuration={500}
-      >
-        {topRatedCards}
-      </Carousel>
+      <div className="topRatedWrapper">
+        <h1>Popular</h1>
+        <Carousel
+          containerClass="carousel-container"
+          responsive={responsive}
+          swipeable={true}
+          draggable={true}
+          infinite={true}
+          autoPlay={true}
+          autoPlaySpeed={2000}
+          transitionDuration={500}
+        >
+          {popularCards}
+        </Carousel>
+      </div>
+      <div className="topRatedWrapper">
+        <h1>Top Rated</h1>
+        <Carousel
+          containerClass="carousel-container"
+          responsive={responsive}
+          swipeable={true}
+          draggable={true}
+          infinite={true}
+          autoPlay={true}
+          autoPlaySpeed={2000}
+          transitionDuration={500}
+        >
+          {topRatedCards}
+        </Carousel>
+      </div>
     </div>
   );
 };

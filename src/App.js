@@ -5,33 +5,22 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Results from "./components/Results";
 import ListPage from "./components/ListPage";
-import Card from "./components/Card";
 import Footer from "./components/Footer";
 import ShowPage from "./components/ShowPage";
 import Lists from "./components/Lists";
+import SeriesPage from "./components/SeriesPage";
+import MoviesPage from "./components/MoviesPage";
+
+export const SetListsContext = React.createContext();
 
 const App = () => {
-  const [topRated, setTopRated] = useState([]);
-  const [topRatedCards, setTopRatedCards] = useState([]);
-
-  const [popular, setPopular] = useState([]);
-  const [popularCards, setPopularCards] = useState([]);
-
+  const [topRatedTV, setTopRatedTV] = useState([]);
+  const [popularTV, setPopularTV] = useState([]);
   const [results, setResults] = useState([]);
-  const [resultCards, setResultCards] = useState([]);
-
   const [watchingList, setWatchingList] = useState([]);
-  const [watchingCards, setWatchingCards] = useState([]);
-
   const [wantToWatchList, setWantToWatchList] = useState([]);
-  const [wantToWatchCards, setwantToWatchCards] = useState([]);
-
   const [completedList, setCompletedList] = useState([]);
-  const [completedCards, setCompletedCards] = useState([]);
-
   const [droppedList, setDroppedList] = useState([]);
-  const [droppedCards, setDroppedCards] = useState([]);
-
   const [showPage, setShowPage] = useState("");
 
   // Gets first two pages worth of top rated shows which will be added to the home page top rated carousel.
@@ -45,7 +34,7 @@ const App = () => {
         const results = allResponses.map((response) => response.results);
         const topShows = [].concat.apply([], results);
 
-        setTopRated(
+        setTopRatedTV(
           topShows
             .filter((show) => show.original_language === "en")
             .map((show) => ({
@@ -76,7 +65,7 @@ const App = () => {
         const results = allResponses.map((response) => response.results);
         const popular = [].concat.apply([], results);
 
-        setPopular(
+        setPopularTV(
           popular
             .filter((show) => show.original_language === "en")
             .map((show) => ({
@@ -127,216 +116,68 @@ const App = () => {
     getPopularShows();
   }, []);
 
-  useEffect(() => {
-    setTopRatedCards(
-      topRated.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-
-    setPopularCards(
-      popular.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-    // );
-
-    setResultCards(
-      results.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-
-    setWatchingCards(
-      watchingList.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-
-    setwantToWatchCards(
-      wantToWatchList.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-
-    setCompletedCards(
-      completedList.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-
-    setDroppedCards(
-      droppedList.map((show) => (
-        <Card
-          key={show.id}
-          showData={show}
-          watchingList={watchingList}
-          wantToWatchList={wantToWatchList}
-          completedList={completedList}
-          droppedList={droppedList}
-          setWatchingList={setWatchingList}
-          setWantToWatchList={setWantToWatchList}
-          setCompletedList={setCompletedList}
-          setDroppedList={setDroppedList}
-          setShowPage={setShowPage}
-        />
-      ))
-    );
-
-    // localStorage.setDroppedList("droppedShowsList", JSON.stringify(droppedList));
-  }, [
-    popular,
-    topRated,
-    results,
-    watchingList,
-    wantToWatchList,
-    completedList,
-    droppedList,
-  ]);
+  //   // localStorage.setDroppedList("droppedShowsList", JSON.stringify(droppedList));
+  // }, [results, watchingList, wantToWatchList, completedList, droppedList]);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav
-          getTopShows={getTopShows}
-          getPopularShows={getPopularShows}
-          searchTvShow={searchTvShow}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home topRatedCards={topRatedCards} popularCards={popularCards} />
-            }
+        <SetListsContext.Provider
+          value={{
+            setWatchingList,
+            setWantToWatchList,
+            setCompletedList,
+            setDroppedList,
+            setShowPage,
+            watchingList,
+            wantToWatchList,
+            completedList,
+            droppedList,
+          }}
+        >
+          <Nav
+            getTopShows={getTopShows}
+            getPopularShows={getPopularShows}
+            searchTvShow={searchTvShow}
           />
-          <Route
-            path="/results"
-            element={<Results resultCards={resultCards} />}
-          />
-          <Route
-            path="/lists"
-            element={
-              <Lists
-                watchingList={watchingList}
-                wantToWatchList={wantToWatchList}
-                completedList={completedList}
-                droppedList={droppedList}
-              />
-            }
-          ></Route>
-          <Route
-            path="/lists/currently-watching"
-            element={
-              <ListPage
-                listCards={watchingCards}
-                title={"Currently Watching"}
-              />
-            }
-          />
-          <Route
-            path="/lists/want-to-watch"
-            element={
-              <ListPage listCards={wantToWatchCards} title={"Want To Watch"} />
-            }
-          />
-          <Route
-            path="/lists/completed"
-            element={
-              <ListPage listCards={completedCards} title={"Completed Shows"} />
-            }
-          />
-          <Route
-            path="/lists/dropped"
-            element={
-              <ListPage listCards={droppedCards} title={"Dropped Shows"} />
-            }
-          />
-          <Route
-            path={`/shows/id:${showPage.id}`}
-            element={
-              <ShowPage
-                id={showPage.id}
-                setWatchingList={setWatchingList}
-                setWantToWatchList={setWantToWatchList}
-                setCompletedList={setCompletedList}
-                setDroppedList={setDroppedList}
-              />
-            }
-          />
-        </Routes>
-        <Footer />
+          <Routes>
+            <Route
+              path="/"
+              element={<Home topRatedTV={topRatedTV} popularTV={popularTV} />}
+            />
+            <Route path="/results" element={<Results results={results} />} />
+            <Route path="/lists" element={<Lists />}></Route>
+            <Route
+              path="/lists/currently-watching"
+              element={
+                <ListPage list={watchingList} title={"Currently Watching"} />
+              }
+            />
+            <Route
+              path="/lists/want-to-watch"
+              element={
+                <ListPage list={wantToWatchList} title={"Want To Watch"} />
+              }
+            />
+            <Route
+              path="/lists/completed"
+              element={
+                <ListPage list={completedList} title={"Completed Shows"} />
+              }
+            />
+            <Route
+              path="/lists/dropped"
+              element={<ListPage list={droppedList} title={"Dropped Shows"} />}
+            />
+            <Route
+              path={`/shows/id:${showPage.id}`}
+              element={<ShowPage id={showPage.id} />}
+            />
+            {/* <Route path="/series" element={<SeriesPage />}></Route> */}
+            {/* <Route path="/movies" element={<MoviesPage />}></Route> */}
+          </Routes>
+          <Footer />
+        </SetListsContext.Provider>
       </div>
     </BrowserRouter>
   );

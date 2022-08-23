@@ -74,12 +74,22 @@ li a:visited, li a:active, li a:focus {
   color: #fff;
 }
 
+footer {
+  background: #189AB4;
+  padding: 5px 0;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin: 0;
+  margin-top: auto;
+}
+
 #root {
   height: 100%;
 }
 
 .App {
-  /* height: 100%; */
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -105,7 +115,7 @@ li a:visited, li a:active, li a:focus {
   height: 100%;
 }
 
- .searchSection {
+.searchSection {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -136,8 +146,13 @@ li a:visited, li a:active, li a:focus {
   gap: 20px;
 }
 
-.pageNavBtns {
+.topRatedWrapper {
+  width: 100%;
+  height: auto;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardGrid {
@@ -156,9 +171,9 @@ li a:visited, li a:active, li a:focus {
   justify-content: flex-start;
 }
 
-/* .card:hover button {
+.card:hover .addToListBtn {
   visibility: visible;
-}  */
+} 
 
 .mainCardContent {
   width: 100%;
@@ -166,11 +181,6 @@ li a:visited, li a:active, li a:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.mainCardContent:hover {
-  cursor: pointer;
-  filter: brightness(85%);
 }
 
 .summary {
@@ -184,39 +194,32 @@ li a:visited, li a:active, li a:focus {
   position: relative;
 }
 
-.addToListBtn {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: inline-block;
+.cardImg:hover {
+  filter: brightness(50%);
+}
+
+.addToListBtn, .removeFromListBtn {
   cursor: pointer;
   background: #05445E;
   color: #fff;
   padding: 10px;
   border-radius: 5px;
+  visibility: hidden;
+}
+
+.addToListBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .removeFromListBtn {
   position: absolute;
   top: 0;
   right: 0;
-  display: inline-block;
-  cursor: pointer;
-  background: #05445E;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
 }
 
 .addToListBtn .listPopup {
-  visibility: hidden;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  position: absolute;
-}
-
-.removeFromListBtn .listPopup {
   visibility: hidden;
   background-color: #555;
   color: #fff;
@@ -249,16 +252,6 @@ li a:visited, li a:active, li a:focus {
   padding: 10px 0;
 } */
 
-.footer {
-  background: #189AB4;
-  padding: 5px 0;
-  width: 100%;
-  height: auto;
-  text-align: center;
-  margin: 0;
-  margin-top: auto;
-}
-
 .showPagePoster {
   position: relative;
 }
@@ -290,6 +283,10 @@ li a:visited, li a:active, li a:focus {
   position: relative;
   width: auto;
   height: 100%;
+  cursor: pointer;
+}
+.posterWrapper:hover .addToListBtn {
+  visibility: visible;
 }
 
 .showInfoContainer {
@@ -304,6 +301,21 @@ li a:visited, li a:active, li a:focus {
   height: 300px;
   width: 400px;
   border: none;
+}
+
+.listSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.listItem {
+  width: 80%;
+  padding: 20px;
+  background: #189AB4;
 }
 
 .listDetails {
@@ -321,6 +333,10 @@ li a:visited, li a:active, li a:focus {
   width: auto;
 }
 
+.personCard, .seasonCard {
+  text-align: center;
+}
+
 .personPic {
   height: 200px;
   width: auto;
@@ -334,10 +350,11 @@ li a:visited, li a:active, li a:focus {
 .react-multi-carousel-item {
   color: black;
   height: 100%;
- }
-
-.react-multi-carousel-item {
   display: flex;
   align-items: center;
   justify-content: center;
+ }
+
+ .react-multi-carousel-item:hover {
+  filter: brightness(100%);
  }

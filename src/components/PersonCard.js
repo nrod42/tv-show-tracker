@@ -15,28 +15,22 @@ const PersonCard = (props) => {
         }
       );
       const pic = await response.json();
-      setActorPic(`https://image.tmdb.org/t/p/w300/${pic.profiles[0].file_path}`);
+      setActorPic(
+        `https://image.tmdb.org/t/p/w300/${pic.profiles[0].file_path}`
+      );
     } catch (error) {
       console.error("Error:API", error);
     }
   };
 
-// const pic = getActorPics(id);
-// const picSrc = `https://image.tmdb.org/t/p/w300/${pic}`;
-
-useEffect(() => {
-    getActorPics(id)
-},[id])
+  useEffect(() => {
+    getActorPics(id);
+  }, [id]);
 
   return (
     <div className="personCard">
-      <div>
-        <img
-          className="personPic"
-          src={actorPic}
-          alt={`${name}`}
-        ></img>
-      </div>
+      <img className="personPic" src={actorPic} alt={`${name}`}></img>
+
       <p>{name}</p>
       <p>{character}</p>
     </div>

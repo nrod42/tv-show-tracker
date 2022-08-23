@@ -1,11 +1,15 @@
+import React, { useContext, useState } from "react";
+import { SetListsContext } from "../App";
+
 const RemoveFromListBtn = (props) => {
   const {
     setWatchingList,
     setWantToWatchList,
     setCompletedList,
     setDroppedList,
-    showData,
-  } = props;
+  } = useContext(SetListsContext);
+
+  const { showData } = props;
 
   const handleRemove = () => {
     setWatchingList((prevState) =>

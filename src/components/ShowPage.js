@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import AddToListBtn from "./AddToListBtn";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
@@ -15,13 +15,7 @@ const ShowPage = (props) => {
   const [castCards, setCastCards] = useState([]);
   // const [crew, setCrew] = useState([]);
 
-  const {
-    id,
-    setWatchingList,
-    setWantToWatchList,
-    setCompletedList,
-    setDroppedList,
-  } = props;
+  const { id } = props;
 
   const {
     title,
@@ -143,20 +137,8 @@ const ShowPage = (props) => {
       <div className="showInfoContainer">
         <div className="posterWrapper">
           <img src={poster} alt={`${title} poster`} />
-          <AddToListBtn
-            setWatchingList={setWatchingList}
-            setWantToWatchList={setWantToWatchList}
-            setCompletedList={setCompletedList}
-            setDroppedList={setDroppedList}
-            showData={showInfo}
-          />
-          <RemoveFromListBtn
-            setWatchingList={setWatchingList}
-            setWantToWatchList={setWantToWatchList}
-            setCompletedList={setCompletedList}
-            setDroppedList={setDroppedList}
-            showData={props.showData}
-          />
+          <AddToListBtn showData={showInfo} />
+          <RemoveFromListBtn showData={props.showData} />
         </div>
         <div className="showInfo">
           <div>
