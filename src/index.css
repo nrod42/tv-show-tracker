@@ -97,43 +97,7 @@ footer {
   justify-content: space-between;
 }
 
-.nav {
-  opacity: 0.85;
-  background: #05445E;
-  position: sticky;
-  top: 0;
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
-}
-
-.pageTabs {
-  height: 100%;
-}
-
-.searchSection {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-}
-
-.myListBtn, .homeBtn, .searchBtn {
-  height: 50px;
-  width: auto;
-}
-
-.homeBtn > img, .searchBtn > img {
-  width: 25px;
-  height: 25px;
-}
-
-.home, .myList, .searchResults {
+.myList {
   margin: 0 100px;
   overflow: auto;
   transition: opacity 1s ease;
@@ -146,7 +110,7 @@ footer {
   gap: 20px;
 }
 
-.topRatedWrapper {
+.topRatedWrapper, .popularWrapper, .latestTVWrapper {
   width: 100%;
   height: auto;
   display: flex;
@@ -159,125 +123,7 @@ footer {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(5, auto);
-}
-
-.card {
-  position: relative;
-  width: auto;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.card:hover .addToListBtn {
-  visibility: visible;
 } 
-
-.mainCardContent {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.summary {
-  text-align: justify;
-  text-justify: inter-word;
-  width: 100%;
-  overflow: hidden;
-}
-
-.cardImg {
-  position: relative;
-}
-
-.cardImg:hover {
-  filter: brightness(50%);
-}
-
-.addToListBtn, .removeFromListBtn {
-  cursor: pointer;
-  background: #05445E;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  visibility: hidden;
-}
-
-.addToListBtn {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.removeFromListBtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.addToListBtn .listPopup {
-  visibility: hidden;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  position: absolute;
-}
-
-.addToListBtn .show {
-  visibility: visible;
-}
-
-.removeFromListBtn .show {
-  visibility: visible;
-}
-
-.listPopup li, .listPopup button {
-  width: 100%;
-}
-
-.showPage {
-  height: auto;
-  max-width: 100%;
-  /* width: 100vw; */
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-}
-
-/* .showPage > * {
-  padding: 10px 0;
-} */
-
-.showPagePoster {
-  position: relative;
-}
-
-.addToListBtnShowPage {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: inline-block;
-  cursor: pointer;
-  background: #05445E;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-.backdrop {
-  width: 100%;
-  /* height: 100%; */
-}
-
-.backdropImg {
-  height: auto;
-  width: 100%;
-}
 
 .posterWrapper {
   position: relative;
@@ -285,67 +131,19 @@ footer {
   height: 100%;
   cursor: pointer;
 }
+
 .posterWrapper:hover .addToListBtn {
   visibility: visible;
 }
 
-.showInfoContainer {
-  display: flex;
-  gap: 20px;
-}
-
-.trailer {
-  /* position: absolute; */
-  top: 50%;
-  left: 50%;
-  height: 300px;
-  width: 400px;
-  border: none;
-}
-
-.listSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.listItem {
-  width: 80%;
-  padding: 20px;
-  background: #189AB4;
-}
-
-.listDetails {
-  display: flex;
-  gap: 10px;
-}
-
-.seasonsCarousel, .castCarousel {
-  display: flex;
-  gap: 10px;
-}
-
-.seasonPoster {
-  height: 300px;
-  width: auto;
-}
-
-.personCard, .seasonCard {
-  text-align: center;
-}
-
-.personPic {
-  height: 200px;
-  width: auto;
+.posterWrapper:hover .removeFromListBtn {
+  visibility: visible;
 }
 
 .carousel-container {
   width: 80%;
   /* margin: 0 20px; */
- }
+}
 
 .react-multi-carousel-item {
   color: black;
@@ -353,8 +151,12 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
- }
+}
 
- .react-multi-carousel-item:hover {
+.react-multi-carousel-item:hover {
   filter: brightness(100%);
- }
+}
+
+.series {
+  width: 100%;
+}

@@ -1,0 +1,27 @@
+.addToListBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    background: #05445E;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    visibility: hidden;
+  }
+  
+.addToListBtn .listPopup {
+    position: absolute;
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+}
+  
+.addToListBtn .show {
+    visibility: visible;
+}
+
+.listPopup li, .listPopup button {
+    width: 100%;
+  }

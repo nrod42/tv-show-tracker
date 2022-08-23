@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TvCard from "./TvCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import './Styles/home.css'
 
 const Home = (props) => {
   const { topRatedTV, popularTV } = props;
@@ -36,7 +37,7 @@ const Home = (props) => {
 
   return (
     <div className={"home"}>
-      <div className="topRatedWrapper">
+      <div className="popularWrapper">
         <h1>Popular</h1>
         <Carousel
           containerClass="carousel-container"

@@ -1,0 +1,11 @@
+.removeFromListBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background: #05445E;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    visibility: hidden;
+}

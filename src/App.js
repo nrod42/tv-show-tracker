@@ -173,7 +173,12 @@ const App = () => {
               path={`/shows/id:${showPage.id}`}
               element={<ShowPage id={showPage.id} />}
             />
-            {/* <Route path="/series" element={<SeriesPage />}></Route> */}
+            <Route path="/series" element={
+              <SeriesPage  
+                topRatedTV={topRatedTV} 
+                popularTV={popularTV}
+              />}
+            />
             {/* <Route path="/movies" element={<MoviesPage />}></Route> */}
           </Routes>
           <Footer />

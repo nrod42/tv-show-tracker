@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { SetListsContext } from "../App";
+import './Styles/removeFromListBtn.css'
 
 const RemoveFromListBtn = (props) => {
   const {

@@ -1,0 +1,29 @@
+.card {
+    position: relative;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .card:hover .addToListBtn {
+    visibility: visible;
+  } 
+  
+  .mainCardContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cardImg {
+    position: relative;
+  }
+  
+  .cardImg:hover {
+    filter: brightness(50%);
+  }

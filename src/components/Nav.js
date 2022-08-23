@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // import homeIcon from "../img/home_icon.svg";
 import searchIcon from "../img/search_icon.svg";
+import './Styles/nav.css'
 
 const Nav = (props) => {
   const { getTopShows, getPopularShows, searchTvShow } = props;
@@ -37,7 +38,7 @@ const Nav = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/lists/" className="myListBtn">
+          <Link to="/lists/" className="listsBtn">
             Lists
           </Link>
         </li>

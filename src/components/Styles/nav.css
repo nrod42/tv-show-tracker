@@ -1,0 +1,36 @@
+nav {
+    opacity: 0.85;
+    background: #05445E;
+    position: sticky;
+    top: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.pageTabs {
+    height: 100%;
+}
+
+.listsBtn, .homeBtn, .searchBtn {
+    height: 50px;
+    width: auto;
+}
+
+.homeBtn > img, .searchBtn > img {
+    width: 25px;
+    height: 25px;
+}
+
+.searchSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+  
