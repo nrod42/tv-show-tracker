@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { getTopTV, getPopularTV, getTVResults } from "./API/getTV";
+
 // import homeIcon from "../img/home_icon.svg";
 import searchIcon from "../img/search_icon.svg";
-import './Styles/nav.css'
+import "./Styles/nav.css";
 
 const Nav = (props) => {
-  const { getTopShows, getPopularShows, searchTvShow } = props;
+  const { setTopRatedTV, setPopularTV, setResults } = props;
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -14,17 +16,17 @@ const Nav = (props) => {
   };
 
   const handleHome = () => {
-    getTopShows();
-    getPopularShows();
+    getTopTV(setTopRatedTV);
+    getPopularTV(setPopularTV);
   };
 
   const handleSearch = () => {
-    searchTvShow(searchInput);
+    getTVResults(searchInput, setResults);
   };
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
-      searchTvShow(searchInput); //Needs to know to switch route
+      getTVResults(searchInput, setResults); //Needs to know to switch route
     }
   };
 

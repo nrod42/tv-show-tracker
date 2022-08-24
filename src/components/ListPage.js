@@ -14,7 +14,7 @@ const ListPage = (props) => {
         <TvCard key={show.id} showData={show} setShowPage={setShowPage} />
       ))
     );
-  }, [list]);
+  }, [list, setShowPage]);
 
   return (
     <div className={"myList"}>

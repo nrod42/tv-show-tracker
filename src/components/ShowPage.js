@@ -5,7 +5,7 @@ import PersonCard from "./PersonCard";
 import RemoveFromListBtn from "./RemoveFromListBtn";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import './Styles/showPage.css'
+import "./Styles/showPage.css";
 
 const ShowPage = (props) => {
   const [showInfo, setShowInfo] = useState("");

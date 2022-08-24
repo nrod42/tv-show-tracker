@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TvCard from "./TvCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import './Styles/home.css'
+import "./Styles/home.css";
 
 const Home = (props) => {
   const { topRatedTV, popularTV } = props;

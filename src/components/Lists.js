@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 import { SetListsContext } from "../App";
-import './Styles/lists.css'
+import "./Styles/lists.css";
 
-const Lists = (props) => {
+const Lists = () => {
   const { watchingList, wantToWatchList, completedList, droppedList } =
     useContext(SetListsContext);
 

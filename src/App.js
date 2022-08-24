@@ -9,7 +9,9 @@ import Footer from "./components/Footer";
 import ShowPage from "./components/ShowPage";
 import Lists from "./components/Lists";
 import SeriesPage from "./components/SeriesPage";
-import MoviesPage from "./components/MoviesPage";
+import { getTopTV, getPopularTV } from "./components/API/getTV";
+
+// import MoviesPage from "./components/MoviesPage";
 
 export const SetListsContext = React.createContext();
 
@@ -23,97 +25,9 @@ const App = () => {
   const [droppedList, setDroppedList] = useState([]);
   const [showPage, setShowPage] = useState("");
 
-  // Gets first two pages worth of top rated shows which will be added to the home page top rated carousel.
-  const getTopShows = async () => {
-    const urls = [
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1`,
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=2`,
-    ];
-    Promise.all(urls.map((url) => fetch(url).then((res) => res.json())))
-      .then((allResponses) => {
-        const results = allResponses.map((response) => response.results);
-        const topShows = [].concat.apply([], results);
-
-        setTopRatedTV(
-          topShows
-            .filter((show) => show.original_language === "en")
-            .map((show) => ({
-              id: show.id,
-              poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-              backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-              title: show.name,
-              rating: show.vote_average,
-              year: show.first_air_date.split("-")[0],
-              plot: show.overview,
-              genre: show.genre_ids,
-            }))
-        );
-      })
-      .catch((error) => {
-        console.error("Error:API", error);
-      });
-  };
-
-  // Gets first two pages worth of most popular shows which will be added to the home page most popular carousel.
-  const getPopularShows = async () => {
-    const urls = [
-      `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1`,
-      `https://api.themoviedb.org/3/tv/popular?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=2`,
-    ];
-    Promise.all(urls.map((url) => fetch(url).then((res) => res.json())))
-      .then((allResponses) => {
-        const results = allResponses.map((response) => response.results);
-        const popular = [].concat.apply([], results);
-
-        setPopularTV(
-          popular
-            .filter((show) => show.original_language === "en")
-            .map((show) => ({
-              id: show.id,
-              poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-              backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-              title: show.name,
-              rating: show.vote_average,
-              year: show.first_air_date.split("-")[0],
-              plot: show.overview,
-              genre: show.genre_ids,
-            }))
-        );
-      })
-      .catch((error) => {
-        console.error("Error:API", error);
-      });
-  };
-
-  const searchTvShow = async (value) => {
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/search/tv?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=1&query=${value}&include_adult=true`,
-        { mode: "cors" }
-      );
-      const tvShows = await response.json();
-      setResults(
-        tvShows.results
-          .filter((show) => show.original_language === "en")
-          .map((show) => ({
-            id: show.id,
-            poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-            backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-            title: show.name,
-            rating: show.vote_average,
-            year: show.first_air_date,
-            plot: show.overview,
-            genre: show.genre_ids,
-          }))
-      );
-    } catch (error) {
-      console.error("Error:API", error);
-    }
-  };
-
   useEffect(() => {
-    getTopShows();
-    getPopularShows();
+    getTopTV(setPopularTV);
+    getPopularTV(setTopRatedTV);
   }, []);
 
   //   // localStorage.setDroppedList("droppedShowsList", JSON.stringify(droppedList));
@@ -136,9 +50,9 @@ const App = () => {
           }}
         >
           <Nav
-            getTopShows={getTopShows}
-            getPopularShows={getPopularShows}
-            searchTvShow={searchTvShow}
+            setTopRatedTV={setTopRatedTV}
+            setPopularTV={setPopularTV}
+            setResults={setResults}
           />
           <Routes>
             <Route
@@ -173,11 +87,11 @@ const App = () => {
               path={`/shows/id:${showPage.id}`}
               element={<ShowPage id={showPage.id} />}
             />
-            <Route path="/series" element={
-              <SeriesPage  
-                topRatedTV={topRatedTV} 
-                popularTV={popularTV}
-              />}
+            <Route
+              path="/series"
+              element={
+                <SeriesPage topRatedTV={topRatedTV} popularTV={popularTV} />
+              }
             />
             {/* <Route path="/movies" element={<MoviesPage />}></Route> */}
           </Routes>

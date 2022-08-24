@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import TvCard from "./TvCard";
-// import { getLatestTVData } from "./API/getLatestTVData";
-import { getLatestTV } from "./API/getLatestTV";
+import { getTopTV, getPopularTV, getLatestTV } from "./API/getTV";
+// import "./Styles/seriesPage.css";
+import "./Styles/seriesPage.css";
 
 const SeriesPage = (props) => {
-  const { topRatedTV, popularTV } = props;
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -23,48 +22,43 @@ const SeriesPage = (props) => {
     },
   };
 
+  const [topTV, setTopTV] = useState([]);
+  const [popularTV, setPopularTV] = useState([]);
+  const [latestTV, setLatestTV] = useState([]);
+
   const [topRatedCards, setTopRatedCards] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
-  const [latestTV, setLatestTV] = useState([]);
   const [latestCards, setLatestCards] = useState([]);
-  
-  
-  // const latest = async () => {
-  //   let latest = await getLatestTVData()
-  //   setLatestTV(latest.results.filter((show) => show.original_language === "en")
-  //   .map((show) => ({
-  //     id: show.id,
-  //     poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
-  //     backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
-  //     title: show.name,
-  //     rating: show.vote_average,
-  //     year: show.first_air_date.split("-")[0],
-  //     plot: show.overview,
-  //     genre: show.genre_ids,
-  //   })))
-  // }
 
   useEffect(() => {
     setTopRatedCards(
-      topRatedTV.map((show) => <TvCard key={show.id} showData={show} />)
+      topTV.map((show) => <TvCard key={show.id} showData={show} />)
     );
 
     setPopularCards(
       popularTV.map((show) => <TvCard key={show.id} showData={show} />)
     );
-    
+
     setLatestCards(
       latestTV.map((show) => <TvCard key={show.id} showData={show} />)
-    )
-  }, [topRatedTV, popularTV, latestTV]);
+    );
+  }, [topTV, popularTV, latestTV]);
 
   useEffect(() => {
+    getTopTV(setTopTV);
+    getPopularTV(setPopularTV);
     getLatestTV(setLatestTV);
   }, []);
 
-
   return (
     <div className={"series"}>
+      <div className="seriesTabs">
+        <ul>
+          <li>Top Rated</li>
+          <li>Popular</li>
+          <li>Latest</li>
+        </ul>
+      </div>
       <div className="popularWrapper">
         <h1>Popular</h1>
         <Carousel
@@ -110,7 +104,6 @@ const SeriesPage = (props) => {
           {latestCards}
         </Carousel>
       </div>
-
     </div>
   );
 };
