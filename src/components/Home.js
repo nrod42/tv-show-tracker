@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import TvCard from "./TvCard";
 import Carousel from "react-multi-carousel";
+import { getTopTV, getPopularTV } from "./API/getTV";
 import "react-multi-carousel/lib/styles.css";
 import "./Styles/home.css";
 
-const Home = (props) => {
-  const { topRatedTV, popularTV } = props;
-
+const Home = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 8,
+      items: 7,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -22,18 +21,31 @@ const Home = (props) => {
     },
   };
 
+  const [topTV, setTopTV] = useState([]);
   const [topRatedCards, setTopRatedCards] = useState([]);
+  const [popularTV, setPopularTV] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
+
+  const handleTopTV = async () => {
+    const top = [...(await getTopTV()), ...(await getTopTV(2))];
+    const popular = [...(await getPopularTV()), ...(await getPopularTV(2))];
+    setTopTV(top);
+    setPopularTV(popular);
+  };
+
+  useEffect(() => {
+    handleTopTV();
+  }, []);
 
   useEffect(() => {
     setTopRatedCards(
-      topRatedTV.map((show) => <TvCard key={show.id} showData={show} />)
+      topTV.map((show) => <TvCard key={show.id} showData={show} />)
     );
 
     setPopularCards(
       popularTV.map((show) => <TvCard key={show.id} showData={show} />)
     );
-  }, [topRatedTV, popularTV]);
+  }, [topTV, popularTV]);
 
   return (
     <div className={"home"}>
@@ -44,10 +56,10 @@ const Home = (props) => {
           responsive={responsive}
           swipeable={true}
           draggable={true}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={2000}
-          transitionDuration={500}
+          // infinite={true}
+          // autoPlay={true}
+          // autoPlaySpeed={2000}
+          // transitionDuration={500}
         >
           {popularCards}
         </Carousel>
@@ -59,10 +71,10 @@ const Home = (props) => {
           responsive={responsive}
           swipeable={true}
           draggable={true}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={2000}
-          transitionDuration={500}
+          // infinite={true}
+          // autoPlay={true}
+          // autoPlaySpeed={2000}
+          // transitionDuration={500}
         >
           {topRatedCards}
         </Carousel>

@@ -1,6 +1,4 @@
 .searchResults {
-    margin: 0 100px;
-    overflow: auto;
     transition: opacity 1s ease;
     height: auto;
     max-width: 100%;

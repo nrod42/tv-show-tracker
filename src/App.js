@@ -1,5 +1,5 @@
 import "./index.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
@@ -8,8 +8,9 @@ import ListPage from "./components/ListPage";
 import Footer from "./components/Footer";
 import ShowPage from "./components/ShowPage";
 import Lists from "./components/Lists";
-import SeriesPage from "./components/SeriesPage";
-import { getTopTV, getPopularTV } from "./components/API/getTV";
+import TopTVPage from "./components/TopTVPage";
+import PopularTVPage from "./components/PopularTVPage";
+import AiringTodayTVPage from "./components/AiringTodayTVPage";
 
 // import MoviesPage from "./components/MoviesPage";
 
@@ -24,14 +25,6 @@ const App = () => {
   const [completedList, setCompletedList] = useState([]);
   const [droppedList, setDroppedList] = useState([]);
   const [showPage, setShowPage] = useState("");
-
-  useEffect(() => {
-    getTopTV(setPopularTV);
-    getPopularTV(setTopRatedTV);
-  }, []);
-
-  //   // localStorage.setDroppedList("droppedShowsList", JSON.stringify(droppedList));
-  // }, [results, watchingList, wantToWatchList, completedList, droppedList]);
 
   return (
     <BrowserRouter>
@@ -87,13 +80,12 @@ const App = () => {
               path={`/shows/id:${showPage.id}`}
               element={<ShowPage id={showPage.id} />}
             />
+            <Route path="/series/top-rated" element={<TopTVPage />} />
+            <Route path="/series/popular" element={<PopularTVPage />} />
             <Route
-              path="/series"
-              element={
-                <SeriesPage topRatedTV={topRatedTV} popularTV={popularTV} />
-              }
+              path="/series/airing-today"
+              element={<AiringTodayTVPage />}
             />
-            {/* <Route path="/movies" element={<MoviesPage />}></Route> */}
           </Routes>
           <Footer />
         </SetListsContext.Provider>

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { getTopTV, getPopularTV, getTVResults } from "./API/getTV";
+import { Link, useNavigate } from "react-router-dom";
+import { getTVResults } from "./API/getTV";
 
 // import homeIcon from "../img/home_icon.svg";
 import searchIcon from "../img/search_icon.svg";
 import "./Styles/nav.css";
 
 const Nav = (props) => {
-  const { setTopRatedTV, setPopularTV, setResults } = props;
+  const { setResults } = props;
+  const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -15,26 +16,23 @@ const Nav = (props) => {
     setSearchInput(e.target.value);
   };
 
-  const handleHome = () => {
-    getTopTV(setTopRatedTV);
-    getPopularTV(setPopularTV);
-  };
-
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate("/results");
     getTVResults(searchInput, setResults);
   };
 
-  const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
-      getTVResults(searchInput, setResults); //Needs to know to switch route
-    }
-  };
+  // const handleEnterKey = (e) => {
+  //   if (e.key === "Enter") {
+  //     getTVResults(searchInput, setResults); //Needs to know to switch route
+  //   }
+  // };
 
   return (
     <nav className="nav">
       <ul className="pageTabs">
         <li>
-          <Link to={"/"} onClick={handleHome} className="homeBtn">
+          <Link to={"/"} className="homeBtn">
             {/* <img src={homeIcon} alt="home button"></img> */}
             Home
           </Link>
@@ -45,31 +43,32 @@ const Nav = (props) => {
           </Link>
         </li>
         {/* <li>
-          <Link to={"/movies"} className="Movies">
-            <img src={homeIcon} alt="home button"></img>
+          <Link to={"/movies"} className="moviesBtn">
             Movies
           </Link>
         </li> */}
         <li>
-          <Link to={"/series"} className="Series">
-            {/* <img src={homeIcon} alt="home button"></img> */}
+          <Link to={"/series/top-rated"} className="seriesBtn">
             Series
           </Link>
         </li>
       </ul>
       <div className="searchSection">
-        <label htmlFor="search">Search</label>
-        <input
-          onChange={handleSearchInput}
-          onKeyDown={handleEnterKey}
-          id="search"
-          type="text"
-          value={searchInput}
-          placeholder={"Search TV Shows"}
-        ></input>
-        <Link to="/results" onClick={handleSearch} className="searchBtn">
-          <img src={searchIcon} alt="search button"></img>
-        </Link>
+        <form onSubmit={handleSearch} action="">
+          <label htmlFor="search">Search</label>
+          <input
+            onChange={handleSearchInput}
+            id="search"
+            type="text"
+            value={searchInput}
+            placeholder={"Search TV Shows"}
+          ></input>
+          <button type="submit">
+            <Link to="/results" className="searchBtn">
+              <img src={searchIcon} alt="search button"></img>
+            </Link>
+          </button>
+        </form>
       </div>
       {/* <Link to="/profile">Profile</Link> */}
     </nav>

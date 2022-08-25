@@ -16,14 +16,24 @@ nav {
     height: 100%;
 }
 
-.listsBtn, .homeBtn, .searchBtn {
-    height: 50px;
-    width: auto;
+.pageTabs li {
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.homeBtn > img, .searchBtn > img {
-    width: 25px;
-    height: 25px;
+.pageTabs a:hover {
+    background: grey;
+    /* color: black; */
+}
+
+.homeBtn, .listsBtn, .moviesBtn, .seriesBtn {
+    height: 100%;
+    width: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .searchSection {
@@ -32,5 +42,10 @@ nav {
     gap: 10px;
     align-items: center;
     justify-content: center;
+}
+
+.homeBtn > img, .searchBtn > img {
+    width: 25px;
+    height: 25px;
 }
   
