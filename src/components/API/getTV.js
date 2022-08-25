@@ -74,6 +74,68 @@ const getAiringTodayTV = async (page = 1) => {
   }
 };
 
+const getShowDetails = async (showId) => {
+  try {
+    const response = await fetch(
+      ` https://api.themoviedb.org/3/tv/${showId}?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
+      {
+        mode: "cors",
+      }
+    );
+    const tvShow = await response.json();
+    return {
+      id: tvShow.id,
+      poster: `https://image.tmdb.org/t/p/w300/${tvShow.poster_path}`,
+      backdrop: `https://image.tmdb.org/t/p/original/${tvShow.backdrop_path}`,
+      title: tvShow.name,
+      genres: tvShow.genres
+        ? tvShow.genres.map((show) => `${show.name}, `)
+        : "",
+      seasonNum: tvShow.number_of_seasons,
+      episodeNum: tvShow.number_of_episodes,
+      rating: tvShow.vote_average,
+      plot: tvShow.overview,
+      year: tvShow.first_air_date.split("-")[0],
+      seasonsInfo: tvShow.seasons,
+    };
+  } catch (error) {
+    console.error("Error:API", error);
+  }
+};
+
+const getShowCredits = async (showId) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/tv/${showId}/credits?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
+      {
+        mode: "cors",
+      }
+    );
+    const credits = await response.json();
+    return {
+      cast: credits.cast,
+      crew: credits.crew,
+    };
+  } catch (error) {
+    console.error("Error:API", error);
+  }
+};
+
+const getShowTrailer = async (showId) => {
+  try {
+    const response = await fetch(
+      ` https://api.themoviedb.org/3/tv/${showId}/videos?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
+      {
+        mode: "cors",
+      }
+    );
+    const trailer = await response.json();
+    return trailer.results[0].key;
+  } catch (error) {
+    console.error("Error:API", error);
+  }
+};
+
 const getTVResults = async (value, setState) => {
   try {
     const response = await fetch(
@@ -100,4 +162,12 @@ const getTVResults = async (value, setState) => {
   }
 };
 
-export { getTopTV, getPopularTV, getAiringTodayTV, getTVResults };
+export {
+  getTopTV,
+  getPopularTV,
+  getAiringTodayTV,
+  getShowDetails,
+  getShowCredits,
+  getShowTrailer,
+  getTVResults,
+};

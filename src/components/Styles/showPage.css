@@ -49,7 +49,21 @@ padding: 10px 0;
 /* position: absolute; */
 top: 50%;
 left: 50%;
-height: 300px;
-width: 400px;
+height: 100%;
+width: 100%;
 border: none;
+}
+
+.trailerContainer {
+    height: 50%;
+    width: 60%;
+    position: absolute;
+    top:50%;
+    left: 10%;
+}
+
+.hiddenTrailer {
+    display: none;
+    visibility: hidden;
+    height: 0;
 }

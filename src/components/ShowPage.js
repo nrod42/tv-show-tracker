@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+import { getShowDetails, getShowCredits, getShowTrailer } from "./API/getTV";
 import AddToListBtn from "./AddToListBtn";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
@@ -8,9 +8,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./Styles/showPage.css";
 
-const ShowPage = (props) => {
+const ShowPage = () => {
   const [showInfo, setShowInfo] = useState("");
-  //   const [trailer, setTrailer] = useState("");
+  const [isVideoOpen, setVideoOpen] = useState(false);
+  const [trailer, setTrailer] = useState("");
   const [seasons, setSeasons] = useState([]);
   const [seasonCards, setSeasonCards] = useState([]);
   const [cast, setCast] = useState([]);
@@ -46,86 +47,38 @@ const ShowPage = (props) => {
     },
   };
 
-  const getShowDetails = async (showId) => {
-    try {
-      const response = await fetch(
-        ` https://api.themoviedb.org/3/tv/${showId}?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
-        {
-          mode: "cors",
-        }
-      );
-      const tvShow = await response.json();
-      const show = {
-        id: tvShow.id,
-        poster: `https://image.tmdb.org/t/p/w300/${tvShow.poster_path}`,
-        backdrop: `https://image.tmdb.org/t/p/original/${tvShow.backdrop_path}`,
-        title: tvShow.name,
-        genres: tvShow.genres
-          ? tvShow.genres.map((show) => `${show.name}, `)
-          : "",
-        seasonNum: tvShow.number_of_seasons,
-        episodeNum: tvShow.number_of_episodes,
-        rating: tvShow.vote_average,
-        plot: tvShow.overview,
-        year: tvShow.first_air_date.split("-")[0],
-      };
-      setShowInfo(show);
-      setSeasons(tvShow.seasons);
-    } catch (error) {
-      console.error("Error:API", error);
-    }
+  const handleShowInfo = async () => {
+    const showInfo = await getShowDetails(id);
+    setShowInfo(showInfo);
+    setSeasons(showInfo.seasonsInfo);
   };
 
-  const getCredits = async (showId) => {
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${showId}/credits?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
-        {
-          mode: "cors",
-        }
-      );
-      const credits = await response.json();
-      setCast(credits.cast);
-      // setCrew(credits.crew)
-      // console.log(credits.crew)
-    } catch (error) {
-      console.error("Error:API", error);
-    }
+  const handleCredits = async () => {
+    const credits = await getShowCredits(id);
+    setCast(credits.cast);
+    // setCrew(credits.crew);
   };
 
-  //   const getTrailer = async (showId) => {
-  //     try {
-  //       const response = await fetch(
-  //         ` https://api.themoviedb.org/3/tv/${showId}/videos?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
-  //         {
-  //           mode: "cors",
-  //         }
-  //       );
-  //       const trailer = await response.json();
-  //       console.log(trailer.results.key);
-  //       setTrailer(trailer.results[0].key);
-  //     } catch (error) {
-  //       console.error("Error:API", error);
-  //     }
-  //   };
+  const handleTrailer = async () => {
+    const trailer = await getShowTrailer(id);
+    setTrailer(trailer);
+  };
 
   useEffect(() => {
-    getShowDetails(id);
-    // getTrailer(id);
-    getCredits(id);
-  }, [id]);
+    handleShowInfo();
+    handleCredits();
+    handleTrailer();
+  });
 
   useEffect(() => {
     setSeasonCards(
       seasons.map((season) => <SeasonCard key={season.id} season={season} />)
     );
-  }, [seasons]);
 
-  useEffect(() => {
     setCastCards(
       cast.map((person) => <PersonCard key={person.id} person={person} />)
     );
-  }, [cast]);
+  }, [seasons, cast]);
 
   return (
     <div className="showPage">
@@ -140,7 +93,7 @@ const ShowPage = (props) => {
         <div className="posterWrapper">
           <img src={poster} alt={`${title} poster`} />
           <AddToListBtn showData={showInfo} />
-          <RemoveFromListBtn showData={props.showData} />
+          <RemoveFromListBtn showData={showInfo} />
         </div>
         <div className="showInfo">
           <div>
@@ -155,6 +108,11 @@ const ShowPage = (props) => {
           <p>Rating: {rating}</p>
           {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
           <p>{plot}</p>
+          <div>
+            <button onClick={() => setVideoOpen((prev) => !prev)}>
+              Trailer
+            </button>
+          </div>
         </div>
       </div>
       <h2>Seasons</h2>
@@ -175,12 +133,15 @@ const ShowPage = (props) => {
       >
         {castCards}
       </Carousel>
-      {/* <iframe
-        className="trailer"
-        title="Youtube player"
-        allowFullScreen="allowfullscreen"
-        src={`https://youtube.com/embed/${trailer}?autoplay=0`}
-      ></iframe> */}
+
+      <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
+        <iframe
+          className="trailer"
+          title="Youtube player"
+          allowFullScreen="allowfullscreen"
+          src={`https://youtube.com/embed/${trailer}?autoplay=0`}
+        ></iframe>
+      </div>
     </div>
   );
 };
