@@ -17,7 +17,7 @@ const TvCard = (props) => {
   return (
     <div className="card" onClick={handleShowPage}>
       <div className="posterWrapper">
-        <Link to={`/shows/id=${id}`}>
+        <Link to={`/shows/id:${id}`}>
           <img
             className="cardImg"
             src={poster !== null ? poster : defaultImg}

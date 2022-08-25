@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+// import { useHistory } from "react-router-dom";
 import AddToListBtn from "./AddToListBtn";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
@@ -16,7 +17,7 @@ const ShowPage = (props) => {
   const [castCards, setCastCards] = useState([]);
   // const [crew, setCrew] = useState([]);
 
-  const { id } = props;
+  const id = window.location.pathname.split(":")[1];
 
   const {
     title,
@@ -152,7 +153,6 @@ const ShowPage = (props) => {
             <p>Episodes: {episodeNum}</p>
           </div>
           <p>Rating: {rating}</p>
-
           {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
           <p>{plot}</p>
         </div>

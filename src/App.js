@@ -76,10 +76,7 @@ const App = () => {
               path="/lists/dropped"
               element={<ListPage list={droppedList} title={"Dropped Shows"} />}
             />
-            <Route
-              path={`/shows/id:${showPage.id}`}
-              element={<ShowPage id={showPage.id} />}
-            />
+            <Route path={`/shows/id:${showPage.id}`} element={<ShowPage />} />
             <Route path="/series/top-rated" element={<TopTVPage />} />
             <Route path="/series/popular" element={<PopularTVPage />} />
             <Route
