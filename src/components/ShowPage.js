@@ -56,7 +56,7 @@ const ShowPage = (props) => {
       const tvShow = await response.json();
       const show = {
         id: tvShow.id,
-        poster: `https://image.tmdb.org/t/p/original/${tvShow.poster_path}`,
+        poster: `https://image.tmdb.org/t/p/w300/${tvShow.poster_path}`,
         backdrop: `https://image.tmdb.org/t/p/original/${tvShow.backdrop_path}`,
         title: tvShow.name,
         genres: tvShow.genres

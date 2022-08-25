@@ -10,7 +10,7 @@ const getTopTV = async (page = 1) => {
       .filter((show) => show.original_language === "en")
       .map((show) => ({
         id: show.id,
-        poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+        poster: `https://image.tmdb.org/t/p/w185/${show.poster_path}`,
         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
         title: show.name,
         rating: show.vote_average,
@@ -35,7 +35,7 @@ const getPopularTV = async (page = 1) => {
       .filter((show) => show.original_language === "en")
       .map((show) => ({
         id: show.id,
-        poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+        poster: `https://image.tmdb.org/t/p/w185/${show.poster_path}`,
         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
         title: show.name,
         rating: show.vote_average,
@@ -61,7 +61,7 @@ const getAiringTodayTV = async (page = 1) => {
       .filter((show) => show.original_language === "en")
       .map((show) => ({
         id: show.id,
-        poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+        poster: `https://image.tmdb.org/t/p/w185/${show.poster_path}`,
         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
         title: show.name,
         rating: show.vote_average,
@@ -86,7 +86,7 @@ const getTVResults = async (value, setState) => {
         .filter((show) => show.original_language === "en")
         .map((show) => ({
           id: show.id,
-          poster: `https://image.tmdb.org/t/p/original/${show.poster_path}`,
+          poster: `https://image.tmdb.org/t/p/w185/${show.poster_path}`,
           backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
           title: show.name,
           rating: show.vote_average,

@@ -9,7 +9,7 @@ const SeasonCard = (props) => {
         className="seasonPoster"
         src={
           poster_path !== null
-            ? `https://image.tmdb.org/t/p/w300/${props.season.poster_path}`
+            ? `https://image.tmdb.org/t/p/w185/${props.season.poster_path}`
             : defaultImg
         }
         alt={`Season ${season_number} poster`}
