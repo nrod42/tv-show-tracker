@@ -49,7 +49,7 @@ const App = () => {
           />
           <Routes>
             <Route
-              path="/"
+              path="/tv-show-tracker"
               element={<Home topRatedTV={topRatedTV} popularTV={popularTV} />}
             />
             <Route path="/results" element={<Results results={results} />} />

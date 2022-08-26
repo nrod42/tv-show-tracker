@@ -26,7 +26,7 @@ const Nav = (props) => {
     <nav className="nav">
       <ul className="pageTabs">
         <li>
-          <Link to={"/"} className="homeBtn">
+          <Link to={"/tv-show-tracker"} className="homeBtn">
             {/* <img src={homeIcon} alt="home button"></img> */}
             Home
           </Link>
@@ -48,21 +48,24 @@ const Nav = (props) => {
         </li>
       </ul>
       <div className="searchSection">
-        <form onSubmit={handleSearch} action="">
-          <label htmlFor="search">Search</label>
+        <form onSubmit={handleSearch} role="search">
           <input
             onChange={handleSearchInput}
             id="search"
             type="text"
             value={searchInput}
             placeholder={"Search TV Shows"}
+            aria-label="Search"
           ></input>
+
+        </form>
+        <div>
           <button type="submit">
-            <Link to="/results" className="searchBtn">
+            <Link to="/results">
               <img src={searchIcon} alt="search button"></img>
             </Link>
           </button>
-        </form>
+        </div>
       </div>
       {/* <Link to="/profile">Profile</Link> */}
     </nav>

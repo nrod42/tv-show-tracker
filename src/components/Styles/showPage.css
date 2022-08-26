@@ -29,7 +29,7 @@ padding: 10px 0;
 .showInfoContainer {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     /* width: var(--main-width); */
 }
 
@@ -43,12 +43,18 @@ padding: 10px 0;
     font-weight: bold;
 }
 
+.seasonSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
 .personCard, .seasonCard {
     text-align: center;
     width: auto;
 }
-
 
 .trailer {
     /* position: absolute; */
@@ -73,7 +79,7 @@ padding: 10px 0;
     height: 0;
 }
 
-.seasonWrapper, .castWrapper {
+.seasonWrapper, .castWrapper, .similarShowsWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,12 +87,13 @@ padding: 10px 0;
     /* width: 100%; */
 }
 
-.seasonStrip, .castStrip {
+.seasonStrip, .castStrip, .similarShowsStrip {
     overflow: auto;
     white-space: nowrap;
     height: auto;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 10px;
     padding: 20px;
     width: 100%;

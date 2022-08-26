@@ -5,7 +5,6 @@ import SeriesNav from "./SeriesNav";
 
 const PopularTVPage = () => {
   const [popularTV, setPopularTV] = useState([]);
-  const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
 
   const showMore = () => {
@@ -22,15 +21,12 @@ const PopularTVPage = () => {
     handlePages();
   }, [page]);
 
-  useEffect(() => {
-    setCards(popularTV.map((show) => <TvCard key={show.id} showData={show} />));
-  }, [popularTV]);
 
   return (
     <div className={"popularTVPage"}>
       <SeriesNav />
       <h1>Popular TV Shows</h1>
-      <div className="cardGrid">{cards}</div>
+      <div className="cardGrid">{popularTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>
       <button onClick={showMore}>Show more</button>
     </div>
   );

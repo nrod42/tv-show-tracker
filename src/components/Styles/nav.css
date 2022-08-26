@@ -8,18 +8,14 @@ nav {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     z-index: 1;
 }
 
-.pageTabs {
-    height: 100%;
-}
-
 .pageTabs li {
-    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .pageTabs a:hover {
@@ -36,8 +32,16 @@ nav {
     justify-content: center;
 }
 
+.homeBtn > img {
+    width: 25px;
+    height: 25px;
+}
+
 .searchSection {
-    height: auto;
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .searchSection form {
@@ -45,6 +49,7 @@ nav {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    height: auto;
 }
 
 .searchSection input {
@@ -56,12 +61,7 @@ nav {
 }
 
 .searchSection button {
-    background: white;
+    background: #FBEC5D;
     border: none;
-}
-
-.homeBtn > img, .searchBtn > img {
-    width: 25px;
-    height: 25px;
 }
   
