@@ -14,7 +14,7 @@ const getTopTV = async (page = 1) => {
         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
         title: show.name,
         rating: show.vote_average,
-        year: show.first_air_date,
+        year: show.first_air_date.split("-")[0],
         plot: show.overview,
         genre: show.genre_ids,
       }));
@@ -39,7 +39,7 @@ const getPopularTV = async (page = 1) => {
         backdrop: `https://image.tmdb.org/t/p/original/${show.backdrop_path}`,
         title: show.name,
         rating: show.vote_average,
-        year: show.first_air_date,
+        year: show.first_air_date.split("-")[0],
         plot: show.overview,
         genre: show.genre_ids,
       }));

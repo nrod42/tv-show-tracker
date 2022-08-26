@@ -4,8 +4,6 @@ import AddToListBtn from "./AddToListBtn";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
 import RemoveFromListBtn from "./RemoveFromListBtn";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import "./Styles/showPage.css";
 
 const ShowPage = () => {
@@ -31,21 +29,6 @@ const ShowPage = () => {
     plot,
     year,
   } = showInfo;
-
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
 
   const handleShowInfo = async () => {
     const showInfo = await getShowDetails(id);
@@ -89,58 +72,54 @@ const ShowPage = () => {
           alt={`${title} backdrop`}
         />
       </div>
-      <div className="showInfoContainer">
-        <div className="posterWrapper">
-          <img src={poster} alt={`${title} poster`} />
-          <AddToListBtn showData={showInfo} />
-          <RemoveFromListBtn showData={showInfo} />
+      <div className="allShowInfo">
+        <div className="showInfoContainer">
+          <div className="posterWrapper">
+            <img src={poster} alt={`${title} poster`} />
+            <AddToListBtn showData={showInfo} />
+            <RemoveFromListBtn showData={showInfo} />
+          </div>
+          <div className="showInfo">
+            <div className="titleSection">
+              <p>{title}</p>
+              <p>({year})</p>
+            </div>
+            <p>Genres: {genres}</p>
+            <div>
+              <p>Seasons: {seasonNum}</p>
+              <p>Episodes: {episodeNum}</p>
+            </div>
+            <p>Rating: {rating}</p>
+            {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
+            <div>
+        
+              <button onClick={() => setVideoOpen((prev) => !prev)}>
+                Trailer
+              </button>
+            </div>
+            <div className="plot">{plot}</div>
+          </div>
         </div>
-        <div className="showInfo">
-          <div>
-            <h2>{title}</h2>
-            <p>({year})</p>
-          </div>
-          <p>Genres: {genres}</p>
-          <div>
-            <p>Seasons: {seasonNum}</p>
-            <p>Episodes: {episodeNum}</p>
-          </div>
-          <p>Rating: {rating}</p>
-          {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-          <p>{plot}</p>
-          <div>
-            <button onClick={() => setVideoOpen((prev) => !prev)}>
-              Trailer
-            </button>
+        <div className="seasonWrapper">
+          <h2>Seasons</h2>
+          <div className="seasonStrip">
+            {seasonCards}
           </div>
         </div>
-      </div>
-      <h2>Seasons</h2>
-      <Carousel
-        containerClass="carousel-container"
-        responsive={responsive}
-        swipeable={true}
-        draggable={true}
-      >
-        {seasonCards}
-      </Carousel>
-      <h2>Starring</h2>
-      <Carousel
-        containerClass="carousel-container"
-        responsive={responsive}
-        swipeable={true}
-        draggable={true}
-      >
-        {castCards}
-      </Carousel>
-
-      <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
-        <iframe
-          className="trailer"
-          title="Youtube player"
-          allowFullScreen="allowfullscreen"
-          src={`https://youtube.com/embed/${trailer}?autoplay=0`}
-        ></iframe>
+        <div className="castWrapper">
+          <h2>Starring</h2>
+          <div className="castStrip">
+            {castCards}
+          </div>
+        </div>
+        <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
+          <iframe
+            className="trailer"
+            title="Youtube player"
+            allowFullScreen="allowfullscreen"
+            src={`https://youtube.com/embed/${trailer}?autoplay=0`}
+          ></iframe>
+        </div>
       </div>
     </div>
   );

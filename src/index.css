@@ -4,6 +4,12 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
+  color: #000000
+}
+
+:root {
+  --card-width: 185px;
+  --main-width: 80%;
 }
 
 html {
@@ -13,13 +19,8 @@ html {
 
 body {
   height: 100%;
-  background: #D4F1F4;
+  background: #D3D0CB;
 }
-
-/* img {
-  width: auto;
-  height: 295px;
-} */
 
 button {
   background: #05445E;
@@ -36,13 +37,6 @@ button:hover {
 
 label {
   color: #fff;
-}
-
-input {
-  font-size: 1rem;
-  padding: 10px;
-  line-height: 100%;
-  margin: 10px 0;
 }
 
 ul {
@@ -64,10 +58,8 @@ li:hover{
 li a {
   text-decoration: none;
   color: #fff;
-  /* padding: 10px; */
   display: block;
   text-align: center;
-  /* padding: 14px 16px; */
 }
 
 li a:visited, li a:active, li a:focus {
@@ -75,13 +67,14 @@ li a:visited, li a:active, li a:focus {
 }
 
 footer {
-  background: #189AB4;
+  background: #393E41;
   padding: 5px 0;
   width: 100%;
   height: auto;
   text-align: center;
   margin: 0;
   margin-top: auto;
+  color: #FFF
 }
 
 #root {
@@ -110,26 +103,18 @@ footer {
   gap: 20px;
 }
 
-.topRatedWrapper, .popularWrapper, .latestTVWrapper {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-}
-
 .cardGrid {
+  width: var(--main-width);
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(5, auto);
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), auto));
+  justify-items: center;
 } 
 
 .posterWrapper {
   position: relative;
   width: auto;
-  height: 100%;
+  height: auto;
   cursor: pointer;
 }
 
@@ -141,24 +126,8 @@ footer {
   visibility: visible;
 }
 
-.carousel-container {
-  width: 80%;
-  /* margin: 0 20px; */
-}
-
-.react-multi-carousel-item {
-  color: black;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.react-multi-carousel-item:hover {
-  filter: brightness(100%);
-}
-
-.topTVPage, .popularTVPage, .latestTVPage {
+.topTVPage, .popularTVPage, .latestTVPage, .searchResults {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

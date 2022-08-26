@@ -22,12 +22,6 @@ const Nav = (props) => {
     getTVResults(searchInput, setResults);
   };
 
-  // const handleEnterKey = (e) => {
-  //   if (e.key === "Enter") {
-  //     getTVResults(searchInput, setResults); //Needs to know to switch route
-  //   }
-  // };
-
   return (
     <nav className="nav">
       <ul className="pageTabs">

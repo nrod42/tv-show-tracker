@@ -27,7 +27,7 @@ const TvCard = (props) => {
         <AddToListBtn showData={props.showData} />
         <RemoveFromListBtn showData={props.showData} />
       </div>
-      <h3 className="title">{title}</h3>
+      <h3 className="cardTitle">{title}</h3>
       <p>({year})</p>
       <p className="rating">Rating: {rating}/10</p>
     </div>

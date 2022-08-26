@@ -1,6 +1,6 @@
 nav {
     opacity: 0.85;
-    background: #05445E;
+    background: #393E41;
     position: sticky;
     top: 0;
     padding: 0;
@@ -37,11 +37,27 @@ nav {
 }
 
 .searchSection {
+    height: auto;
+}
+
+.searchSection form {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     align-items: center;
     justify-content: center;
+}
+
+.searchSection input {
+    font-size: 1rem;
+    padding: 10px;
+    line-height: 100%;
+    margin: 10px 0;
+    flex-grow: 2;
+}
+
+.searchSection button {
+    background: white;
+    border: none;
 }
 
 .homeBtn > img, .searchBtn > img {

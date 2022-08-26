@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import TvCard from "./TvCard";
-import "./Styles/results.css";
 
 const Results = (props) => {
   const { results } = props;

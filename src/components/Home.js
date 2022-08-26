@@ -1,26 +1,9 @@
 import React, { useEffect, useState } from "react";
 import TvCard from "./TvCard";
-import Carousel from "react-multi-carousel";
 import { getTopTV, getPopularTV } from "./API/getTV";
-import "react-multi-carousel/lib/styles.css";
 import "./Styles/home.css";
 
 const Home = () => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 7,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-
   const [topTV, setTopTV] = useState([]);
   const [topRatedCards, setTopRatedCards] = useState([]);
   const [popularTV, setPopularTV] = useState([]);
@@ -51,33 +34,15 @@ const Home = () => {
     <div className={"home"}>
       <div className="popularWrapper">
         <h1>Popular</h1>
-        <Carousel
-          containerClass="carousel-container"
-          responsive={responsive}
-          swipeable={true}
-          draggable={true}
-          // infinite={true}
-          // autoPlay={true}
-          // autoPlaySpeed={2000}
-          // transitionDuration={500}
-        >
+        <div className="popularTVStrip">
           {popularCards}
-        </Carousel>
+        </div >
       </div>
       <div className="topRatedWrapper">
         <h1>Top Rated</h1>
-        <Carousel
-          containerClass="carousel-container"
-          responsive={responsive}
-          swipeable={true}
-          draggable={true}
-          // infinite={true}
-          // autoPlay={true}
-          // autoPlaySpeed={2000}
-          // transitionDuration={500}
-        >
+        <div className="topTVStrip">
           {topRatedCards}
-        </Carousel>
+        </div>
       </div>
     </div>
   );

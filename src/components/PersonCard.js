@@ -16,7 +16,7 @@ const PersonCard = (props) => {
       );
       const pic = await response.json();
       setActorPic(
-        `https://image.tmdb.org/t/p/w300/${pic.profiles[0].file_path}`
+        `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}`
       );
     } catch (error) {
       console.error("Error:API", error);
