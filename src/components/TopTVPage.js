@@ -23,7 +23,7 @@ const TopTVPage = () => {
 
 
   return (
-    <div className={"topTVPage"}>
+    <div className={"categoryPage"}>
       <SeriesNav />
       <h1>Top TV Shows</h1>
       <div className="cardGrid">{topTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>

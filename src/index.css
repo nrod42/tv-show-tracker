@@ -122,11 +122,28 @@ footer {
   visibility: visible;
 }
 
-.topTVPage, .popularTVPage, .latestTVPage, .searchResults {
+.strip {
+  overflow: auto;
+  white-space: nowrap;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  /* flex-wrap: wrap; */
+}
+
+.categoryPage, .searchResults {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+
+.topTVPage .removeFromListBtn, .popularTVPage .removeFromListBtn, .latestTVPage .removeFromListBtn, .searchResults .removeFromListBtn {
+  display: none;
 }

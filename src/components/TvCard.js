@@ -24,10 +24,10 @@ const TvCard = (props) => {
             alt={`${title} poster`}
           ></img>
         </Link>
-        <AddToListBtn showData={props.showData} />
-        <RemoveFromListBtn showData={props.showData} />
+        <AddToListBtn data={props.showData} />
+        <RemoveFromListBtn data={props.showData} />
       </div>
-      <h3 className="cardTitle">{title}</h3>
+      <p className="cardTitle">{title}</p>
       <p>({year})</p>
       <p className="rating">Rating: {rating}/10</p>
     </div>

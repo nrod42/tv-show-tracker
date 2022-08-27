@@ -12,37 +12,37 @@ const AddToListBtn = (props) => {
 
   const [popupClass, setPopupClass] = useState(false);
 
-  const { showData } = props;
+  const { data } = props;
 
   const handleAddToWatching = () => {
     setWatchingList((prevState) =>
-      prevState.some((show) => show.id === showData.id)
+      prevState.some((media) => media.id === data.id)
         ? prevState
-        : [...prevState, showData]
+        : [...prevState, data]
     );
   };
 
   const handleAddToWanted = () => {
     setWantToWatchList((prevState) =>
-      prevState.some((show) => show.id === showData.id)
+      prevState.some((media) => media.id === data.id)
         ? prevState
-        : [...prevState, showData]
+        : [...prevState, data]
     );
   };
 
   const handleAddToCompleted = () => {
     setCompletedList((prevState) =>
-      prevState.some((show) => show.id === showData.id)
+      prevState.some((media) => media.id === data.id)
         ? prevState
-        : [...prevState, showData]
+        : [...prevState, data]
     );
   };
 
   const handleAddToDropped = () => {
     setDroppedList((prevState) =>
-      prevState.some((show) => show.id === showData.id)
+      prevState.some((media) => media.id === data.id)
         ? prevState
-        : [...prevState, showData]
+        : [...prevState, data]
     );
   };
 

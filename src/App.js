@@ -4,38 +4,45 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Results from "./components/Results";
-import ListPage from "./components/ListPage";
-import Footer from "./components/Footer";
-import ShowPage from "./components/ShowPage";
+
 import Lists from "./components/Lists";
+import ListPage from "./components/ListPage";
+
+import ShowPage from "./components/ShowPage";
 import TopTVPage from "./components/TopTVPage";
 import PopularTVPage from "./components/PopularTVPage";
 import AiringTodayTVPage from "./components/AiringTodayTVPage";
 
-// import MoviesPage from "./components/MoviesPage";
+import MoviePage from "./components/MoviePage";
+import TopMoviesPage from "./components/TopMoviesPage";
+import PopularMoviesPage from "./components/PopularMoviesPage";
+import UpcomingMoviesPage from "./components/UpcomingMoviesPage";
+import NowPlayingMoviesPage from "./components/NowPlayingMoviesPage";
+
+import Footer from "./components/Footer";
 
 export const SetListsContext = React.createContext();
 
 const App = () => {
-  const [topRatedTV, setTopRatedTV] = useState([]);
-  const [popularTV, setPopularTV] = useState([]);
-  const [results, setResults] = useState([]);
+  const [moviePage, setMoviePage] = useState("");
+  const [showPage, setShowPage] = useState("");
+  const [searchQuery, setSearchQuery] = useState([]);
   const [watchingList, setWatchingList] = useState([]);
   const [wantToWatchList, setWantToWatchList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
   const [droppedList, setDroppedList] = useState([]);
-  const [showPage, setShowPage] = useState("");
 
   return (
     <BrowserRouter>
       <div className="App">
         <SetListsContext.Provider
           value={{
+            setShowPage,
+            setMoviePage,
             setWatchingList,
             setWantToWatchList,
             setCompletedList,
             setDroppedList,
-            setShowPage,
             watchingList,
             wantToWatchList,
             completedList,
@@ -43,16 +50,14 @@ const App = () => {
           }}
         >
           <Nav
-            setTopRatedTV={setTopRatedTV}
-            setPopularTV={setPopularTV}
-            setResults={setResults}
+            setSearchQuery={setSearchQuery}
           />
           <Routes>
             <Route
               path="/tv-show-tracker"
-              element={<Home topRatedTV={topRatedTV} popularTV={popularTV} />}
+              element={<Home />}
             />
-            <Route path="/results" element={<Results results={results} />} />
+            <Route path="/results" element={<Results searchQuery={searchQuery} />} />
             <Route path="/lists" element={<Lists />}></Route>
             <Route
               path="/lists/currently-watching"
@@ -76,6 +81,11 @@ const App = () => {
               path="/lists/dropped"
               element={<ListPage list={droppedList} title={"Dropped Shows"} />}
             />
+            <Route path={`/movies/id:${moviePage.id}`} element={<MoviePage />} />
+            <Route path="/movies/top-rated" element={<TopMoviesPage />} />
+            <Route path="/movies/popular" element={<PopularMoviesPage />} />
+            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+            <Route path="/movies/now-playing" element={<NowPlayingMoviesPage />} />
             <Route path={`/shows/id:${showPage.id}`} element={<ShowPage />} />
             <Route path="/series/top-rated" element={<TopTVPage />} />
             <Route path="/series/popular" element={<PopularTVPage />} />

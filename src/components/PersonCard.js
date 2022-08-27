@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getActorPics } from "./API/getTV";
-// import defaultImg from "../img/defaultImg.webp";
+import defaultImg from "../img/defaultImg.webp";
 
 const PersonCard = (props) => {
   const { id, name, character } = props.person;
 
   const [actorPic, setActorPic] = useState("");
 
-(async () => {
-  const actorPic = await getActorPics(id);
-  setActorPic(actorPic);
-})();
+  useEffect(() => {
+    (async () => {
+      const actorPic = await getActorPics(id);
+      setActorPic(actorPic);
+    })();
+  }, [id])
+
 
   return (
     <div className="personCard">
-      <img className="personPic" src={actorPic} alt={`${name}`}></img>
+      <img className="personPic" src={actorPic !== null ? actorPic : defaultImg} alt={`${name}`}></img>
       <p>{name}</p>
       <p>{character}</p>
     </div>

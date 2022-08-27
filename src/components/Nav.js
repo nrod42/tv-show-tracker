@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getTVResults } from "./API/getTV";
 
 // import homeIcon from "../img/home_icon.svg";
 import searchIcon from "../img/search_icon.svg";
 import "./Styles/nav.css";
 
 const Nav = (props) => {
-  const { setResults } = props;
+  const { setSearchQuery } = props;
   const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState("");
@@ -19,7 +18,7 @@ const Nav = (props) => {
   const handleSearch = (e) => {
     e.preventDefault();
     navigate("/results");
-    getTVResults(searchInput, setResults);
+    setSearchQuery(searchInput);
   };
 
   return (
@@ -36,11 +35,11 @@ const Nav = (props) => {
             Lists
           </Link>
         </li>
-        {/* <li>
-          <Link to={"/movies"} className="moviesBtn">
+        <li>
+          <Link to={"/movies/top-rated"} className="moviesBtn">
             Movies
           </Link>
-        </li> */}
+        </li>
         <li>
           <Link to={"/series/top-rated"} className="seriesBtn">
             Series

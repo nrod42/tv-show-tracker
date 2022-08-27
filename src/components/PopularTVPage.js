@@ -23,7 +23,7 @@ const PopularTVPage = () => {
 
 
   return (
-    <div className={"popularTVPage"}>
+    <div className={"categoryPage"}>
       <SeriesNav />
       <h1>Popular TV Shows</h1>
       <div className="cardGrid">{popularTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>

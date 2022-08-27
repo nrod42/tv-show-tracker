@@ -1,32 +1,26 @@
-.seriesNav > * {
+.categoryNav {
     background: #05445E;
-    position: sticky;
-    top: 0;
-    padding: 0;
-    /* width: 80%; */
+    width: 100%;
+    /* /position: sticky; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content:space-evenly;
-    z-index: 1;
+    justify-content:center;
 }
 
-
-.seriesTabs li {
-    /* width: ; */
+.categoryTabs li {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
     justify-content: center;
 }
 
-.seriesTabs a:hover {
+.categoryTabs a:hover {
     background: grey;
     /* color: black; */
 }
 
-.popularTVBtn, .topTVBtn, .latestTVBtn {
+.categoryBtn {
     /* height: 100%; */
     width: auto;
     padding: 20px;

@@ -12,6 +12,13 @@ nav {
     z-index: 1;
 }
 
+.pageTabs {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .pageTabs li {
     display: flex;
     justify-content: center;
@@ -26,7 +33,7 @@ nav {
 .homeBtn, .listsBtn, .moviesBtn, .seriesBtn {
     height: 100%;
     width: auto;
-    padding: 20px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +45,7 @@ nav {
 }
 
 .searchSection {
-    /* height: 100%; */
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;

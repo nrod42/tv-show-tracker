@@ -6,15 +6,25 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    
   }
   
 .listItem {
     width: var(--main-width);
     padding: 20px;
-    background: #189AB4;
+    background: #393E41;
+    opacity: 85%;
+    border-radius: 5px;
+    
 }
 
 .listDetails {
     display: flex;
     gap: 10px;
+    
+}
+
+.listItem * {
+    color: white;
+    text-decoration: none;
 }

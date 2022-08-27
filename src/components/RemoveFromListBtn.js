@@ -10,20 +10,20 @@ const RemoveFromListBtn = (props) => {
     setDroppedList,
   } = useContext(SetListsContext);
 
-  const { showData } = props;
+  const { data } = props;
 
   const handleRemove = () => {
     setWatchingList((prevState) =>
-      prevState.filter((show) => show.id !== showData.id)
+      prevState.filter((media) => media.id !== data.id)
     );
     setWantToWatchList((prevState) =>
-      prevState.filter((show) => show.id !== showData.id)
+      prevState.filter((media) => media.id !== data.id)
     );
     setCompletedList((prevState) =>
-      prevState.filter((show) => show.id !== showData.id)
+      prevState.filter((media) => media.id !== data.id)
     );
     setDroppedList((prevState) =>
-      prevState.filter((show) => show.id !== showData.id)
+      prevState.filter((media) => media.id !== data.id)
     );
   };
 

@@ -1,4 +1,4 @@
-.showPage {
+.moviePage {
     height: auto;
     max-width: 100%;
     /* width: 100vw; */
@@ -22,11 +22,11 @@ padding: 10px 0;
     width: 100%;
 }
 
-.allShowInfo {
+.allMovieInfo {
     width: var(--main-width);
 }
 
-.showInfoContainer {
+.movieInfoContainer {
     display: flex;
     gap: 20px;
     /* flex-wrap: wrap; */
@@ -43,15 +43,8 @@ padding: 10px 0;
     font-weight: bold;
 }
 
-.seasonSection {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-}
 
-.personCard, .seasonCard {
+.personCard {
     text-align: center;
     width: auto;
 }
@@ -79,7 +72,7 @@ padding: 10px 0;
     height: 0;
 }
 
-.seasonWrapper, .castWrapper, .similarShowsWrapper {
+.castWrapper, .similarShowsWrapper, .recMoviesWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;

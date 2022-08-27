@@ -1,108 +1,103 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getMovieDetails, getMovieCredits, getSimilarMovies, getRecMovies } from "./API/getMovies";
+import PersonCard from "./PersonCard";
+import MovieCard from "./MovieCard";
 import AddToListBtn from "./AddToListBtn";
 import RemoveFromListBtn from "./RemoveFromListBtn";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import "./Styles/moviePage.css";
 
-const MoviePage = (props) => {
+
+const MoviePage = () => {
   const [movieInfo, setMovieInfo] = useState("");
-  //   const [trailer, setTrailer] = useState("");
+  const [cast, setCast] = useState([]);
+  // const [crew, setCrew] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [recMovies, setRecMovies] = useState([]);
+  // const [isVideoOpen, setVideoOpen] = useState(false);
+  // const [trailer, setTrailer] = useState("");
 
-  const { id } = props;
+  const id = window.location.pathname.split(":")[1];
 
-  const { title, backdrop, poster, rating, genres, plot, year } = movieInfo;
-
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-
-  const getMovieDetails = async (movieId) => {
-    try {
-      const response = await fetch(
-        ` https://api.themoviedb.org/3/tv/${showId}?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US`,
-        {
-          mode: "cors",
-        }
-      );
-      const movie = await response.json();
-      console.log(movie);
-      //   const movieData = {
-      //     id: movie.id,
-      //     poster: `https://image.tmdb.org/t/p/original/${movie.poster_path}`,
-      //     backdrop: `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`,
-      //     title: movie.name,
-      //     genres: movie.genres
-      //       ? movie.genres.map((show) => `${show.name}, `)
-      //       : "",
-      //     rating: movie.vote_average,
-      //     plot: movie.overview,
-      //     year: movie.first_air_date.split("-")[0],
-      //   };
-      //   setMovieInfo(movieData);
-    } catch (error) {
-      console.error("Error:API", error);
-    }
-  };
-
-  useEffect(() => {
-    getMovieDetails(id);
-    // getTrailer(id);
-    // getCredits(id);
-  }, [id]);
+  //Fetch all relevant show info and saves them in a state
+useEffect(() => {
+  (async () => {
+    const movieInfo = await getMovieDetails(id);
+    const credits = await getMovieCredits(id);
+    const similarMovies = await getSimilarMovies(id);
+    const recMovies = await getRecMovies(id);
+    // const trailer = await getShowTrailer(id)
+    setMovieInfo(movieInfo);
+    setCast(credits.cast);
+    // setCrew(credits.crew);
+    setSimilarMovies(similarMovies);
+    setRecMovies(recMovies);
+    // setTrailer(trailer);
+  })();
+})
 
   return (
-    <div className="showPage">
+    <div className="moviePage">
       <div className="backdrop">
         <img
           className={"backdropImg"}
-          src={backdrop}
-          alt={`${title} backdrop`}
+          src={movieInfo.backdrop}
+          alt={`${movieInfo.title} backdrop`}
         />
       </div>
-      <div className="showInfoContainer">
-        <div className="posterWrapper">
-          <img src={poster} alt={`${title} poster`} />
-          <AddToListBtn showData={showInfo} />
-          <RemoveFromListBtn showData={props.showData} />
-        </div>
-        <div className="showInfo">
-          <div>
-            <h2>{title}</h2>
-            <p>({year})</p>
+      <div className="allMovieInfo">
+        <div className="movieInfoContainer">
+          <div className="posterWrapper">
+            <img src={movieInfo.poster} alt={`${movieInfo.title} poster`} />
+            <AddToListBtn data={movieInfo} />
+            <RemoveFromListBtn data={movieInfo} />
           </div>
-          <p>Genres: {genres}</p>
-          <p>Rating: {rating}</p>
-          <p>{plot}</p>
+          <div className="movieInfo">
+            <div className="titleSection">
+              <p>{movieInfo.title}</p>
+              <p>({movieInfo.year})</p>
+            </div>
+            <p>Genres: {movieInfo.genres}</p>
+            <p>Rating: {movieInfo.rating}</p>
+            {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
+            <div>
+        
+              <button 
+              // onClick={() => setVideoOpen((prev) => !prev)}
+              >
+                Trailer
+              </button>
+            </div>
+            <div className="plot">{movieInfo.plot}</div>
+          </div>
         </div>
+        <div className="castWrapper">
+          <h2>Starring</h2>
+          <div className="strip">
+          {cast.map((person) => <PersonCard key={person.id} person={person} />)}
+          </div>
+        </div>
+        
+        <div className="similarMoviesWrapper">
+          <h2>Similar Movies</h2>
+          <div className="strip">
+            {similarMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}
+          </div>
+        </div>
+        <div className="recMoviesWrapper">
+          <h2>Recommended Movies</h2>
+          <div className="strip">
+            {recMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}
+          </div>
+        </div>
+        {/* <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
+          <iframe
+            className="trailer"
+            title="Youtube player"
+            allowFullScreen="allowfullscreen"
+            src={`https://youtube.com/embed/${trailer}?autoplay=0`}
+          ></iframe>
+        </div> */}
       </div>
-      <h2>Seasons</h2>
-
-      <h2>Starring</h2>
-      <Carousel
-        containerClass="carousel-container"
-        responsive={responsive}
-        swipeable={true}
-        draggable={true}
-      >
-        {castCards}
-      </Carousel>
-      {/* <iframe
-        className="trailer"
-        title="Youtube player"
-        allowFullScreen="allowfullscreen"
-        src={`https://youtube.com/embed/${trailer}?autoplay=0`}
-      ></iframe> */}
     </div>
   );
 };

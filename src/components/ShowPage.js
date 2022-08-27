@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getShowDetails, getShowCredits, getSimilarShows, getShowTrailer } from "./API/getTV";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
@@ -19,18 +19,33 @@ const ShowPage = () => {
   const id = window.location.pathname.split(":")[1];
 
   //Fetch all relevant show info and saves them in a state
-  (async () => {
-    const showInfo = await getShowDetails(id);
-    const credits = await getShowCredits(id);
-    const similarShows = await getSimilarShows(id);
-    // const trailer = await getShowTrailer(id)
-    setShowInfo(showInfo);
-    setSeasons(showInfo.seasonsInfo);
-    setCast(credits.cast);
-    // setCrew(credits.crew);
-    setSimilarShows(similarShows);
-    // setTrailer(trailer);
-  })();
+  // (async () => {
+  //   const showInfo = await getShowDetails(id);
+  //   const credits = await getShowCredits(id);
+  //   const similarShows = await getSimilarShows(id);
+  //   // const trailer = await getShowTrailer(id)
+  //   setShowInfo(showInfo);
+  //   setSeasons(showInfo.seasonsInfo);
+  //   setCast(credits.cast);
+  //   // setCrew(credits.crew);
+  //   setSimilarShows(similarShows);
+  //   // setTrailer(trailer);
+  // })();
+
+  useEffect(() => {
+    (async () => {
+      const showInfo = await getShowDetails(id);
+      const credits = await getShowCredits(id);
+      const similarShows = await getSimilarShows(id);
+      // const trailer = await getShowTrailer(id)
+      setShowInfo(showInfo);
+      setSeasons(showInfo.seasonsInfo);
+      setCast(credits.cast);
+      // setCrew(credits.crew);
+      setSimilarShows(similarShows);
+      // setTrailer(trailer);
+    })();
+  }, [id])
 
   return (
     <div className="showPage">
@@ -45,8 +60,8 @@ const ShowPage = () => {
         <div className="showInfoContainer">
           <div className="posterWrapper">
             <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
-            <AddToListBtn showData={showInfo} />
-            <RemoveFromListBtn showData={showInfo} />
+            <AddToListBtn data={showInfo} />
+            <RemoveFromListBtn data={showInfo} />
           </div>
           <div className="showInfo">
             <div className="titleSection">
@@ -73,19 +88,19 @@ const ShowPage = () => {
         </div>
         <div className="seasonWrapper">
           <h2>Seasons</h2>
-          <div className="seasonStrip">
+          <div className="strip">
           {seasons.map((season) => <SeasonCard key={season.id} season={season} />)}
           </div>
         </div>
         <div className="castWrapper">
           <h2>Starring</h2>
-          <div className="castStrip">
+          <div className="strip">
           {cast.map((person) => <PersonCard key={person.id} person={person} />)}
           </div>
         </div>
         <div className="similarShowsWrapper">
           <h2>Similar Shows</h2>
-          <div className="similarShowsStrip">
+          <div className="strip">
             {similarShows.map((show) => <TvCard key={show.id} showData={show} />)}
           </div>
         </div>

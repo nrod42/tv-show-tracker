@@ -22,7 +22,7 @@ const AiringTodayTVPage = () => {
   }, [page]);
 
   return (
-    <div className={"popularTVPage"}>
+    <div className={"categoryPage"}>
       <SeriesNav />
       <h1>Airing Today</h1>
       <div className="cardGrid">{airingTodayTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>
