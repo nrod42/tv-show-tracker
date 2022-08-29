@@ -46,7 +46,7 @@ useEffect(() => {
       </div>
       <div className="allMovieInfo">
         <div className="movieInfoContainer">
-          <div className="posterWrapper">
+          <div className="moviePosterWrapper">
             <img src={movieInfo.poster} alt={`${movieInfo.title} poster`} />
             <AddToListBtn data={movieInfo} />
             <RemoveFromListBtn data={movieInfo} />

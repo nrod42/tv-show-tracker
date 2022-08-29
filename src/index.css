@@ -9,6 +9,7 @@
 
 :root {
   --card-width: 185px;
+  --card-height: 278px;
   --main-width: 80%;
 }
 
@@ -18,7 +19,7 @@ html {
 }
 
 body {
-  height: 100%;
+  height: fit-content;
   background: #D3D0CB;
 }
 
@@ -51,14 +52,14 @@ li:hover{
   filter: brightness(50%);
 }
 
-li a {
+a {
   text-decoration: none;
   color: #fff;
   display: block;
   text-align: center;
 }
 
-li a:visited, li a:active, li a:focus {
+a:visited, a:active {
   color: #fff;
 }
 
@@ -109,8 +110,8 @@ footer {
 
 .posterWrapper {
   position: relative;
-  width: auto;
-  height: auto;
+  width: var(--card-width);
+  height: var(--card-height);
   cursor: pointer;
 }
 
@@ -146,4 +147,13 @@ footer {
 
 .topTVPage .removeFromListBtn, .popularTVPage .removeFromListBtn, .latestTVPage .removeFromListBtn, .searchResults .removeFromListBtn {
   display: none;
+}
+
+.backdrop {
+max-width: 100%;
+}
+
+.backdropImg {
+  /* height: 80%; */
+  max-width: 100%;
 }

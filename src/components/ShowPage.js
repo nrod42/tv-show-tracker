@@ -58,10 +58,17 @@ const ShowPage = () => {
       </div>
       <div className="allShowInfo">
         <div className="showInfoContainer">
-          <div className="posterWrapper">
+          <div className="showPosterWrapper">
             <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
             <AddToListBtn data={showInfo} />
             <RemoveFromListBtn data={showInfo} />
+            <div>
+              <button 
+              // onClick={() => setVideoOpen((prev) => !prev)}
+              >
+                Trailer
+              </button>
+            </div>
           </div>
           <div className="showInfo">
             <div className="titleSection">
@@ -75,14 +82,7 @@ const ShowPage = () => {
             <p>Genres: {showInfo.genres}</p>
             <p>Rating: {showInfo.rating}</p>
             {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-            <div>
-        
-              <button 
-              // onClick={() => setVideoOpen((prev) => !prev)}
-              >
-                Trailer
-              </button>
-            </div>
+
             <div className="plot">{showInfo.plot}</div>
           </div>
         </div>
