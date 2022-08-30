@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TvCard from "./TvCard";
 import { getAiringTodayTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
+import TvCard from "./Cards/TvCard";
 
 const AiringTodayTVPage = () => {
   const [airingTodayTV, setAiringTodayTV] = useState([]);

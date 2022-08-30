@@ -1,5 +1,5 @@
-import TvCard from "./TvCard";
-import MovieCard from "./MovieCard";
+import TvCard from "./Cards/TvCard";
+import MovieCard from "./Cards/MovieCard";
 import { useEffect, useState } from "react";
 import { getResults } from "./API/getResults";
 

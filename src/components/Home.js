@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTopMovies, getPopularMovies } from "./API/getMovies";
 import { getTopTV, getPopularTV } from "./API/getTV";
-import MovieCard from "./MovieCard";
-import TvCard from "./TvCard";
+import MovieCard from "./Cards/MovieCard";
+import TvCard from "./Cards/TvCard";
 import "./Styles/home.css";
 
 const Home = () => {

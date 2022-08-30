@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SetListsContext } from "../App";
-import defaultImg from "../img/defaultImg.webp";
-import AddToListBtn from "./AddToListBtn";
-import RemoveFromListBtn from "./RemoveFromListBtn";
-import "./Styles/card.css";
+import { SetListsContext } from "../../App";
+import defaultImg from "../../img/defaultImg.webp";
+import AddToListBtn from "../AddToListBtn";
+import RemoveFromListBtn from "../RemoveFromListBtn";
+import "../Styles/card.css";
 
 const TvCard = (props) => {
   const { setShowPage } = useContext(SetListsContext);

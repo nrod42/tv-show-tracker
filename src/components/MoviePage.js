@@ -5,8 +5,8 @@ import {
   getSimilarMovies,
   getRecMovies,
 } from "./API/getMovies";
-import PersonCard from "./PersonCard";
-import MovieCard from "./MovieCard";
+import PersonCard from "./Cards/PersonCard";
+import MovieCard from "./Cards/MovieCard";
 import AddToListBtn from "./AddToListBtn";
 import "./Styles/moviePage.css";
 

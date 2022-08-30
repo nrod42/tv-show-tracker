@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getActorPics } from "./API/getTV";
-import defaultImg from "../img/defaultImg.webp";
+import { getActorPics } from "../API/getTV";
+import defaultImg from "../../img/defaultImg.webp";
 
 const PersonCard = (props) => {
   const { id, name, character } = props.person;

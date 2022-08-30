@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TvCard from "./TvCard";
+import TvCard from "./Cards/TvCard";
 import { getTopTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
 

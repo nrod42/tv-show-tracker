@@ -6,9 +6,9 @@ import {
   getRecTV,
   getShowTrailer,
 } from "./API/getTV";
-import SeasonCard from "./SeasonCard";
-import PersonCard from "./PersonCard";
-import TvCard from "./TvCard";
+import SeasonCard from "./Cards/SeasonCard";
+import PersonCard from "./Cards/PersonCard";
+import TvCard from "./Cards/TvCard";
 import AddToListBtn from "./AddToListBtn";
 import "./Styles/showPage.css";
 

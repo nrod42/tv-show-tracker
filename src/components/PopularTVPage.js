@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TvCard from "./TvCard";
+import TvCard from "./Cards/TvCard";
 import { getPopularTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
 
@@ -21,13 +21,18 @@ const PopularTVPage = () => {
     handlePages();
   }, [page]);
 
-
   return (
     <div className={"categoryPage"}>
       <SeriesNav />
       <h1>Popular TV Shows</h1>
-      <div className="cardGrid">{popularTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>
-      <button className="showMoreBtn" onClick={showMore}>Show more</button>
+      <div className="cardGrid">
+        {popularTV.map((show) => (
+          <TvCard key={show.id} showData={show} />
+        ))}
+      </div>
+      <button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </button>
     </div>
   );
 };

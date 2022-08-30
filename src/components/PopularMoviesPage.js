@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MoviesNav from "./MoviesNav";
-import MovieCard from "./MovieCard";
+import MovieCard from "./Cards/MovieCard";
 import { getPopularMovies } from "./API/getMovies";
 
 const PopularMoviesPage = () => {
