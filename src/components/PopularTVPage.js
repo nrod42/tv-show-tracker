@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import TvCard from "./Cards/TvCard";
 import { getPopularTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
+import TvCard from "./Cards/TvCard";
+import uniqid from "uniqid";
 
 const PopularTVPage = () => {
   const [popularTV, setPopularTV] = useState([]);
@@ -27,7 +28,7 @@ const PopularTVPage = () => {
       <h1>Popular TV Shows</h1>
       <div className="cardGrid">
         {popularTV.map((show) => (
-          <TvCard key={show.id} showData={show} />
+          <TvCard key={uniqid()} showData={show} />
         ))}
       </div>
       <button className="showMoreBtn" onClick={showMore}>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MovieCard from "./Cards/MovieCard";
 import { getUpcomingMovies } from "./API/getMovies";
 import MoviesNav from "./MoviesNav";
+import MovieCard from "./Cards/MovieCard";
+import uniqid from "uniqid";
 
 const UpcomingMoviesPage = () => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
@@ -27,7 +28,7 @@ const UpcomingMoviesPage = () => {
       <h1>Upcoming Movies</h1>
       <div className="cardGrid">
         {upcomingMovies.map((movie) => (
-          <MovieCard key={movie.id} movieData={movie} />
+          <MovieCard key={uniqid()} movieData={movie} />
         ))}
       </div>
       <button className="showMoreBtn" onClick={showMore}>

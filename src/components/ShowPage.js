@@ -6,11 +6,12 @@ import {
   getRecTV,
   getShowTrailer,
 } from "./API/getTV";
+import TvCard from "./Cards/TvCard";
 import SeasonCard from "./Cards/SeasonCard";
 import PersonCard from "./Cards/PersonCard";
-import TvCard from "./Cards/TvCard";
 import AddToListBtn from "./AddToListBtn";
 import "./Styles/showPage.css";
+import uniqid from "uniqid";
 
 const ShowPage = () => {
   const [showInfo, setShowInfo] = useState("");
@@ -84,7 +85,7 @@ const ShowPage = () => {
           <h2>Seasons</h2>
           <div className="strip">
             {seasons.map((season) => (
-              <SeasonCard key={season.id} season={season} />
+              <SeasonCard key={uniqid()} season={season} />
             ))}
           </div>
         </div>
@@ -92,7 +93,7 @@ const ShowPage = () => {
           <h2>Starring</h2>
           <div className="strip">
             {cast.map((person) => (
-              <PersonCard key={person.id} person={person} />
+              <PersonCard key={uniqid()} person={person} />
             ))}
           </div>
         </div>
@@ -100,7 +101,7 @@ const ShowPage = () => {
           <h2>Similar Shows</h2>
           <div className="strip">
             {similarShows.map((show) => (
-              <TvCard key={show.id} showData={show} />
+              <TvCard key={uniqid()} showData={show} />
             ))}
           </div>
         </div>
@@ -108,7 +109,7 @@ const ShowPage = () => {
           <h2>Recommended Shows</h2>
           <div className="strip">
             {recShows.map((show) => (
-              <TvCard key={show.id} showData={show} />
+              <TvCard key={uniqid()} showData={show} />
             ))}
           </div>
         </div>

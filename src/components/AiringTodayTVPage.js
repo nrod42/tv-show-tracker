@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAiringTodayTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
 import TvCard from "./Cards/TvCard";
+import uniqid from "uniqid";
 
 const AiringTodayTVPage = () => {
   const [airingTodayTV, setAiringTodayTV] = useState([]);
@@ -27,7 +28,7 @@ const AiringTodayTVPage = () => {
       <h1>Airing Today</h1>
       <div className="cardGrid">
         {airingTodayTV.map((show) => (
-          <TvCard key={show.id} showData={show} />
+          <TvCard key={uniqid()} showData={show} />
         ))}
       </div>
       <button className="showMoreBtn" onClick={showMore}>

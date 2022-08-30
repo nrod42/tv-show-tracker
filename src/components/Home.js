@@ -5,6 +5,7 @@ import { getTopTV, getPopularTV } from "./API/getTV";
 import MovieCard from "./Cards/MovieCard";
 import TvCard from "./Cards/TvCard";
 import "./Styles/home.css";
+import uniqid from "uniqid";
 
 const Home = () => {
   const [topTV, setTopTV] = useState([]);
@@ -42,7 +43,7 @@ const Home = () => {
         </Link>
         <div className="strip">
           {popularTV.map((show) => (
-            <TvCard key={show.id} showData={show} />
+            <TvCard key={uniqid()} showData={show} />
           ))}
         </div>
       </div>
@@ -52,7 +53,7 @@ const Home = () => {
         </Link>
         <div className="strip">
           {topTV.map((show) => (
-            <TvCard key={show.id} showData={show} />
+            <TvCard key={uniqid()} showData={show} />
           ))}
         </div>
       </div>
@@ -62,7 +63,7 @@ const Home = () => {
         </Link>
         <div className="strip">
           {popularMovies.map((movie) => (
-            <MovieCard key={movie.id} movieData={movie} />
+            <MovieCard key={uniqid()} movieData={movie} />
           ))}
         </div>
       </div>
@@ -72,7 +73,7 @@ const Home = () => {
         </Link>
         <div className="strip">
           {topMovies.map((movie) => (
-            <MovieCard key={movie.id} movieData={movie} />
+            <MovieCard key={uniqid()} movieData={movie} />
           ))}
         </div>
       </div>

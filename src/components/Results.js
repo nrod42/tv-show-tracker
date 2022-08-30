@@ -2,6 +2,7 @@ import TvCard from "./Cards/TvCard";
 import MovieCard from "./Cards/MovieCard";
 import { useEffect, useState } from "react";
 import { getResults } from "./API/getResults";
+import uniqid from "uniqid";
 
 const Results = (props) => {
   const { searchQuery } = props;
@@ -13,9 +14,9 @@ const Results = (props) => {
     setCards(
       results.map((result) =>
         result.type === "movie" ? (
-          <MovieCard key={result.id} movieData={result} />
+          <MovieCard key={uniqid()} movieData={result} />
         ) : (
-          <TvCard key={result.id} showData={result} />
+          <TvCard key={uniqid()} showData={result} />
         )
       )
     );
@@ -25,7 +26,7 @@ const Results = (props) => {
     setCards(
       results
         .filter((result) => result.type === "movie")
-        .map((movie) => <MovieCard key={movie.id} movieData={movie} />)
+        .map((movie) => <MovieCard key={uniqid()} movieData={movie} />)
     );
   };
 
@@ -33,7 +34,7 @@ const Results = (props) => {
     setCards(
       results
         .filter((result) => result.type === "tv")
-        .map((show) => <TvCard key={show.id} showData={show} />)
+        .map((show) => <TvCard key={uniqid()} showData={show} />)
     );
   };
 

@@ -9,6 +9,7 @@ import PersonCard from "./Cards/PersonCard";
 import MovieCard from "./Cards/MovieCard";
 import AddToListBtn from "./AddToListBtn";
 import "./Styles/moviePage.css";
+import uniqid from "uniqid";
 
 const MoviePage = () => {
   const [movieInfo, setMovieInfo] = useState("");
@@ -75,7 +76,7 @@ const MoviePage = () => {
           <h2>Starring</h2>
           <div className="strip">
             {cast.map((person) => (
-              <PersonCard key={person.id} person={person} />
+              <PersonCard key={uniqid()} person={person} />
             ))}
           </div>
         </div>
@@ -84,7 +85,7 @@ const MoviePage = () => {
           <h2>Similar Movies</h2>
           <div className="strip">
             {similarMovies.map((movie) => (
-              <MovieCard key={movie.id} movieData={movie} />
+              <MovieCard key={uniqid()} movieData={movie} />
             ))}
           </div>
         </div>
@@ -92,7 +93,7 @@ const MoviePage = () => {
           <h2>Recommended Movies</h2>
           <div className="strip">
             {recMovies.map((movie) => (
-              <MovieCard key={movie.id} movieData={movie} />
+              <MovieCard key={uniqid()} movieData={movie} />
             ))}
           </div>
         </div>

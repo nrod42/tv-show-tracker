@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { SetListsContext } from "../App";
 import TvCard from "./Cards/TvCard";
+import uniqid from "uniqid";
 
 const ListPage = (props) => {
   const { list } = props;
@@ -11,7 +12,7 @@ const ListPage = (props) => {
   useEffect(() => {
     setCards(
       list.map((show) => (
-        <TvCard key={show.id} showData={show} setShowPage={setShowPage} />
+        <TvCard key={uniqid()} showData={show} setShowPage={setShowPage} />
       ))
     );
   }, [list, setShowPage]);
