@@ -4,10 +4,11 @@
     left: 0;
     cursor: pointer;
     background: #05445E;
+    font-size: 1.2rem;
     color: #fff;
     padding: 10px;
-    border-radius: 5px;
-    visibility: hidden;
+    border-bottom-right-radius: 5px;
+    
   }
   
 .addToListBtn .listPopup {

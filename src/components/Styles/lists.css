@@ -7,16 +7,15 @@
     justify-content: center;
     gap: 10px;
     
-  }
-  
-.listItem {
+}
+
+.list {
     width: var(--main-width);
     padding: 20px;
     background: #393E41;
     opacity: 85%;
     border-radius: 5px;
-    
-}
+} 
 
 .listDetails {
     display: flex;

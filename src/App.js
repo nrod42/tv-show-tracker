@@ -74,12 +74,12 @@ const App = () => {
             <Route
               path="/lists/completed"
               element={
-                <ListPage list={completedList} title={"Completed Shows"} />
+                <ListPage list={completedList} title={"Completed"} />
               }
             />
             <Route
               path="/lists/dropped"
-              element={<ListPage list={droppedList} title={"Dropped Shows"} />}
+              element={<ListPage list={droppedList} title={"Dropped"} />}
             />
             <Route path={`/movies/id:${moviePage.id}`} element={<MoviePage />} />
             <Route path="/movies/top-rated" element={<TopMoviesPage />} />

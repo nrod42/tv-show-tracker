@@ -23,29 +23,30 @@ const Nav = (props) => {
 
   return (
     <nav className="nav">
-      <ul className="pageTabs">
-        <li>
-          <Link to={"/tv-show-tracker"} className="homeBtn">
-            {/* <img src={homeIcon} alt="home button"></img> */}
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/lists/" className="listsBtn">
-            Lists
-          </Link>
-        </li>
-        <li>
-          <Link to={"/movies/top-rated"} className="moviesBtn">
-            Movies
-          </Link>
-        </li>
-        <li>
-          <Link to={"/series/top-rated"} className="seriesBtn">
-            Series
-          </Link>
-        </li>
-      </ul>
+      <div className="navTabs">
+        <ul className="pageTabs">
+          <li>
+            <Link to={"/tv-show-tracker"} className="homeBtn">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/lists/" className="listsBtn">
+              Lists
+            </Link>
+          </li>
+          <li>
+            <Link to={"/movies/top-rated"} className="moviesBtn">
+              Movies
+            </Link>
+          </li>
+          <li>
+            <Link to={"/series/top-rated"} className="seriesBtn">
+              Series
+            </Link>
+          </li>
+        </ul>
+      </div>
       <div className="searchSection">
         <form onSubmit={handleSearch} role="search">
           <input
@@ -56,15 +57,10 @@ const Nav = (props) => {
             placeholder={"Search TV Shows"}
             aria-label="Search"
           ></input>
-
-        </form>
-        <div>
-          <button type="submit">
-            <Link to="/results">
+          <button onClick={handleSearch} type="submit">
               <img src={searchIcon} alt="search button"></img>
-            </Link>
           </button>
-        </div>
+        </form>
       </div>
       {/* <Link to="/profile">Profile</Link> */}
     </nav>

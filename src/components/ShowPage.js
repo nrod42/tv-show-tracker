@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { getShowDetails, getShowCredits, getSimilarShows, getShowTrailer } from "./API/getTV";
+import { getShowDetails, getShowCredits, getSimilarShows, getRecTV, getShowTrailer } from "./API/getTV";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
 import TvCard from "./TvCard";
 import AddToListBtn from "./AddToListBtn";
-import RemoveFromListBtn from "./RemoveFromListBtn";
 import "./Styles/showPage.css";
 
 const ShowPage = () => {
@@ -13,36 +12,26 @@ const ShowPage = () => {
   const [cast, setCast] = useState([]);
   // const [crew, setCrew] = useState([]);
   const [similarShows, setSimilarShows] = useState([]);
+  const [recShows, setRecShows] = useState([]);
   // const [isVideoOpen, setVideoOpen] = useState(false);
   // const [trailer, setTrailer] = useState("");
 
   const id = window.location.pathname.split(":")[1];
 
   //Fetch all relevant show info and saves them in a state
-  // (async () => {
-  //   const showInfo = await getShowDetails(id);
-  //   const credits = await getShowCredits(id);
-  //   const similarShows = await getSimilarShows(id);
-  //   // const trailer = await getShowTrailer(id)
-  //   setShowInfo(showInfo);
-  //   setSeasons(showInfo.seasonsInfo);
-  //   setCast(credits.cast);
-  //   // setCrew(credits.crew);
-  //   setSimilarShows(similarShows);
-  //   // setTrailer(trailer);
-  // })();
-
   useEffect(() => {
     (async () => {
       const showInfo = await getShowDetails(id);
       const credits = await getShowCredits(id);
       const similarShows = await getSimilarShows(id);
+      const recShows = await getRecTV(id);
       // const trailer = await getShowTrailer(id)
       setShowInfo(showInfo);
       setSeasons(showInfo.seasonsInfo);
       setCast(credits.cast);
       // setCrew(credits.crew);
       setSimilarShows(similarShows);
+      setRecShows(recShows);
       // setTrailer(trailer);
     })();
   }, [id])
@@ -61,7 +50,6 @@ const ShowPage = () => {
           <div className="showPosterWrapper">
             <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
             <AddToListBtn data={showInfo} />
-            <RemoveFromListBtn data={showInfo} />
             <div>
               <button 
               // onClick={() => setVideoOpen((prev) => !prev)}
@@ -102,6 +90,12 @@ const ShowPage = () => {
           <h2>Similar Shows</h2>
           <div className="strip">
             {similarShows.map((show) => <TvCard key={show.id} showData={show} />)}
+          </div>
+        </div>
+        <div className="recShowsWrapper">
+          <h2>Recommended Shows</h2>
+          <div className="strip">
+            {recShows.map((show) => <TvCard key={show.id} showData={show} />)}
           </div>
         </div>
         {/* <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>

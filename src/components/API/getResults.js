@@ -1,10 +1,11 @@
 const getResults = async (query) => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&query=${query}&page=1&include_adult=true`,
+        `https://api.themoviedb.org/3/search/multi?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&query=${query}&page=1&include_adult=false`,
         { mode: "cors" }
       );
       const results = await response.json();
+      console.log(results.results)
       return results.results
         .map((result) => ({
         id: result.id,

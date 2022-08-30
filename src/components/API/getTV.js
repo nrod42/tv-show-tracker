@@ -152,6 +152,31 @@ const getSimilarShows = async (showId, page=1) => {
   }
 };
 
+const getRecTV = async (showId, page=1) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/tv/${showId}/recommendations?api_key=4a82fad1143aa1a462a2f120e4923710&language=en-US&page=${page}`,
+      {
+        mode: "cors",
+      }
+    );
+    const rec = await response.json();
+    // console.log(rec)
+    return rec.results
+    // .filter((movie) => movie.original_language === "en")
+    .map((show) => ({
+      id: show.id,
+      poster: `https://image.tmdb.org/t/p/w185/${show.poster_path}`,
+      title: show.name,
+      rating: show.vote_average,
+      year: show.first_air_date.split('-')[0],
+      type: 'tv',
+    }));
+  } catch (error) {
+    console.error("Error:API", error);
+  }
+};
+
 const getShowTrailer = async (showId) => {
   try {
     const response = await fetch(
@@ -175,5 +200,6 @@ export {
   getShowCredits,
   getActorPics,
   getSimilarShows,
+  getRecTV,
   getShowTrailer,
 };

@@ -8,11 +8,6 @@
     justify-content: center;
 }
 
-/* .showPage > * {
-padding: 10px 0;
-} */
-
-
 .allMovieInfo {
     width: var(--main-width);
 }
@@ -63,15 +58,15 @@ padding: 10px 0;
     height: 0;
 }
 
-.castWrapper, .similarShowsWrapper, .recMoviesWrapper {
+.castWrapper, .similarMoviesWrapper, .recMoviesWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-self: flex-start; */
-    /* width: 100%; */
+    margin: 20px 0;
 }
 
 .moviePosterWrapper {
+    position: relative;
     height: auto;
     width: auto;
 }

@@ -4,6 +4,7 @@ import { getTopTV, getPopularTV } from "./API/getTV";
 import TvCard from "./TvCard";
 import "./Styles/home.css";
 import MovieCard from "./MovieCard";
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -34,25 +35,31 @@ const Home = () => {
   return (
     <div className={"home"}>
       <div className="popularWrapper">
-        <h1>Popular</h1>
+        <Link to={"/series/popular"}><h1>Popular TV</h1> </Link>
         <div className="strip">
           { popularTV.map((show) => <TvCard key={show.id} showData={show} />)}
         </div >
       </div>
       <div className="topRatedWrapper">
-        <h1>Top Rated</h1>
+        <Link to={"/series/top-rated"}>
+          <h1>Top Rated TV</h1>
+        </Link>
         <div className="strip">
           {topTV.map((show) => <TvCard key={show.id} showData={show} />)}
         </div>
       </div>
       <div className="popularWrapper">
-        <h1>Popular</h1>
+        <Link to={"/movies/popular"}>
+          <h1>Popular Movies</h1>
+        </Link>
         <div className="strip">
           { popularMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}
         </div >
       </div>
       <div className="topRatedWrapper">
-        <h1>Top Rated</h1>
+        <Link to={"/movies/top-rated"}>
+          <h1>Top Rated Movies</h1>
+        </Link>
         <div className="strip">
           {topMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}
         </div>

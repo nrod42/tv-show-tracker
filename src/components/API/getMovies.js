@@ -15,6 +15,7 @@ const getTopMovies = async (page = 1) => {
           title: movie.title,
           rating: movie.vote_average,
           year: movie.release_date.split('-')[0],
+          type: 'movie',
         }));
     } catch (error) {
       console.error("Error:API", error);
@@ -37,6 +38,7 @@ const getTopMovies = async (page = 1) => {
           title: movie.title,
           rating: movie.vote_average,
           year: movie.release_date.split('-')[0],
+          type: 'movie',
 
         }));
     } catch (error) {
@@ -60,6 +62,7 @@ const getTopMovies = async (page = 1) => {
           title: movie.title,
           rating: movie.vote_average,
           year: movie.release_date.split('-')[0],
+          type: 'movie',
         }));
     } catch (error) {
       console.error("Error:API", error);
@@ -82,6 +85,7 @@ const getTopMovies = async (page = 1) => {
           title: movie.title,
           rating: movie.vote_average,
           year: movie.release_date.split('-')[0],
+          type: 'movie',
         }));
     } catch (error) {
       console.error("Error:API", error);
@@ -109,6 +113,7 @@ const getTopMovies = async (page = 1) => {
         rating: movie.vote_average,
         plot: movie.overview,
         year: movie.release_date,
+        type: 'movie',
       };
     } catch (error) {
       console.error("Error:API", error);
@@ -165,6 +170,7 @@ const getTopMovies = async (page = 1) => {
         title: movie.title,
         rating: movie.vote_average,
         year: movie.release_date.split('-')[0],
+        type: 'movie',
       }));
     } catch (error) {
       console.error("Error:API", error);
@@ -189,6 +195,7 @@ const getTopMovies = async (page = 1) => {
         title: movie.title,
         rating: movie.vote_average,
         year: movie.release_date.split('-')[0],
+        type: 'movie',
       }));
     } catch (error) {
       console.error("Error:API", error);

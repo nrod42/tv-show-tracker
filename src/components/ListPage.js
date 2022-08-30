@@ -17,7 +17,7 @@ const ListPage = (props) => {
   }, [list, setShowPage]);
 
   return (
-    <div className={"myList"}>
+    <div className={"categoryPage"}>
       <h1>{props.title}</h1>
       <div className="cardGrid">{cards}</div>
     </div>

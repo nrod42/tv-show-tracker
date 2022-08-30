@@ -1,10 +1,11 @@
 nav {
-    opacity: 0.85;
-    background: #393E41;
     position: sticky;
     top: 0;
     padding: 0;
     width: 100%;
+    font-size: 1.2rem;
+    opacity: 0.85;
+    background: #393E41;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -12,28 +13,30 @@ nav {
     z-index: 1;
 }
 
-.pageTabs {
-    margin: 20px 0;
+.navTabs {
+    height: 100%;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 .pageTabs li {
+    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .pageTabs a:hover {
-    background: grey;
-    /* color: black; */
+    background: #FBEC5D;
+    color: black;
 }
 
 .homeBtn, .listsBtn, .moviesBtn, .seriesBtn {
     height: 100%;
     width: auto;
-    padding: 0 20px;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,30 +48,31 @@ nav {
 }
 
 .searchSection {
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .searchSection form {
+    /* height: auto; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    height: auto;
 }
 
 .searchSection input {
     font-size: 1rem;
     padding: 10px;
-    line-height: 100%;
-    margin: 10px 0;
-    flex-grow: 2;
+    /* line-height: 1.5rem; */
+    outline: none;
 }
 
 .searchSection button {
     background: #FBEC5D;
     border: none;
+    border-radius: none;
+    height: 100%;
+    outline: none;
+    padding: 10px;
 }
-  

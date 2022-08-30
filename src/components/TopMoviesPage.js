@@ -27,7 +27,7 @@ const TopMoviesPage = () => {
       <MoviesNav />
       <h1>Top Movies</h1>
       <div className="cardGrid">{topMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}</div>
-      <button onClick={showMore}>Show more</button>
+      <button className="showMoreBtn" onClick={showMore}>Show more</button>
     </div>
   );
 };

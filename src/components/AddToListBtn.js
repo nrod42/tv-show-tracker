@@ -52,7 +52,7 @@ const AddToListBtn = (props) => {
 
   return (
     <div onClick={toggleListPopup} className={"addToListBtn"}>
-      Add
+      +
       <ul className={popupClass ? "listPopup show" : "listPopup"}>
         <li>
           <button onClick={handleAddToWatching}>Currently Watching</button>

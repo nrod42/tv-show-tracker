@@ -4,15 +4,10 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: flex-start;
     font-size: 1rem;
   }
-  
-  .card:hover .addToListBtn {
-    visibility: visible;
-  } 
   
   .cardImg {
     position: relative;

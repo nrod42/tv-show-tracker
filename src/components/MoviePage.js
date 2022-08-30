@@ -3,7 +3,6 @@ import { getMovieDetails, getMovieCredits, getSimilarMovies, getRecMovies } from
 import PersonCard from "./PersonCard";
 import MovieCard from "./MovieCard";
 import AddToListBtn from "./AddToListBtn";
-import RemoveFromListBtn from "./RemoveFromListBtn";
 import "./Styles/moviePage.css";
 
 
@@ -49,7 +48,13 @@ useEffect(() => {
           <div className="moviePosterWrapper">
             <img src={movieInfo.poster} alt={`${movieInfo.title} poster`} />
             <AddToListBtn data={movieInfo} />
-            <RemoveFromListBtn data={movieInfo} />
+            <div>
+              <button 
+                // onClick={() => setVideoOpen((prev) => !prev)}
+              >
+                Trailer
+              </button>
+            </div>
           </div>
           <div className="movieInfo">
             <div className="titleSection">
@@ -59,14 +64,6 @@ useEffect(() => {
             <p>Genres: {movieInfo.genres}</p>
             <p>Rating: {movieInfo.rating}</p>
             {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-            <div>
-        
-              <button 
-              // onClick={() => setVideoOpen((prev) => !prev)}
-              >
-                Trailer
-              </button>
-            </div>
             <div className="plot">{movieInfo.plot}</div>
           </div>
         </div>

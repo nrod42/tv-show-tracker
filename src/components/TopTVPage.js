@@ -27,7 +27,7 @@ const TopTVPage = () => {
       <SeriesNav />
       <h1>Top TV Shows</h1>
       <div className="cardGrid">{topTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>
-      <button onClick={showMore}>Show more</button>
+      <button className="showMoreBtn" onClick={showMore}>Show more</button>
     </div>
   );
 };
