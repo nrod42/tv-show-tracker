@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { getShowDetails, getShowCredits, getSimilarShows, getRecTV, getShowTrailer } from "./API/getTV";
+import {
+  getShowDetails,
+  getShowCredits,
+  getSimilarShows,
+  getRecTV,
+  getShowTrailer,
+} from "./API/getTV";
 import SeasonCard from "./SeasonCard";
 import PersonCard from "./PersonCard";
 import TvCard from "./TvCard";
@@ -34,7 +40,7 @@ const ShowPage = () => {
       setRecShows(recShows);
       // setTrailer(trailer);
     })();
-  }, [id])
+  }, [id]);
 
   return (
     <div className="showPage">
@@ -51,7 +57,7 @@ const ShowPage = () => {
             <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
             <AddToListBtn data={showInfo} />
             <div>
-              <button 
+              <button
               // onClick={() => setVideoOpen((prev) => !prev)}
               >
                 Trailer
@@ -77,25 +83,33 @@ const ShowPage = () => {
         <div className="seasonWrapper">
           <h2>Seasons</h2>
           <div className="strip">
-          {seasons.map((season) => <SeasonCard key={season.id} season={season} />)}
+            {seasons.map((season) => (
+              <SeasonCard key={season.id} season={season} />
+            ))}
           </div>
         </div>
         <div className="castWrapper">
           <h2>Starring</h2>
           <div className="strip">
-          {cast.map((person) => <PersonCard key={person.id} person={person} />)}
+            {cast.map((person) => (
+              <PersonCard key={person.id} person={person} />
+            ))}
           </div>
         </div>
         <div className="similarShowsWrapper">
           <h2>Similar Shows</h2>
           <div className="strip">
-            {similarShows.map((show) => <TvCard key={show.id} showData={show} />)}
+            {similarShows.map((show) => (
+              <TvCard key={show.id} showData={show} />
+            ))}
           </div>
         </div>
         <div className="recShowsWrapper">
           <h2>Recommended Shows</h2>
           <div className="strip">
-            {recShows.map((show) => <TvCard key={show.id} showData={show} />)}
+            {recShows.map((show) => (
+              <TvCard key={show.id} showData={show} />
+            ))}
           </div>
         </div>
         {/* <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>

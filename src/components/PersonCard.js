@@ -12,12 +12,15 @@ const PersonCard = (props) => {
       const actorPic = await getActorPics(id);
       setActorPic(actorPic);
     })();
-  }, [id])
-
+  }, [id]);
 
   return (
     <div className="personCard">
-      <img className="personPic" src={actorPic !== null ? actorPic : defaultImg} alt={`${name}`}></img>
+      <img
+        className="personPic"
+        src={actorPic !== null ? actorPic : defaultImg}
+        alt={`${name}`}
+      ></img>
       <p>{name}</p>
       <p>{character}</p>
     </div>

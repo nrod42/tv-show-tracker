@@ -31,17 +31,23 @@ const Nav = (props) => {
             </Link>
           </li>
           <li>
-            <Link to="/lists/" className="listsBtn">
+            <Link to="/tv-show-tracker/lists/" className="listsBtn">
               Lists
             </Link>
           </li>
           <li>
-            <Link to={"/movies/top-rated"} className="moviesBtn">
+            <Link
+              to={"/tv-show-tracker/movies/top-rated"}
+              className="moviesBtn"
+            >
               Movies
             </Link>
           </li>
           <li>
-            <Link to={"/series/top-rated"} className="seriesBtn">
+            <Link
+              to={"/tv-show-tracker/series/top-rated"}
+              className="seriesBtn"
+            >
               Series
             </Link>
           </li>
@@ -58,7 +64,7 @@ const Nav = (props) => {
             aria-label="Search"
           ></input>
           <button onClick={handleSearch} type="submit">
-              <img src={searchIcon} alt="search button"></img>
+            <img src={searchIcon} alt="search button"></img>
           </button>
         </form>
       </div>

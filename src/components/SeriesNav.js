@@ -6,17 +6,20 @@ const SeriesNav = () => {
     <div className="categoryNav">
       <ul className="categoryTabs">
         <li>
-          <Link to="/series/top-rated" className="categoryBtn">
+          <Link to="/tv-show-tracker/series/top-rated" className="categoryBtn">
             Top Rated
           </Link>
         </li>
         <li>
-          <Link to="/series/popular" className="categoryBtn">
+          <Link to="/tv-show-tracker/series/popular" className="categoryBtn">
             Popular
           </Link>
         </li>
         <li>
-          <Link to="/series/airing-today" className="categoryBtn">
+          <Link
+            to="/tv-show-tracker/series/airing-today"
+            className="categoryBtn"
+          >
             Airing Today
           </Link>
         </li>

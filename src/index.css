@@ -129,7 +129,7 @@ footer {
   width: 100%;
 }
 
-.categoryPage, .searchResults {
+.categoryPage, .listPage, .searchResults {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -138,7 +138,7 @@ footer {
   gap: 20px;
 }
 
-.topTVPage .removeFromListBtn, .popularTVPage .removeFromListBtn, .latestTVPage .removeFromListBtn, .searchResults .removeFromListBtn {
+.categoryPage .removeFromListBtn {
   display: none;
 }
 

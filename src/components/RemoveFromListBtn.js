@@ -29,7 +29,7 @@ const RemoveFromListBtn = (props) => {
 
   return (
     <div onClick={handleRemove} className={"removeFromListBtn"}>
-      Remove
+      -
     </div>
   );
 };

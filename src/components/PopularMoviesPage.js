@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import MoviesNav from "./MoviesNav";
 import MovieCard from "./MovieCard";
 import { getPopularMovies } from "./API/getMovies";
-import MoviesNav from "./MoviesNav";
 
 const PopularMoviesPage = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -21,13 +21,18 @@ const PopularMoviesPage = () => {
     handlePages();
   }, [page]);
 
-
   return (
     <div className={"categoryPage"}>
       <MoviesNav />
       <h1>Popular Movies</h1>
-      <div className="cardGrid">{popularMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}</div>
-      <button className="showMoreBtn" onClick={showMore}>Show more</button>
+      <div className="cardGrid">
+        {popularMovies.map((movie) => (
+          <MovieCard key={movie.id} movieData={movie} />
+        ))}
+      </div>
+      <button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </button>
     </div>
   );
 };

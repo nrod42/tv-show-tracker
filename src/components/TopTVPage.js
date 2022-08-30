@@ -21,13 +21,18 @@ const TopTVPage = () => {
     handlePages();
   }, [page]);
 
-
   return (
     <div className={"categoryPage"}>
       <SeriesNav />
       <h1>Top TV Shows</h1>
-      <div className="cardGrid">{topTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>
-      <button className="showMoreBtn" onClick={showMore}>Show more</button>
+      <div className="cardGrid">
+        {topTV.map((show) => (
+          <TvCard key={show.id} showData={show} />
+        ))}
+      </div>
+      <button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </button>
     </div>
   );
 };

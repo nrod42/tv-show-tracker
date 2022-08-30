@@ -25,8 +25,14 @@ const AiringTodayTVPage = () => {
     <div className={"categoryPage"}>
       <SeriesNav />
       <h1>Airing Today</h1>
-      <div className="cardGrid">{airingTodayTV.map((show) => <TvCard key={show.id} showData={show} />)}</div>
-      <button className="showMoreBtn" onClick={showMore}>Show more</button>
+      <div className="cardGrid">
+        {airingTodayTV.map((show) => (
+          <TvCard key={show.id} showData={show} />
+        ))}
+      </div>
+      <button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </button>
     </div>
   );
 };

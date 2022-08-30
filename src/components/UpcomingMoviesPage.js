@@ -21,13 +21,18 @@ const UpcomingMoviesPage = () => {
     handlePages();
   }, [page]);
 
-
   return (
     <div className={"categoryPage"}>
       <MoviesNav />
       <h1>Upcoming Movies</h1>
-      <div className="cardGrid">{upcomingMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}</div>
-      <button className="showMoreBtn" onClick={showMore}>Show more</button>
+      <div className="cardGrid">
+        {upcomingMovies.map((movie) => (
+          <MovieCard key={movie.id} movieData={movie} />
+        ))}
+      </div>
+      <button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </button>
     </div>
   );
 };

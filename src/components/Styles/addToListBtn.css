@@ -2,13 +2,14 @@
     position: absolute;
     top: 0;
     left: 0;
+    height: 35px;
+    width: 35px;
     cursor: pointer;
     background: #05445E;
     font-size: 1.2rem;
     color: #fff;
     padding: 10px;
     border-bottom-right-radius: 5px;
-    
   }
   
 .addToListBtn .listPopup {

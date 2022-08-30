@@ -6,22 +6,25 @@ const MoviesNav = () => {
     <div className="categoryNav">
       <ul className="categoryTabs">
         <li>
-          <Link to="/movies/top-rated" className="categoryBtn">
+          <Link to="/tv-show-tracker/movies/top-rated" className="categoryBtn">
             Top Rated
           </Link>
         </li>
         <li>
-          <Link to="/movies/popular" className="categoryBtn">
+          <Link to="/tv-show-tracker/movies/popular" className="categoryBtn">
             Popular
           </Link>
         </li>
         <li>
-          <Link to="/movies/upcoming" className="categoryBtn">
+          <Link to="/tv-show-tracker/movies/upcoming" className="categoryBtn">
             Upcoming
           </Link>
         </li>
         <li>
-          <Link to="/movies/now-playing" className="categoryBtn">
+          <Link
+            to="/tv-show-tracker/movies/now-playing"
+            className="categoryBtn"
+          >
             Now Playing
           </Link>
         </li>

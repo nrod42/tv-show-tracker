@@ -17,13 +17,13 @@ const TvCard = (props) => {
   return (
     <div className="card" onClick={handleShowPage}>
       <div className="posterWrapper">
-      <Link to={`/shows/id:${id}`}>
+        <Link to={`/tv-show-tracker/shows/id:${id}`}>
           <img
             className="cardImg"
             src={poster !== null ? poster : defaultImg}
             alt={`${title} poster`}
           ></img>
-          </Link>
+        </Link>
         <AddToListBtn data={props.showData} />
         <RemoveFromListBtn data={props.showData} />
       </div>
@@ -31,7 +31,6 @@ const TvCard = (props) => {
       <p>({year})</p>
       <p className="rating">Rating: {rating}/10</p>
     </div>
-    
   );
 };
 

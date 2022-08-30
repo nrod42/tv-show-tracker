@@ -1,5 +1,5 @@
 import "./index.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
@@ -19,18 +19,28 @@ import PopularMoviesPage from "./components/PopularMoviesPage";
 import UpcomingMoviesPage from "./components/UpcomingMoviesPage";
 import NowPlayingMoviesPage from "./components/NowPlayingMoviesPage";
 
-import Footer from "./components/Footer";
-
 export const SetListsContext = React.createContext();
 
 const App = () => {
   const [moviePage, setMoviePage] = useState("");
   const [showPage, setShowPage] = useState("");
   const [searchQuery, setSearchQuery] = useState([]);
-  const [watchingList, setWatchingList] = useState([]);
+  const [watchingList, setWatchingList] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("watchingList");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
   const [wantToWatchList, setWantToWatchList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
   const [droppedList, setDroppedList] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("watchingList", JSON.stringify(watchingList));
+    localStorage.setItem("wantToWatchList", JSON.stringify(wantToWatchList));
+    localStorage.setItem("completedList", JSON.stringify(completedList));
+    localStorage.setItem("droppedList", JSON.stringify(droppedList));
+  }, [watchingList, wantToWatchList, completedList, droppedList]);
 
   return (
     <BrowserRouter>
@@ -49,52 +59,72 @@ const App = () => {
             droppedList,
           }}
         >
-          <Nav
-            setSearchQuery={setSearchQuery}
-          />
+          <Nav setSearchQuery={setSearchQuery} />
           <Routes>
+            <Route path="/tv-show-tracker" element={<Home />} />
             <Route
-              path="/tv-show-tracker"
-              element={<Home />}
+              path="/results"
+              element={<Results searchQuery={searchQuery} />}
             />
-            <Route path="/results" element={<Results searchQuery={searchQuery} />} />
-            <Route path="/lists" element={<Lists />}></Route>
+            <Route path="/tv-show-tracker/lists" element={<Lists />}></Route>
             <Route
-              path="/lists/currently-watching"
+              path="/tv-show-tracker/lists/currently-watching"
               element={
                 <ListPage list={watchingList} title={"Currently Watching"} />
               }
             />
             <Route
-              path="/lists/want-to-watch"
+              path="/tv-show-tracker/lists/want-to-watch"
               element={
                 <ListPage list={wantToWatchList} title={"Want To Watch"} />
               }
             />
             <Route
-              path="/lists/completed"
-              element={
-                <ListPage list={completedList} title={"Completed"} />
-              }
+              path="/tv-show-tracker/lists/completed"
+              element={<ListPage list={completedList} title={"Completed"} />}
             />
             <Route
-              path="/lists/dropped"
+              path="/tv-show-tracker/lists/dropped"
               element={<ListPage list={droppedList} title={"Dropped"} />}
             />
-            <Route path={`/movies/id:${moviePage.id}`} element={<MoviePage />} />
-            <Route path="/movies/top-rated" element={<TopMoviesPage />} />
-            <Route path="/movies/popular" element={<PopularMoviesPage />} />
-            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-            <Route path="/movies/now-playing" element={<NowPlayingMoviesPage />} />
-            <Route path={`/shows/id:${showPage.id}`} element={<ShowPage />} />
-            <Route path="/series/top-rated" element={<TopTVPage />} />
-            <Route path="/series/popular" element={<PopularTVPage />} />
             <Route
-              path="/series/airing-today"
+              path={`/tv-show-tracker/movies/id:${moviePage.id}`}
+              element={<MoviePage />}
+            />
+            <Route
+              path="/tv-show-tracker/movies/top-rated"
+              element={<TopMoviesPage />}
+            />
+            <Route
+              path="/tv-show-tracker/movies/popular"
+              element={<PopularMoviesPage />}
+            />
+            <Route
+              path="/tv-show-tracker/movies/upcoming"
+              element={<UpcomingMoviesPage />}
+            />
+            <Route
+              path="/tv-show-tracker/movies/now-playing"
+              element={<NowPlayingMoviesPage />}
+            />
+            <Route
+              path={`/tv-show-tracker/shows/id:${showPage.id}`}
+              element={<ShowPage />}
+            />
+            <Route
+              path="/tv-show-tracker/series/top-rated"
+              element={<TopTVPage />}
+            />
+            <Route
+              path="/tv-show-tracker/series/popular"
+              element={<PopularTVPage />}
+            />
+            <Route
+              path="/tv-show-tracker/series/airing-today"
               element={<AiringTodayTVPage />}
             />
           </Routes>
-          <Footer />
+          <footer>By: Nigel Rodriguez</footer>
         </SetListsContext.Provider>
       </div>
     </BrowserRouter>

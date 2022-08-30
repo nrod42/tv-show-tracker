@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { getMovieDetails, getMovieCredits, getSimilarMovies, getRecMovies } from "./API/getMovies";
+import {
+  getMovieDetails,
+  getMovieCredits,
+  getSimilarMovies,
+  getRecMovies,
+} from "./API/getMovies";
 import PersonCard from "./PersonCard";
 import MovieCard from "./MovieCard";
 import AddToListBtn from "./AddToListBtn";
 import "./Styles/moviePage.css";
-
 
 const MoviePage = () => {
   const [movieInfo, setMovieInfo] = useState("");
@@ -18,21 +22,21 @@ const MoviePage = () => {
   const id = window.location.pathname.split(":")[1];
 
   //Fetch all relevant show info and saves them in a state
-useEffect(() => {
-  (async () => {
-    const movieInfo = await getMovieDetails(id);
-    const credits = await getMovieCredits(id);
-    const similarMovies = await getSimilarMovies(id);
-    const recMovies = await getRecMovies(id);
-    // const trailer = await getShowTrailer(id)
-    setMovieInfo(movieInfo);
-    setCast(credits.cast);
-    // setCrew(credits.crew);
-    setSimilarMovies(similarMovies);
-    setRecMovies(recMovies);
-    // setTrailer(trailer);
-  })();
-})
+  useEffect(() => {
+    (async () => {
+      const movieInfo = await getMovieDetails(id);
+      const credits = await getMovieCredits(id);
+      const similarMovies = await getSimilarMovies(id);
+      const recMovies = await getRecMovies(id);
+      // const trailer = await getShowTrailer(id)
+      setMovieInfo(movieInfo);
+      setCast(credits.cast);
+      // setCrew(credits.crew);
+      setSimilarMovies(similarMovies);
+      setRecMovies(recMovies);
+      // setTrailer(trailer);
+    })();
+  });
 
   return (
     <div className="moviePage">
@@ -49,8 +53,8 @@ useEffect(() => {
             <img src={movieInfo.poster} alt={`${movieInfo.title} poster`} />
             <AddToListBtn data={movieInfo} />
             <div>
-              <button 
-                // onClick={() => setVideoOpen((prev) => !prev)}
+              <button
+              // onClick={() => setVideoOpen((prev) => !prev)}
               >
                 Trailer
               </button>
@@ -70,20 +74,26 @@ useEffect(() => {
         <div className="castWrapper">
           <h2>Starring</h2>
           <div className="strip">
-          {cast.map((person) => <PersonCard key={person.id} person={person} />)}
+            {cast.map((person) => (
+              <PersonCard key={person.id} person={person} />
+            ))}
           </div>
         </div>
-        
+
         <div className="similarMoviesWrapper">
           <h2>Similar Movies</h2>
           <div className="strip">
-            {similarMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}
+            {similarMovies.map((movie) => (
+              <MovieCard key={movie.id} movieData={movie} />
+            ))}
           </div>
         </div>
         <div className="recMoviesWrapper">
           <h2>Recommended Movies</h2>
           <div className="strip">
-            {recMovies.map((movie) => <MovieCard key={movie.id} movieData={movie} />)}
+            {recMovies.map((movie) => (
+              <MovieCard key={movie.id} movieData={movie} />
+            ))}
           </div>
         </div>
         {/* <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
