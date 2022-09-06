@@ -28,12 +28,7 @@ const Home = () => {
       setTopMovies(topMovies);
       setPopularMovies(popularMovies);
     })();
-  });
-
-  // window.setInterval(function() {
-  //   var elem = document.getElementById('data');
-  //   elem.scrollTop = elem.scrollHeight;
-  // }, 5000);
+  }, []);
 
   return (
     <div className={"home"}>

@@ -25,7 +25,6 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* align-items: center; */
 }
 
 .pageTabs a:hover {
@@ -54,7 +53,6 @@ nav {
 }
 
 .searchSection form {
-    /* height: auto; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -64,7 +62,6 @@ nav {
 .searchSection input {
     font-size: 1rem;
     padding: 10px;
-    /* line-height: 1.5rem; */
     outline: none;
 }
 

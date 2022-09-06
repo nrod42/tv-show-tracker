@@ -1,4 +1,5 @@
-import "./index.css";
+// import "./index.css";
+import "./scss/styles";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
@@ -31,9 +32,23 @@ const App = () => {
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });
-  const [wantToWatchList, setWantToWatchList] = useState([]);
-  const [completedList, setCompletedList] = useState([]);
-  const [droppedList, setDroppedList] = useState([]);
+  const [wantToWatchList, setWantToWatchList] = useState(() => {
+    const saved = localStorage.getItem("wantToWatchList");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+  const [completedList, setCompletedList] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("completedList");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+  const [droppedList, setDroppedList] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("droppedList");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
 
   useEffect(() => {
     localStorage.setItem("watchingList", JSON.stringify(watchingList));
@@ -63,7 +78,7 @@ const App = () => {
           <Routes>
             <Route path="/tv-show-tracker" element={<Home />} />
             <Route
-              path="/results"
+              path="/tv-show-tracker/results"
               element={<Results searchQuery={searchQuery} />}
             />
             <Route path="/tv-show-tracker/lists" element={<Lists />}></Route>
