@@ -3,6 +3,7 @@ import { getAiringTodayTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
 import TvCard from "./Cards/TvCard";
 import uniqid from "uniqid";
+import { Button } from "react-bootstrap";
 
 const AiringTodayTVPage = () => {
   const [airingTodayTV, setAiringTodayTV] = useState([]);
@@ -31,9 +32,9 @@ const AiringTodayTVPage = () => {
           <TvCard key={uniqid()} showData={show} />
         ))}
       </div>
-      <button className="showMoreBtn" onClick={showMore}>
+      <Button className="showMoreBtn" onClick={showMore}>
         Show more
-      </button>
+      </Button>
     </div>
   );
 };

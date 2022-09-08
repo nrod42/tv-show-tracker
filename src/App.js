@@ -1,5 +1,3 @@
-// import "./index.css";
-import "./scss/styles";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
@@ -26,6 +24,7 @@ const App = () => {
   const [moviePage, setMoviePage] = useState("");
   const [showPage, setShowPage] = useState("");
   const [searchQuery, setSearchQuery] = useState([]);
+
   const [watchingList, setWatchingList] = useState(() => {
     // getting stored value
     const saved = localStorage.getItem("watchingList");

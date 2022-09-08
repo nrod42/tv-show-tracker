@@ -4,7 +4,6 @@ import { getTopMovies, getPopularMovies } from "./API/getMovies";
 import { getTopTV, getPopularTV } from "./API/getTV";
 import MovieCard from "./Cards/MovieCard";
 import TvCard from "./Cards/TvCard";
-import "./Styles/home.css";
 import uniqid from "uniqid";
 
 const Home = () => {
@@ -31,45 +30,49 @@ const Home = () => {
   }, []);
 
   return (
-    <div className={"home"}>
-      <div className="popularWrapper">
+    <div className="home">
+      <div className="stripWrapper">
         <Link to={"/tv-show-tracker/series/popular"}>
-          <h1>Popular TV</h1>{" "}
+          <h1>Popular TV</h1>
         </Link>
         <div className="strip">
-          {popularTV.map((show) => (
-            <TvCard key={uniqid()} showData={show} />
-          ))}
+              {popularTV.map((show) => (
+                <TvCard key={uniqid()} showData={show} />
+              ))}
         </div>
       </div>
-      <div className="topRatedWrapper">
+
+      <div className="stripWrapper">
         <Link to={"/tv-show-tracker/series/top-rated"}>
           <h1>Top Rated TV</h1>
         </Link>
         <div className="strip">
-          {topTV.map((show) => (
-            <TvCard key={uniqid()} showData={show} />
-          ))}
+            {topTV.map((show) => (
+              <TvCard key={uniqid()} showData={show} />
+            ))}
         </div>
       </div>
-      <div className="popularWrapper">
+
+      <div className="stripWrapper">
         <Link to={"/tv-show-tracker/movies/popular"}>
           <h1>Popular Movies</h1>
         </Link>
         <div className="strip">
-          {popularMovies.map((movie) => (
-            <MovieCard key={uniqid()} movieData={movie} />
-          ))}
+            {popularMovies.map((movie) => (
+              <MovieCard key={uniqid()} movieData={movie} />
+            ))}
+
         </div>
       </div>
-      <div className="topRatedWrapper">
+
+      <div className="stripWrapper">
         <Link to={"/tv-show-tracker/movies/top-rated"}>
           <h1>Top Rated Movies</h1>
         </Link>
         <div className="strip">
-          {topMovies.map((movie) => (
-            <MovieCard key={uniqid()} movieData={movie} />
-          ))}
+            {topMovies.map((movie) => (
+              <MovieCard key={uniqid()} movieData={movie} />
+            ))}
         </div>
       </div>
     </div>

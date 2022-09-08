@@ -3,6 +3,7 @@ import { getPopularMovies } from "./API/getMovies";
 import MoviesNav from "./MoviesNav";
 import MovieCard from "./Cards/MovieCard";
 import uniqid from "uniqid";
+import { Button } from "react-bootstrap";
 
 const PopularMoviesPage = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -31,9 +32,9 @@ const PopularMoviesPage = () => {
           <MovieCard key={uniqid()} movieData={movie} />
         ))}
       </div>
-      <button className="showMoreBtn" onClick={showMore}>
+      <Button className="showMoreBtn" onClick={showMore}>
         Show more
-      </button>
+      </Button>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { getNowPlayingMovies } from "./API/getMovies";
 import MoviesNav from "./MoviesNav";
 import MovieCard from "./Cards/MovieCard";
 import uniqid from "uniqid";
+import { Button } from "react-bootstrap";
 
 const NowPlayingMoviesPage = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -31,7 +32,7 @@ const NowPlayingMoviesPage = () => {
           <MovieCard key={uniqid()} movieData={movie} />
         ))}
       </div>
-      <button onClick={showMore}>Show more</button>
+      <Button onClick={showMore}>Show more</Button>
     </div>
   );
 };

@@ -1,436 +1,244 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    color: #000000
-  }
+  box-sizing: border-box;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  color: #000000
+}
   
-  :root {
-    --card-width: 185px;
-    --card-height: 278px;
-    --main-width: 80%;
-  }
+:root {
+  --card-width: 185px;
+  --card-height: 278px;
+  --main-width: 80%;
+}
   
-  html {
-    height: 100%;
-    font-size: 16px;
-  }
-  
-  body {
-    height: fit-content;
-    background: #D3D0CB;
-  }
-  
-  button {
-    background: #05445E;
-    color: white;
-    border: none;
-    /* border-radius: 5px; */
-    padding: 10px;
-  }
-  
-  button:hover {
-    filter: brightness(85%);
-    cursor: pointer;
-  }
-  
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-  
-  li {
-    display: inline;
-    color: #fff;
-    float: left;
-  }
-  
-  li:hover{
-    filter: brightness(50%);
-  }
-  
-  a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    text-align: center;
-  }
-  
-  a:visited, a:active {
-    color: #fff;
-  }
-  
-  footer {
-    background: #393E41;
-    padding: 5px 0;
-    width: 100%;
-    height: auto;
-    text-align: center;
-    margin: 0;
-    margin-top: auto;
-    color: #FFF;
-  }
-  
-  #root {
-    height: 100%;
-  }
-  
-  .App {
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .cardGrid {
-    width: var(--main-width);
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), auto));
-    justify-items: center;
-  }
-  
-  .backdrop {
-    max-width: 100%;
-  }
-    
-  .backdropImg {
-    /* height: 80%; */
-    max-width: 100%;
-  }
-  
-  .posterWrapper {
-    position: relative;
-    width: var(--card-width);
-    height: var(--card-height);
-    cursor: pointer;
-  }
-  
-  /* .posterWrapper:hover .addToListBtn {
-    visibility: visible;
-  } */
-  
-  .posterWrapper:hover .removeFromListBtn {
-    visibility: visible;
-  }
-  
-  .strip {
-    overflow: auto;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 20px;
-    width: 100%;
-  }
-  
-  .categoryPage, .listPage, .searchResults {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .categoryPage .removeFromListBtn, .searchResults .removeFromListBtn {
-    display: none;
-  }
-  
-  .showMoreBtn {
-    margin: 20px;
-    padding: 10px;
-    font-size: 1rem;
-  }
+html {
+  height: 100%;
+  font-size: 16px;
+}
 
-  .showPage {
-    height: auto;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+body {
+  height: fit-content;
+  background: #D3D0CB;
+}
+  
+a {
+  text-decoration: none;
+}
+
+a:visited, a:active, a:focus, a:hover {
+  text-decoration: none;
+}
+
+.mb-3.navbar {
+  margin: 0 !important;
+}
+
+footer {
+  background: #393E41;
+  padding: 5px 0;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin: 0;
+  margin-top: auto;
+  color: #FFF;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  max-width: 100vw;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.card img:hover {
+  filter: brightness(50%);
+}
+
+.cardGrid {
+  width: var(--main-width);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), auto));
+  justify-items: center;
+}
+
+.backdrop {
+  max-width: 100%;
+}
+  
+.backdropImg {
+  max-width: 100%;
+}
+  
+.categoryPage, .listPage, .searchResults {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.showPage {
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .allShowInfo {
-    width: var(--main-width);
+  width: var(--main-width);
+  margin-top: 20px;
+  
 }
 
 .showInfoContainer {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
 }
 
 .showInfo {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.titleSection {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.seasonSection {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.personCard, .seasonCard {
-    text-align: center;
-    width: auto;
-}
-
-.trailer {
-    /* position: absolute; */
-    top: 50%;
-    left: 50%;
-    height: 100%;
-    width: 100%;
-    border: none;
-}
-
-.trailerContainer {
-    height: 50%;
-    width: 60%;
-    position: absolute;
-    top:50%;
-    left: 10%;
-}
-
-.hiddenTrailer {
-    display: none;
-    visibility: hidden;
-    height: 0;
-}
-
-.seasonWrapper, .castWrapper, .similarShowsWrapper, .recShowsWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
+  // width: 50%;
+  // display: flex;
+  // flex-direction: column;
+  // flex-wrap: wrap;
 }
 
 .showPosterWrapper {
-    position: relative;
-    height: auto;
-    width: auto;
+  position: relative;
+  height: auto;
+  width: 300px; //make a poster width variable
 }
 
-.removeFromListBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 35px;
-    width: 35px;
-    cursor: pointer;
-    background: #05445E;
-    color: #fff;
-    padding: 10px;
-    font-size: 1.2rem;
-    border-bottom-left-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.titleSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.addToListBtn {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 35px;
-    width: 35px;
-    cursor: pointer;
-    background: #05445E;
-    font-size: 1.2rem;
-    color: #fff;
-    padding: 10px;
-    border-bottom-right-radius: 5px;
-  }
-  
-.addToListBtn .listPopup {
-    position: absolute;
-    visibility: hidden;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-}
-  
-.addToListBtn .show {
-    visibility: visible;
+.seasonSection {
+  display: flex;
+  gap: 10px;
 }
 
-.listPopup li, .listPopup button {
-    width: 100%;
-}
-  
-.categoryNav {
-    background: #05445E;
-    width: 100%;
-    /* /position: sticky; */
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content:center;
-}
-
-.categoryTabs li {
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.categoryTabs a:hover {
-    background: grey;
-    /* color: black; */
-}
-
-.categoryBtn {
-    /* height: 100%; */
-    width: auto;
-    padding: 20px;
-    flex-wrap: wrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card {
-    position: relative;
-    max-width: var(--card-width);
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 1rem;
-  }
-  
-  .cardImg {
-    position: relative;
-    width: auto;
-    height: auto;
-  }
-  
-  .cardImg:hover {
-    filter: brightness(50%);
-  }
-
-  .cardTitle {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-
-  .home {
-    transition: opacity 1s ease;
-    height: auto;
-    max-width: 100%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin: 30px 0;
-}
-
-.topRatedWrapper, .popularWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-.topStrip, .popularStrip {
-    overflow: auto;
-    white-space: nowrap;
-    height: auto;
-    display: flex;
-    gap: 10px;
-    padding: 20px;
-    width: 100%;
-}
-
-.home .removeFromListBtn {
-    display: none;
-}
-
-
-.listSection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    
-}
-
-.list {
-    width: var(--main-width);
-    padding: 20px;
-    background: #393E41;
-    opacity: 85%;
-    border-radius: 5px;
-} 
-
-.listDetails {
-    display: flex;
-    gap: 10px;
-    
-}
-
-.listItem * {
-    color: white;
-    text-decoration: none;
+.plotSection {
+  // width: 80%;
 }
 
 .listSection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .list {
-    width: var(--main-width);
-    padding: 20px;
-    background: #393E41;
-    opacity: 85%;
-    border-radius: 5px;
+  width: var(--main-width);
+  padding: 20px;
+  background: #393E41;
+  opacity: 85%;
+  border-radius: 5px;
 } 
 
+.list:hover {
+  filter: brightness(85%);
+}
+
+.list a {
+  text-decoration: none;
+}
+
 .listDetails {
-    display: flex;
-    gap: 10px;
-    
+  display: flex;
+  gap: 10px; 
 }
 
 .listItem * {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
+}
+  
+.moviePage {
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.local-bootstrap {
-  @import "~bootstrap/scss/bootstrap";
+.home {
+  align-self: center;
 }
+
+.home, .allMovieInfo {
+  width: var(--main-width);
+}
+
+.movieInfoContainer {
+  display: flex;
+  gap: 20px;
+}
+
+// .moviePosterWrapper {
+//   position: relative;
+//   height: auto;
+//   width: auto;
+// }
+
+
+
+.stripWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.stripWrapper a {
+  text-decoration: none;
+}
+
+.strip {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+}
+
+.showMoreBtn {
+  margin: 30px 0;
+}
+
+// .posterWrapper {
+//   position: relative;
+//   width: var(--card-width);
+//   height: var(--card-height);
+//   cursor: pointer;
+// }
   

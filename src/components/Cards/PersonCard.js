@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getActorPics } from "../API/getTV";
 import defaultImg from "../../img/defaultImg.webp";
+import Card from "react-bootstrap/Card";
 
 const PersonCard = (props) => {
   const { id, name, character } = props.person;
@@ -15,15 +16,15 @@ const PersonCard = (props) => {
   }, [id]);
 
   return (
-    <div className="personCard">
-      <img
-        className="personPic"
-        src={actorPic !== null ? actorPic : defaultImg}
-        alt={`${name}`}
-      ></img>
-      <p>{name}</p>
-      <p>{character}</p>
-    </div>
+    <Card bg="light" style={{textAlign: "center", minWidth: '185px', width: '185px', border: "none"}}>
+      <Card.Img variant="top" style={{height: '278px'}} src={actorPic !== null ? actorPic : defaultImg}/>
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <Card.Subtitle>
+          {character}
+        </Card.Subtitle>
+      </Card.Body>
+    </Card>    
   );
 };
 

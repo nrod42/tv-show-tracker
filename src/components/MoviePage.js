@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getMovieDetails,
   getMovieCredits,
   getSimilarMovies,
   getRecMovies,
 } from "./API/getMovies";
-import PersonCard from "./Cards/PersonCard";
 import MovieCard from "./Cards/MovieCard";
+import PersonCard from "./Cards/PersonCard";
 import AddToListBtn from "./AddToListBtn";
-import "./Styles/moviePage.css";
 import uniqid from "uniqid";
 
 const MoviePage = () => {
@@ -37,7 +36,7 @@ const MoviePage = () => {
       setRecMovies(recMovies);
       // setTrailer(trailer);
     })();
-  });
+  }, [id]);
 
   return (
     <div className="moviePage">
@@ -72,7 +71,7 @@ const MoviePage = () => {
             <div className="plot">{movieInfo.plot}</div>
           </div>
         </div>
-        <div className="castWrapper">
+        <div className="stripWrapper">
           <h2>Starring</h2>
           <div className="strip">
             {cast.map((person) => (
@@ -81,7 +80,7 @@ const MoviePage = () => {
           </div>
         </div>
 
-        <div className="similarMoviesWrapper">
+        <div className="stripWrapper">
           <h2>Similar Movies</h2>
           <div className="strip">
             {similarMovies.map((movie) => (
@@ -89,7 +88,7 @@ const MoviePage = () => {
             ))}
           </div>
         </div>
-        <div className="recMoviesWrapper">
+        <div className="stripWrapper">
           <h2>Recommended Movies</h2>
           <div className="strip">
             {recMovies.map((movie) => (

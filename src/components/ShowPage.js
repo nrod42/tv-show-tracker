@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getShowDetails,
   getShowCredits,
@@ -10,8 +10,9 @@ import TvCard from "./Cards/TvCard";
 import SeasonCard from "./Cards/SeasonCard";
 import PersonCard from "./Cards/PersonCard";
 import AddToListBtn from "./AddToListBtn";
-import "./Styles/showPage.css";
 import uniqid from "uniqid";
+import { Button, Modal } from "react-bootstrap";
+
 
 const ShowPage = () => {
   const [showInfo, setShowInfo] = useState("");
@@ -20,8 +21,8 @@ const ShowPage = () => {
   // const [crew, setCrew] = useState([]);
   const [similarShows, setSimilarShows] = useState([]);
   const [recShows, setRecShows] = useState([]);
-  // const [isVideoOpen, setVideoOpen] = useState(false);
-  // const [trailer, setTrailer] = useState("");
+  const [lgShow, setLgShow] = useState(false);
+  const [trailer, setTrailer] = useState("");
 
   const id = window.location.pathname.split(":")[1];
 
@@ -32,14 +33,14 @@ const ShowPage = () => {
       const credits = await getShowCredits(id);
       const similarShows = await getSimilarShows(id);
       const recShows = await getRecTV(id);
-      // const trailer = await getShowTrailer(id)
+      const trailer = await getShowTrailer(id)
       setShowInfo(showInfo);
       setSeasons(showInfo.seasonsInfo);
       setCast(credits.cast);
       // setCrew(credits.crew);
       setSimilarShows(similarShows);
       setRecShows(recShows);
-      // setTrailer(trailer);
+      setTrailer(trailer);
     })();
   }, [id]);
 
@@ -57,13 +58,11 @@ const ShowPage = () => {
           <div className="showPosterWrapper">
             <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
             <AddToListBtn data={showInfo} />
-            <div>
-              <button
-              // onClick={() => setVideoOpen((prev) => !prev)}
-              >
-                Trailer
-              </button>
-            </div>
+            {/* <div> */}
+            <Button variant="warning" style={{width: "100%", margin: "20px 0"}} onClick={() => setLgShow(true)}>
+              Trailer
+            </Button>
+            {/* </div> */}
           </div>
           <div className="showInfo">
             <div className="titleSection">
@@ -77,11 +76,10 @@ const ShowPage = () => {
             <p>Genres: {showInfo.genres}</p>
             <p>Rating: {showInfo.rating}</p>
             {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-
-            <div className="plot">{showInfo.plot}</div>
+            <div className="plotSection">{showInfo.plot}</div>
           </div>
         </div>
-        <div className="seasonWrapper">
+        <div className="stripWrapper">
           <h2>Seasons</h2>
           <div className="strip">
             {seasons.map((season) => (
@@ -89,7 +87,7 @@ const ShowPage = () => {
             ))}
           </div>
         </div>
-        <div className="castWrapper">
+        <div className="stripWrapper">
           <h2>Starring</h2>
           <div className="strip">
             {cast.map((person) => (
@@ -97,7 +95,7 @@ const ShowPage = () => {
             ))}
           </div>
         </div>
-        <div className="similarShowsWrapper">
+        <div className="stripWrapper">
           <h2>Similar Shows</h2>
           <div className="strip">
             {similarShows.map((show) => (
@@ -105,7 +103,7 @@ const ShowPage = () => {
             ))}
           </div>
         </div>
-        <div className="recShowsWrapper">
+        <div className="stripWrapper">
           <h2>Recommended Shows</h2>
           <div className="strip">
             {recShows.map((show) => (
@@ -113,15 +111,29 @@ const ShowPage = () => {
             ))}
           </div>
         </div>
-        {/* <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
+      </div>
+      <Modal
+                 size="lg"
+                 show={lgShow}
+          onHide={() => setLgShow(false)}
+          // dialogClassName="modal-100w"
+          aria-labelledby="trailer"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="trailerModal">
+              {showInfo.title} - Trailer
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
           <iframe
             className="trailer"
             title="Youtube player"
             allowFullScreen="allowfullscreen"
+            style={{height: "100%", width: "100%"}}
             src={`https://youtube.com/embed/${trailer}?autoplay=0`}
           ></iframe>
-        </div> */}
-      </div>
+          </Modal.Body>
+        </Modal>
     </div>
   );
 };

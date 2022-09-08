@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { SetListsContext } from "../App";
-import "./Styles/addToListBtn.css";
+import { Popover, OverlayTrigger, Button, ButtonGroup } from "react-bootstrap";
 
 const AddToListBtn = (props) => {
   const {
@@ -9,8 +9,6 @@ const AddToListBtn = (props) => {
     setCompletedList,
     setDroppedList,
   } = useContext(SetListsContext);
-
-  const [popupClass, setPopupClass] = useState(false);
 
   const { data } = props;
 
@@ -46,28 +44,26 @@ const AddToListBtn = (props) => {
     );
   };
 
-  const toggleListPopup = () => {
-    setPopupClass((prev) => !prev);
-  };
+  const popover = (
+      <Popover id="popover-basic">
+        <Popover.Body>
+          <ButtonGroup vertical>
+             <Button variant="secondary" onClick={handleAddToWatching}>Currently Watching</Button>
+             <Button variant="secondary" onClick={handleAddToWanted}>Want to Watch</Button>
+             <Button variant="secondary" onClick={handleAddToCompleted}>Completed</Button>
+             <Button variant="secondary" onClick={handleAddToDropped}>Dropped</Button>
+          </ButtonGroup>
+        </Popover.Body>
+      </Popover>
+  );
+  
 
   return (
-    <div onClick={toggleListPopup} className={"addToListBtn"}>
-      +
-      <ul className={popupClass ? "listPopup show" : "listPopup"}>
-        <li>
-          <button onClick={handleAddToWatching}>Currently Watching</button>
-        </li>
-        <li>
-          <button onClick={handleAddToWanted}>Want to Watch</button>
-        </li>
-        <li>
-          <button onClick={handleAddToCompleted}>Completed</button>
-        </li>
-        <li>
-          <button onClick={handleAddToDropped}>Dropped</button>
-        </li>
-      </ul>
-    </div>
+      <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+        <Button variant="success" style={{width: '100%', borderTopLeftRadius: "0", borderTopRightRadius: "0"}}>Add To Watchlist</Button>
+      </OverlayTrigger>
+
+
   );
 };
 

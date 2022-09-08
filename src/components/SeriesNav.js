@@ -1,31 +1,24 @@
 import { Link } from "react-router-dom";
-import "./Styles/CategoryNav.css";
+import { Nav } from "react-bootstrap";
 
 const SeriesNav = () => {
+  const page = window.location.pathname.split(":")[0].split('/')[3];
+    
   return (
-    <div className="categoryNav">
-      <ul className="categoryTabs">
-        <li>
-          <Link to="/tv-show-tracker/series/top-rated" className="categoryBtn">
-            Top Rated
-          </Link>
-        </li>
-        <li>
-          <Link to="/tv-show-tracker/series/popular" className="categoryBtn">
-            Popular
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/tv-show-tracker/series/airing-today"
-            className="categoryBtn"
-          >
-            Airing Today
-          </Link>
-        </li>
-      </ul>
-    </div>
-  );
+  <Nav variant="pills" defaultActiveKey={page}>
+    <Nav.Item>
+      <Nav.Link as={Link} to="/tv-show-tracker/series/top-rated" eventKey="top-rated">Top Rated</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link as={Link} to="/tv-show-tracker/series/popular" eventKey="popular">Popular</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link as={Link} to="/tv-show-tracker/series/airing-today" eventKey="airing-today">
+        Airing Today
+      </Nav.Link>
+    </Nav.Item>
+  </Nav>
+  )
 };
 
 export default SeriesNav;

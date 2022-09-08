@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { SetListsContext } from "../../App";
 import defaultImg from "../../img/defaultImg.webp";
 import AddToListBtn from "../AddToListBtn";
 import RemoveFromListBtn from "../RemoveFromListBtn";
-import "../Styles/card.css";
 
 const MovieCard = (props) => {
   const { setMoviePage } = useContext(SetListsContext);
@@ -15,22 +15,20 @@ const MovieCard = (props) => {
   };
 
   return (
-    <div className="card" onClick={handleMoviePage}>
-      <div className="posterWrapper">
-        <Link to={`/tv-show-tracker/movies/id:${id}`}>
-          <img
-            className="cardImg"
-            src={poster !== null ? poster : defaultImg}
-            alt={`${title} poster`}
-          ></img>
-        </Link>
+      <Card bg="light" onClick={handleMoviePage} style={{ minWidth: '185px', width: '185px', border: "none" }}>
+        <Card.Link as={Link} to={`/tv-show-tracker/movies/id:${id}`}>
+          <Card.Img variant="top" style={{height: '278px'}} src={poster !== null ? poster : defaultImg}/>
+        </Card.Link>
         <AddToListBtn data={props.movieData} />
-        <RemoveFromListBtn data={props.movieData} />
-      </div>
-      <p className="cardTitle">{title}</p>
-      <p>({year})</p>
-      <p className="rating">Rating: {rating}/10</p>
-    </div>
+        <Card.Body style={{textAlign: "center"}}>
+          <Card.Title>{title}</Card.Title>
+          <Card.Subtitle>
+            ({year})
+          </Card.Subtitle>
+          <Card.Text>Rating: {rating}</Card.Text>
+          <RemoveFromListBtn data={props.movieData} />
+        </Card.Body>
+      </Card>
   );
 };
 
