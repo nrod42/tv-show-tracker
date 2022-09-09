@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import {
   getShowDetails,
   getShowCredits,
@@ -11,8 +13,6 @@ import SeasonCard from "./Cards/SeasonCard";
 import PersonCard from "./Cards/PersonCard";
 import AddToListBtn from "./AddToListBtn";
 import uniqid from "uniqid";
-import { Button, Modal } from "react-bootstrap";
-
 
 const ShowPage = () => {
   const [showInfo, setShowInfo] = useState("");
@@ -21,8 +21,8 @@ const ShowPage = () => {
   // const [crew, setCrew] = useState([]);
   const [similarShows, setSimilarShows] = useState([]);
   const [recShows, setRecShows] = useState([]);
-  const [lgShow, setLgShow] = useState(false);
   const [trailer, setTrailer] = useState("");
+  const [lgShow, setLgShow] = useState(false);
 
   const id = window.location.pathname.split(":")[1];
 
@@ -33,7 +33,7 @@ const ShowPage = () => {
       const credits = await getShowCredits(id);
       const similarShows = await getSimilarShows(id);
       const recShows = await getRecTV(id);
-      const trailer = await getShowTrailer(id)
+      const trailer = await getShowTrailer(id);
       setShowInfo(showInfo);
       setSeasons(showInfo.seasonsInfo);
       setCast(credits.cast);
@@ -41,6 +41,7 @@ const ShowPage = () => {
       setSimilarShows(similarShows);
       setRecShows(recShows);
       setTrailer(trailer);
+      window.scrollTo(0, 0);
     })();
   }, [id]);
 
@@ -58,11 +59,13 @@ const ShowPage = () => {
           <div className="showPosterWrapper">
             <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
             <AddToListBtn data={showInfo} />
-            {/* <div> */}
-            <Button variant="warning" style={{width: "100%", margin: "20px 0"}} onClick={() => setLgShow(true)}>
+            <Button
+              variant="warning"
+              style={{ width: "100%", margin: "20px 0" }}
+              onClick={() => setLgShow(true)}
+            >
               Trailer
             </Button>
-            {/* </div> */}
           </div>
           <div className="showInfo">
             <div className="titleSection">
@@ -113,27 +116,27 @@ const ShowPage = () => {
         </div>
       </div>
       <Modal
-                 size="lg"
-                 show={lgShow}
-          onHide={() => setLgShow(false)}
-          // dialogClassName="modal-100w"
-          aria-labelledby="trailer"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="trailerModal">
-              {showInfo.title} - Trailer
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        // dialogClassName="modal-100w"
+        aria-labelledby="trailer"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="trailerModal">
+            {showInfo.title} - Trailer
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <iframe
             className="trailer"
             title="Youtube player"
             allowFullScreen="allowfullscreen"
-            style={{height: "100%", width: "100%"}}
+            style={{ height: "100%", width: "100%" }}
             src={`https://youtube.com/embed/${trailer}?autoplay=0`}
           ></iframe>
-          </Modal.Body>
-        </Modal>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

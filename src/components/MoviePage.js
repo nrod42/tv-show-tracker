@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import {
   getMovieDetails,
   getMovieCredits,
   getSimilarMovies,
   getRecMovies,
+  getMovieTrailer,
 } from "./API/getMovies";
 import MovieCard from "./Cards/MovieCard";
 import PersonCard from "./Cards/PersonCard";
@@ -16,8 +19,8 @@ const MoviePage = () => {
   // const [crew, setCrew] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [recMovies, setRecMovies] = useState([]);
-  // const [isVideoOpen, setVideoOpen] = useState(false);
-  // const [trailer, setTrailer] = useState("");
+  const [trailer, setTrailer] = useState("");
+  const [lgShow, setLgShow] = useState(false);
 
   const id = window.location.pathname.split(":")[1];
 
@@ -28,13 +31,14 @@ const MoviePage = () => {
       const credits = await getMovieCredits(id);
       const similarMovies = await getSimilarMovies(id);
       const recMovies = await getRecMovies(id);
-      // const trailer = await getShowTrailer(id)
+      const trailer = await getMovieTrailer(id);
       setMovieInfo(movieInfo);
       setCast(credits.cast);
       // setCrew(credits.crew);
       setSimilarMovies(similarMovies);
       setRecMovies(recMovies);
-      // setTrailer(trailer);
+      setTrailer(trailer);
+      window.scrollTo(0, 0);
     })();
   }, [id]);
 
@@ -52,13 +56,13 @@ const MoviePage = () => {
           <div className="moviePosterWrapper">
             <img src={movieInfo.poster} alt={`${movieInfo.title} poster`} />
             <AddToListBtn data={movieInfo} />
-            <div>
-              <button
-              // onClick={() => setVideoOpen((prev) => !prev)}
-              >
-                Trailer
-              </button>
-            </div>
+            <Button
+              variant="warning"
+              style={{ width: "100%", margin: "20px 0" }}
+              onClick={() => setLgShow(true)}
+            >
+              Trailer
+            </Button>
           </div>
           <div className="movieInfo">
             <div className="titleSection">
@@ -68,7 +72,7 @@ const MoviePage = () => {
             <p>Genres: {movieInfo.genres}</p>
             <p>Rating: {movieInfo.rating}</p>
             {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-            <div className="plot">{movieInfo.plot}</div>
+            <div className="plotSection">{movieInfo.plot}</div>
           </div>
         </div>
         <div className="stripWrapper">
@@ -96,14 +100,28 @@ const MoviePage = () => {
             ))}
           </div>
         </div>
-        {/* <div className={isVideoOpen ? "trailerContainer" : "hiddenTrailer"}>
-          <iframe
-            className="trailer"
-            title="Youtube player"
-            allowFullScreen="allowfullscreen"
-            src={`https://youtube.com/embed/${trailer}?autoplay=0`}
-          ></iframe>
-        </div> */}
+        <Modal
+          size="lg"
+          show={lgShow}
+          onHide={() => setLgShow(false)}
+          // dialogClassName="modal-100w"
+          aria-labelledby="trailer"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="trailerModal">
+              {movieInfo.title} - Trailer
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{ height: "500px" }}>
+            <iframe
+              className="trailer"
+              title="Youtube player"
+              allowFullScreen="allowfullscreen"
+              style={{ height: "100%", width: "100%" }}
+              src={`https://youtube.com/embed/${trailer}?autoplay=0`}
+            ></iframe>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

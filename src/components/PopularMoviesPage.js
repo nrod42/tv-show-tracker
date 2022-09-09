@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import { getPopularMovies } from "./API/getMovies";
 import MoviesNav from "./MoviesNav";
 import MovieCard from "./Cards/MovieCard";
 import uniqid from "uniqid";
-import { Button } from "react-bootstrap";
 
 const PopularMoviesPage = () => {
   const [popularMovies, setPopularMovies] = useState([]);

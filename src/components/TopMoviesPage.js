@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import MovieCard from "./Cards/MovieCard";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import { getTopMovies } from "./API/getMovies";
+import MovieCard from "./Cards/MovieCard";
 import MoviesNav from "./MoviesNav";
 import uniqid from "uniqid";
-import { Button } from "react-bootstrap";
 
 const TopMoviesPage = () => {
   const [topMovies, setTopMovies] = useState([]);

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import { getNowPlayingMovies } from "./API/getMovies";
 import MoviesNav from "./MoviesNav";
 import MovieCard from "./Cards/MovieCard";
 import uniqid from "uniqid";
-import { Button } from "react-bootstrap";
 
 const NowPlayingMoviesPage = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -32,7 +32,9 @@ const NowPlayingMoviesPage = () => {
           <MovieCard key={uniqid()} movieData={movie} />
         ))}
       </div>
-      <Button onClick={showMore}>Show more</Button>
+      <Button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </Button>
     </div>
   );
 };

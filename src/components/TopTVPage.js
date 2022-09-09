@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import { getTopTV } from "./API/getTV";
 import SeriesNav from "./SeriesNav";
 import TvCard from "./Cards/TvCard";
 import uniqid from "uniqid";
-import { Button } from "react-bootstrap";
 
 const TopTVPage = () => {
   const [topTV, setTopTV] = useState([]);

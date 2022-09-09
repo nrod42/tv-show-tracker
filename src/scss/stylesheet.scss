@@ -21,20 +21,9 @@ html {
 body {
   height: fit-content;
   background: #D3D0CB;
+  // background-image: url('../img/background-img.png');
 }
   
-a {
-  text-decoration: none;
-}
-
-a:visited, a:active, a:focus, a:hover {
-  text-decoration: none;
-}
-
-.mb-3.navbar {
-  margin: 0 !important;
-}
-
 footer {
   background: #393E41;
   padding: 5px 0;
@@ -60,8 +49,64 @@ footer {
   overflow: scroll;
 }
 
+.navbar-brand {
+  margin-left: 16px !important;
+}
+
+.searchForm {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.nav-pills .nav-link {
+  color: #000000 !important;
+}
+
+.nav-pills .nav-link.active {
+  background: #198754 !important;
+  color: white !important;
+}
+
+.home {
+  width: var(--main-width);
+  align-self: center;
+  padding-top: 50px;
+}
+
+.stripWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.stripWrapper a {
+  text-decoration: none;
+}
+
+.strip {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+}
+
 .card img:hover {
   filter: brightness(50%);
+}
+
+.categoryPage, .listPage, .searchResults {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 70px;
 }
 
 .cardGrid {
@@ -74,37 +119,31 @@ footer {
 
 .backdrop {
   max-width: 100%;
+  // width: 100%;
 }
   
 .backdropImg {
   max-width: 100%;
+  // width: 100%;
 }
   
-.categoryPage, .listPage, .searchResults {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.showPage {
+.showPage, .moviePage {
   height: auto;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 50px;
 }
 
-.allShowInfo {
+.allShowInfo, .allMovieInfo {
   width: var(--main-width);
   margin-top: 20px;
   
 }
 
-.showInfoContainer {
+.showInfoContainer, .movieInfoContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -112,14 +151,14 @@ footer {
   gap: 20px;
 }
 
-.showInfo {
+.showInfo, .movieInfo {
   // width: 50%;
   // display: flex;
   // flex-direction: column;
   // flex-wrap: wrap;
 }
 
-.showPosterWrapper {
+.showPosterWrapper, .moviePosterWrapper {
   position: relative;
   height: auto;
   width: 300px; //make a poster width variable
@@ -146,6 +185,7 @@ footer {
 
 .listSection {
   width: 100%;
+  padding-top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,67 +218,9 @@ footer {
   color: white;
   text-decoration: none;
 }
-  
-.moviePage {
-  height: auto;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.home {
-  align-self: center;
-}
-
-.home, .allMovieInfo {
-  width: var(--main-width);
-}
-
-.movieInfoContainer {
-  display: flex;
-  gap: 20px;
-}
-
-// .moviePosterWrapper {
-//   position: relative;
-//   height: auto;
-//   width: auto;
-// }
-
-
-
-.stripWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.stripWrapper a {
-  text-decoration: none;
-}
-
-.strip {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 10px;
-  padding: 20px;
-  width: 100%;
-}
 
 .showMoreBtn {
   margin: 30px 0;
+  background: #198754 !important;
+  border: none !important;
 }
-
-// .posterWrapper {
-//   position: relative;
-//   width: var(--card-width);
-//   height: var(--card-height);
-//   cursor: pointer;
-// }
-  

@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
 import TvCard from "./Cards/TvCard";
 import MovieCard from "./Cards/MovieCard";
-import { useEffect, useState } from "react";
 import { getResults } from "./API/getResults";
 import uniqid from "uniqid";
-import { ButtonGroup, Button } from "react-bootstrap";
 
 const Results = (props) => {
   const { searchQuery } = props;
@@ -53,9 +54,15 @@ const Results = (props) => {
   return (
     <div className="searchResults">
       <ButtonGroup aria-label="Basic example">
-        <Button variant="secondary" onClick={showAll}>All</Button>
-        <Button variant="secondary" onClick={showMovies}>Movies</Button>
-        <Button variant="secondary" onClick={showTV}>Series</Button>
+        <Button variant="secondary" onClick={showAll}>
+          All
+        </Button>
+        <Button variant="secondary" onClick={showMovies}>
+          Movies
+        </Button>
+        <Button variant="secondary" onClick={showTV}>
+          Series
+        </Button>
       </ButtonGroup>
       <h1>Results:</h1>
       <div className="cardGrid">{cards}</div>

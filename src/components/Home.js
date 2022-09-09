@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getTopMovies, getPopularMovies } from "./API/getMovies";
 import { getTopTV, getPopularTV } from "./API/getTV";
@@ -36,9 +36,9 @@ const Home = () => {
           <h1>Popular TV</h1>
         </Link>
         <div className="strip">
-              {popularTV.map((show) => (
-                <TvCard key={uniqid()} showData={show} />
-              ))}
+          {popularTV.map((show) => (
+            <TvCard key={uniqid()} showData={show} />
+          ))}
         </div>
       </div>
 
@@ -47,9 +47,9 @@ const Home = () => {
           <h1>Top Rated TV</h1>
         </Link>
         <div className="strip">
-            {topTV.map((show) => (
-              <TvCard key={uniqid()} showData={show} />
-            ))}
+          {topTV.map((show) => (
+            <TvCard key={uniqid()} showData={show} />
+          ))}
         </div>
       </div>
 
@@ -58,10 +58,9 @@ const Home = () => {
           <h1>Popular Movies</h1>
         </Link>
         <div className="strip">
-            {popularMovies.map((movie) => (
-              <MovieCard key={uniqid()} movieData={movie} />
-            ))}
-
+          {popularMovies.map((movie) => (
+            <MovieCard key={uniqid()} movieData={movie} />
+          ))}
         </div>
       </div>
 
@@ -70,9 +69,9 @@ const Home = () => {
           <h1>Top Rated Movies</h1>
         </Link>
         <div className="strip">
-            {topMovies.map((movie) => (
-              <MovieCard key={uniqid()} movieData={movie} />
-            ))}
+          {topMovies.map((movie) => (
+            <MovieCard key={uniqid()} movieData={movie} />
+          ))}
         </div>
       </div>
     </div>
