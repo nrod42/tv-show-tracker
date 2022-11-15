@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import logo from "../img/popcorn.png";
 
 const Navi = (props) => {
   const { setSearchQuery } = props;
@@ -35,8 +36,8 @@ const Navi = (props) => {
           fixed="top"
         >
           <Container fluid>
-            <Navbar.Brand as={Link} to="/tv-show-tracker">
-              Track TV
+            <Navbar.Brand as={Link} to="/tv-show-tracker" style={{display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem"}}>
+              <img src={logo} style={{height: "20px"}}></img>Track TV
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas

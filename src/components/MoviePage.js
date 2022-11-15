@@ -67,7 +67,7 @@ const MoviePage = () => {
           <div className="movieInfo">
             <div className="titleSection">
               <p>{movieInfo.title}</p>
-              <p>({movieInfo.year})</p>
+              <p>({movieInfo.year?.split('-')[0]})</p>
             </div>
             <p>Genres: {movieInfo.genres}</p>
             <p>Rating: {movieInfo.rating}</p>

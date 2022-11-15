@@ -26,7 +26,6 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState([]);
 
   const [watchingList, setWatchingList] = useState(() => {
-    // getting stored value
     const saved = localStorage.getItem("watchingList");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
@@ -37,13 +36,11 @@ const App = () => {
     return initialValue || [];
   });
   const [completedList, setCompletedList] = useState(() => {
-    // getting stored value
     const saved = localStorage.getItem("completedList");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });
   const [droppedList, setDroppedList] = useState(() => {
-    // getting stored value
     const saved = localStorage.getItem("droppedList");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
@@ -138,7 +135,7 @@ const App = () => {
               element={<AiringTodayTVPage />}
             />
           </Routes>
-          <footer>By: Nigel Rodriguez</footer>
+          <footer>© 2022 - Nigel Rodriguez</footer>
         </SetListsContext.Provider>
       </div>
     </BrowserRouter>

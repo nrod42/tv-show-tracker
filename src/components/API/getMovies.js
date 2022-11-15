@@ -8,7 +8,6 @@ const getTopMovies = async (page = 1) => {
 
     return (
       top.results
-        // .filter((movie) => movie.original_language === "en")
         .map((movie) => ({
           id: movie.id,
           poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
@@ -33,7 +32,6 @@ const getPopularMovies = async (page = 1) => {
 
     return (
       pop.results
-        // .filter((movie) => movie.original_language === "en")
         .map((movie) => ({
           id: movie.id,
           poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
@@ -58,7 +56,6 @@ const getUpcomingMovies = async (page = 1) => {
 
     return (
       upcoming.results
-        // .filter((movie) => movie.original_language === "en")
         .map((movie) => ({
           id: movie.id,
           poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
@@ -153,7 +150,7 @@ const getActorPics = async (id) => {
       }
     );
     const pic = await response.json();
-    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}`;
+    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0]?.file_path}`;
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -170,7 +167,6 @@ const getSimilarMovies = async (movieId, page = 1) => {
     const similar = await response.json();
     return (
       similar.results
-        //   .filter((movie) => movie.original_language === "en")
         .map((movie) => ({
           id: movie.id,
           poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
@@ -194,10 +190,8 @@ const getRecMovies = async (movieId, page = 1) => {
       }
     );
     const rec = await response.json();
-    // console.log(rec)
     return (
       rec.results
-        // .filter((movie) => movie.original_language === "en")
         .map((movie) => ({
           id: movie.id,
           poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
@@ -222,7 +216,6 @@ const getMovieTrailer = async (showId) => {
     );
     const trailer = await response.json();
     return trailer.results.filter((vid) => vid.type === "Trailer")[0].key;
-    // return trailer.results[0].key;
   } catch (error) {
     console.error("Error:API", error);
   }

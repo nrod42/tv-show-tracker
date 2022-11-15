@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Card from "react-bootstrap/Card";
 import { SetListsContext } from "../../App";
 import AddToListBtn from "../AddToListBtn";
 import RemoveFromListBtn from "../RemoveFromListBtn";
+import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
 const MovieCard = (props) => {

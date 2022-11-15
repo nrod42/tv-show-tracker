@@ -127,7 +127,7 @@ const ShowPage = () => {
             {showInfo.title} - Trailer
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ height: "500px" }}>
           <iframe
             className="trailer"
             title="Youtube player"
