@@ -119,7 +119,7 @@ const getActorPics = async (id) => {
       }
     );
     const pic = await response.json();
-    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0]?.file_path}`;
+    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}`;
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -174,6 +174,7 @@ const getRecTV = async (showId, page = 1) => {
   }
 };
 
+// Get TV Show trailer by passing TV show ID
 const getShowTrailer = async (showId) => {
   try {
     const response = await fetch(
@@ -183,8 +184,7 @@ const getShowTrailer = async (showId) => {
       }
     );
     const trailer = await response.json();
-    return trailer.results.filter((vid) => vid.type === "Trailer")[0].key;
-    // return trailer.results[0].key;
+    return trailer.results.filter((vid) => vid.type === "Trailer")[0]?.key;
   } catch (error) {
     console.error("Error:API", error);
   }

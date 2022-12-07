@@ -48,7 +48,7 @@ const AddToListBtn = (props) => {
   };
 
   const popover = (
-    <Popover id="popover-basic">
+    <Popover>
       <Popover.Body>
         <ButtonGroup vertical>
           <Button variant="secondary" onClick={handleAddToWatching}>

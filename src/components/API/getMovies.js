@@ -6,17 +6,14 @@ const getTopMovies = async (page = 1) => {
     );
     const top = await response.json();
 
-    return (
-      top.results
-        .map((movie) => ({
-          id: movie.id,
-          poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-          title: movie.title,
-          rating: movie.vote_average,
-          year: movie.release_date.split("-")[0],
-          type: "movie",
-        }))
-    );
+    return top.results.map((movie) => ({
+      id: movie.id,
+      poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+      title: movie.title,
+      rating: movie.vote_average,
+      year: movie.release_date.split("-")[0],
+      type: "movie",
+    }));
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -30,17 +27,14 @@ const getPopularMovies = async (page = 1) => {
     );
     const pop = await response.json();
 
-    return (
-      pop.results
-        .map((movie) => ({
-          id: movie.id,
-          poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-          title: movie.title,
-          rating: movie.vote_average,
-          year: movie.release_date.split("-")[0],
-          type: "movie",
-        }))
-    );
+    return pop.results.map((movie) => ({
+      id: movie.id,
+      poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+      title: movie.title,
+      rating: movie.vote_average,
+      year: movie.release_date.split("-")[0],
+      type: "movie",
+    }));
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -54,17 +48,14 @@ const getUpcomingMovies = async (page = 1) => {
     );
     const upcoming = await response.json();
 
-    return (
-      upcoming.results
-        .map((movie) => ({
-          id: movie.id,
-          poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-          title: movie.title,
-          rating: movie.vote_average,
-          year: movie.release_date.split("-")[0],
-          type: "movie",
-        }))
-    );
+    return upcoming.results.map((movie) => ({
+      id: movie.id,
+      poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+      title: movie.title,
+      rating: movie.vote_average,
+      year: movie.release_date.split("-")[0],
+      type: "movie",
+    }));
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -165,17 +156,14 @@ const getSimilarMovies = async (movieId, page = 1) => {
       }
     );
     const similar = await response.json();
-    return (
-      similar.results
-        .map((movie) => ({
-          id: movie.id,
-          poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-          title: movie.title,
-          rating: movie.vote_average,
-          year: movie.release_date.split("-")[0],
-          type: "movie",
-        }))
-    );
+    return similar.results.map((movie) => ({
+      id: movie.id,
+      poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+      title: movie.title,
+      rating: movie.vote_average,
+      year: movie.release_date.split("-")[0],
+      type: "movie",
+    }));
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -190,17 +178,14 @@ const getRecMovies = async (movieId, page = 1) => {
       }
     );
     const rec = await response.json();
-    return (
-      rec.results
-        .map((movie) => ({
-          id: movie.id,
-          poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-          title: movie.title,
-          rating: movie.vote_average,
-          year: movie.release_date.split("-")[0],
-          type: "movie",
-        }))
-    );
+    return rec.results.map((movie) => ({
+      id: movie.id,
+      poster: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+      title: movie.title,
+      rating: movie.vote_average,
+      year: movie.release_date.split("-")[0],
+      type: "movie",
+    }));
   } catch (error) {
     console.error("Error:API", error);
   }
@@ -215,7 +200,7 @@ const getMovieTrailer = async (showId) => {
       }
     );
     const trailer = await response.json();
-    return trailer.results.filter((vid) => vid.type === "Trailer")[0].key;
+    return trailer.results.filter((vid) => vid.type === "Trailer")[0]?.key;
   } catch (error) {
     console.error("Error:API", error);
   }

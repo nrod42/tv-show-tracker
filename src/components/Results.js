@@ -53,7 +53,7 @@ const Results = (props) => {
 
   return (
     <div className="searchResults">
-      <ButtonGroup aria-label="Basic example">
+      <ButtonGroup aria-label="Fliter buttons">
         <Button variant="secondary" onClick={showAll}>
           All
         </Button>
