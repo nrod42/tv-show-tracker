@@ -36,19 +36,23 @@ const Navi = (props) => {
           fixed="top"
         >
           <Container fluid>
-            <Navbar.Brand as={Link} to="/tv-show-tracker" style={{display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem"}}>
-              <img src={logo} style={{height: "20px"}}></img>Track TV
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end"
+            <Navbar.Brand
+              as={Link}
+              to="/tv-show-tracker"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "1rem",
+              }}
             >
+              <img src={logo} alt={"logo"} style={{ height: "20px" }}></img>
+              Track TV
+            </Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Offcanvas placement="end">
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Track TV
-                </Offcanvas.Title>
+                <Offcanvas.Title>Track TV</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav

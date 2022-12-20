@@ -70,22 +70,22 @@ h1, h2 {
   color: white !important;
 }
 
-.home {
-  width: var(--main-width);
-  align-self: center;
-  padding-top: 50px;
-}
+// .home {
+//   width: var(--main-width);
+//   align-self: center;
+//   padding-top: 50px;
+// }
 
-.stripWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-}
+// .stripWrapper {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin: 20px 0;
+// }
 
-.stripWrapper a {
-  text-decoration: none;
-}
+// .stripWrapper a {
+//   text-decoration: none;
+// }
 
 .strip {
   overflow-x: scroll;

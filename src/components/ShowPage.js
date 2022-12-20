@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import TvCard from "./Cards/TvCard";
+import SeasonCard from "./Cards/SeasonCard";
+import PersonCard from "./Cards/PersonCard";
+import AddToListBtn from "./AddToListBtn";
+import uniqid from "uniqid";
 import {
   getShowDetails,
   getShowCredits,
@@ -8,11 +16,6 @@ import {
   getRecTV,
   getShowTrailer,
 } from "./API/getTV";
-import TvCard from "./Cards/TvCard";
-import SeasonCard from "./Cards/SeasonCard";
-import PersonCard from "./Cards/PersonCard";
-import AddToListBtn from "./AddToListBtn";
-import uniqid from "uniqid";
 
 const ShowPage = () => {
   const [showInfo, setShowInfo] = useState("");
@@ -54,67 +57,70 @@ const ShowPage = () => {
           alt={`${showInfo.title} backdrop`}
         />
       </div>
-      <div className="allShowInfo">
-        <div className="showInfoContainer">
-          <div className="showPosterWrapper">
-            <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
-            <AddToListBtn data={showInfo} />
-            <Button
-              variant="warning"
-              style={{ width: "100%", margin: "20px 0" }}
-              onClick={() => setLgShow(true)}
-            >
-              Trailer
-            </Button>
-          </div>
-          <div className="showInfo">
-            <div className="titleSection">
-              <p>{showInfo.title}</p>
-              <p>({showInfo.year})</p>
+      <Container>
+        <div className="allShowInfo">
+          <Row>
+            <Col lg={3} sm={12}>
+              <div className="d-flex flex-column justify-content-center">
+                <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
+                <AddToListBtn data={showInfo} />
+                <Button
+                  variant="warning"
+                  style={{ margin: "20px 0" }}
+                  onClick={() => setLgShow(true)}
+                >
+                  Trailer
+                </Button>
+              </div>
+            </Col>
+            <Col lg={9} sm={12}>
+              <div className="titleSection">
+                <p>{showInfo.title}</p>
+                <p>({showInfo.year})</p>
+              </div>
+              <div className="seasonSection">
+                <p>Seasons: {showInfo.seasonNum}</p>
+                <p>Episodes: {showInfo.episodeNum}</p>
+              </div>
+              <p>Genres: {showInfo.genres}</p>
+              <p>Rating: {showInfo.rating}</p>
+              <div className="plotSection">{showInfo.plot}</div>
+            </Col>
+          </Row>
+          <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
+            <h2>Seasons</h2>
+            <div className="strip">
+              {seasons.map((season) => (
+                <SeasonCard key={uniqid()} season={season} />
+              ))}
             </div>
-            <div className="seasonSection">
-              <p>Seasons: {showInfo.seasonNum}</p>
-              <p>Episodes: {showInfo.episodeNum}</p>
+          </Row>
+          <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
+            <h2>Starring</h2>
+            <div className="strip">
+              {cast.map((person) => (
+                <PersonCard key={uniqid()} person={person} />
+              ))}
             </div>
-            <p>Genres: {showInfo.genres}</p>
-            <p>Rating: {showInfo.rating}</p>
-            {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-            <div className="plotSection">{showInfo.plot}</div>
-          </div>
+          </Row>
+          <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
+            <h2>Similar Shows</h2>
+            <div className="strip">
+              {similarShows.map((show) => (
+                <TvCard key={uniqid()} showData={show} />
+              ))}
+            </div>
+          </Row>
+          <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
+            <h2>Recommended Shows</h2>
+            <div className="strip">
+              {recShows.map((show) => (
+                <TvCard key={uniqid()} showData={show} />
+              ))}
+            </div>
+          </Row>
         </div>
-        <div className="stripWrapper">
-          <h2>Seasons</h2>
-          <div className="strip">
-            {seasons.map((season) => (
-              <SeasonCard key={uniqid()} season={season} />
-            ))}
-          </div>
-        </div>
-        <div className="stripWrapper">
-          <h2>Starring</h2>
-          <div className="strip">
-            {cast.map((person) => (
-              <PersonCard key={uniqid()} person={person} />
-            ))}
-          </div>
-        </div>
-        <div className="stripWrapper">
-          <h2>Similar Shows</h2>
-          <div className="strip">
-            {similarShows.map((show) => (
-              <TvCard key={uniqid()} showData={show} />
-            ))}
-          </div>
-        </div>
-        <div className="stripWrapper">
-          <h2>Recommended Shows</h2>
-          <div className="strip">
-            {recShows.map((show) => (
-              <TvCard key={uniqid()} showData={show} />
-            ))}
-          </div>
-        </div>
-      </div>
+      </Container>
       <Modal
         size="lg"
         show={lgShow}

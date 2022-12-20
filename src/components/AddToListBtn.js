@@ -73,7 +73,7 @@ const AddToListBtn = (props) => {
       <Button
         variant="success"
         style={{
-          width: "100%",
+          // width: "100%",
           borderTopLeftRadius: "0",
           borderTopRightRadius: "0",
         }}

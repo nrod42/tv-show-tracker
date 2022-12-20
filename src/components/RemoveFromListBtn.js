@@ -40,7 +40,7 @@ const RemoveFromListBtn = (props) => {
       style={{ display: page.includes("lists") ? "block" : "none" }}
     >
       <Button variant="danger" style={{ width: "100%" }}>
-        Remove From list
+        Remove From List
       </Button>
     </div>
   );
