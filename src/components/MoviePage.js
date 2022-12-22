@@ -47,12 +47,17 @@ const MoviePage = () => {
 
   return (
     <div className="moviePage">
-      <div className="backdrop">
+      <div className="backdrop" style={{height: '30rem'}}>
         <img
           className={"backdropImg"}
           src={movieInfo.backdrop}
           alt={`${movieInfo.title} backdrop`}
-        />
+          style={{  maxHeight: '100%',
+          maxWidth: '100%',
+          width: '100%',
+          height: 'auto',
+          objectFit: 'cover'}}
+      />
       </div>
       <Container>
         <div className="allMovieInfo">

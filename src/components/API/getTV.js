@@ -76,9 +76,7 @@ const getShowDetails = async (showId) => {
       poster: `https://image.tmdb.org/t/p/w300/${tvShow.poster_path}`,
       backdrop: `https://image.tmdb.org/t/p/original/${tvShow.backdrop_path}`,
       title: tvShow.name,
-      genres: tvShow.genres
-        ? tvShow.genres.map((genre) => `${genre.name}, `)
-        : "",
+      genres: tvShow.genres ? tvShow.genres.map((genre, index) => index < tvShow.genres.length - 1 ? `${genre.name}, ` : genre.name).join("") : null,
       seasonNum: tvShow.number_of_seasons,
       episodeNum: tvShow.number_of_episodes,
       rating: tvShow.vote_average,

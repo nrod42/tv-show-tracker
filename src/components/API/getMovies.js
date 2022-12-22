@@ -100,9 +100,8 @@ const getMovieDetails = async (movieId) => {
       poster: `https://image.tmdb.org/t/p/w300/${movie.poster_path}`,
       backdrop: `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`,
       title: movie.title,
-      genres: movie.genres
-        ? movie.genres.map((genre) => `${genre.name}, `)
-        : "",
+      genres: movie.genres ? movie.genres.map((genre, index) => index < movie.genres.length - 1 ? `${genre.name}, ` : genre.name).join("") : null,
+
       runtime: movie.runtime,
       rating: movie.vote_average,
       plot: movie.overview,
@@ -141,7 +140,7 @@ const getActorPics = async (id) => {
       }
     );
     const pic = await response.json();
-    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}`;
+    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0]?.file_path}`;
   } catch (error) {
     console.error("Error:API", error);
   }

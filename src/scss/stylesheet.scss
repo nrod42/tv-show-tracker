@@ -83,9 +83,9 @@ h1, h2 {
 //   margin: 20px 0;
 // }
 
-// .stripWrapper a {
-//   text-decoration: none;
-// }
+a {
+  text-decoration: none !important;
+}
 
 .strip {
   overflow-x: scroll;
