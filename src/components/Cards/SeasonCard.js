@@ -27,7 +27,7 @@ const SeasonCard = (props) => {
         <Card.Title>
           {season_number === 0 ? "Specials" : `Season ${season_number}`}
         </Card.Title>
-        <Card.Subtitle>{episode_count} episodes</Card.Subtitle>
+        <Card.Subtitle>{episode_count} Episodes</Card.Subtitle>
       </Card.Body>
     </Card>
   );

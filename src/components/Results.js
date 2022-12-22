@@ -53,14 +53,14 @@ const Results = (props) => {
 
   return (
     <div className="searchResults">
-      <ButtonGroup aria-label="Fliter buttons">
-        <Button variant="secondary" onClick={showAll}>
+      <ButtonGroup aria-label="Filter buttons">
+        <Button variant="success" onClick={showAll}>
           All
         </Button>
-        <Button variant="secondary" onClick={showMovies}>
+        <Button variant="success" onClick={showMovies}>
           Movies
         </Button>
-        <Button variant="secondary" onClick={showTV}>
+        <Button variant="success" onClick={showTV}>
           Series
         </Button>
       </ButtonGroup>

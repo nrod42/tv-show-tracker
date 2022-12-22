@@ -29,14 +29,6 @@ const ShowPage = () => {
 
   const id = window.location.pathname.split(":")[1];
 
-  const scrollToTop = ()=> {
-    window.scrollTo({
-               top: 0,
-               left: 0,
-               behavior: "smooth"
-             })
-   }
-
   //Fetch all relevant show info and saves them in a state
   useEffect(() => {
     (async () => {
@@ -52,22 +44,25 @@ const ShowPage = () => {
       setSimilarShows(similarShows);
       setRecShows(recShows);
       setTrailer(trailer);
-      scrollToTop();
+      window.scrollTo(0, 0);
     })();
   }, [id]);
 
   return (
     <div className="showPage">
-      <div className="backdrop" style={{height: '30rem'}}>
+      <div className="backdrop" style={{ height: "700px" }}>
         <img
           className={"backdropImg"}
           src={showInfo.backdrop}
           alt={`${showInfo.title} backdrop`}
-          style={{  maxHeight: '100%',
-            maxWidth: '100%',
-            width: '100%',
-            height: 'auto',
-            objectFit: 'cover'}}
+          style={{
+            maxHeight: "100%",
+            maxWidth: "100%",
+            width: "100%",
+            minHeight: "100%",
+            // height: "auto",
+            objectFit: "cover",
+          }}
         />
       </div>
       <Container>
