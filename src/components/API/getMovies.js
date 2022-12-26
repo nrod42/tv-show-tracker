@@ -139,10 +139,12 @@ const getActorPics = async (id) => {
         mode: "cors",
       }
     );
+    console.log(response)
     const pic = await response.json();
-    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0]?.file_path}`;
+    console.log(pic);
+    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}`;
   } catch (error) {
-    console.error("Error:API", error);
+    console.error("Error: getActorPics", error);
   }
 };
 

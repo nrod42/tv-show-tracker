@@ -28,6 +28,7 @@ const ShowPage = () => {
   const [lgShow, setLgShow] = useState(false);
 
   const id = window.location.pathname.split(":")[1];
+  
 
   //Fetch all relevant show info and saves them in a state
   useEffect(() => {
@@ -44,7 +45,7 @@ const ShowPage = () => {
       setSimilarShows(similarShows);
       setRecShows(recShows);
       setTrailer(trailer);
-      window.scrollTo(0, 0);
+      window.scrollTo(0,0); 
     })();
   }, [id]);
 
@@ -60,7 +61,6 @@ const ShowPage = () => {
             maxWidth: "100%",
             width: "100%",
             minHeight: "100%",
-            // height: "auto",
             objectFit: "cover",
           }}
         />

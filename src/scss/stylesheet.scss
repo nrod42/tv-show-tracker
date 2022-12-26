@@ -33,9 +33,6 @@ footer {
   margin-bottom: 0;
 }
 
-h1, h2 {
-  color: #297373;
-}
 
 #root {
   height: 100%;
@@ -44,11 +41,8 @@ h1, h2 {
 .App {
   background: #F0F0F4;
   max-width: 100vw;
-  height: 100%;
+  height: 100vh;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  // justify-content: space-between;
   overflow: scroll;
 }
 
@@ -69,19 +63,6 @@ h1, h2 {
   background: #198754 !important;
   color: white !important;
 }
-
-// .home {
-//   width: var(--main-width);
-//   align-self: center;
-//   padding-top: 50px;
-// }
-
-// .stripWrapper {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin: 20px 0;
-// }
 
 a {
   text-decoration: none !important;
@@ -119,40 +100,9 @@ a {
   justify-items: center;
 }
 
-.backdrop {
-  width: 100%;
-  text-align: center;
-}
-  
-.backdropImg {
-  width: 100%;
-}
-  
-.showPage, .moviePage {
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 50px;
-}
-
 .allShowInfo, .allMovieInfo {
   width: 100%;
   padding: 20px 4rem 0 4rem;  
-}
-
-.showInfoContainer, .movieInfoContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.showPosterWrapper, .moviePosterWrapper {
-  position: relative;
-  height: auto;
-  width: 300px; //make a poster width variable
 }
 
 .titleSection {
@@ -168,10 +118,6 @@ a {
 .seasonSection {
   display: flex;
   gap: 10px;
-}
-
-.plotSection {
-  // width: 80%;
 }
 
 .listSection {

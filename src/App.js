@@ -135,8 +135,9 @@ const App = () => {
               element={<AiringTodayTVPage />}
             />
           </Routes>
-          <footer>© 2022 - Nigel Rodriguez</footer>
+          
         </SetListsContext.Provider>
+        <footer>© 2022 - Nigel Rodriguez</footer>
       </div>
     </BrowserRouter>
   );

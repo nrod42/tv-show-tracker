@@ -17,7 +17,6 @@ const TvCard = (props) => {
   return (
     <Card
       bg="light"
-      onClick={handleShowPage}
       style={{ minWidth: "185px", width: "185px", border: "none" }}
     >
       <Card.Link as={Link} to={`/tv-show-tracker/shows/id:${id}`}>
@@ -25,6 +24,7 @@ const TvCard = (props) => {
           variant="top"
           style={{ height: "278px" }}
           src={poster !== null ? poster : defaultImg}
+          onClick={handleShowPage}
         />
       </Card.Link>
       <AddToListBtn data={props.showData} />

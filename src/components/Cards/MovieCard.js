@@ -17,7 +17,6 @@ const MovieCard = (props) => {
   return (
     <Card
       bg="light"
-      onClick={handleMoviePage}
       style={{ minWidth: "185px", width: "185px", border: "none" }}
     >
       <Card.Link as={Link} to={`/tv-show-tracker/movies/id:${id}`}>
@@ -25,6 +24,7 @@ const MovieCard = (props) => {
           variant="top"
           style={{ height: "278px" }}
           src={poster !== null ? poster : defaultImg}
+          onClick={handleMoviePage}
         />
       </Card.Link>
       <AddToListBtn data={props.movieData} />

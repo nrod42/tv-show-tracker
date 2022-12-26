@@ -41,22 +41,24 @@ const MoviePage = () => {
       setSimilarMovies(similarMovies);
       setRecMovies(recMovies);
       setTrailer(trailer);
-      window.scrollTo(0, 0);
+      window.scrollTo(0,0); 
     })();
   }, [id]);
 
   return (
     <div className="moviePage">
-      <div className="backdrop" style={{height: '30rem'}}>
+      <div className="backdrop" style={{height: '700px'}}>
         <img
           className={"backdropImg"}
           src={movieInfo.backdrop}
           alt={`${movieInfo.title} backdrop`}
-          style={{  maxHeight: '100%',
-          maxWidth: '100%',
-          width: '100%',
-          height: 'auto',
-          objectFit: 'cover'}}
+          style={{  
+            maxHeight: "100%",
+            maxWidth: "100%",
+            width: "100%",
+            minHeight: "100%",
+            objectFit: "cover",
+        }}
       />
       </div>
       <Container>

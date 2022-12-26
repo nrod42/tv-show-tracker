@@ -73,12 +73,11 @@ const AddToListBtn = (props) => {
       <Button
         variant="success"
         style={{
-          // width: "100%",
           borderTopLeftRadius: "0",
           borderTopRightRadius: "0",
         }}
       >
-        Add To Watchlist
+        Add To Watch List
       </Button>
     </OverlayTrigger>
   );

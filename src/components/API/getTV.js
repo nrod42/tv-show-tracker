@@ -117,9 +117,9 @@ const getActorPics = async (id) => {
       }
     );
     const pic = await response.json();
-    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}`;
+    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0]?.file_path}`;
   } catch (error) {
-    console.error("Error:API", error);
+    console.error("Error: getTVActorPics", error);
   }
 };
 

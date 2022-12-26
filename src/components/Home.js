@@ -41,7 +41,7 @@ const Home = () => {
 
   const topMedia = [...topTV, ...topMovies];
   const randomIndex = Math.floor(Math.random() * 40);
-  const randomTopMedia = topMedia[randomIndex];
+  const randomTopMedia = topMedia[randomIndex] ? topMedia[randomIndex] : [];
 
   const fetchRandomMedia = async () => {
     const randomDetails =
@@ -77,9 +77,9 @@ const Home = () => {
             objectFit: "cover",
           }}
         />
-        <div style={{ position: "absolute", bottom: "50%" }}>
-          <h1>Welcome to Track TV</h1>
-          <h2>Keep track of your favorite Movies and TV Shows</h2>
+        <div style={{position: "absolute", left: '20px', bottom: "350px"}}>
+          <h1 style={{color: 'white'}}>Welcome to Track TV</h1>
+          <h2 style={{color: 'white'}}>Keep track of your favorite Movies and TV Shows</h2>
         </div>
         <Link to={`/tv-show-tracker/shows/id:${randomBackdrop.id}`}>
           <div
