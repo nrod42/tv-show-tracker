@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SetListsContext } from "../App";
-import TvCard from "./Cards/TvCard";
+import TvCard from "../components/Cards/TvCard";
 import uniqid from "uniqid";
 
 const ListPage = (props) => {

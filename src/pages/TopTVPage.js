@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { getTopTV } from "./API/getTV";
-import SeriesNav from "./SeriesNav";
-import TvCard from "./Cards/TvCard";
+import { getTopTV } from "../components/API/getTV";
+import SeriesNav from "../components/SeriesNav";
+import TvCard from "../components/Cards/TvCard";
 import uniqid from "uniqid";
 
 const TopTVPage = () => {

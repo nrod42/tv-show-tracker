@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { getNowPlayingMovies } from "./API/getMovies";
-import MoviesNav from "./MoviesNav";
-import MovieCard from "./Cards/MovieCard";
+import { getTopMovies } from "../components/API/getMovies";
+import MovieCard from "../components/Cards/MovieCard";
+import MoviesNav from "../components/MoviesNav";
 import uniqid from "uniqid";
 
-const NowPlayingMoviesPage = () => {
-  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+const TopMoviesPage = () => {
+  const [topMovies, setTopMovies] = useState([]);
   const [page, setPage] = useState(1);
 
   const showMore = () => {
@@ -14,9 +14,8 @@ const NowPlayingMoviesPage = () => {
   };
 
   const handlePages = async () => {
-    const newPage = await getNowPlayingMovies(page);
-    const newState = [...nowPlayingMovies, ...newPage];
-    setNowPlayingMovies(newState);
+    const newPage = await getTopMovies(page);
+    setTopMovies([...topMovies, ...newPage]);
   };
 
   useEffect(() => {
@@ -26,9 +25,9 @@ const NowPlayingMoviesPage = () => {
   return (
     <div className={"categoryPage"}>
       <MoviesNav />
-      <h1>Now Playing Movies</h1>
+      <h1>Top Movies</h1>
       <div className="cardGrid">
-        {nowPlayingMovies.map((movie) => (
+        {topMovies.map((movie) => (
           <MovieCard key={uniqid()} movieData={movie} />
         ))}
       </div>
@@ -39,4 +38,4 @@ const NowPlayingMoviesPage = () => {
   );
 };
 
-export default NowPlayingMoviesPage;
+export default TopMoviesPage;

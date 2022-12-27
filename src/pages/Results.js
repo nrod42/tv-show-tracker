@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import TvCard from "./Cards/TvCard";
-import MovieCard from "./Cards/MovieCard";
-import { getResults } from "./API/getResults";
+import TvCard from "../components/Cards/TvCard";
+import MovieCard from "../components/Cards/MovieCard";
+import { getResults } from "../components/API/getResults";
 import uniqid from "uniqid";
 
 const Results = (props) => {

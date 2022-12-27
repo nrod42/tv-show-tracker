@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
-import Home from "./components/Home";
-import Results from "./components/Results";
+import Home from "./pages/Home";
+import Results from "./pages/Results";
 
-import Lists from "./components/Lists";
-import ListPage from "./components/ListPage";
+import Lists from "./pages/Lists";
+import ListPage from "./pages/ListPage";
 
-import ShowPage from "./components/ShowPage";
-import TopTVPage from "./components/TopTVPage";
-import PopularTVPage from "./components/PopularTVPage";
-import AiringTodayTVPage from "./components/AiringTodayTVPage";
+import ShowPage from "./pages/ShowPage";
+import TopTVPage from "./pages/TopTVPage";
+import PopularTVPage from "./pages/PopularTVPage";
+import AiringTodayTVPage from "./pages/AiringTodayTVPage";
 
-import MoviePage from "./components/MoviePage";
-import TopMoviesPage from "./components/TopMoviesPage";
-import PopularMoviesPage from "./components/PopularMoviesPage";
-import UpcomingMoviesPage from "./components/UpcomingMoviesPage";
-import NowPlayingMoviesPage from "./components/NowPlayingMoviesPage";
+import MoviePage from "./pages/MoviePage";
+import TopMoviesPage from "./pages/TopMoviesPage";
+import PopularMoviesPage from "./pages/PopularMoviesPage";
+import UpcomingMoviesPage from "./pages/UpcomingMoviesPage";
+import NowPlayingMoviesPage from "./pages/NowPlayingMoviesPage";
 
 export const SetListsContext = React.createContext();
 
@@ -135,7 +135,6 @@ const App = () => {
               element={<AiringTodayTVPage />}
             />
           </Routes>
-          
         </SetListsContext.Provider>
         <footer>© 2022 - Nigel Rodriguez</footer>
       </div>

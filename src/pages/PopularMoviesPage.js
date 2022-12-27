@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { getPopularMovies } from "./API/getMovies";
-import MoviesNav from "./MoviesNav";
-import MovieCard from "./Cards/MovieCard";
+import { getPopularMovies } from "../components/API/getMovies";
+import MoviesNav from "../components/MoviesNav";
+import MovieCard from "../components/Cards/MovieCard";
 import uniqid from "uniqid";
 
 const PopularMoviesPage = () => {

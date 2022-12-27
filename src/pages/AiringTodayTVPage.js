@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import { getPopularTV } from "./API/getTV";
-import SeriesNav from "./SeriesNav";
-import TvCard from "./Cards/TvCard";
+import { getAiringTodayTV } from "../components/API/getTV";
+import SeriesNav from "../components/SeriesNav";
+import TvCard from "../components/Cards/TvCard";
 import uniqid from "uniqid";
+import { Button } from "react-bootstrap";
 
-const PopularTVPage = () => {
-  const [popularTV, setPopularTV] = useState([]);
+const AiringTodayTVPage = () => {
+  const [airingTodayTV, setAiringTodayTV] = useState([]);
   const [page, setPage] = useState(1);
 
   const showMore = () => {
@@ -14,9 +14,9 @@ const PopularTVPage = () => {
   };
 
   const handlePages = async () => {
-    const newPage = await getPopularTV(page);
-    const newState = [...popularTV, ...newPage];
-    setPopularTV(newState);
+    const newPage = await getAiringTodayTV(page);
+    const newState = [...airingTodayTV, ...newPage];
+    setAiringTodayTV(newState);
   };
 
   useEffect(() => {
@@ -26,9 +26,9 @@ const PopularTVPage = () => {
   return (
     <div className={"categoryPage"}>
       <SeriesNav />
-      <h1>Popular TV Shows</h1>
+      <h1>Airing Today</h1>
       <div className="cardGrid">
-        {popularTV.map((show) => (
+        {airingTodayTV.map((show) => (
           <TvCard key={uniqid()} showData={show} />
         ))}
       </div>
@@ -38,4 +38,4 @@ const PopularTVPage = () => {
     </div>
   );
 };
-export default PopularTVPage;
+export default AiringTodayTVPage;

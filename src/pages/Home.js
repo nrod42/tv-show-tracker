@@ -4,13 +4,18 @@ import {
   getTopMovies,
   getPopularMovies,
   getMovieDetails,
-} from "./API/getMovies";
-import { getTopTV, getPopularTV, getShowDetails } from "./API/getTV";
-import MovieCard from "./Cards/MovieCard";
-import TvCard from "./Cards/TvCard";
+} from "../components/API/getMovies";
+import {
+  getTopTV,
+  getPopularTV,
+  getShowDetails,
+} from "../components/API/getTV";
+import Strip from "../components/Strip";
+import MovieCard from "../components/Cards/MovieCard";
+import TvCard from "../components/Cards/TvCard";
+import uniqid from "uniqid";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import uniqid from "uniqid";
 
 const Home = () => {
   const [topTV, setTopTV] = useState([]);
@@ -77,9 +82,11 @@ const Home = () => {
             objectFit: "cover",
           }}
         />
-        <div style={{position: "absolute", left: '20px', bottom: "350px"}}>
-          <h1 style={{color: 'white'}}>Welcome to Track TV</h1>
-          <h2 style={{color: 'white'}}>Keep track of your favorite Movies and TV Shows</h2>
+        <div style={{ position: "absolute", left: "20px", bottom: "350px" }}>
+          <h1 style={{ color: "white" }}>Welcome to Track TV</h1>
+          <h2 style={{ color: "white" }}>
+            Keep track of your favorite Movies and TV Shows
+          </h2>
         </div>
         <Link to={`/tv-show-tracker/shows/id:${randomBackdrop.id}`}>
           <div
@@ -96,46 +103,46 @@ const Home = () => {
         </Link>
       </Row>
       <Container style={{ marginTop: "40px" }}>
-        <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
-          <Link to={"/tv-show-tracker/series/popular"}>
-            <h1>Popular TV</h1>
-          </Link>
-          <div className="strip">
-            {popularTV.map((show) => (
-              <TvCard key={uniqid()} showData={show} />
-            ))}
-          </div>
-        </Row>
-        <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
-          <Link to={"/tv-show-tracker/series/top-rated"}>
-            <h1>Top Rated TV</h1>
-          </Link>
-          <div className="strip">
-            {topTV.map((show) => (
-              <TvCard key={uniqid()} showData={show} />
-            ))}
-          </div>
-        </Row>
-        <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
-          <Link to={"/tv-show-tracker/movies/popular"}>
-            <h1>Popular Movies</h1>
-          </Link>
-          <div className="strip">
-            {popularMovies.map((movie) => (
-              <MovieCard key={uniqid()} movieData={movie} />
-            ))}
-          </div>
-        </Row>
-        <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
-          <Link to={"/tv-show-tracker/movies/top-rated"}>
-            <h1>Top Rated Movies</h1>
-          </Link>
-          <div className="strip">
-            {topMovies.map((movie) => (
-              <MovieCard key={uniqid()} movieData={movie} />
-            ))}
-          </div>
-        </Row>
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/series/popular"}>
+              <h1>Popular TV</h1>
+            </Link>
+          }
+          array={popularTV.map((show) => (
+            <TvCard key={uniqid()} showData={show} />
+          ))}
+        />
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/series/top-rated"}>
+              <h1>Top Rated TV</h1>
+            </Link>
+          }
+          array={topTV.map((show) => (
+            <TvCard key={uniqid()} showData={show} />
+          ))}
+        />
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/movies/popular"}>
+              <h1>Popular Movies</h1>
+            </Link>
+          }
+          array={popularMovies.map((movie) => (
+            <MovieCard key={uniqid()} movieData={movie} />
+          ))}
+        />
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/movies/top-rated"}>
+              <h1>Top Rated Movies</h1>
+            </Link>
+          }
+          array={topMovies.map((movie) => (
+            <MovieCard key={uniqid()} movieData={movie} />
+          ))}
+        />
       </Container>
     </div>
   );
