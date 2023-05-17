@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import TvCard from "../components/Cards/TvCard";
-import MovieCard from "../components/Cards/MovieCard";
+import MediaCard from "../components/Cards/MediaCard";
 import { getResults } from "../components/API/getResults";
 import uniqid from "uniqid";
+
 
 const Results = (props) => {
   const { searchQuery } = props;
@@ -15,11 +15,7 @@ const Results = (props) => {
   const showAll = () => {
     setCards(
       results.map((result) =>
-        result.type === "movie" ? (
-          <MovieCard key={uniqid()} movieData={result} />
-        ) : (
-          <TvCard key={uniqid()} showData={result} />
-        )
+        <MediaCard key={uniqid()} mediaData={result} />
       )
     );
   };
@@ -28,7 +24,7 @@ const Results = (props) => {
     setCards(
       results
         .filter((result) => result.type === "movie")
-        .map((movie) => <MovieCard key={uniqid()} movieData={movie} />)
+        .map((movie) => <MediaCard key={uniqid()} mediaData={movie} />)
     );
   };
 
@@ -36,7 +32,7 @@ const Results = (props) => {
     setCards(
       results
         .filter((result) => result.type === "tv")
-        .map((show) => <TvCard key={uniqid()} showData={show} />)
+        .map((show) => <MediaCard key={uniqid()} mediaData={show} />)
     );
   };
 

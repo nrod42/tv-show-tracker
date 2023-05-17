@@ -68,8 +68,8 @@ const Navi = (props) => {
                   <Nav.Link as={Link} to={"/tv-show-tracker/movies/top-rated"}>
                     Movies
                   </Nav.Link>
-                  <Nav.Link as={Link} to={"/tv-show-tracker/series/top-rated"}>
-                    Series
+                  <Nav.Link as={Link} to={"/tv-show-tracker/tv/top-rated"}>
+                    TV
                   </Nav.Link>
                 </Nav>
                 <Form onSubmit={handleSearch} className="d-flex searchForm">

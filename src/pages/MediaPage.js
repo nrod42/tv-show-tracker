@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getMediaDetails, getMediaCredits,getSimilarMedia, getRecMedia, getMediaTrailer } from "../components/API/getMedia";
+import { getMediaDetails, getMediaCredits, getSimilarMedia, getRecMedia, getMediaTrailer } from "../components/API/getMedia";
 import Strip from "../components/Strip";
-import TvCard from "../components/Cards/TvCard";
+import MediaCard from "../components/Cards/MediaCard";
 import SeasonCard from "../components/Cards/SeasonCard";
 import PersonCard from "../components/Cards/PersonCard";
 import AddToListBtn from "../components/AddToListBtn";
@@ -12,59 +12,59 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const ShowPage = () => {
-  const [showInfo, setShowInfo] = useState("");
+const MediaPage = () => {
+  const [mediaInfo, setMediaInfo] = useState("");
   const [seasons, setSeasons] = useState([]);
   const [cast, setCast] = useState([]);
-  // const [crew, setCrew] = useState([]);
-  const [similarShows, setSimilarShows] = useState([]);
-  const [recShows, setRecShows] = useState([]);
+  const [similarMedia, setSimilarMedia] = useState([]);
+  const [recMedia, setRecMedia] = useState([]);
   const [trailer, setTrailer] = useState("");
   const [lgShow, setLgShow] = useState(false);
 
   const id = window.location.pathname.split(":")[1];
+  const mediaType = window.location.pathname.includes("shows") ? "tv" : "movie";
 
-  //Fetch all relevant show info and saves them in a state
-  const fetchShowDetails = async () => {
-    const showInfo = await getMediaDetails(id, "tv");
-    setShowInfo(showInfo);
-    setSeasons(showInfo.seasonsInfo);
+  const fetchMediaDetails = async () => {
+    const mediaInfo = await getMediaDetails(id, mediaType);
+    setMediaInfo(mediaInfo);
+    if (mediaType === "tv") {
+      setSeasons(mediaInfo.seasonsInfo);
+    }
   };
 
-  const fetchShowCredits = async () => {
-    const credits = await getMediaCredits(id, "tv");
+  const fetchMediaCredits = async () => {
+    const credits = await getMediaCredits(id, mediaType);
     setCast(credits.cast);
-    // setCrew(credits.crew);
   };
 
-  const fetchSimilarShows = async () => {
-    setSimilarShows(await getSimilarMedia(id, "tv"));
+  const fetchSimilarMedia = async () => {
+    setSimilarMedia(await getSimilarMedia(id, mediaType));
   };
 
-  const fetchRecShows = async () => {
-    setRecShows(await getRecMedia(id, "tv"));
+  const fetchRecMedia = async () => {
+    setRecMedia(await getRecMedia(id, mediaType));
   };
 
   const fetchTrailer = async () => {
-    setTrailer(await getMediaTrailer(id, "tv"));
+    setTrailer(await getMediaTrailer(id, mediaType));
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchShowDetails();
-    fetchShowCredits();
-    fetchSimilarShows();
-    fetchRecShows();
+    fetchMediaDetails();
+    fetchMediaCredits();
+    fetchSimilarMedia();
+    fetchRecMedia();
     fetchTrailer();
   }, [id]);
 
   return (
-    <div className="showPage">
+    <div className="mediaPage">
       <div className="backdrop" style={{ height: "700px" }}>
         <img
           className={"backdropImg"}
-          src={showInfo.backdrop}
-          alt={`${showInfo.title} backdrop`}
+          src={mediaInfo.backdrop}
+          alt={`${mediaInfo.title} backdrop`}
           style={{
             maxHeight: "100%",
             maxWidth: "100%",
@@ -78,8 +78,8 @@ const ShowPage = () => {
         <Row>
           <Col lg={3} sm={12}>
             <div className="d-flex flex-column justify-content-center">
-              <img src={showInfo.poster} alt={`${showInfo.title} poster`} />
-              <AddToListBtn data={showInfo} />
+              <img src={mediaInfo.poster} alt={`${mediaInfo.title} poster`} />
+              <AddToListBtn data={mediaInfo} />
               <Button
                 variant="warning"
                 style={{ margin: "20px 0" }}
@@ -91,24 +91,28 @@ const ShowPage = () => {
           </Col>
           <Col lg={9} sm={12}>
             <div className="titleSection">
-              <p>{showInfo.title}</p>
-              <p>({showInfo.year})</p>
+              <p>{mediaInfo.title}</p>
+              <p>({mediaInfo.year?.split("-")[0]})</p>
             </div>
-            <div className="seasonSection">
-              <p>Seasons: {showInfo.seasonNum}</p>
-              <p>Episodes: {showInfo.episodeNum}</p>
-            </div>
-            <p>Genres: {showInfo.genres}</p>
-            <p>Rating: {showInfo.rating}</p>
-            <div className="plotSection">{showInfo.plot}</div>
+            {mediaType === "tv" && (
+              <div className="seasonSection">
+                <p>Seasons: {mediaInfo.seasonNum}</p>
+                <p>Episodes: {mediaInfo.episodeNum}</p>
+              </div>
+            )}
+            <p>Genres: {mediaInfo.genres}</p>
+            <p>Rating: {mediaInfo.rating}</p>
+            <div className="plotSection">{mediaInfo.plot}</div>
           </Col>
         </Row>
-        <Strip
-          title={"Seasons"}
-          array={seasons.map((season) => (
-            <SeasonCard key={uniqid()} season={season} />
-          ))}
-        />
+        {mediaType === "tv" && (
+          <Strip
+            title={"Seasons"}
+            array={seasons.map((season) => (
+              <SeasonCard key={uniqid()} season={season} />
+            ))}
+          />
+        )}
         <Strip
           title={"Starring"}
           array={cast.map((person) => (
@@ -116,15 +120,15 @@ const ShowPage = () => {
           ))}
         />
         <Strip
-          title={"Similar Shows"}
-          array={similarShows.map((show) => (
-            <TvCard key={uniqid()} showData={show} />
+          title={`Similar ${mediaType === "tv" ? "TV" : "Movies"}`}
+          array={similarMedia.map((media) => (
+            <MediaCard key={uniqid()} mediaData={media} />
           ))}
         />
         <Strip
-          title={"Recommended Shows"}
-          array={recShows.map((show) => (
-            <TvCard key={uniqid()} showData={show} />
+          title={`Recommended ${mediaType === "tv" ? "TV" : "Movies"}`}
+          array={recMedia.map((media) => (
+            <MediaCard key={uniqid()} mediaData={media} />
           ))}
         />
       </Container>
@@ -132,12 +136,11 @@ const ShowPage = () => {
         size="lg"
         show={lgShow}
         onHide={() => setLgShow(false)}
-        // dialogClassName="modal-100w"
         aria-labelledby="trailer"
       >
         <Modal.Header closeButton>
           <Modal.Title id="trailerModal">
-            {showInfo.title} - Trailer
+            {mediaInfo.title} - Trailer
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "500px" }}>
@@ -154,4 +157,5 @@ const ShowPage = () => {
   );
 };
 
-export default ShowPage;
+export default MediaPage;
+

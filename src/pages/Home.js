@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
 import Strip from "../components/Strip";
-import MovieCard from "../components/Cards/MovieCard";
-import TvCard from "../components/Cards/TvCard";
+import MediaCard from "../components/Cards/MediaCard";
 import uniqid from "uniqid";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+
 
 const Home = () => {
   const [topTV, setTopTV] = useState([]);
@@ -94,34 +94,14 @@ const Home = () => {
         </Link>
       </Row>
       <Container style={{ marginTop: "40px" }}>
-        <Strip
-          title={
-            <Link to={"/tv-show-tracker/series/popular"}>
-              <h1>Popular TV</h1>
-            </Link>
-          }
-          array={popularTV.map((show) => (
-            <TvCard key={uniqid()} showData={show} />
-          ))}
-        />
-        <Strip
-          title={
-            <Link to={"/tv-show-tracker/series/top-rated"}>
-              <h1>Top Rated TV</h1>
-            </Link>
-          }
-          array={topTV.map((show) => (
-            <TvCard key={uniqid()} showData={show} />
-          ))}
-        />
-        <Strip
+      <Strip
           title={
             <Link to={"/tv-show-tracker/movies/popular"}>
               <h1>Popular Movies</h1>
             </Link>
           }
           array={popularMovies.map((movie) => (
-            <MovieCard key={uniqid()} movieData={movie} />
+            <MediaCard key={uniqid()} mediaData={movie} />
           ))}
         />
         <Strip
@@ -131,7 +111,27 @@ const Home = () => {
             </Link>
           }
           array={topMovies.map((movie) => (
-            <MovieCard key={uniqid()} movieData={movie} />
+            <MediaCard key={uniqid()} mediaData={movie} />
+          ))}
+        />
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/tv/popular"}>
+              <h1>Popular TV</h1>
+            </Link>
+          }
+          array={popularTV.map((show) => (
+            <MediaCard key={uniqid()} mediaData={show} />
+          ))}
+        />
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/tv/top-rated"}>
+              <h1>Top Rated TV</h1>
+            </Link>
+          }
+          array={topTV.map((show) => (
+            <MediaCard key={uniqid()} mediaData={show} />
           ))}
         />
       </Container>

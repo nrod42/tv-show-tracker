@@ -6,12 +6,16 @@ import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
-const MovieCard = (props) => {
-  const { setMoviePage } = useContext(SetListsContext);
-  const { id, poster, title, rating, year } = props.movieData;
+const MediaCard = (props) => {
+  const { setMoviePage, setShowPage } = useContext(SetListsContext);
+  const { id, poster, title, rating, year } = props.mediaData;
 
-  const handleMoviePage = () => {
-    setMoviePage(props.movieData);
+  const handleMediaPage = () => {
+    if (props.mediaData.type === "movie") {
+      setMoviePage(props.mediaData);
+    } else if (props.mediaData.type === "tv") {
+      setShowPage(props.mediaData);
+    }
   };
 
   return (
@@ -19,23 +23,29 @@ const MovieCard = (props) => {
       bg="light"
       style={{ minWidth: "185px", width: "185px", border: "none" }}
     >
-      <Card.Link as={Link} to={`/tv-show-tracker/movies/id:${id}`}>
+      <Card.Link
+        as={Link}
+        to={props.mediaData.type === 'tv' ? 
+        `/tv-show-tracker/shows/id:${id}` 
+        : `/tv-show-tracker/movies/id:${id}`}
+      >
         <Card.Img
           variant="top"
           style={{ height: "278px" }}
           src={poster !== null ? poster : defaultImg}
-          onClick={handleMoviePage}
+          onClick={handleMediaPage}
         />
       </Card.Link>
-      <AddToListBtn data={props.movieData} />
+      <AddToListBtn data={props.mediaData} />
+      <RemoveFromListBtn data={props.mediaData} />
       <Card.Body style={{ textAlign: "center" }}>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>({year})</Card.Subtitle>
         <Card.Text>Rating: {rating}</Card.Text>
-        <RemoveFromListBtn data={props.movieData} />
+        
       </Card.Body>
     </Card>
   );
 };
 
-export default MovieCard;
+export default MediaCard;

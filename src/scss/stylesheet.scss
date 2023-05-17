@@ -1,24 +1,22 @@
+$success-color: #198754;
+// $body-background-color: #F0F0F4;
+$card-width: 185px;
+$card-height: 278px;
+$main-width: 80%;
+
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   color: #000000;
 }
-  
-:root {
-  --card-width: 185px;
-  --card-height: 278px;
-  --main-width: 80%;
-}
-  
+
 #root, html, body {
   width: 100%;
   height: 100%;
   font-size: 16px;
 }
-  
+
 footer {
   background: #393E41;
   padding: 5px 0;
@@ -36,125 +34,128 @@ footer {
   overflow: scroll;
   display: flex;
   flex-direction: column;
-}
 
-.navbar-brand {
-  margin-left: 16px !important;
-}
-
-.searchForm {
-  margin-left: 16px;
-  margin-right: 16px;
-}
-
-.nav-pills .nav-link {
-  color: #000000 !important;
-}
-
-.nav-pills .nav-link.active {
-  background: #198754 !important;
-  color: white !important;
-}
-
-a {
-  text-decoration: none !important;
-}
-
-.strip {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 10px;
-  padding: 20px;
-  width: 100%;
-  scroll-behavior: smooth;
-}
-
-.arrow-left, .arrow-right {
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.arrow-left:hover, .arrow-right:hover {
-  transform: scale(1.2);
-}
-
-.card img:hover {
-  filter: brightness(50%);
-}
-
-.categoryPage, .listPage, .searchResults {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding-top: 70px;
-}
-
-.cardGrid {
-  width: var(--main-width);
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), auto));
-  justify-items: center;
-}
-
-.titleSection {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.seasonSection {
-  display: flex;
-  gap: 10px;
-}
-
-.listSection {
-  height: 100%;
-  width: 100%;
-  padding-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.list {
-  width: var(--main-width);
-  padding: 20px;
-  background: #393E41;
-  opacity: 85%;
-  border-radius: 5px;
-  a {
-    text-decoration: none;
+  .navbar-brand {
+    margin-left: 16px !important;
   }
-} 
 
-.list:hover {
-  filter: brightness(85%);
-}
+  .searchForm {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 
+  .nav-pills .nav-link {
+    color: #000000 !important;
+  }
 
-.listDetails {
-  display: flex;
-  gap: 10px; 
-}
+  .nav-pills .nav-link.active {
+    background: $success-color !important;
+    color: white !important;
+  }
 
-.listItem * {
-  color: white;
-  text-decoration: none;
-}
+  a {
+    text-decoration: none !important;
+  }
 
-.showMoreBtn {
-  margin: 30px 0;
-  background: #198754 !important;
-  border: none !important;
-}
+  .strip {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+    scroll-behavior: smooth;
+
+    .arrow-left, .arrow-right {
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .card img:hover {
+      filter: brightness(50%);
+    }
+  }
+
+  .categoryPage,
+  .listPage,
+  .searchResults {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 70px;
+  }
+
+  .cardGrid {
+    width: $main-width;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax($card-width, auto));
+    justify-items: center;
+  }
+
+  .titleSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .seasonSection {
+    display: flex;
+    gap: 10px;
+  }
+
+  .listSection {
+    height: 100%;
+    width: 100%;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+    .list {
+      width: $main-width;
+      padding: 20px;
+      background: #393E41;
+      opacity: 85%;
+      border-radius: 5px;
+      
+      a {
+        text-decoration: none;
+      }
+      
+      &:hover {
+        filter: brightness(85%);
+      }
+    }
+    
+    .listDetails {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .listItem * {
+      color: white;
+      text-decoration: none;
+    }
+    
+    .showMoreBtn {
+      margin: 30px 0;
+      background: $success-color !important;
+      border: none !important;
+    }
+  }
+

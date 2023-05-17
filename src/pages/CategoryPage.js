@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
+import MediaNav from "../components/MediaNav";
 import Button from "react-bootstrap/Button";
-import SeriesNav from "../components/SeriesNav";
-import TvCard from "../components/Cards/TvCard";
-import MovieCard from "../components/Cards/MovieCard";
 import uniqid from "uniqid";
-import MoviesNav from "../components/MoviesNav";
+import MediaCard from "../components/Cards/MediaCard";
 
 const CategoryPage = ({type, title, getMedia}) => {
   const [media, setMedia] = useState([]);
@@ -22,14 +20,11 @@ const CategoryPage = ({type, title, getMedia}) => {
 
   return (
     <div className={"categoryPage"}>
-      {type === 'tv' ? 
-      <SeriesNav /> : <MoviesNav /> }
+      <MediaNav type={type} />
       <h1>{title}</h1>
       <div className="cardGrid">
         {media.map((media) => (
-          type==='tv' ?
-          <TvCard key={uniqid()} showData={media} /> 
-          : <MovieCard key={uniqid()} movieData={media} />
+          <MediaCard key={uniqid()} mediaData={media} />
         ))}
       </div>
       <Button className="showMoreBtn" onClick={showMore}>
@@ -38,4 +33,5 @@ const CategoryPage = ({type, title, getMedia}) => {
     </div>
   );
 };
+
 export default CategoryPage;
