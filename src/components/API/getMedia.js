@@ -1,11 +1,12 @@
-const API_KEY = "4a82fad1143aa1a462a2f120e4923710";
+// const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY='4a82fad1143aa1a462a2f120e4923710'
 
 const fetchMedia = async (url, type) => {
   try {
     const response = await fetch(url, { mode: "cors" });
-    const data = await response.json();
+    const {results} = await response.json();
 
-    return data.results.map((media) => ({
+    return results.map((media) => ({
       id: media.id || '',
       poster: `https://image.tmdb.org/t/p/w185/${media.poster_path || 'default_poster_path.jpg'}`,
       title: media.title || media.name || 'Unknown',
@@ -18,29 +19,29 @@ const fetchMedia = async (url, type) => {
   }
 };
 
-const getTopMedia = async (type, page = 1) => {
+const getTopMedia = (type, page = 1) => {
     const mediaType = type === 'movie' ? 'movie' : 'tv';
     const url = `https://api.themoviedb.org/3/${mediaType}/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
     return fetchMedia(url, type);
   };
   
-const getPopularMedia = async (type, page = 1) => {
+const getPopularMedia = (type, page = 1) => {
     const mediaType = type === 'movie' ? 'movie' : 'tv';
     const url = `https://api.themoviedb.org/3/${mediaType}/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     return fetchMedia(url, type);
 };
 
-const getAiringTodayTV = async (page = 1) => {
+const getAiringTodayTV = (page = 1) => {
     const url = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${page}`;
     return fetchMedia(url, 'tv');
 };
 
-const getUpcomingMovies = async (page = 1) => {
+const getUpcomingMovies = (page = 1) => {
     const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
     return fetchMedia(url, 'movie');
 };
 
-const getNowPlayingMovies = async (page = 1) => {
+const getNowPlayingMovies = (page = 1) => {
     const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`;
     return fetchMedia(url, 'movie');
 };
@@ -54,8 +55,8 @@ const getMediaDetails = async (id, type) => {
   
       const details = {
         id: media.id,
-        poster: `https://image.tmdb.org/t/p/w300/${media.poster_path}`,
-        backdrop: `https://image.tmdb.org/t/p/original/${media.backdrop_path}`,
+        poster: `https://image.tmdb.org/t/p/w300/${media.poster_path || ''}`,
+        backdrop: `https://image.tmdb.org/t/p/original/${media.backdrop_path || 'default_poster_path.jpg'}`,
         title: media.title || media.name,
         genres: media.genres
           ? media.genres

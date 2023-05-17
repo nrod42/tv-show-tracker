@@ -7,8 +7,8 @@ const getResults = async (query) => {
       "%20"
     )}&page=1&include_adult=false`;
     const response = await fetch(url, { mode: "cors" });
-    const results = await response.json();
-    return results.results.map((result) => ({
+    const {results} = await response.json();
+    return results.map((result) => ({
       id: result.id,
       poster: `https://image.tmdb.org/t/p/w185/${result.poster_path}`,
       title: result.media_type === "movie" ? result.title : result.name,

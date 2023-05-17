@@ -6,9 +6,8 @@ import { getResults } from "../components/API/getResults";
 import uniqid from "uniqid";
 
 
-const Results = (props) => {
-  const { searchQuery } = props;
-
+const Results = ({ searchQuery }) => {
+  const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
   const [cards, setCards] = useState([]);
 
@@ -36,10 +35,17 @@ const Results = (props) => {
     );
   };
 
+  const showMore = async () => {
+    const newResults = await getResults(searchQuery, page);
+    setResults([...results, ...newResults]);
+    setPage((prevPage) => prevPage + 1)
+  }
+
   useEffect(() => {
     (async () => {
-      const results = await getResults(searchQuery);
+      const results = await getResults(searchQuery, page);
       setResults(results);
+      setPage((prevPage) => prevPage +  1)
     })();
   }, [searchQuery]);
 
@@ -62,6 +68,9 @@ const Results = (props) => {
       </ButtonGroup>
       <h1>Results:</h1>
       <div className="cardGrid">{cards}</div>
+      <Button className="showMoreBtn" onClick={showMore}>
+        Show more
+      </Button>
     </div>
   );
 };
