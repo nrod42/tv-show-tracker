@@ -11,7 +11,7 @@ const CategoryPage = ({type, title, getMedia}) => {
   const [page, setPage] = useState(1);
 
   const showMore = async () => {
-    const newPage = await getMedia(page);
+    const newPage = await getMedia(type, page);
     setMedia([...media, ...newPage]);
     setPage((prev) => prev + 1);
   };

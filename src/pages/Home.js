@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  getTopMovies,
-  getPopularMovies,
-  getMovieDetails,
-} from "../components/API/getMovies";
-import {
-  getTopTV,
-  getPopularTV,
-  getShowDetails,
-} from "../components/API/getTV";
+import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
 import Strip from "../components/Strip";
 import MovieCard from "../components/Cards/MovieCard";
 import TvCard from "../components/Cards/TvCard";
@@ -26,21 +17,21 @@ const Home = () => {
 
   // Fetches first two pages of each categories' shows and saves them to a state
   const fetchTopTV = async () => {
-    setTopTV([...(await getTopTV()), ...(await getTopTV(2))]);
+    setTopTV([...(await getTopMedia("tv")), ...(await getTopMedia("tv", 2))]);
   };
 
   const fetchPopTV = async () => {
-    setPopularTV([...(await getPopularTV()), ...(await getPopularTV(2))]);
+    setPopularTV([...(await getPopularMedia("tv")), ...(await getPopularMedia("tv", 2))]);
   };
 
   const fetchTopMovies = async () => {
-    setTopMovies([...(await getTopMovies()), ...(await getTopMovies(2))]);
+    setTopMovies([...(await getTopMedia("movie")), ...(await getTopMedia("movie", 2))]);
   };
 
   const fetchPopMovies = async () => {
     setPopularMovies([
-      ...(await getPopularMovies()),
-      ...(await getPopularMovies(2)),
+      ...(await getPopularMedia("movie")),
+      ...(await getPopularMedia("movie", 2)),
     ]);
   };
 
@@ -51,8 +42,8 @@ const Home = () => {
   const fetchRandomMedia = async () => {
     const randomDetails =
       randomTopMedia.type === "tv"
-        ? await getShowDetails(randomTopMedia.id)
-        : await getMovieDetails(randomTopMedia.id);
+        ? await getMediaDetails(randomTopMedia.id, "tv")
+        : await getMediaDetails(randomTopMedia.id, "movie");
     setRandomBackdrop(randomDetails);
   };
 

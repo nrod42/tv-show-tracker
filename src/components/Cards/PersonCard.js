@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getActorPics } from "../API/getTV";
+import { getActorPics } from "../API/getMedia";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 

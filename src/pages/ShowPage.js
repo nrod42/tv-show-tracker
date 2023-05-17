@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  getShowDetails,
-  getShowCredits,
-  getSimilarShows,
-  getRecTV,
-  getShowTrailer,
-} from "../components/API/getTV";
+import { getMediaDetails, getMediaCredits,getSimilarMedia, getRecMedia, getMediaTrailer } from "../components/API/getMedia";
 import Strip from "../components/Strip";
 import TvCard from "../components/Cards/TvCard";
 import SeasonCard from "../components/Cards/SeasonCard";
@@ -32,27 +26,27 @@ const ShowPage = () => {
 
   //Fetch all relevant show info and saves them in a state
   const fetchShowDetails = async () => {
-    const showInfo = await getShowDetails(id);
+    const showInfo = await getMediaDetails(id, "tv");
     setShowInfo(showInfo);
     setSeasons(showInfo.seasonsInfo);
   };
 
   const fetchShowCredits = async () => {
-    const credits = await getShowCredits(id);
+    const credits = await getMediaCredits(id, "tv");
     setCast(credits.cast);
     // setCrew(credits.crew);
   };
 
   const fetchSimilarShows = async () => {
-    setSimilarShows(await getSimilarShows(id));
+    setSimilarShows(await getSimilarMedia(id, "tv"));
   };
 
   const fetchRecShows = async () => {
-    setRecShows(await getRecTV(id));
+    setRecShows(await getRecMedia(id, "tv"));
   };
 
   const fetchTrailer = async () => {
-    setTrailer(await getShowTrailer(id));
+    setTrailer(await getMediaTrailer(id, "tv"));
   };
 
   useEffect(() => {

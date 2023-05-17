@@ -7,8 +7,9 @@ import Lists from "./pages/Lists";
 import ListPage from "./pages/ListPage";
 import ShowPage from "./pages/ShowPage";
 import MoviePage from "./pages/MoviePage";
-import { getUpcomingMovies, getTopMovies, getPopularMovies, getNowPlayingMovies } from "./components/API/getMovies"
-import { getAiringTodayTV, getPopularTV, getTopTV } from "./components/API/getTV";
+import { getTopMedia, getPopularMedia, getAiringTodayTV, getUpcomingMovies, getNowPlayingMovies } from "./components/API/getMedia";
+// import { getUpcomingMovies, getNowPlayingMovies } from "./components/API/getMovies"
+// import { getAiringTodayTV} from "./components/API/getTV";
 import CategoryPage from "./pages/CategoryPage";
 
 export const SetListsContext = React.createContext();
@@ -97,11 +98,11 @@ const App = () => {
             />
             <Route
               path="/tv-show-tracker/movies/top-rated"
-              element={<CategoryPage key="top" type={"movie"} title={"Top Rated Movies"} getMedia={getTopMovies} />}
+              element={<CategoryPage key="top" type={"movie"} title={"Top Rated Movies"} getMedia={getTopMedia} />}
             />
             <Route
               path="/tv-show-tracker/movies/popular"
-              element={<CategoryPage key="popular" type={"movie"} title={"Popular Movies"} getMedia={getPopularMovies} />}
+              element={<CategoryPage key="popular" type={"movie"} title={"Popular Movies"} getMedia={getPopularMedia} />}
             />
             <Route
               path="/tv-show-tracker/movies/upcoming"
@@ -117,11 +118,11 @@ const App = () => {
             />
             <Route
               path="/tv-show-tracker/series/top-rated"
-              element={<CategoryPage key="top-tv" type={'tv'} title={"Top Rated TV"} getMedia={getTopTV} />}
+              element={<CategoryPage key="top-tv" type={'tv'} title={"Top Rated TV"} getMedia={getTopMedia} />}
             />
             <Route
               path="/tv-show-tracker/series/popular"
-              element={<CategoryPage key="popular-tv" type={"tv"} title={"Popular TV"} getMedia={getPopularTV} />}
+              element={<CategoryPage key="popular-tv" type={"tv"} title={"Popular TV"} getMedia={getPopularMedia} />}
             />
             <Route
               path="/tv-show-tracker/series/airing-today"

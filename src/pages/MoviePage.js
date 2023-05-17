@@ -4,13 +4,7 @@ import MovieCard from "../components/Cards/MovieCard";
 import PersonCard from "../components/Cards/PersonCard";
 import AddToListBtn from "../components/AddToListBtn";
 import uniqid from "uniqid";
-import {
-  getMovieDetails,
-  getMovieCredits,
-  getSimilarMovies,
-  getRecMovies,
-  getMovieTrailer,
-} from "../components/API/getMovies";
+import { getMediaDetails, getMediaCredits, getSimilarMedia, getRecMedia, getMediaTrailer } from "../components/API/getMedia";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -30,25 +24,25 @@ const MoviePage = () => {
 
   //Fetch all relevant show info and saves them in a state
   const fetchMovieDetails = async () => {
-    setMovieInfo(await getMovieDetails(id));
+    setMovieInfo(await getMediaDetails(id, "movie"));
   };
 
   const fetchMovieCredits = async () => {
-    const credits = await getMovieCredits(id);
+    const credits = await getMediaCredits(id, "movie");
     setCast(credits.cast);
     // setCrew(credits.crew);
   };
 
   const fetchSimilarMovies = async () => {
-    setSimilarMovies(await getSimilarMovies(id));
+    setSimilarMovies(await getSimilarMedia(id, "movie"));
   };
 
   const fetchRecMovies = async () => {
-    setRecMovies(await getRecMovies(id));
+    setRecMovies(await getRecMedia(id, "movie"));
   };
 
   const fetchTrailer = async () => {
-    setTrailer(await getMovieTrailer(id));
+    setTrailer(await getMediaTrailer(id, "movie"));
   };
 
   useEffect(() => {

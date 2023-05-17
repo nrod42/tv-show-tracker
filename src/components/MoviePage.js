@@ -26,10 +26,7 @@ const MoviePage = () => {
   const [lgShow, setLgShow] = useState(false);
 
   const id = window.location.pathname.split(":")[1];
-  // Maybe when card is clicked, we include type to setMovieCard and setTVCard.
-  // THen we can combone MoviePage and ShowPage and just check the type to coditionally
-  // ..render the correct sections.
-  
+
   //Fetch all relevant show info and saves them in a state
   useEffect(() => {
     (async () => {
