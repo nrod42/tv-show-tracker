@@ -1,72 +1,70 @@
 import React, { useState, useEffect } from "react";
+import { getMediaDetails, getMediaCredits, getSimilarMedia, getRecMedia, getMediaTrailer } from "../components/API/getMedia";
 import Strip from "../components/Strip";
-import MovieCard from "../components/Cards/MovieCard";
+import MediaCard from "../components/Cards/MediaCard";
+import SeasonCard from "../components/Cards/SeasonCard";
 import PersonCard from "../components/Cards/PersonCard";
 import AddToListBtn from "../components/AddToListBtn";
 import uniqid from "uniqid";
-import {
-  getMovieDetails,
-  getMovieCredits,
-  getSimilarMovies,
-  getRecMovies,
-  getMovieTrailer,
-} from "../components/API/getMovies";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const MoviePage = () => {
-  const [movieInfo, setMovieInfo] = useState("");
+const MediaPage = () => {
+  const [mediaInfo, setMediaInfo] = useState("");
+  const [seasons, setSeasons] = useState([]);
   const [cast, setCast] = useState([]);
-  // const [crew, setCrew] = useState([]);
-  const [similarMovies, setSimilarMovies] = useState([]);
-  const [recMovies, setRecMovies] = useState([]);
+  const [similarMedia, setSimilarMedia] = useState([]);
+  const [recMedia, setRecMedia] = useState([]);
   const [trailer, setTrailer] = useState("");
   const [lgShow, setLgShow] = useState(false);
 
   const id = window.location.pathname.split(":")[1];
+  const mediaType = window.location.pathname.includes("shows") ? "tv" : "movie";
 
-  //Fetch all relevant show info and saves them in a state
-  const fetchMovieDetails = async () => {
-    setMovieInfo(await getMovieDetails(id));
+  const fetchMediaDetails = async () => {
+    const mediaInfo = await getMediaDetails(id, mediaType);
+    setMediaInfo(mediaInfo);
+    if (mediaType === "tv") {
+      setSeasons(mediaInfo.seasonsInfo);
+    }
   };
 
-  const fetchMovieCredits = async () => {
-    const credits = await getMovieCredits(id);
+  const fetchMediaCredits = async () => {
+    const credits = await getMediaCredits(id, mediaType);
     setCast(credits.cast);
-    // setCrew(credits.crew);
   };
 
-  const fetchSimilarMovies = async () => {
-    setSimilarMovies(await getSimilarMovies(id));
+  const fetchSimilarMedia = async () => {
+    setSimilarMedia(await getSimilarMedia(id, mediaType));
   };
 
-  const fetchRecMovies = async () => {
-    setRecMovies(await getRecMovies(id));
+  const fetchRecMedia = async () => {
+    setRecMedia(await getRecMedia(id, mediaType));
   };
 
   const fetchTrailer = async () => {
-    setTrailer(await getMovieTrailer(id));
+    setTrailer(await getMediaTrailer(id, mediaType));
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchMovieDetails();
-    fetchMovieCredits();
-    fetchSimilarMovies();
-    fetchRecMovies();
+    fetchMediaDetails();
+    fetchMediaCredits();
+    fetchSimilarMedia();
+    fetchRecMedia();
     fetchTrailer();
   }, [id]);
 
   return (
-    <div className="moviePage">
+    <div className="mediaPage">
       <div className="backdrop" style={{ height: "700px" }}>
         <img
           className={"backdropImg"}
-          src={movieInfo.backdrop}
-          alt={`${movieInfo.title} backdrop`}
+          src={mediaInfo.backdrop}
+          alt={`${mediaInfo.title} backdrop`}
           style={{
             maxHeight: "100%",
             maxWidth: "100%",
@@ -80,8 +78,8 @@ const MoviePage = () => {
         <Row>
           <Col lg={3} sm={12}>
             <div className="d-flex flex-column justify-content-center">
-              <img src={movieInfo.poster} alt={`${movieInfo.title} poster`} />
-              <AddToListBtn data={movieInfo} />
+              <img src={mediaInfo.poster} alt={`${mediaInfo.title} poster`} />
+              <AddToListBtn data={mediaInfo} />
               <Button
                 variant="warning"
                 style={{ margin: "20px 0" }}
@@ -93,15 +91,28 @@ const MoviePage = () => {
           </Col>
           <Col lg={9} sm={12}>
             <div className="titleSection">
-              <p>{movieInfo.title}</p>
-              <p>({movieInfo.year?.split("-")[0]})</p>
+              <p>{mediaInfo.title}</p>
+              <p>({mediaInfo.year?.split("-")[0]})</p>
             </div>
-            <p>Genres: {movieInfo.genres}</p>
-            <p>Rating: {movieInfo.rating}</p>
-            {/* <p>Crew: {crew.map((actor) => actor.name)}</p> */}
-            <div className="plotSection">{movieInfo.plot}</div>
+            {mediaType === "tv" && (
+              <div className="seasonSection">
+                <p>Seasons: {mediaInfo.seasonNum}</p>
+                <p>Episodes: {mediaInfo.episodeNum}</p>
+              </div>
+            )}
+            <p>Genres: {mediaInfo.genres}</p>
+            <p>Rating: {mediaInfo.rating}</p>
+            <div className="plotSection">{mediaInfo.plot}</div>
           </Col>
         </Row>
+        {mediaType === "tv" && (
+          <Strip
+            title={"Seasons"}
+            array={seasons.map((season) => (
+              <SeasonCard key={uniqid()} season={season} />
+            ))}
+          />
+        )}
         <Strip
           title={"Starring"}
           array={cast.map((person) => (
@@ -109,15 +120,15 @@ const MoviePage = () => {
           ))}
         />
         <Strip
-          title={"Similar Movies"}
-          array={similarMovies.map((movie) => (
-            <MovieCard key={uniqid()} movieData={movie} />
+          title={`Similar ${mediaType === "tv" ? "TV" : "Movies"}`}
+          array={similarMedia.map((media) => (
+            <MediaCard key={uniqid()} mediaData={media} />
           ))}
         />
         <Strip
-          title={"Recommended Movies"}
-          array={recMovies.map((movie) => (
-            <MovieCard key={uniqid()} movieData={movie} />
+          title={`Recommended ${mediaType === "tv" ? "TV" : "Movies"}`}
+          array={recMedia.map((media) => (
+            <MediaCard key={uniqid()} mediaData={media} />
           ))}
         />
       </Container>
@@ -125,12 +136,11 @@ const MoviePage = () => {
         size="lg"
         show={lgShow}
         onHide={() => setLgShow(false)}
-        // dialogClassName="modal-100w"
         aria-labelledby="trailer"
       >
         <Modal.Header closeButton>
           <Modal.Title id="trailerModal">
-            {movieInfo.title} - Trailer
+            {mediaInfo.title} - Trailer
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "500px" }}>
@@ -147,4 +157,5 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage;
+export default MediaPage;
+
