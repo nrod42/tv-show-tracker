@@ -3,8 +3,8 @@ import { getActorPics } from "../API/getMedia";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
-const PersonCard = (props) => {
-  const { id, name, character } = props.person;
+const PersonCard = ({person}) => {
+  const { id, name, character } = person;
 
   const [actorPic, setActorPic] = useState("");
 

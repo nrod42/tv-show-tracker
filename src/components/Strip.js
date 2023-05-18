@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Row from "react-bootstrap/Row";
 import leftArrow from "../img/arrow-left.svg";
 import rightArrow from "../img/arrow-right.svg";

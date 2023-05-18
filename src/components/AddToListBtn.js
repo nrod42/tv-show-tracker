@@ -4,7 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
-const AddToListBtn = (props) => {
+const AddToListBtn = ({data}) => {
   const {
     setWatchingList,
     setWantToWatchList,
@@ -12,7 +12,7 @@ const AddToListBtn = (props) => {
     setDroppedList,
   } = useContext(SetListsContext);
 
-  const { data } = props;
+  
 
   const handleAddToWatching = () => {
     setWatchingList((prevState) =>

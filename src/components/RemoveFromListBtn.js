@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { SetListsContext } from "../App";
 import Button from "react-bootstrap/Button";
 
-const RemoveFromListBtn = (props) => {
+const RemoveFromListBtn = ({data}) => {
   const {
     setWatchingList,
     setWantToWatchList,
@@ -11,8 +11,6 @@ const RemoveFromListBtn = (props) => {
   } = useContext(SetListsContext);
 
   const page = window.location.pathname.split(":")[0].split("/");
-
-  const { data } = props;
 
   const handleRemove = () => {
     page.includes("currently-watching")

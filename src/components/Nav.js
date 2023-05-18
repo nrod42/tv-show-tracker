@@ -8,8 +8,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import logo from "../img/popcorn.png";
 
-const Navi = (props) => {
-  const { setSearchQuery } = props;
+const Navi = ({setSearchQuery}) => {
   const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState("");
