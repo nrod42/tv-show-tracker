@@ -8,15 +8,18 @@ const CategoryPage = ({type, title, getMedia}) => {
   const [media, setMedia] = useState([]);
   const [page, setPage] = useState(1);
 
-  const showMore = async () => {
-    const newPage = await getMedia(type, page);
-    setMedia([...media, ...newPage]);
+  const addPage = async () => {
     setPage((prev) => prev + 1);
   };
-
+  
   useEffect(() => {
-    showMore();
-  }, []);
+    const fetchPage = async () => {
+      const newPage = await getMedia(type, page);
+      setMedia([...media, ...newPage])
+    }
+    fetchPage();
+  }, [page]);
+  
 
   return (
     <div className={"categoryPage"}>
@@ -27,7 +30,7 @@ const CategoryPage = ({type, title, getMedia}) => {
           <MediaCard key={uniqid()} mediaData={media} />
         ))}
       </div>
-      <Button className="showMoreBtn" onClick={showMore}>
+      <Button className="showMoreBtn" onClick={addPage}>
         Show more
       </Button>
     </div>

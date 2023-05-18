@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
 import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
-import uniqid from "uniqid";
+import uniqid from 'uniqid'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-
 
 const Home = () => {
   const [topTV, setTopTV] = useState([]);
@@ -15,31 +14,38 @@ const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [randomBackdrop, setRandomBackdrop] = useState("");
 
-  // Fetches first two pages of each categories' shows and saves them to a state
-  const fetchTopTV = async () => {
-    setTopTV([...(await getTopMedia("tv")), ...(await getTopMedia("tv", 2))]);
-  };
-
-  const fetchPopTV = async () => {
-    setPopularTV([...(await getPopularMedia("tv")), ...(await getPopularMedia("tv", 2))]);
-  };
-
-  const fetchTopMovies = async () => {
-    setTopMovies([...(await getTopMedia("movie")), ...(await getTopMedia("movie", 2))]);
-  };
-
-  const fetchPopMovies = async () => {
-    setPopularMovies([
-      ...(await getPopularMedia("movie")),
-      ...(await getPopularMedia("movie", 2)),
+  const fetchData = async () => {
+    const [
+      topTVResult,
+      topTVPage2Result,
+      popTVResult,
+      popTVPage2Result,
+      topMoviesResult,
+      topMoviesPage2Result,
+      popMoviesResult,
+      popMoviesPage2Result,
+    ] = await Promise.all([
+      getTopMedia("tv"),
+      getTopMedia("tv", 2),
+      getPopularMedia("tv"),
+      getPopularMedia("tv", 2),
+      getTopMedia("movie"),
+      getTopMedia("movie", 2),
+      getPopularMedia("movie"),
+      getPopularMedia("movie", 2),
     ]);
-  };
 
-  const topMedia = [...topTV, ...topMovies];
-  const randomIndex = Math.floor(Math.random() * 40);
-  const randomTopMedia = topMedia[randomIndex] ? topMedia[randomIndex] : [];
+    setTopTV([...topTVResult, ...topTVPage2Result]);
+    setPopularTV([...popTVResult, ...popTVPage2Result]);
+    setTopMovies([...topMoviesResult, ...topMoviesPage2Result]);
+    setPopularMovies([...popMoviesResult, ...popMoviesPage2Result]);
+  };
 
   const fetchRandomMedia = async () => {
+    const topMedia = [...topTV, ...topMovies];
+    const randomIndex = Math.floor(Math.random() * topMedia.length);
+    const randomTopMedia = topMedia[randomIndex] || [];
+
     const randomDetails =
       randomTopMedia.type === "tv"
         ? await getMediaDetails(randomTopMedia.id, "tv")
@@ -48,15 +54,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchTopTV();
-    fetchPopTV();
-    fetchTopMovies();
-    fetchPopMovies();
+    fetchData();
   }, []);
 
   useEffect(() => {
     fetchRandomMedia();
-  }, [popularMovies]);
+  }, [topTV])
 
   return (
     <div style={{ overflowX: "hidden" }}>
@@ -79,8 +82,8 @@ const Home = () => {
             Keep track of your favorite Movies and TV Shows
           </h2>
         </div>
-        <Link to={`/tv-show-tracker/shows/id:${randomBackdrop.id}`}>
-          <div
+        <Link to={`/tv-show-tracker/${randomBackdrop.type === "tv" ? "shows": "movies"}/id:${randomBackdrop.id}`}>
+          <div 
             style={{
               position: "absolute",
               left: "20px",

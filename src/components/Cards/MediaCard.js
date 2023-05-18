@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SetListsContext } from "../../App";
 import AddToListBtn from "../AddToListBtn";
@@ -6,17 +6,21 @@ import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
-const MediaCard = (props) => {
+const MediaCard = ({mediaData}) => {
   const { setMoviePage, setShowPage } = useContext(SetListsContext);
-  const { id, poster, title, rating, year } = props.mediaData;
+  const { id, poster, title, rating, year, type } = mediaData;
 
   const handleMediaPage = () => {
-    if (props.mediaData.type === "movie") {
-      setMoviePage(props.mediaData);
-    } else if (props.mediaData.type === "tv") {
-      setShowPage(props.mediaData);
+    if (type === "movie") {
+      setMoviePage(mediaData);
+    } else if (type === "tv") {
+      setShowPage(mediaData);
     }
   };
+
+  // useEffect(() => {
+  //   console.log(id)
+  // })
 
   return (
     <Card
@@ -25,7 +29,7 @@ const MediaCard = (props) => {
     >
       <Card.Link
         as={Link}
-        to={props.mediaData.type === 'tv' ? 
+        to={type === 'tv' ? 
         `/tv-show-tracker/shows/id:${id}` 
         : `/tv-show-tracker/movies/id:${id}`}
       >
@@ -36,8 +40,8 @@ const MediaCard = (props) => {
           onClick={handleMediaPage}
         />
       </Card.Link>
-      <AddToListBtn data={props.mediaData} />
-      <RemoveFromListBtn data={props.mediaData} />
+      <AddToListBtn data={mediaData} />
+      <RemoveFromListBtn data={mediaData} />
       <Card.Body style={{ textAlign: "center" }}>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>({year})</Card.Subtitle>

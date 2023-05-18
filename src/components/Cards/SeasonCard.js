@@ -1,8 +1,8 @@
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
-const SeasonCard = (props) => {
-  const { season_number, episode_count, poster_path } = props.season;
+const SeasonCard = ({season}) => {
+  const { season_number, episode_count, poster_path } = season;
 
   return (
     <Card
@@ -19,7 +19,7 @@ const SeasonCard = (props) => {
         style={{ height: "278px" }}
         src={
           poster_path !== null
-            ? `https://image.tmdb.org/t/p/w185/${props.season.poster_path}`
+            ? `https://image.tmdb.org/t/p/w185/${poster_path}`
             : defaultImg
         }
       />
