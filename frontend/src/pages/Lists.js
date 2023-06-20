@@ -1,20 +1,43 @@
 import { Link } from "react-router-dom";
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { SetListsContext } from "../App";
+import { UserContext } from "../UserContext";
+import { API_URL } from "../apiConfig";
 
 const Lists = () => {
   const { watchingList, wantToWatchList, completedList, droppedList } =
     useContext(SetListsContext);
 
-  // useEffect(() => {
-  //   //get the lists from mongodb
-  //   const fetchLists
-  // })
+  const { userInfo } = useContext(UserContext);
+
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    //get the lists from mongodb
+    const fetchLists = async () => {
+      try {
+        // const response = await fetch(`/lists/${userInfo.id}`);
+        const response = await fetch(`${API_URL}/lists/${userInfo.id}`, {
+          credentials: "include",
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUserData(data);
+        } else {
+          // Handle error response
+        }
+      } catch (error) {
+        // Handle any network or other errors
+      }
+    };
+
+    fetchLists();
+  }, [userInfo]);
 
   return (
     <div className="listSection">
       <h1>Lists</h1>
-
+      {/* <button onClick={() => console.log(userData)}>Test</button> */}
       <div className="list">
         <Link to="/tv-show-tracker/lists/currently-watching">
           <div className="listItem">
@@ -58,7 +81,7 @@ const Lists = () => {
           <div className="listItem">
             <h2>Completed</h2>
             <div className="listDetails">
-              <p>Total: {completedList.length}</p>
+              <p>Total: {userData.completed?.length}</p>
               <p>
                 Movies:{" "}
                 {completedList.filter((item) => item.type === "movie").length}

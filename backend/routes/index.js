@@ -41,10 +41,6 @@ router.post("/login", async function (req, res) {
         res.cookie("token", token).json({
           id: userDoc._id,
           username,
-          watching,
-          completed,
-          planning,
-          dropped,
         });
       }
     );
@@ -53,9 +49,10 @@ router.post("/login", async function (req, res) {
   }
 });
 
-router.get("/lists", async function (req, res) {
-  const { user_id } = req.body;
-  res.json(await User.findById(user_id));
+router.get("/lists/:userId", async function (req, res) {
+  const { userId } = req.params;
+  console.log(userId);
+  res.json(await User.findById(userId));
 });
 
 module.exports = router;
