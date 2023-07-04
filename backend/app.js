@@ -24,10 +24,9 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "https://mernblog-2g36.onrender.com",
-      "https://www.mernblog-2g36.onrender.com",
-      "https://mernblog-api-2lf4.onrender.com",
-      "https://www.mernblog-api-2lf4.onrender.com",
+      "http://localhost:3000/",
+      "https://localhost:3000",
+      "http://localhost:3000/tv-show-tracker",
     ],
   })
 ); //issue when deploying?

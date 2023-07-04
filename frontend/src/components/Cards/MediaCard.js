@@ -6,7 +6,7 @@ import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
-const MediaCard = ({ mediaData }) => {
+const MediaCard = ({ mediaData, setReload }) => {
   const { setMoviePage, setShowPage } = useContext(SetListsContext);
   const { id, poster, title, rating, year, type } = mediaData;
 
@@ -38,8 +38,8 @@ const MediaCard = ({ mediaData }) => {
           onClick={handleMediaPage}
         />
       </Card.Link>
-      <AddToListBtn data={mediaData} />
-      <RemoveFromListBtn data={mediaData} />
+      <AddToListBtn id={id} type={type}/>
+      <RemoveFromListBtn id={id} type={type} setReload={setReload}/>
       <Card.Body style={{ textAlign: "center" }}>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>({year})</Card.Subtitle>

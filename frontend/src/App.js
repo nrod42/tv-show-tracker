@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { UserContextProvider } from "./UserContext";
 import Nav from "./components/Nav";
@@ -25,33 +25,6 @@ const App = () => {
   const [showPage, setShowPage] = useState("");
   const [searchQuery, setSearchQuery] = useState([]);
 
-  const [watchingList, setWatchingList] = useState(() => {
-    const saved = localStorage.getItem("watchingList");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
-  const [wantToWatchList, setWantToWatchList] = useState(() => {
-    const saved = localStorage.getItem("wantToWatchList");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
-  const [completedList, setCompletedList] = useState(() => {
-    const saved = localStorage.getItem("completedList");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
-  const [droppedList, setDroppedList] = useState(() => {
-    const saved = localStorage.getItem("droppedList");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("watchingList", JSON.stringify(watchingList));
-    localStorage.setItem("wantToWatchList", JSON.stringify(wantToWatchList));
-    localStorage.setItem("completedList", JSON.stringify(completedList));
-    localStorage.setItem("droppedList", JSON.stringify(droppedList));
-  }, [watchingList, wantToWatchList, completedList, droppedList]);
 
   return (
     <div className="App">
@@ -60,14 +33,6 @@ const App = () => {
           value={{
             setShowPage,
             setMoviePage,
-            setWatchingList,
-            setWantToWatchList,
-            setCompletedList,
-            setDroppedList,
-            watchingList,
-            wantToWatchList,
-            completedList,
-            droppedList,
           }}
         >
           <Nav setSearchQuery={setSearchQuery} />
@@ -83,22 +48,22 @@ const App = () => {
             <Route
               path="/tv-show-tracker/lists/currently-watching"
               element={
-                <ListPage list={watchingList} title={"Currently Watching"} />
+                <ListPage listType={"watching"} title={"Currently Watching"} />
               }
             />
             <Route
               path="/tv-show-tracker/lists/want-to-watch"
               element={
-                <ListPage list={wantToWatchList} title={"Want To Watch"} />
+                <ListPage listType = {"wantToWatch"} title={"Want To Watch"} />
               }
             />
             <Route
               path="/tv-show-tracker/lists/completed"
-              element={<ListPage list={completedList} title={"Completed"} />}
+              element={<ListPage listType = {"completed"} title={"Completed"} />}
             />
             <Route
               path="/tv-show-tracker/lists/dropped"
-              element={<ListPage list={droppedList} title={"Dropped"} />}
+              element={<ListPage listType={"dropped"} title={"Dropped"} />}
             />
             <Route
               path={`/tv-show-tracker/movies/id:${moviePage.id}`}

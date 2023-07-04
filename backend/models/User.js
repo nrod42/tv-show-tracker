@@ -8,10 +8,22 @@ const UserSchema = new Schema(
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    watching: [String],
-    completed: [String],
-    wantToWatch: [String],
-    dropped: [String],
+    watching: {
+      movies: [{ type: String }],
+      tvShows: [{ type: String }]
+    },
+    completed: {
+      movies: [{ type: String }],
+      tvShows: [{ type: String }]
+    },
+    wantToWatch: {
+      movies: [{ type: String }],
+      tvShows: [{ type: String }]
+    },
+    dropped: {
+      movies: [{ type: String }],
+      tvShows: [{ type: String }]
+    }
   },
   {
     timestamps: true,

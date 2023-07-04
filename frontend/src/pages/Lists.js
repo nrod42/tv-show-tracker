@@ -1,22 +1,17 @@
 import { Link } from "react-router-dom";
 import React, { useState, useContext, useEffect } from "react";
-import { SetListsContext } from "../App";
 import { UserContext } from "../UserContext";
 import { API_URL } from "../apiConfig";
 
 const Lists = () => {
-  const { watchingList, wantToWatchList, completedList, droppedList } =
-    useContext(SetListsContext);
-
   const { userInfo } = useContext(UserContext);
 
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     //get the lists from mongodb
     const fetchLists = async () => {
       try {
-        // const response = await fetch(`/lists/${userInfo.id}`);
         const response = await fetch(`${API_URL}/lists/${userInfo.id}`, {
           credentials: "include",
         });
@@ -24,7 +19,7 @@ const Lists = () => {
           const data = await response.json();
           setUserData(data);
         } else {
-          // Handle error response
+          console.log('problem getting user info')
         }
       } catch (error) {
         // Handle any network or other errors
@@ -37,20 +32,19 @@ const Lists = () => {
   return (
     <div className="listSection">
       <h1>Lists</h1>
-      {/* <button onClick={() => console.log(userData)}>Test</button> */}
       <div className="list">
         <Link to="/tv-show-tracker/lists/currently-watching">
           <div className="listItem">
             <h2>Currently Watching</h2>
             <div className="listDetails">
-              <p>Total: {watchingList.length}</p>
+            <p>Total: {userData?.watching?.movies.length + userData?.watching?.tvShows.length}</p>
               <p>
                 Movies:{" "}
-                {watchingList.filter((item) => item.type === "movie").length}
+                {userData?.watching?.movies.length}
               </p>
               <p>
                 Series:{" "}
-                {watchingList.filter((item) => item.type === "tv").length}
+                {userData?.watching?.tvShows.length}
               </p>
             </div>
           </div>
@@ -62,14 +56,14 @@ const Lists = () => {
           <div className="listItem">
             <h2>Want To Watch</h2>
             <div className="listDetails">
-              <p>Total: {wantToWatchList.length}</p>
+              <p>Total: {userData?.wantToWatch?.movies.length + userData?.wantToWatch?.tvShows.length}</p>
               <p>
                 Movies:{" "}
-                {wantToWatchList.filter((item) => item.type === "movie").length}
+                {userData?.wantToWatch?.movies.length}
               </p>
               <p>
                 Series:{" "}
-                {wantToWatchList.filter((item) => item.type === "tv").length}
+                {userData?.wantToWatch?.tvShows.length}
               </p>
             </div>
           </div>
@@ -81,14 +75,14 @@ const Lists = () => {
           <div className="listItem">
             <h2>Completed</h2>
             <div className="listDetails">
-              <p>Total: {userData.completed?.length}</p>
+              <p>Total: {userData?.completed?.movies.length + userData?.completed?.tvShows.length}</p>
               <p>
                 Movies:{" "}
-                {completedList.filter((item) => item.type === "movie").length}
+                {userData?.completed?.movies.length}
               </p>
               <p>
                 Series:{" "}
-                {completedList.filter((item) => item.type === "tv").length}
+                {userData?.completed?.tvShows.length}
               </p>
             </div>
           </div>
@@ -100,13 +94,14 @@ const Lists = () => {
           <div className="listItem">
             <h2>Dropped</h2>
             <div className="listDetails">
-              <p>Total: {droppedList.length}</p>
+            <p>Total: {userData?.dropped?.movies.length + userData?.dropped?.tvShows.length}</p>
               <p>
                 Movies:{" "}
-                {droppedList.filter((item) => item.type === "movie").length}
+                {userData?.dropped?.movies.length}
               </p>
               <p>
-                Series:{droppedList.filter((item) => item.type === "tv").length}
+                Series:{" "}
+                {userData?.dropped?.tvShows.length}
               </p>
             </div>
           </div>

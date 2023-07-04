@@ -1,50 +1,34 @@
 import React, { useContext } from "react";
-import { SetListsContext } from "../App";
+import { UserContext } from "../UserContext";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { API_URL } from "../apiConfig";
 
-const AddToListBtn = ({data}) => {
-  const {
-    setWatchingList,
-    setWantToWatchList,
-    setCompletedList,
-    setDroppedList,
-  } = useContext(SetListsContext);
+const AddToListBtn = ({id, type}) => {
 
-  
+  const { userInfo } = useContext(UserContext);
 
-  const handleAddToWatching = () => {
-    setWatchingList((prevState) =>
-      prevState.some((media) => media.id === data.id)
-        ? prevState
-        : [...prevState, data]
-    );
+  const addToList = async (list) => {
+    try {
+      const response = await fetch(`${API_URL}/users/${userInfo.id}/lists/${list}/${type}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to add item to the watch list.  Response status: ${response.status}`);
+      }
+
+      await response.json();
+    } catch (err) {
+      console.error("Error adding item to watch list:", err);
+  }
   };
 
-  const handleAddToWanted = () => {
-    setWantToWatchList((prevState) =>
-      prevState.some((media) => media.id === data.id)
-        ? prevState
-        : [...prevState, data]
-    );
-  };
-
-  const handleAddToCompleted = () => {
-    setCompletedList((prevState) =>
-      prevState.some((media) => media.id === data.id)
-        ? prevState
-        : [...prevState, data]
-    );
-  };
-
-  const handleAddToDropped = () => {
-    setDroppedList((prevState) =>
-      prevState.some((media) => media.id === data.id)
-        ? prevState
-        : [...prevState, data]
-    );
-  };
 
   const tooltip = (
     <div
@@ -64,16 +48,16 @@ const AddToListBtn = ({data}) => {
         }}
       ></div>
       <ButtonGroup vertical>
-        <Button variant="secondary" onClick={handleAddToWatching}>
+        <Button variant="secondary" onClick={() => addToList("watching")}>
           Currently Watching
         </Button>
-        <Button variant="secondary" onClick={handleAddToWanted}>
+        <Button variant="secondary" onClick={() => addToList("wantToWatch")}>
           Want to Watch
         </Button>
-        <Button variant="secondary" onClick={handleAddToCompleted}>
+        <Button variant="secondary" onClick={() => addToList("completed")}>
           Completed
         </Button>
-        <Button variant="secondary" onClick={handleAddToDropped}>
+        <Button variant="secondary" onClick={() => addToList("dropped")}>
           Dropped
         </Button>
       </ButtonGroup>

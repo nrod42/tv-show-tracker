@@ -1,39 +1,45 @@
 import React, { useContext } from "react";
-import { SetListsContext } from "../App";
+import { API_URL } from "../apiConfig";
+import { UserContext } from "../UserContext";
 import Button from "react-bootstrap/Button";
 
-const RemoveFromListBtn = ({data}) => {
-  const {
-    setWatchingList,
-    setWantToWatchList,
-    setCompletedList,
-    setDroppedList,
-  } = useContext(SetListsContext);
+const RemoveFromListBtn = ({id, type, setReload}) => {
 
-  const page = window.location.pathname.split(":")[0].split("/");
+  const page = window.location.pathname.split("/");
+  const list = page[3];
 
-  const handleRemove = () => {
-    page.includes("currently-watching")
-      ? setWatchingList((prevState) =>
-          prevState.filter((media) => media.id !== data.id)
-        )
-      : page.includes("want-to-watch")
-      ? setWantToWatchList((prevState) =>
-          prevState.filter((media) => media.id !== data.id)
-        )
-      : page.includes("completed")
-      ? setCompletedList((prevState) =>
-          prevState.filter((media) => media.id !== data.id)
-        )
-      : page.includes("dropped");
-    setDroppedList((prevState) =>
-      prevState.filter((media) => media.id !== data.id)
-    );
+  const listMappings = {
+    'currently-watching': 'watching',
+    'want-to-watch': 'wantToWatch',
+  };
+
+  const listToSend = listMappings[list] || list;
+
+  const { userInfo } = useContext(UserContext);
+
+  const removeFromList = async () => {
+    try {
+      const response = await fetch(`${API_URL}/users/${userInfo.id}/lists/${listToSend}/${type}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      setReload(prevState => !prevState)
+      if (!response.ok) {
+        throw new Error(`Failed to delete item from the watch list.  Response status: ${response.status}`);
+      }
+
+
+    } catch (err) {
+      console.error("Error deleting item from watch list:", err);
+    }
   };
 
   return (
     <div
-      onClick={handleRemove}
+      onClick={removeFromList}
       className={"removeFromListBtn"}
       style={{ display: page.includes("lists") ? "block" : "none" }}
     >

@@ -79,7 +79,7 @@ const MediaPage = () => {
           <Col lg={3} sm={12}>
             <div className="d-flex flex-column justify-content-center">
               <img src={mediaInfo.poster} alt={`${mediaInfo.title} poster`} />
-              <AddToListBtn data={mediaInfo} />
+              <AddToListBtn id={id} type={mediaType}/>
               <Button
                 variant="warning"
                 style={{ margin: "20px 0" }}
