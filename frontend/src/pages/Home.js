@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
 import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
-import uniqid from 'uniqid'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { motion } from "framer-motion";
+import styles from './Home.module.css';
 
 const Home = () => {
   const [topTV, setTopTV] = useState([]);
@@ -14,6 +15,7 @@ const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [randomBackdrop, setRandomBackdrop] = useState("");
 
+  // Fetches data for top TV shows, popular TV shows, top movies, and popular movies
   const fetchData = async () => {
     const [
       topTVResult,
@@ -35,17 +37,20 @@ const Home = () => {
       getPopularMedia("movie", 2),
     ]);
 
+    // Merge results of multiple API calls into respective state variables
     setTopTV([...topTVResult, ...topTVPage2Result]);
     setPopularTV([...popTVResult, ...popTVPage2Result]);
     setTopMovies([...topMoviesResult, ...topMoviesPage2Result]);
     setPopularMovies([...popMoviesResult, ...popMoviesPage2Result]);
   };
 
+  // Fetches random media item from the combined list of top TV shows and top movies
   const fetchRandomMedia = async () => {
     const topMedia = [...topTV, ...topMovies];
     const randomIndex = Math.floor(Math.random() * topMedia.length);
     const randomTopMedia = topMedia[randomIndex] || [];
 
+    // Fetch details of the random media item
     const randomDetails =
       randomTopMedia.type === "tv"
         ? await getMediaDetails(randomTopMedia.id, "tv")
@@ -54,58 +59,55 @@ const Home = () => {
   };
 
   useEffect(() => {
+    // Fetch data on component mount
     fetchData();
   }, []);
 
   useEffect(() => {
+    // Fetch random media when topTV state updates
     fetchRandomMedia();
-  }, [topTV])
+  }, [topTV]);
+
+  const renderMediaCards = (array) => {
+    return array.map((media) => (
+      <MediaCard key={media.id} mediaData={media} />
+    ));
+  };
 
   return (
-    <div style={{ overflowX: "hidden" }}>
-      <Row style={{ height: "700px", position: "relative" }}>
+    <motion.div 
+    style={{ overflowX: "hidden" }}
+
+    initial={{width: 0}}
+    animate={{width: "100%"}}
+    exit={{x: window.innerWidth, transition: { duration: 0.1 }}}
+    >
+      <Row className={styles.row}>
         <img
+          className={styles.randomBackdrop}
           src={randomBackdrop.backdrop}
           alt=""
-          style={{
-            filter: "brightness(20%)",
-            maxHeight: "100%",
-            maxWidth: "100%",
-            width: "100%",
-            minHeight: "100%",
-            objectFit: "cover",
-          }}
         />
-        <div style={{ position: "absolute", left: "20px", bottom: "350px" }}>
-          <h1 style={{ color: "white" }}>Welcome to Track TV</h1>
-          <h2 style={{ color: "white" }}>
-            Keep track of your favorite Movies and TV Shows
-          </h2>
+        <div className={styles.titleWrapper}>
+          <h1 className={styles.title}>Welcome to Track TV</h1>
+          <h2 className={styles.title}>Keep track of your favorite Movies and TV Shows</h2>
         </div>
-        <Link to={`/tv-show-tracker/${randomBackdrop.type === "tv" ? "shows": "movies"}/id:${randomBackdrop.id}`}>
+        <Link to={`/tv-show-tracker/${randomBackdrop.type === "tv" ? "shows": "movies"}/${randomBackdrop.id}`}>
           <div 
-            style={{
-              position: "absolute",
-              left: "20px",
-              bottom: "20px",
-              color: "white",
-              textAlign: "center",
-            }}
+            className={styles.randomBackdropInfo}
           >
             {randomBackdrop.title} ({randomBackdrop.year})
           </div>
         </Link>
       </Row>
-      <Container style={{ marginTop: "40px" }}>
-      <Strip
+      <Container className={styles.container}>
+        <Strip
           title={
             <Link to={"/tv-show-tracker/movies/popular"}>
               <h1>Popular Movies</h1>
             </Link>
           }
-          array={popularMovies.map((movie) => (
-            <MediaCard key={uniqid()} mediaData={movie} />
-          ))}
+          array={renderMediaCards(popularMovies)}
         />
         <Strip
           title={
@@ -113,9 +115,7 @@ const Home = () => {
               <h1>Top Rated Movies</h1>
             </Link>
           }
-          array={topMovies.map((movie) => (
-            <MediaCard key={uniqid()} mediaData={movie} />
-          ))}
+          array={renderMediaCards(topMovies)}
         />
         <Strip
           title={
@@ -123,9 +123,7 @@ const Home = () => {
               <h1>Popular TV</h1>
             </Link>
           }
-          array={popularTV.map((show) => (
-            <MediaCard key={uniqid()} mediaData={show} />
-          ))}
+          array={renderMediaCards(popularTV)}
         />
         <Strip
           title={
@@ -133,12 +131,10 @@ const Home = () => {
               <h1>Top Rated TV</h1>
             </Link>
           }
-          array={topTV.map((show) => (
-            <MediaCard key={uniqid()} mediaData={show} />
-          ))}
+          array={renderMediaCards(topTV)}
         />
       </Container>
-    </div>
+    </motion.div>
   );
 };
 export default Home;

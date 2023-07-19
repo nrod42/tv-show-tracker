@@ -1,77 +1,88 @@
+
 import { useEffect, useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
-import { getResults } from "../components/API/getResults";
-import uniqid from "uniqid";
-
+// import { getResults } from "../components/API/getResults";
+import { getResults } from "../components/API/getMedia";
 
 const Results = ({ searchQuery }) => {
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
-  const [cards, setCards] = useState([]);
+  const [filterType, setFilterType] = useState("all");
 
-  const showAll = () => {
-    setCards(
-      results.map((result) =>
-        <MediaCard key={uniqid()} mediaData={result} />
-      )
-    );
+  const filterResults = () => {
+    let filteredResults = results;
+    if (filterType === "movie") {
+      filteredResults = results.filter((result) => result.type === "movie");
+    } else if (filterType === "tv") {
+      filteredResults = results.filter((result) => result.type === "tv");
+    }
+    // Render filtered results as MediaCards
+    return filteredResults.map((result) => (
+      <MediaCard key={result.id} mediaData={result} />
+    ));
   };
 
-  const showMovies = () => {
-    setCards(
-      results
-        .filter((result) => result.type === "movie")
-        .map((movie) => <MediaCard key={uniqid()} mediaData={movie} />)
-    );
-  };
-
-  const showTV = () => {
-    setCards(
-      results
-        .filter((result) => result.type === "tv")
-        .map((show) => <MediaCard key={uniqid()} mediaData={show} />)
-    );
-  };
-
-  const showMore = async () => {
+  const loadResults = async () => {
+    // Load more results from the API
     const newResults = await getResults(searchQuery, page);
-    setResults([...results, ...newResults]);
-    setPage((prevPage) => prevPage + 1)
-  }
+    // Append new results to existing results
+    setResults((prevResults) => [...prevResults, ...newResults]);
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handleFilter = (type) => {
+    // Update the filter type
+    setFilterType(type);
+  };
 
   useEffect(() => {
+    // Load initial results when searchQuery or page changes
     (async () => {
-      const results = await getResults(searchQuery, page);
-      setResults(results);
-      setPage((prevPage) => prevPage +  1)
+      const initialResults = await getResults(searchQuery, page);
+      setResults(initialResults);
+      setPage((prevPage) => prevPage + 1);
     })();
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   useEffect(() => {
-    showAll();
+    // Reset filter type when results change
+    setFilterType("all");
   }, [results]);
 
   return (
     <div className="searchResults">
-      <ButtonGroup aria-label="Filter buttons">
-        <Button variant="success" onClick={showAll}>
+      <ButtonGroup aria-label="filter buttons">
+        <Button
+          variant="success"
+          onClick={() => handleFilter("")}
+          active={filterType === "all"}
+        >
           All
         </Button>
-        <Button variant="success" onClick={showMovies}>
+        <Button
+          variant="success"
+          onClick={() => handleFilter("movie")}
+          active={filterType === "movie"}
+        >
           Movies
         </Button>
-        <Button variant="success" onClick={showTV}>
+        <Button
+          variant="success"
+          onClick={() => handleFilter("tv")}
+          active={filterType === "tv"}
+        >
           Series
         </Button>
       </ButtonGroup>
       <h1>Results:</h1>
-      <div className="cardGrid">{cards}</div>
-      <Button className="showMoreBtn" onClick={showMore}>
+      <div className="cardGrid">{filterResults()}</div>
+      <Button className="showMoreBtn" onClick={loadResults}>
         Show more
       </Button>
     </div>
   );
 };
+
 export default Results;

@@ -1,0 +1,27 @@
+.strip {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+    scroll-behavior: smooth;
+    text-align: center;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+.arrowLeft, .arrowRight {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+.arrowLeft:hover, .arrowRight:hover {
+    transform: scale(1.2);
+}
+
+.strip img:hover {
+    filter: brightness(50%);
+}

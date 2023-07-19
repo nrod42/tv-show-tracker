@@ -1,0 +1,40 @@
+
+.container {
+    margin-top: 40px;
+}
+
+.row {
+    height: 700px;
+    position: relative;
+}
+
+.randomBackdrop {
+    filter: brightness(20%);
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+.titleWrapper { 
+    position: absolute;
+    left: 20px;
+    bottom: 350px;
+}
+
+.title {
+    color: white;
+}
+
+.randomBackdropInfo {
+    position: absolute;
+    left: 30px;
+    bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.randomBackdropInfo:hover {
+    filter: brightness(80%);
+}

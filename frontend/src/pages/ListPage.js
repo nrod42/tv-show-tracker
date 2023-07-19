@@ -3,7 +3,6 @@ import MediaCard from "../components/Cards/MediaCard";
 import { getMediaDetails } from "../components/API/getMedia";
 import { API_URL } from "../apiConfig";
 import { UserContext } from "../UserContext";
-import uniqid from "uniqid";
 
 const ListPage = ({listType, title}) => {
   const { userInfo } = useContext(UserContext);
@@ -60,7 +59,7 @@ const ListPage = ({listType, title}) => {
       <h1>{title}</h1>
       <div className="cardGrid">     
         {list?.map((media) => (
-          <MediaCard key={uniqid()} mediaData={media} setReload={setReload}/>
+          <MediaCard key={media.id} mediaData={media} setReload={setReload}/>
         ))}
       </div>
     </div>

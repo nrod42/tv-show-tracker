@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Row from "react-bootstrap/Row";
 import leftArrow from "../img/arrow-left.svg";
 import rightArrow from "../img/arrow-right.svg";
+import styles from './Strip.module.css';
 
 const Strip = ({ title, array }) => {
   //   const array = props.array;
@@ -24,24 +25,24 @@ const Strip = ({ title, array }) => {
   };
 
   return (
-    <Row style={{ margin: "1.5rem 0", textAlign: "center" }}>
+    <Row className={styles.strip}>
       <h2>{title}</h2>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div className={styles.wrapper}>
         <img
           src={leftArrow}
           alt="scroll left button"
-          className="arrow-left"
+          className={styles.arrowLeft}
           onMouseDown={() => startScroll("left")}
           onMouseUp={stopScroll}
           onMouseLeave={stopScroll}
         ></img>
-        <div ref={strip} className="strip">
+        <div ref={strip} className={styles.strip}>
           {array}
         </div>
         <img
           src={rightArrow}
           alt="scroll right button"
-          className="arrow-right"
+          className={styles.arrowRight}
           onMouseDown={() => startScroll("right")}
           onMouseUp={stopScroll}
           onMouseLeave={stopScroll}

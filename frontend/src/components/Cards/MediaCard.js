@@ -1,22 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { SetListsContext } from "../../App";
 import AddToListBtn from "../AddToListBtn";
 import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
 const MediaCard = ({ mediaData, setReload }) => {
-  const { setMoviePage, setShowPage } = useContext(SetListsContext);
   const { id, poster, title, rating, year, type } = mediaData;
-
-  const handleMediaPage = () => {
-    if (type === "movie") {
-      setMoviePage(mediaData);
-    } else if (type === "tv") {
-      setShowPage(mediaData);
-    }
-  };
 
   return (
     <Card
@@ -27,15 +17,14 @@ const MediaCard = ({ mediaData, setReload }) => {
         as={Link}
         to={
           type === "tv"
-            ? `/tv-show-tracker/shows/id:${id}`
-            : `/tv-show-tracker/movies/id:${id}`
+            ? `/tv-show-tracker/shows/${id}`
+            : `/tv-show-tracker/movies/${id}`
         }
       >
         <Card.Img
           variant="top"
           style={{ height: "278px" }}
           src={poster !== null ? poster : defaultImg}
-          onClick={handleMediaPage}
         />
       </Card.Link>
       <AddToListBtn id={id} type={type}/>

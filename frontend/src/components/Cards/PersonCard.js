@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { getActorPics } from "../API/getMedia";
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
@@ -25,11 +27,16 @@ const PersonCard = ({person}) => {
         border: "none",
       }}
     >
-      <Card.Img
-        variant="top"
-        style={{ height: "278px" }}
-        src={actorPic !== null ? actorPic : defaultImg}
-      />
+      <Card.Link
+        as={Link}
+        to={`/tv-show-tracker/people/${id}`}
+      >
+        <Card.Img
+          variant="top"
+          style={{ height: "278px" }}
+          src={actorPic !== null ? actorPic : defaultImg}
+        />
+      </Card.Link>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle>{character}</Card.Subtitle>

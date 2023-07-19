@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
 import React, { useState, useContext, useEffect } from "react";
+import WatchList from '../components/WatchList';
 import { UserContext } from "../UserContext";
 import { API_URL } from "../apiConfig";
+import styles from "./Lists.module.css";
 
+/**
+ * Lists component displays the user's watch lists.
+ * It fetches the user's data from the API and renders the watch lists using the WatchList component.
+ */
 const Lists = () => {
   const { userInfo } = useContext(UserContext);
 
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    //get the lists from mongodb
+    // Fetch the user's watch lists from the API
     const fetchLists = async () => {
       try {
         const response = await fetch(`${API_URL}/lists/${userInfo.id}`, {
@@ -19,10 +24,10 @@ const Lists = () => {
           const data = await response.json();
           setUserData(data);
         } else {
-          console.log('problem getting user info')
+          console.log("Problem getting user info");
         }
       } catch (error) {
-        // Handle any network or other errors
+        console.error("Error fetching user lists:", error);
       }
     };
 
@@ -30,83 +35,36 @@ const Lists = () => {
   }, [userInfo]);
 
   return (
-    <div className="listSection">
+    <div className={styles.listSection}>
       <h1>Lists</h1>
-      <div className="list">
-        <Link to="/tv-show-tracker/lists/currently-watching">
-          <div className="listItem">
-            <h2>Currently Watching</h2>
-            <div className="listDetails">
-            <p>Total: {userData?.watching?.movies.length + userData?.watching?.tvShows.length}</p>
-              <p>
-                Movies:{" "}
-                {userData?.watching?.movies.length}
-              </p>
-              <p>
-                Series:{" "}
-                {userData?.watching?.tvShows.length}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
 
-      <div className="list">
-        <Link to="/tv-show-tracker/lists/want-to-watch">
-          <div className="listItem">
-            <h2>Want To Watch</h2>
-            <div className="listDetails">
-              <p>Total: {userData?.wantToWatch?.movies.length + userData?.wantToWatch?.tvShows.length}</p>
-              <p>
-                Movies:{" "}
-                {userData?.wantToWatch?.movies.length}
-              </p>
-              <p>
-                Series:{" "}
-                {userData?.wantToWatch?.tvShows.length}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
+      {/* Render the Currently Watching watch list */}
+      <WatchList
+        title="Currently Watching"
+        link="/tv-show-tracker/lists/currently-watching"
+        userData={userData?.watching}
+      />
 
-      <div className="list">
-        <Link to="/tv-show-tracker/lists/completed">
-          <div className="listItem">
-            <h2>Completed</h2>
-            <div className="listDetails">
-              <p>Total: {userData?.completed?.movies.length + userData?.completed?.tvShows.length}</p>
-              <p>
-                Movies:{" "}
-                {userData?.completed?.movies.length}
-              </p>
-              <p>
-                Series:{" "}
-                {userData?.completed?.tvShows.length}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
+      {/* Render the Want To Watch watch list */}
+      <WatchList
+        title="Want To Watch"
+        link="/tv-show-tracker/lists/want-to-watch"
+        userData={userData?.wantToWatch}
+      />
 
-      <div className="list">
-        <Link to="/tv-show-tracker/lists/dropped">
-          <div className="listItem">
-            <h2>Dropped</h2>
-            <div className="listDetails">
-            <p>Total: {userData?.dropped?.movies.length + userData?.dropped?.tvShows.length}</p>
-              <p>
-                Movies:{" "}
-                {userData?.dropped?.movies.length}
-              </p>
-              <p>
-                Series:{" "}
-                {userData?.dropped?.tvShows.length}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
+      {/* Render the Completed watch list */}
+      <WatchList
+        title="Completed"
+        link="/tv-show-tracker/lists/completed"
+        userData={userData?.completed}
+      />
+
+      {/* Render the Dropped watch list */}
+      <WatchList
+        title="Dropped"
+        link="/tv-show-tracker/lists/dropped"
+        userData={userData?.dropped}
+      />
     </div>
   );
 };

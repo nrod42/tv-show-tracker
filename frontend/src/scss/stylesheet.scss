@@ -56,31 +56,6 @@ footer {
     text-decoration: none !important;
   }
 
-  .strip {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 20px;
-    width: 100%;
-    scroll-behavior: smooth;
-
-    .arrow-left, .arrow-right {
-      cursor: pointer;
-      transition: transform 0.2s ease-in-out;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-
-    .card img:hover {
-      filter: brightness(50%);
-    }
-  }
-
   .categoryPage,
   .listPage,
   .searchResults {
@@ -115,46 +90,5 @@ footer {
     gap: 10px;
   }
 
-  .listSection {
-    height: 100%;
-    width: 100%;
-    padding-top: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-    .list {
-      width: $main-width;
-      padding: 20px;
-      background: #393E41;
-      opacity: 85%;
-      border-radius: 5px;
-      
-      a {
-        text-decoration: none;
-      }
-      
-      &:hover {
-        filter: brightness(85%);
-      }
-    }
-    
-    .listDetails {
-      display: flex;
-      gap: 10px;
-    }
-    
-    .listItem * {
-      color: white;
-      text-decoration: none;
-    }
-    
-    .showMoreBtn {
-      margin: 30px 0;
-      background: $success-color !important;
-      border: none !important;
-    }
-  }
+}
 

@@ -1,0 +1,43 @@
+
+.listSection {
+    height: 100%;
+    width: 100%;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.list {
+    width: 80%;
+    padding: 20px;
+    background: #393E41;
+    opacity: 85%;
+    border-radius: 5px;
+}  
+
+.list:hover {
+    filter: brightness(85%);
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+.listDetails {
+    display: flex;
+    gap: 10px;
+}
+
+.listItem * {
+    color: white;
+    text-decoration: none;
+}
+
+.showMoreBtn {
+    margin: 30px 0;
+    background: #198754;
+    border: none;
+}
