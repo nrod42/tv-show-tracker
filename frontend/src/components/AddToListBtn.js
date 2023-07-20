@@ -5,30 +5,33 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { API_URL } from "../apiConfig";
 
-const AddToListBtn = ({id, type}) => {
-
+const AddToListBtn = ({ id, type }) => {
   const { userInfo } = useContext(UserContext);
 
   const addToList = async (list) => {
     try {
-      const response = await fetch(`${API_URL}/users/${userInfo.id}/lists/${list}/${type}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${API_URL}/users/${userInfo.id}/lists/${list}/${type}/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`Failed to add item to the watch list.  Response status: ${response.status}`);
+        throw new Error(
+          `Failed to add item to the watch list.  Response status: ${response.status}`
+        );
       }
 
       await response.json();
     } catch (err) {
       console.error("Error adding item to watch list:", err);
-  }
+    }
   };
-
 
   const tooltip = (
     <div

@@ -1,8 +1,8 @@
-
 import React from "react";
 
 const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
-  const { title, year, genres, rating, plot, seasonNum, episodeNum } = mediaInfo;
+  const { title, year, genres, rating, plot, seasonNum, episodeNum } =
+    mediaInfo;
 
   return (
     <>
@@ -15,14 +15,22 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
       {/* Render season information for TV shows */}
       {mediaType === "tv" && (
         <div className="seasonSection">
-          <p>Seasons: {seasonNum}</p>
-          <p>Episodes: {episodeNum}</p>
+          <p>
+            <strong>Seasons:</strong> {seasonNum}
+          </p>
+          <p>
+            <strong>Episodes:</strong> {episodeNum}
+          </p>
         </div>
       )}
 
       {/* Render genres, rating, and plot */}
-      <p>Genres: {genres}</p>
-      <p>Rating: {rating}</p>
+      <p>
+        <strong>Genres:</strong> {genres}
+      </p>
+      <p>
+        <strong>Rating:</strong> {rating}
+      </p>
       <div className="plotSection">{plot}</div>
     </>
   );

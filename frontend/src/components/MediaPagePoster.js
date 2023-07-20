@@ -1,4 +1,3 @@
-
 import React from "react";
 import AddToListBtn from "../components/AddToListBtn";
 import Button from "react-bootstrap/Button";

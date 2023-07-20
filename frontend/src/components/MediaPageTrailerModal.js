@@ -11,9 +11,7 @@ const MediaPageTrailerModal = ({ lgShow, setLgShow, mediaTitle, trailer }) => {
     >
       {/* Render the modal header */}
       <Modal.Header closeButton>
-        <Modal.Title id="trailerModal">
-          {mediaTitle} - Trailer
-        </Modal.Title>
+        <Modal.Title id="trailerModal">{mediaTitle} - Trailer</Modal.Title>
       </Modal.Header>
 
       {/* Render the modal body */}

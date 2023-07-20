@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
+import {
+  getTopMedia,
+  getPopularMedia,
+  getMediaDetails,
+} from "../components/API/getMedia";
 import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { motion } from "framer-motion";
-import styles from './Home.module.css';
+import styles from "./Home.module.css";
 
 const Home = () => {
   const [topTV, setTopTV] = useState([]);
@@ -69,18 +73,15 @@ const Home = () => {
   }, [topTV]);
 
   const renderMediaCards = (array) => {
-    return array.map((media) => (
-      <MediaCard key={media.id} mediaData={media} />
-    ));
+    return array.map((media) => <MediaCard key={media.id} mediaData={media} />);
   };
 
   return (
-    <motion.div 
-    style={{ overflowX: "hidden" }}
-
-    initial={{width: 0}}
-    animate={{width: "100%"}}
-    exit={{x: window.innerWidth, transition: { duration: 0.1 }}}
+    <motion.div
+      style={{ overflowX: "hidden" }}
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <Row className={styles.row}>
         <img
@@ -90,25 +91,21 @@ const Home = () => {
         />
         <div className={styles.titleWrapper}>
           <h1 className={styles.title}>Welcome to Track TV</h1>
-          <h2 className={styles.title}>Keep track of your favorite Movies and TV Shows</h2>
+          <h2 className={styles.title}>
+            Keep track of your favorite Movies and TV Shows
+          </h2>
         </div>
-        <Link to={`/tv-show-tracker/${randomBackdrop.type === "tv" ? "shows": "movies"}/${randomBackdrop.id}`}>
-          <div 
-            className={styles.randomBackdropInfo}
-          >
+        <Link
+          to={`/tv-show-tracker/${
+            randomBackdrop.type === "tv" ? "shows" : "movies"
+          }/${randomBackdrop.id}`}
+        >
+          <div className={styles.randomBackdropInfo}>
             {randomBackdrop.title} ({randomBackdrop.year})
           </div>
         </Link>
       </Row>
       <Container className={styles.container}>
-        <Strip
-          title={
-            <Link to={"/tv-show-tracker/movies/popular"}>
-              <h1>Popular Movies</h1>
-            </Link>
-          }
-          array={renderMediaCards(popularMovies)}
-        />
         <Strip
           title={
             <Link to={"/tv-show-tracker/movies/top-rated"}>
@@ -119,11 +116,11 @@ const Home = () => {
         />
         <Strip
           title={
-            <Link to={"/tv-show-tracker/tv/popular"}>
-              <h1>Popular TV</h1>
+            <Link to={"/tv-show-tracker/movies/popular"}>
+              <h1>Popular Movies</h1>
             </Link>
           }
-          array={renderMediaCards(popularTV)}
+          array={renderMediaCards(popularMovies)}
         />
         <Strip
           title={
@@ -132,6 +129,14 @@ const Home = () => {
             </Link>
           }
           array={renderMediaCards(topTV)}
+        />
+        <Strip
+          title={
+            <Link to={"/tv-show-tracker/tv/popular"}>
+              <h1>Popular TV</h1>
+            </Link>
+          }
+          array={renderMediaCards(popularTV)}
         />
       </Container>
     </motion.div>

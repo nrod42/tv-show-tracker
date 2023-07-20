@@ -27,8 +27,8 @@ const MediaCard = ({ mediaData, setReload }) => {
           src={poster !== null ? poster : defaultImg}
         />
       </Card.Link>
-      <AddToListBtn id={id} type={type}/>
-      <RemoveFromListBtn id={id} type={type} setReload={setReload}/>
+      <AddToListBtn id={id} type={type} />
+      <RemoveFromListBtn id={id} type={type} setReload={setReload} />
       <Card.Body style={{ textAlign: "center" }}>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>({year})</Card.Subtitle>

@@ -4,11 +4,11 @@ import { getMediaDetails } from "../components/API/getMedia";
 import { API_URL } from "../apiConfig";
 import { UserContext } from "../UserContext";
 
-const ListPage = ({listType, title}) => {
+const ListPage = ({ listType, title }) => {
   const { userInfo } = useContext(UserContext);
-  const [ userData, setUserData ] = useState([]);
-  const [ list, setList ] = useState([]);
-  const [ reload, setReload ] = useState(false);
+  const [userData, setUserData] = useState([]);
+  const [list, setList] = useState([]);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -51,15 +51,13 @@ const ListPage = ({listType, title}) => {
 
     fetchMedia();
   }, [listType, userData, reload]);
-  
-
 
   return (
     <div className={"listPage"}>
       <h1>{title}</h1>
-      <div className="cardGrid">     
+      <div className="cardGrid">
         {list?.map((media) => (
-          <MediaCard key={media.id} mediaData={media} setReload={setReload}/>
+          <MediaCard key={media.id} mediaData={media} setReload={setReload} />
         ))}
       </div>
     </div>

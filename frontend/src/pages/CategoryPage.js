@@ -18,17 +18,17 @@ const CategoryPage = ({ type, title, getMedia }) => {
     const newPage = await getMedia(type, page);
     setMedia([...media, ...newPage]);
   };
-  
+
   useEffect(() => {
     fetchPage(); // Fetch the initial page of media
   }, [page]);
 
   return (
-    <motion.div 
-      className={"categoryPage"}     
-      initial={{width: 0}}
-      animate={{width: "100%"}}
-      exit={{x: window.innerWidth, transition: { duration: 0.1 }}}
+    <motion.div
+      className={"categoryPage"}
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <MediaNav type={type} /> {/* Component for displaying media navigation */}
       <h1>{title}</h1> {/* Title of the category page */}

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import WatchList from '../components/WatchList';
+import WatchList from "../components/WatchList";
 import { UserContext } from "../UserContext";
 import { API_URL } from "../apiConfig";
 import styles from "./Lists.module.css";

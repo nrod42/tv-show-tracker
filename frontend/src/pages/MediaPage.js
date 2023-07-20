@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getMediaDetails, getMediaCredits, getSimilarMedia, getRecMedia, getMediaTrailer } from "../components/API/getMedia";
+import {
+  getMediaDetails,
+  getMediaCredits,
+  getSimilarMedia,
+  getRecMedia,
+  getMediaTrailer,
+} from "../components/API/getMedia";
 import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
 import SeasonCard from "../components/Cards/SeasonCard";
@@ -75,7 +81,12 @@ const MediaPage = () => {
         <Row>
           <Col lg={3} sm={12}>
             {/* Render the media poster and related buttons */}
-            <MediaPagePoster id={id} mediaInfo={mediaInfo} mediaType={mediaType} setLgShow={setLgShow} />
+            <MediaPagePoster
+              id={id}
+              mediaInfo={mediaInfo}
+              mediaType={mediaType}
+              setLgShow={setLgShow}
+            />
           </Col>
           <Col lg={9} sm={12}>
             {/* Render the media information section */}
@@ -114,7 +125,12 @@ const MediaPage = () => {
         />
       </Container>
       {/* Render the trailer modal */}
-      <MediaPageTrailerModal lgShow={lgShow} setLgShow={setLgShow} mediaTitle={mediaInfo.title} trailer={trailer} />
+      <MediaPageTrailerModal
+        lgShow={lgShow}
+        setLgShow={setLgShow}
+        mediaTitle={mediaInfo.title}
+        trailer={trailer}
+      />
     </div>
   );
 };

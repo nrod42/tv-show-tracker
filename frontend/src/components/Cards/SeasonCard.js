@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 
-const SeasonCard = ({season}) => {
+const SeasonCard = ({ season }) => {
   const { season_number, episode_count, poster_path } = season;
 
   return (

@@ -2,11 +2,9 @@ import React, { useRef } from "react";
 import Row from "react-bootstrap/Row";
 import leftArrow from "../img/arrow-left.svg";
 import rightArrow from "../img/arrow-right.svg";
-import styles from './Strip.module.css';
+import styles from "./Strip.module.css";
 
 const Strip = ({ title, array }) => {
-  //   const array = props.array;
-
   let scrollInterval;
   const strip = useRef(null);
 
@@ -25,8 +23,8 @@ const Strip = ({ title, array }) => {
   };
 
   return (
-    <Row className={styles.strip}>
-      <h2>{title}</h2>
+    <Row className="mt-5 mb-5">
+      <h2 className="text-center">{title}</h2>
       <div className={styles.wrapper}>
         <img
           src={leftArrow}
