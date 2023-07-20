@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/tv-show-tracker/static/css/main.3f97c8da.css",
-    "main.js": "/tv-show-tracker/static/js/main.a0f2e7e6.js",
+    "main.js": "/tv-show-tracker/static/js/main.e7e32486.js",
     "static/media/defaultImg.webp": "/tv-show-tracker/static/media/defaultImg.95373fd2b1dfbf5c0950.webp",
     "static/media/popcorn.png": "/tv-show-tracker/static/media/popcorn.3d6f00482ea720a3aac7.png",
     "index.html": "/tv-show-tracker/index.html",
     "static/media/arrow-right.svg": "/tv-show-tracker/static/media/arrow-right.7b13c9ac5e7c53fc2f3af0ae9afcc4d1.svg",
     "static/media/arrow-left.svg": "/tv-show-tracker/static/media/arrow-left.bc24e9e3061ccb03a6e13a55760da701.svg",
     "main.3f97c8da.css.map": "/tv-show-tracker/static/css/main.3f97c8da.css.map",
-    "main.a0f2e7e6.js.map": "/tv-show-tracker/static/js/main.a0f2e7e6.js.map"
+    "main.e7e32486.js.map": "/tv-show-tracker/static/js/main.e7e32486.js.map"
   },
   "entrypoints": [
     "static/css/main.3f97c8da.css",
-    "static/js/main.a0f2e7e6.js"
+    "static/js/main.e7e32486.js"
   ]
 }
