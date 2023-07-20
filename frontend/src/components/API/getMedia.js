@@ -5,17 +5,22 @@ const fetchMedia = async (url, type) => {
   try {
     const response = await fetch(url, { mode: "cors" });
     const { results } = await response.json();
-
-    return results.map((media) => ({
-      id: media.id || "",
-      poster: `https://image.tmdb.org/t/p/w185/${
-        media.poster_path || "default_poster_path.jpg"
-      }`,
-      title: media.title || media.name || "Unknown",
-      rating: media.vote_average || 0,
-      year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
-      type,
-    }));
+    return results
+      .filter(
+        (media) =>
+          media.original_language === "en" || media.original_language === "ja"
+      )
+      .map((media) => ({
+        id: media.id || "",
+        poster: `https://image.tmdb.org/t/p/w185/${
+          media.poster_path || "default_poster_path.jpg"
+        }`,
+        title: media.title || media.name || "Unknown",
+        rating: media.vote_average || 0,
+        year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
+        type,
+        // language: media.original_language,
+      }));
   } catch (error) {
     console.error("Error:API", error);
   }

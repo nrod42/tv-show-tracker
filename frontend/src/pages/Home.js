@@ -70,7 +70,7 @@ const Home = () => {
   useEffect(() => {
     // Fetch random media when topTV state updates
     fetchRandomMedia();
-  }, [topTV]);
+  }, []);
 
   const renderMediaCards = (array) => {
     return array.map((media) => <MediaCard key={media.id} mediaData={media} />);
