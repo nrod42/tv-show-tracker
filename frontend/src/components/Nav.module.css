@@ -1,0 +1,22 @@
+
+.searchForm {
+    display: flex;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.darkModeToggle:hover {
+    cursor: pointer;
+}
+
+.navbarBrand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 20px;
+    width: auto;
+}

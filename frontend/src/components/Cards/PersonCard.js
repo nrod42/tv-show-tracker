@@ -20,18 +20,16 @@ const PersonCard = ({ person }) => {
 
   return (
     <Card
-    bg={darkMode ? 'dark' : 'light'}
+      bg={darkMode ? 'dark' : 'light'}
       style={{
         textAlign: "center",
         minWidth: "185px",
-        width: "185px",
         border: "none",
       }}
     >
       <Card.Link as={Link} to={`/tv-show-tracker/people/${id}`}>
         <Card.Img
           variant="top"
-          style={{ height: "278px" }}
           src={actorPic !== null ? actorPic : defaultImg}
         />
       </Card.Link>

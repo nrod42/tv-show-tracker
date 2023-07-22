@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getActorInfo, getActorRoles } from "../components/API/getMedia";
 import { useParams } from "react-router-dom";
-import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/esm/Container";
 import uniqid from "uniqid";
 import ActorPageRole from "../components/ActorPageRole";

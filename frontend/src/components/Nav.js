@@ -12,6 +12,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import logo from "../img/popcorn.png";
 import lightModeIcon from "../img/light_mode_icon.svg"
 import darkModeIcon from "../img/dark_mode_icon.svg";
+import styles from './Nav.module.css'
 import { API_URL } from "../apiConfig";
 
 const Navi = ({ setSearchQuery }) => {
@@ -84,14 +85,9 @@ const Navi = ({ setSearchQuery }) => {
             <Navbar.Brand
               as={Link}
               to="/tv-show-tracker"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "1rem",
-              }}
+              className={styles.navbarBrand}
             >
-              <img src={logo} alt={"logo"} style={{ height: "20px" }}></img>
+              <img src={logo} alt={"logo"} className={styles.logo}></img>
               Track TV
             </Navbar.Brand>
             <Navbar.Toggle />
@@ -101,8 +97,8 @@ const Navi = ({ setSearchQuery }) => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav
-                  className="justify-content-end flex-grow-1 pe-3"
-                  style={{ textAlign: "center" }}
+                  className="text-center flex-grow-1 pe-3"
+                  // className="text-center justify-content-end flex-grow-1 pe-3"
                 >
                   <Nav.Link as={Link} to={"/tv-show-tracker"}>
                     Home
@@ -131,7 +127,7 @@ const Navi = ({ setSearchQuery }) => {
                     </>
                   )}
                 </Nav>
-                <Form onSubmit={handleSearch} className="d-flex searchForm">
+                <Form onSubmit={handleSearch} className={styles.searchForm}>
                   <Form.Control
                     onChange={handleSearchInput}
                     type="search"
@@ -148,15 +144,13 @@ const Navi = ({ setSearchQuery }) => {
                     Search
                   </Button>
                 </Form>
-                {/* <Button onClick={handleDarkMode}>Dark</Button> */}
-                {/* <Button  variant="dark"> */}
                   <img
                     src={darkMode ? lightModeIcon : darkModeIcon }
+                    className={styles.darkModeToggle}
                     alt="dark mode"
                     style={{ width: "30px", height: "auto" }}
                     onClick={handleDarkMode}
                   />
-                {/* </Button> */}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

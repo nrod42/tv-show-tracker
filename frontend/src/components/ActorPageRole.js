@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const ActorPageRole = ({ roleInfo }) => {
-  const { id, poster, title, rating, year, type, role } = roleInfo;
+  const { id, poster, title, year, type, role } = roleInfo;
 
   return (
     <>
