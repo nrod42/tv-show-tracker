@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getActorPics } from "../API/getMedia";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
+import { DarkModeContext } from "../../DarkModeContext";
 
 const PersonCard = ({ person }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const { id, name, character } = person;
 
   const [actorPic, setActorPic] = useState("");
@@ -18,7 +20,7 @@ const PersonCard = ({ person }) => {
 
   return (
     <Card
-      bg="light"
+    bg={darkMode ? 'dark' : 'light'}
       style={{
         textAlign: "center",
         minWidth: "185px",

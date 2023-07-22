@@ -19,7 +19,6 @@ const fetchMedia = async (url, type) => {
         rating: media.vote_average || 0,
         year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
         type,
-        // language: media.original_language,
       }));
   } catch (error) {
     console.error("Error:API", error);
@@ -62,7 +61,7 @@ const getMediaDetails = async (id, type) => {
 
     const details = {
       id: media.id,
-      poster: `https://image.tmdb.org/t/p/w300/${media.poster_path || ""}`,
+      poster: `https://image.tmdb.org/t/p/w185/${media.poster_path || ""}`,
       backdrop: `https://image.tmdb.org/t/p/original/${
         media.backdrop_path || "default_poster_path.jpg"
       }`,
@@ -119,7 +118,6 @@ const getActorInfo = async (actorId) => {
       throw new Error("Failed to fetch actor information");
     }
     return await response.json();
-    // return data;
   } catch (error) {
     console.error("Error: getActorInfo", error);
     // Handle error case, such as displaying an error message or fallback data
@@ -138,15 +136,15 @@ const getActorRoles = async (actorId) => {
     const roles = await response.json();
     const data = roles.cast.map((role) => ({
       id: role.id || "",
-      poster: `https://image.tmdb.org/t/p/w185/${
+      poster: `https://image.tmdb.org/t/p/w45/${
         role.poster_path || "default_poster_path.jpg"
       }`,
       title: role.title || role.name || "Unknown",
+      role: role.character,
       rating: role.vote_average || 0,
       year: (role.release_date || role.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
       type: role.media_type,
     }));
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

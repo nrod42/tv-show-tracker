@@ -1,4 +1,18 @@
 
+.homePageLight {
+    background: #F8F9FA ;
+    color: black;
+}
+
+.homePageDark {
+    background: #212529;
+    color: white;
+}
+
+.homePageDark * {
+    color: white;
+}
+
 .container {
     margin-top: 40px;
 }
@@ -9,7 +23,7 @@
 }
 
 .randomBackdrop {
-    filter: brightness(20%);
+    filter: brightness(40%);
     max-height: 100%;
     max-width: 100%;
     width: 100%;

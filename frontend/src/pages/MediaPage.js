@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import {
   getMediaDetails,
@@ -18,8 +18,12 @@ import MediaPageTrailerModal from "../components/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import styles from './MediaPage.module.css';
+import { DarkModeContext } from "../DarkModeContext";
+
 
 const MediaPage = () => {
+  const { darkMode } = useContext(DarkModeContext);
   const [mediaInfo, setMediaInfo] = useState("");
   const [seasons, setSeasons] = useState([]);
   const [cast, setCast] = useState([]);
@@ -74,12 +78,12 @@ const MediaPage = () => {
   }, [id]);
 
   return (
-    <div className="mediaPage">
+    <div className={darkMode ? styles.mediaPageDark : styles.mediaPageLight}>
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
       <Container style={{ marginTop: "40px" }}>
         <Row>
-          <Col lg={3} sm={12}>
+          <Col lg={3} sm={12} className={styles.posterWrapper}>
             {/* Render the media poster and related buttons */}
             <MediaPagePoster
               id={id}
@@ -93,37 +97,50 @@ const MediaPage = () => {
             <MediaPageInfoSection mediaInfo={mediaInfo} mediaType={mediaType} />
           </Col>
         </Row>
+
         {/* Render seasons strip for TV shows */}
         {mediaType === "tv" && (
+          <>
+            <h2 className={styles.stripTitle}>Seasons</h2>
+            <Strip
+              array={seasons.map((season) => (
+                <SeasonCard key={season.id} season={season} />
+              ))}
+            />
+          </>
+        )}
+
+        {/* Render strip for starring cast */}
+        <>
+          <h2 className={styles.stripTitle}>Starring</h2>
           <Strip
-            title={"Seasons"}
-            array={seasons.map((season) => (
-              <SeasonCard key={season.id} season={season} />
+            array={cast.map((person) => (
+              <PersonCard key={person.id} person={person} />
             ))}
           />
-        )}
-        {/* Render strip for starring cast */}
-        <Strip
-          title={"Starring"}
-          array={cast.map((person) => (
-            <PersonCard key={person.id} person={person} />
-          ))}
-        />
-        {/* Render strip for similar media */}
-        <Strip
-          title={`Similar ${mediaType === "tv" ? "TV" : "Movies"}`}
-          array={similarMedia.map((media) => (
-            <MediaCard key={media.id} mediaData={media} />
-          ))}
-        />
+        </>
+
         {/* Render strip for recommended media */}
-        <Strip
-          title={`Recommended ${mediaType === "tv" ? "TV" : "Movies"}`}
-          array={recMedia.map((media) => (
-            <MediaCard key={media.id} mediaData={media} />
-          ))}
-        />
+        <>
+          <h2 className={styles.stripTitle}>{`Recommended ${mediaType === "tv" ? "TV" : "Movies"}`}</h2>
+          <Strip
+            array={recMedia.map((media) => (
+              <MediaCard key={media.id} mediaData={media} />
+            ))}
+          />
+        </>
+
+        {/* Render strip for similar media */}
+        <>
+          <h2 className={styles.stripTitle}>{`Similar ${mediaType === "tv" ? "TV" : "Movies"}`}</h2>
+          <Strip
+            array={similarMedia.map((media) => (
+              <MediaCard key={media.id} mediaData={media} />
+            ))}
+          />
+        </>
       </Container>
+      
       {/* Render the trailer modal */}
       <MediaPageTrailerModal
         lgShow={lgShow}

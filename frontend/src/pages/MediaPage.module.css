@@ -1,0 +1,23 @@
+
+.mediaPageLight {
+    background: #F8F9FA ;
+    color: black;
+    
+}
+
+.mediaPageDark {
+    background: #212529;
+    color: white;
+}
+
+.mediaPageDark * {
+    color: white;
+}
+
+.stripTitle {
+    text-align: center;
+}
+
+.posterWrapper {
+    position: relative;
+}

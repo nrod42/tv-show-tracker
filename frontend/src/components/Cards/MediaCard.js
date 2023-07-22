@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AddToListBtn from "../AddToListBtn";
 import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
+import { DarkModeContext } from "../../DarkModeContext";
 
 const MediaCard = ({ mediaData, setReload }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const { id, poster, title, rating, year, type } = mediaData;
 
   return (
     <Card
-      bg="light"
+      bg={darkMode ? 'dark' : 'light'}
       style={{ minWidth: "185px", width: "185px", border: "none" }}
     >
       <Card.Link

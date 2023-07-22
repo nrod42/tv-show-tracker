@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { DarkModeContext } from "../DarkModeContext";
 import { UserContext } from "../UserContext";
 import Cookies from "js-cookie";
 import Container from "react-bootstrap/Container";
@@ -9,9 +10,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import logo from "../img/popcorn.png";
+import lightModeIcon from "../img/light_mode_icon.svg"
+import darkModeIcon from "../img/dark_mode_icon.svg";
 import { API_URL } from "../apiConfig";
 
 const Navi = ({ setSearchQuery }) => {
+  const { darkMode, setDarkMode } = useContext(DarkModeContext)
   const { userInfo, setUserInfo } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -60,6 +64,10 @@ const Navi = ({ setSearchQuery }) => {
     navigate("/tv-show-tracker/results");
     setSearchQuery(searchInput);
   };
+
+  const handleDarkMode = () => {
+    setDarkMode((prevState) => !prevState)
+  }
 
   return (
     <>
@@ -140,6 +148,15 @@ const Navi = ({ setSearchQuery }) => {
                     Search
                   </Button>
                 </Form>
+                {/* <Button onClick={handleDarkMode}>Dark</Button> */}
+                {/* <Button  variant="dark"> */}
+                  <img
+                    src={darkMode ? lightModeIcon : darkModeIcon }
+                    alt="dark mode"
+                    style={{ width: "30px", height: "auto" }}
+                    onClick={handleDarkMode}
+                  />
+                {/* </Button> */}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

@@ -4,12 +4,18 @@ import { useParams } from "react-router-dom";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/esm/Container";
 import uniqid from "uniqid";
+import ActorPageRole from "../components/ActorPageRole";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+
 // import Button from "react-bootstrap/Button";
 
 const PersonPage = () => {
   const { actorId } = useParams();
   const [actorInfo, setActorInfo] = useState("");
   const [actorRoles, setActorRoles] = useState([]);
+  const [showFullBio, setShowFullBio] = useState(false);
   // const [rolesToShow, setRolesToShow] = useState(10);
   // const [totalRoles, setTotalRoles] = useState(0);
 
@@ -36,6 +42,10 @@ const PersonPage = () => {
   //   setRolesToShow((prevRolesToShow) => prevRolesToShow + 10);
   // };
 
+  const handleShowFullBio = () => {
+    setShowFullBio((prev) => !prev);
+  };
+
   useEffect(() => {
     fetchActorInfo();
     fetchActingRoles();
@@ -43,14 +53,16 @@ const PersonPage = () => {
 
   return (
     <Container className="actorPage" style={{ marginTop: "80px" }}>
-      <div className="actorInfo" style={{ display: "flex", gap: "20px" }}>
-        <div className="actorProfile">
+      <Row className="actorInfo" 
+      // style={{ display: "flex", gap: "20px" }}
+      >
+        <Col md={2} className="actorProfile">
           <img
             src={`https://image.tmdb.org/t/p/w185${profile_path}`}
             alt={`${name} profile`}
           />
-        </div>
-        <div className="actorDetails">
+        </Col>
+        <Col md={10} className="actorDetails">
           <h2>{name}</h2>
           <p>
             <strong>Birthday:</strong> {birthday}
@@ -59,20 +71,34 @@ const PersonPage = () => {
             <strong>Place of Birth:</strong> {place_of_birth}
           </p>
           <h3>Biography</h3>
-          <p>{biography}</p>
-        </div>
-      </div>
+          {showFullBio ? (
+            <p>{biography}</p>
+          ) : (
+            <p>{String(biography).slice(0, 300)}...</p>
+          )}
+          {!showFullBio && (
+            <Button variant="link" onClick={handleShowFullBio}>
+              Show More
+            </Button>
+          )}
+                    {showFullBio && (
+            <Button variant="link" onClick={handleShowFullBio}>
+              Show Less
+            </Button>
+          )}
+        </Col>
+      </Row>
       <div
         className="actingRoles text-center"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        // style={{
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   justifyContent: "center",
+        //   alignItems: "center",
+        // }}
       >
         <h2>Acting Roles</h2>
-        <div className="cardGrid">
+        <div >
           {actorRoles
             .sort((a, b) => {
               const yearA = parseInt(a.year, 10);
@@ -80,7 +106,7 @@ const PersonPage = () => {
               return yearB - yearA;
             })
             .map((role) => (
-              <MediaCard key={uniqid()} mediaData={role} />
+              <ActorPageRole key={uniqid()} roleInfo={role} />
             ))}
         </div>
         {/* Show the "Show More" button only if there are more roles to show */}

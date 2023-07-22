@@ -1,0 +1,18 @@
+/* .mediaNav  */
+.mediaNavLight .nav-pills .nav-link {
+    color: white;
+}
+
+.mediaNavLight .nav-pills .nav-link.active {
+    background: #198754;
+    color: white ;
+}
+
+.mediaNavDark .nav-pills .nav-link {
+    color: white;
+}
+
+.mediaNavDark .nav-pills .nav-link.active {
+    background: #198754;
+    color: white ;
+}

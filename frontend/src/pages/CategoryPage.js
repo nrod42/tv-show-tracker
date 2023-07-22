@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MediaNav from "../components/MediaNav";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
 import { motion } from "framer-motion";
+import styles from './CategoryPage.module.css';
+import { DarkModeContext } from "../DarkModeContext";
 
 const CategoryPage = ({ type, title, getMedia }) => {
-  const [media, setMedia] = useState([]); // State to store the fetched media
-  const [page, setPage] = useState(1); // State to track the current page number
+  const { darkMode } = useContext(DarkModeContext);
+  const [ media, setMedia ] = useState([]); // State to store the fetched media
+  const [ page, setPage ] = useState(1); // State to track the current page number
 
   // Function to increment the page number
   const addPage = async () => {
@@ -25,20 +28,20 @@ const CategoryPage = ({ type, title, getMedia }) => {
 
   return (
     <motion.div
-      className={"categoryPage"}
+      className={darkMode ? styles.categoryPageDark : styles.categoryPageLight}
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <MediaNav type={type} /> {/* Component for displaying media navigation */}
-      <h1>{title}</h1> {/* Title of the category page */}
+      <h2>{title}</h2> {/* Title of the category page */}
       <div className="cardGrid">
         {/* Map through the media array and render MediaCard components */}
         {media.map((mediaItem) => (
           <MediaCard key={mediaItem.id} mediaData={mediaItem} />
         ))}
       </div>
-      <Button className="showMoreBtn" onClick={addPage}>
+      <Button variant="success" className="showMoreBtn" onClick={addPage}>
         Show more
       </Button>
     </motion.div>

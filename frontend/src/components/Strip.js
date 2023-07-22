@@ -4,7 +4,7 @@ import leftArrow from "../img/arrow-left.svg";
 import rightArrow from "../img/arrow-right.svg";
 import styles from "./Strip.module.css";
 
-const Strip = ({ title, array }) => {
+const Strip = ({ array }) => {
   let scrollInterval;
   const strip = useRef(null);
 
@@ -23,11 +23,11 @@ const Strip = ({ title, array }) => {
   };
 
   return (
-    <Row className="mt-5 mb-5">
-      <h2 className="text-center">{title}</h2>
+    <Row>
       <div className={styles.wrapper}>
         <img
           src={leftArrow}
+          style={{height: '30px', width: 'auto', marginBottom: '150px'}}
           alt="scroll left button"
           className={styles.arrowLeft}
           onMouseDown={() => startScroll("left")}
@@ -39,6 +39,7 @@ const Strip = ({ title, array }) => {
         </div>
         <img
           src={rightArrow}
+          style={{height: '30px', width: 'auto', marginBottom: '150px'}}
           alt="scroll right button"
           className={styles.arrowRight}
           onMouseDown={() => startScroll("right")}
