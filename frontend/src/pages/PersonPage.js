@@ -7,6 +7,7 @@ import ActorPageRole from "../components/ActorPageRole";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { format } from "date-fns";
 
 // import Button from "react-bootstrap/Button";
 
@@ -64,7 +65,8 @@ const PersonPage = () => {
         <Col md={10} className="actorDetails">
           <h2>{name}</h2>
           <p>
-            <strong>Birthday:</strong> {birthday}
+            <strong>Birthday: </strong>{format(new Date(birthday), "MMMM d, yyyy")}
+            
           </p>
           <p>
             <strong>Place of Birth:</strong> {place_of_birth}
@@ -80,7 +82,7 @@ const PersonPage = () => {
               Show More
             </Button>
           )}
-                    {showFullBio && (
+          {showFullBio && (
             <Button variant="link" onClick={handleShowFullBio}>
               Show Less
             </Button>

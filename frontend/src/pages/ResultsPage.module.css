@@ -1,0 +1,33 @@
+
+/* Start of Dark Mode */
+.resultsPageLight {
+    background: #F8F9FA ;
+    color: black;
+}
+
+.resultsPageDark {
+    background: #212529;
+    /* color: white; */
+}
+
+.resultsPageDark * {
+    color: white;
+}
+
+.resultsPageLight, .resultsPageDark {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 70px;
+}
+/* End of Dark Mode Styling */
+
+.cardGrid {
+    width: 80%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(185px, auto));
+    justify-items: center;
+}

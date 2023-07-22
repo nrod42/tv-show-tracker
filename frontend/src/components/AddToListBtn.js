@@ -74,9 +74,12 @@ const AddToListBtn = ({ id, type }) => {
         style={{
           borderTopLeftRadius: "0",
           borderTopRightRadius: "0",
+          position: 'absolute',
+          right: 0,
+          top: 0,
         }}
       >
-        Add To Watch List
+        +
       </Button>
     </OverlayTrigger>
   );

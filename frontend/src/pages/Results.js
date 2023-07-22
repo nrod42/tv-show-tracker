@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, useContext  } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
-// import { getResults } from "../components/API/getResults";
 import { getResults } from "../components/API/getMedia";
+import { DarkModeContext } from "../DarkModeContext";
+import styles from './ResultsPage.module.css';
+
 
 const Results = ({ searchQuery }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
   const [filterType, setFilterType] = useState("all");
@@ -51,7 +54,7 @@ const Results = ({ searchQuery }) => {
   }, [results]);
 
   return (
-    <div className="searchResults">
+    <div className={darkMode ? styles.resultsPageDark : styles.resultsPageLight}>
       <ButtonGroup aria-label="filter buttons">
         <Button
           variant="success"
@@ -76,8 +79,8 @@ const Results = ({ searchQuery }) => {
         </Button>
       </ButtonGroup>
       <h1>Results:</h1>
-      <div className="cardGrid">{filterResults()}</div>
-      <Button className="showMoreBtn" onClick={loadResults}>
+      <div className={styles.cardGrid}>{filterResults()}</div>
+      <Button variant='secondary' onClick={loadResults}>
         Show more
       </Button>
     </div>

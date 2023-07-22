@@ -31,7 +31,7 @@ const MediaCard = ({ mediaData, setReload }) => {
       </Card.Link>
       <AddToListBtn id={id} type={type} />
       <RemoveFromListBtn id={id} type={type} setReload={setReload} />
-      <Card.Body style={{ textAlign: "center" }}>
+      <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>({year})</Card.Subtitle>
         <Card.Text>Rating: {rating}</Card.Text>
