@@ -12,7 +12,7 @@ const MediaCard = ({ mediaData, setReload }) => {
 
   return (
     <Card
-      bg={darkMode ? 'dark' : 'light'}
+      bg={darkMode ? "dark" : "light"}
       style={{ minWidth: "185px", width: "185px", border: "none" }}
     >
       <Card.Link
@@ -31,7 +31,7 @@ const MediaCard = ({ mediaData, setReload }) => {
       </Card.Link>
       <AddToListBtn id={id} type={type} />
       <RemoveFromListBtn id={id} type={type} setReload={setReload} />
-      <Card.Body>
+      <Card.Body className="text-center">
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>({year})</Card.Subtitle>
         <Card.Text>Rating: {rating}</Card.Text>

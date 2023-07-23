@@ -2,15 +2,17 @@
 .homePageLight {
     background: #F8F9FA ;
     color: black;
+    transition: background 0.3s, color 0.3s; 
 }
 
 .homePageDark {
     background: #212529;
-    color: white;
+    transition: background 0.3s;
 }
 
 .homePageDark * {
     color: white;
+    transition: color 0.3s;
 }
 
 .container {

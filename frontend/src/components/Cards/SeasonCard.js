@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react";
 import Card from "react-bootstrap/Card";
 import defaultImg from "../../img/defaultImg.webp";
 import { DarkModeContext } from "../../DarkModeContext";
@@ -9,7 +9,7 @@ const SeasonCard = ({ season }) => {
 
   return (
     <Card
-      bg={darkMode ? 'dark' : 'light'}
+      bg={darkMode ? "dark" : "light"}
       style={{
         textAlign: "center",
         minWidth: "185px",

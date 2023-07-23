@@ -20,10 +20,11 @@ const PersonCard = ({ person }) => {
 
   return (
     <Card
-      bg={darkMode ? 'dark' : 'light'}
+      bg={darkMode ? "dark" : "light"}
       style={{
         textAlign: "center",
         minWidth: "185px",
+        width: "185px",
         border: "none",
       }}
     >

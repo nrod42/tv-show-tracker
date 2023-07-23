@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./MediaPageInfoSection.module.css"
+import styles from "./MediaPageInfoSection.module.css";
 
 const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
   const { title, year, genres, rating, plot, seasonNum, episodeNum } =

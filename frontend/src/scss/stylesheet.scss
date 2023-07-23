@@ -16,6 +16,10 @@ $main-width: 80%;
   font-size: 16px;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 footer {
   background: #393E41;
   padding: 5px 0;
@@ -47,27 +51,7 @@ footer {
   //   color: white !important;
   // }
 
-  a {
-    text-decoration: none !important;
-  }
-
-  .listPage,
-  .searchResults {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding-top: 70px;
-  }
-
-  .cardGrid {
-    width: $main-width;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax($card-width, auto));
-    justify-items: center;
-  }
+  
 
 }
 

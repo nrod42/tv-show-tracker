@@ -2,9 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import MediaCard from "../components/Cards/MediaCard";
 import { getMediaDetails } from "../components/API/getMedia";
 import { API_URL } from "../apiConfig";
+import { DarkModeContext } from "../DarkModeContext";
 import { UserContext } from "../UserContext";
+import styles from "./ListPage.module.css";
 
 const ListPage = ({ listType, title }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const { userInfo } = useContext(UserContext);
   const [userData, setUserData] = useState([]);
   const [list, setList] = useState([]);
@@ -53,9 +56,9 @@ const ListPage = ({ listType, title }) => {
   }, [listType, userData, reload]);
 
   return (
-    <div className={"listPage"}>
+    <div className={darkMode ? styles.listPageDark : styles.listPageLight}>
       <h1>{title}</h1>
-      <div className="cardGrid">
+      <div className={styles.cardGrid}>
         {list?.map((media) => (
           <MediaCard key={media.id} mediaData={media} setReload={setReload} />
         ))}

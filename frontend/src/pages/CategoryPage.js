@@ -3,13 +3,13 @@ import MediaNav from "../components/MediaNav";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
 import { motion } from "framer-motion";
-import styles from './CategoryPage.module.css';
+import styles from "./CategoryPage.module.css";
 import { DarkModeContext } from "../DarkModeContext";
 
 const CategoryPage = ({ type, title, getMedia }) => {
   const { darkMode } = useContext(DarkModeContext);
-  const [ media, setMedia ] = useState([]); // State to store the fetched media
-  const [ page, setPage ] = useState(1); // State to track the current page number
+  const [media, setMedia] = useState([]); // State to store the fetched media
+  const [page, setPage] = useState(1); // State to track the current page number
 
   // Function to increment the page number
   const addPage = async () => {
@@ -35,13 +35,13 @@ const CategoryPage = ({ type, title, getMedia }) => {
     >
       <MediaNav type={type} /> {/* Component for displaying media navigation */}
       <h2>{title}</h2> {/* Title of the category page */}
-      <div className="cardGrid">
+      <div className={styles.cardGrid}>
         {/* Map through the media array and render MediaCard components */}
         {media.map((mediaItem) => (
           <MediaCard key={mediaItem.id} mediaData={mediaItem} />
         ))}
       </div>
-      <Button variant="success" className="showMoreBtn" onClick={addPage}>
+      <Button variant="success" onClick={addPage}>
         Show more
       </Button>
     </motion.div>

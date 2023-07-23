@@ -1,21 +1,15 @@
-
-.mediaPageLight {
+.personPageLight {
     background: #F8F9FA ;
     color: black;
-    transition: background 0.3s, color 0.3s; 
+    transition: background 0.3s, color 0.3s;
 }
 
-.mediaPageDark {
+.personPageDark {
     background: #212529;
     transition: background 0.3s;
 }
 
-.mediaPageDark * {
+.personPageDark * {
     color: white;
     transition: color 0.3s;
 }
-
-.posterWrapper {
-    position: relative;
-}
-

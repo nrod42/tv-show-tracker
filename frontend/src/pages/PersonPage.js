@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getActorInfo, getActorRoles } from "../components/API/getMedia";
 import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
@@ -7,11 +7,12 @@ import ActorPageRole from "../components/ActorPageRole";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { DarkModeContext } from "../DarkModeContext";
 import { format } from "date-fns";
-
-// import Button from "react-bootstrap/Button";
+import styles from "./PersonPage.module.css";
 
 const PersonPage = () => {
+  const { darkMode } = useContext(DarkModeContext);
   const { actorId } = useParams();
   const [actorInfo, setActorInfo] = useState("");
   const [actorRoles, setActorRoles] = useState([]);
@@ -52,70 +53,65 @@ const PersonPage = () => {
   }, [actorId]);
 
   return (
-    <Container className="actorPage" style={{ marginTop: "80px" }}>
-      <Row className="actorInfo" 
-      // style={{ display: "flex", gap: "20px" }}
-      >
-        <Col md={2} className="actorProfile">
-          <img
-            src={`https://image.tmdb.org/t/p/w185${profile_path}`}
-            alt={`${name} profile`}
-          />
-        </Col>
-        <Col md={10} className="actorDetails">
-          <h2>{name}</h2>
-          <p>
-            <strong>Birthday: </strong>{format(new Date(birthday), "MMMM d, yyyy")}
-            
-          </p>
-          <p>
-            <strong>Place of Birth:</strong> {place_of_birth}
-          </p>
-          <h3>Biography</h3>
-          {showFullBio ? (
-            <p>{biography}</p>
-          ) : (
-            <p>{String(biography).slice(0, 300)}...</p>
-          )}
-          {!showFullBio && (
-            <Button variant="link" onClick={handleShowFullBio}>
-              Show More
-            </Button>
-          )}
-          {showFullBio && (
-            <Button variant="link" onClick={handleShowFullBio}>
-              Show Less
-            </Button>
-          )}
-        </Col>
-      </Row>
-      <div
-        className="actingRoles text-center"
-        // style={{
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   justifyContent: "center",
-        //   alignItems: "center",
-        // }}
-      >
-        <h2>Acting Roles</h2>
-        <div >
-          {actorRoles
-            .sort((a, b) => {
-              const yearA = parseInt(a.year, 10);
-              const yearB = parseInt(b.year, 10);
-              return yearB - yearA;
-            })
-            .map((role) => (
-              <ActorPageRole key={uniqid()} roleInfo={role} />
-            ))}
+    <div className={darkMode ? styles.personPageDark : styles.personPageLight}>
+      <Container style={{ marginTop: "80px" }}>
+        <Row
+          className="actorInfo"
+          // style={{ display: "flex", gap: "20px" }}
+        >
+          <Col md={2} className="actorProfile">
+            <img
+              src={`https://image.tmdb.org/t/p/w185${profile_path}`}
+              alt={`${name} profile`}
+            />
+          </Col>
+          <Col md={10} className="actorDetails">
+            <h2>{name}</h2>
+            <p>
+              <strong>Birthday: </strong>
+              {/* {format(new Date(birthday), "MM d, yyyy")} */}
+            </p>
+            <p>
+              <strong>Place of Birth:</strong> {place_of_birth}
+            </p>
+            <h3>Biography</h3>
+            {showFullBio ? (
+              <p>{biography}</p>
+            ) : (
+              <p>{String(biography).slice(0, 300)}...</p>
+            )}
+            {!showFullBio && (
+              <Button variant="link" onClick={handleShowFullBio}>
+                Show More
+              </Button>
+            )}
+            {showFullBio && (
+              <Button variant="link" onClick={handleShowFullBio}>
+                Show Less
+              </Button>
+            )}
+          </Col>
+        </Row>
+        <div>
+          <h2>Acting Roles</h2>
+          <div>
+            {actorRoles
+              .sort((a, b) => {
+                const yearA = parseInt(a.year, 10);
+                const yearB = parseInt(b.year, 10);
+                return yearB - yearA;
+              })
+              .map((role) => (
+                <ActorPageRole key={uniqid()} roleInfo={role} />
+              ))}
+          </div>
+          {/* Show the "Show More" button only if there are more roles to show */}
+          {/* {rolesToShow < totalRoles && (
+            <Button onClick={handleShowMoreRoles}>Show More</Button>
+          )} */}
         </div>
-        {/* Show the "Show More" button only if there are more roles to show */}
-        {/* {rolesToShow < totalRoles && (
-          <Button onClick={handleShowMoreRoles}>Show More</Button>
-        )} */}
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

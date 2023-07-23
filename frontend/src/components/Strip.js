@@ -27,7 +27,7 @@ const Strip = ({ array }) => {
       <div className={styles.wrapper}>
         <img
           src={leftArrow}
-          style={{height: '30px', width: 'auto', marginBottom: '150px'}}
+          style={{ height: "30px", width: "auto", marginBottom: "150px" }}
           alt="scroll left button"
           className={styles.arrowLeft}
           onMouseDown={() => startScroll("left")}
@@ -39,7 +39,7 @@ const Strip = ({ array }) => {
         </div>
         <img
           src={rightArrow}
-          style={{height: '30px', width: 'auto', marginBottom: '150px'}}
+          style={{ height: "30px", width: "auto", marginBottom: "150px" }}
           alt="scroll right button"
           className={styles.arrowRight}
           onMouseDown={() => startScroll("right")}

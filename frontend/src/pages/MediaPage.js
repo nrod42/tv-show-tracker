@@ -18,9 +18,8 @@ import MediaPageTrailerModal from "../components/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import styles from './MediaPage.module.css';
+import styles from "./MediaPage.module.css";
 import { DarkModeContext } from "../DarkModeContext";
-
 
 const MediaPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -101,7 +100,7 @@ const MediaPage = () => {
         {/* Render seasons strip for TV shows */}
         {mediaType === "tv" && (
           <>
-            <h2 className='text-center ms-5 mt-5 mb-3'>Seasons</h2>
+            <h2 className="text-center ms-5 mt-5 mb-3">Seasons</h2>
             <Strip
               array={seasons.map((season) => (
                 <SeasonCard key={season.id} season={season} />
@@ -112,7 +111,7 @@ const MediaPage = () => {
 
         {/* Render strip for starring cast */}
         <>
-          <h2 className='text-center ms-5 mt-5 mb-3'>Starring</h2>
+          <h2 className="text-center ms-5 mt-5 mb-3">Starring</h2>
           <Strip
             array={cast.map((person) => (
               <PersonCard key={person.id} person={person} />
@@ -122,7 +121,7 @@ const MediaPage = () => {
 
         {/* Render strip for recommended media */}
         <>
-          <h2 className='text-center ms-5 mt-5 mb-3'>Recommended</h2>
+          <h2 className="text-center ms-5 mt-5 mb-3">Recommended</h2>
           <Strip
             array={recMedia.map((media) => (
               <MediaCard key={media.id} mediaData={media} />
@@ -132,7 +131,7 @@ const MediaPage = () => {
 
         {/* Render strip for similar media */}
         <>
-          <h2 className='text-center ms-5 mt-5 mb-3'>Similar</h2>
+          <h2 className="text-center ms-5 mt-5 mb-3">Similar</h2>
           <Strip
             array={similarMedia.map((media) => (
               <MediaCard key={media.id} mediaData={media} />
@@ -140,7 +139,7 @@ const MediaPage = () => {
           />
         </>
       </Container>
-      
+
       {/* Render the trailer modal */}
       <MediaPageTrailerModal
         lgShow={lgShow}

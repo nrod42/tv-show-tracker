@@ -10,7 +10,7 @@ import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import rightArrow from '../img/arrow-right.svg';
+import rightArrow from "../img/arrow-right.svg";
 import { DarkModeContext } from "../DarkModeContext";
 import styles from "./Home.module.css";
 
@@ -87,60 +87,75 @@ const Home = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-        <Row className={styles.row}>
-          <img
-            className={styles.randomBackdrop}
-            src={randomBackdrop.backdrop}
-            alt=""
-          />
-          <div className={styles.titleWrapper}>
-            <h1 className={styles.title}>Welcome to Track TV</h1>
-            <h2 className={styles.title}>
-              Keep track of your favorite Movies and TV Shows
-            </h2>
+      <Row className={styles.row}>
+        <img
+          className={styles.randomBackdrop}
+          src={randomBackdrop.backdrop}
+          alt={`${randomBackdrop.title} poster`}
+        />
+        <div className={styles.titleWrapper}>
+          <h1 className={styles.title}>Welcome to Track TV</h1>
+          <h2 className={styles.title}>
+            Keep track of your favorite Movies and TV Shows
+          </h2>
+        </div>
+        <Link
+          to={`/tv-show-tracker/${
+            randomBackdrop.type === "tv" ? "shows" : "movies"
+          }/${randomBackdrop.id}`}
+        >
+          <div className={styles.randomBackdropInfo}>
+            {randomBackdrop.title} ({randomBackdrop.year})
           </div>
-          <Link
-            to={`/tv-show-tracker/${
-              randomBackdrop.type === "tv" ? "shows" : "movies"
-            }/${randomBackdrop.id}`}
-          >
-            <div className={styles.randomBackdropInfo}>
-              {randomBackdrop.title} ({randomBackdrop.year})
-            </div>
-          </Link>
-        </Row>
-        <Container className={styles.container}>
-          <Link to={"/tv-show-tracker/movies/popular"}>
+        </Link>
+      </Row>
+      <Container className={styles.container}>
+        <Link to={"/tv-show-tracker/movies/popular"}>
           {/* className='d-flex flex-row justify-content-center align-items-center'  */}
-            <h2 className='ms-5 mt-5 mb-3'>Popular Movies
-              <img src={rightArrow} style={{height: '25px', width: 'auto', marginLeft: '10px'}}/>
-            </h2>
-          </Link>
-          <p className="ms-5">Popular Movies</p>
-          <Strip array={renderMediaCards(popularMovies)}/>
-          <Link to={"/tv-show-tracker/movies/top-rated"}>
-          <h2 className='ms-5 mt-5 mb-3'>Top Rated Movies
-              <img src={rightArrow} style={{height: '25px', width: 'auto', marginLeft: '10px'}}/>
-            </h2>
-          </Link>
-          <p className="ms-5">Top Movies</p>
-          <Strip array={renderMediaCards(topMovies)}/>
-          <Link to={"/tv-show-tracker/tv/popular"}>
-            <h2 className='ms-5 mt-5 mb-3'>Popular TV
-              <img src={rightArrow} style={{height: '25px', width: 'auto', marginLeft: '10px'}}/>
-            </h2>
-          </Link>
-          <p className="ms-5">Popular Shows</p>
-          <Strip array={renderMediaCards(popularTV)}/>
-          <Link to={"/tv-show-tracker/tv/top-rated"}>
-            <h2 className='ms-5 mt-5 mb-3'>Top Rated TV
-              <img src={rightArrow} style={{height: '25px', width: 'auto', marginLeft: '10px'}}/>
-            </h2>
-          </Link>
-          <p className="ms-5">Top TV</p>
-          <Strip array={renderMediaCards(topTV)}/>
-        </Container>
-
+          <h2 className="ms-5 mt-5 mb-3">
+            Popular Movies
+            <img
+              src={rightArrow}
+              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+            />
+          </h2>
+        </Link>
+        <p className="ms-5">Popular Movies</p>
+        <Strip array={renderMediaCards(popularMovies)} />
+        <Link to={"/tv-show-tracker/movies/top-rated"}>
+          <h2 className="ms-5 mt-5 mb-3">
+            Top Rated Movies
+            <img
+              src={rightArrow}
+              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+            />
+          </h2>
+        </Link>
+        <p className="ms-5">Top Movies</p>
+        <Strip array={renderMediaCards(topMovies)} />
+        <Link to={"/tv-show-tracker/tv/popular"}>
+          <h2 className="ms-5 mt-5 mb-3">
+            Popular TV
+            <img
+              src={rightArrow}
+              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+            />
+          </h2>
+        </Link>
+        <p className="ms-5">Popular Shows</p>
+        <Strip array={renderMediaCards(popularTV)} />
+        <Link to={"/tv-show-tracker/tv/top-rated"}>
+          <h2 className="ms-5 mt-5 mb-3">
+            Top Rated TV
+            <img
+              src={rightArrow}
+              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+            />
+          </h2>
+        </Link>
+        <p className="ms-5">Top TV</p>
+        <Strip array={renderMediaCards(topTV)} />
+      </Container>
     </motion.div>
   );
 };

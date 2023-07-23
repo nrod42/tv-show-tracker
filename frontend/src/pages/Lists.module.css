@@ -1,5 +1,23 @@
 
-.listSection {
+.listSectionLight {
+    background: #F8F9FA;
+    color: black;
+    transition: background 0.3s, color 0.3s; 
+}
+
+.listSectionDark {
+    background:#393E41;
+    transition: background 0.3s;
+}
+
+
+.listSectionDark * {
+    color: white;
+    transition: color 0.3s;
+}
+
+.listSectionLight, .listSectionDark {
+    min-height: 100vh;
     height: 100%;
     width: 100%;
     padding-top: 70px;

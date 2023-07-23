@@ -1,11 +1,10 @@
-import { useState, useEffect, useContext  } from "react";
+import { useState, useEffect, useContext } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
 import { getResults } from "../components/API/getMedia";
 import { DarkModeContext } from "../DarkModeContext";
-import styles from './ResultsPage.module.css';
-
+import styles from "./ResultsPage.module.css";
 
 const Results = ({ searchQuery }) => {
   const { darkMode } = useContext(DarkModeContext);
@@ -54,7 +53,9 @@ const Results = ({ searchQuery }) => {
   }, [results]);
 
   return (
-    <div className={darkMode ? styles.resultsPageDark : styles.resultsPageLight}>
+    <div
+      className={darkMode ? styles.resultsPageDark : styles.resultsPageLight}
+    >
       <ButtonGroup aria-label="filter buttons">
         <Button
           variant="success"
@@ -80,7 +81,7 @@ const Results = ({ searchQuery }) => {
       </ButtonGroup>
       <h1>Results:</h1>
       <div className={styles.cardGrid}>{filterResults()}</div>
-      <Button variant='secondary' onClick={loadResults}>
+      <Button variant="secondary" onClick={loadResults}>
         Show more
       </Button>
     </div>

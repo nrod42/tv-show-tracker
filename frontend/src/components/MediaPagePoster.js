@@ -6,13 +6,13 @@ const MediaPagePoster = ({ id, mediaInfo, mediaType, setLgShow }) => {
   const { title, poster } = mediaInfo;
 
   return (
-    <div 
-    className="d-flex flex-column justify-content-center" 
-    style={{
-      position: 'absolute',
-      bottom: '50px',
-      left: '80px',
-    }}
+    <div
+      className="d-flex flex-column justify-content-center"
+      style={{
+        position: "absolute",
+        bottom: "50px",
+        left: "80px",
+      }}
     >
       {/* Render the poster image */}
       <img src={poster} alt={`${title} poster`} />

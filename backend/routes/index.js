@@ -45,7 +45,6 @@ router.post("/login", async function (req, res) {
     } else {
       res.status(400).json("wrong credentials");
     }
-    
   } else {
     res.status(400).json("wrong credentials");
   }
@@ -56,42 +55,44 @@ router.get("/lists/:userId", async function (req, res) {
   res.json(await User.findById(userId));
 });
 
-router.put("/users/:userId/lists/:watchList/:mediaType/:mediaId", async function (req, res) {
-  try {
-    const { userId, watchList, mediaType, mediaId} = req.params;
-    const newMediaType = mediaType === 'movie' ? 'movies' : 'tvShows';
-    const user = await User.findById(userId);
-    // This should add the media id to the correct array
-    
-    await user.updateOne(
-      { $addToSet: { [`${watchList}.${newMediaType}`]: mediaId } },
+router.put(
+  "/users/:userId/lists/:watchList/:mediaType/:mediaId",
+  async function (req, res) {
+    try {
+      const { userId, watchList, mediaType, mediaId } = req.params;
+      const newMediaType = mediaType === "movie" ? "movies" : "tvShows";
+      const user = await User.findById(userId);
+      // This should add the media id to the correct array
 
-    );
-    const updatedUser = await User.findById(userId);
-    res.json(updatedUser)
-
-  } catch (err) {
-    res.status(400).json(err);
+      await user.updateOne({
+        $addToSet: { [`${watchList}.${newMediaType}`]: mediaId },
+      });
+      const updatedUser = await User.findById(userId);
+      res.json(updatedUser);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   }
-});
+);
 
-router.delete("/users/:userId/lists/:watchList/:mediaType/:mediaId", async function (req, res) {
-  try {
-    const { userId, watchList, mediaType, mediaId} = req.params;
-    const newMediaType = mediaType === 'movie' ? 'movies' : 'tvShows';
+router.delete(
+  "/users/:userId/lists/:watchList/:mediaType/:mediaId",
+  async function (req, res) {
+    try {
+      const { userId, watchList, mediaType, mediaId } = req.params;
+      const newMediaType = mediaType === "movie" ? "movies" : "tvShows";
 
-    //write function to find id in correct list and remove it
-    await User.findByIdAndUpdate(
-      userId,
-      { $pull: { [`${watchList}.${newMediaType}`]: mediaId } },
-    );
+      //write function to find id in correct list and remove it
+      await User.findByIdAndUpdate(userId, {
+        $pull: { [`${watchList}.${newMediaType}`]: mediaId },
+      });
 
-    const updatedUser = await User.findById(userId);
-    res.json(updatedUser)
-
-  } catch (err) {
-    res.status(400).json(err);
+      const updatedUser = await User.findById(userId);
+      res.json(updatedUser);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   }
-});
+);
 
 module.exports = router;

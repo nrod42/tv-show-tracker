@@ -237,7 +237,11 @@ const Navi = ({ setSearchQuery }) => {
       fixed="top"
     >
       <Container fluid>
-        <Navbar.Brand as={Link} to="/tv-show-tracker" className={styles.navbarBrand}>
+        <Navbar.Brand
+          as={Link}
+          to="/tv-show-tracker"
+          className={styles.navbarBrand}
+        >
           <img src={logo} alt="logo" className={styles.logo} />
           Track TV
         </Navbar.Brand>
@@ -301,4 +305,3 @@ const Navi = ({ setSearchQuery }) => {
 };
 
 export default Navi;
-

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import WatchList from "../components/WatchList";
 import { UserContext } from "../UserContext";
 import { API_URL } from "../apiConfig";
+import { DarkModeContext } from "../DarkModeContext";
 import styles from "./Lists.module.css";
 
 /**
@@ -9,6 +10,7 @@ import styles from "./Lists.module.css";
  * It fetches the user's data from the API and renders the watch lists using the WatchList component.
  */
 const Lists = () => {
+  const { darkMode } = useContext(DarkModeContext);
   const { userInfo } = useContext(UserContext);
 
   const [userData, setUserData] = useState([]);
@@ -35,8 +37,10 @@ const Lists = () => {
   }, [userInfo]);
 
   return (
-    <div className={styles.listSection}>
-      <h1>Lists</h1>
+    <div
+      className={darkMode ? styles.listSectionDark : styles.listSectionLight}
+    >
+      <h2>Lists</h2>
 
       {/* Render the Currently Watching watch list */}
       <WatchList

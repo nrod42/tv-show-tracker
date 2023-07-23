@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
-import styles from './MediaNav.module.css'
-import { DarkModeContext } from '../DarkModeContext';
+import styles from "./MediaNav.module.css";
+import { DarkModeContext } from "../DarkModeContext";
 
 const MediaNav = ({ type }) => {
   const { darkMode } = useContext(DarkModeContext);
@@ -26,7 +26,11 @@ const MediaNav = ({ type }) => {
   }
 
   return (
-    <Nav variant="pills" defaultActiveKey={page} className={darkMode ? styles.mediaNavDark : styles.mediaNavLight}>
+    <Nav
+      variant="pills"
+      defaultActiveKey={page}
+      className={darkMode ? styles.mediaNavDark : styles.mediaNavLight}
+    >
       {navItems.map((item) => (
         <Nav.Item key={item.key}>
           <Nav.Link
