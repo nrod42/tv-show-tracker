@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tv-show-tracker/static/css/main.2b06d22f.css",
-    "main.js": "/tv-show-tracker/static/js/main.76ac56f1.js",
+    "main.css": "/tv-show-tracker/static/css/main.f43d16fe.css",
+    "main.js": "/tv-show-tracker/static/js/main.9fc535fc.js",
     "static/media/defaultImg.webp": "/tv-show-tracker/static/media/defaultImg.95373fd2b1dfbf5c0950.webp",
     "static/media/popcorn.png": "/tv-show-tracker/static/media/popcorn.3d6f00482ea720a3aac7.png",
     "static/media/light_mode_icon.svg": "/tv-show-tracker/static/media/light_mode_icon.fe1e8ebdd98e61f630e0373e08037ee9.svg",
@@ -9,11 +9,11 @@
     "static/media/dark_mode_icon.svg": "/tv-show-tracker/static/media/dark_mode_icon.c53ca5a274054fcaff4fe037d32aadca.svg",
     "static/media/arrow-right.svg": "/tv-show-tracker/static/media/arrow-right.7b13c9ac5e7c53fc2f3af0ae9afcc4d1.svg",
     "static/media/arrow-left.svg": "/tv-show-tracker/static/media/arrow-left.bc24e9e3061ccb03a6e13a55760da701.svg",
-    "main.2b06d22f.css.map": "/tv-show-tracker/static/css/main.2b06d22f.css.map",
-    "main.76ac56f1.js.map": "/tv-show-tracker/static/js/main.76ac56f1.js.map"
+    "main.f43d16fe.css.map": "/tv-show-tracker/static/css/main.f43d16fe.css.map",
+    "main.9fc535fc.js.map": "/tv-show-tracker/static/js/main.9fc535fc.js.map"
   },
   "entrypoints": [
-    "static/css/main.2b06d22f.css",
-    "static/js/main.76ac56f1.js"
+    "static/css/main.f43d16fe.css",
+    "static/js/main.9fc535fc.js"
   ]
 }
