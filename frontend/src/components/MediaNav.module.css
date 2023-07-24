@@ -1,18 +1,5 @@
-/* .mediaNav  */
-.mediaNavLight .nav-pills .nav-link {
-    color: white;
-}
 
-.mediaNavLight .nav-pills .nav-link.active {
-    background: #198754;
-    color: white ;
-}
-
-.mediaNavDark .nav-pills .nav-link {
-    color: white;
-}
-
-.mediaNavDark .nav-pills .nav-link.active {
-    background: #198754;
-    color: white ;
+/* Styles for the media navigation in light mode */
+.mediaNavLight, .mediaNavDark {
+    margin: 90px 0 20px 0;
 }

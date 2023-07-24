@@ -57,7 +57,7 @@ const ListPage = ({ listType, title }) => {
 
   return (
     <div className={darkMode ? styles.listPageDark : styles.listPageLight}>
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <div className={styles.cardGrid}>
         {list?.map((media) => (
           <MediaCard key={media.id} mediaData={media} setReload={setReload} />

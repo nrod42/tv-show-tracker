@@ -37,6 +37,15 @@ const MediaNav = ({ type }) => {
             as={Link}
             to={`/tv-show-tracker${item.path}`}
             eventKey={item.key}
+            className={
+              page === item.key
+                ? darkMode
+                  ? "bg-success text-white"
+                  : "bg-success text-white"
+                : darkMode
+                ? "text-white"
+                : "text-black"
+            }
           >
             {item.title}
           </Nav.Link>

@@ -29,9 +29,9 @@ const CategoryPage = ({ type, title, getMedia }) => {
   return (
     <motion.div
       className={darkMode ? styles.categoryPageDark : styles.categoryPageLight}
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
+      // initial={{ width: 0 }}
+      // animate={{ width: "100%" }}
+      // exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <MediaNav type={type} /> {/* Component for displaying media navigation */}
       <h2>{title}</h2> {/* Title of the category page */}
@@ -41,7 +41,7 @@ const CategoryPage = ({ type, title, getMedia }) => {
           <MediaCard key={mediaItem.id} mediaData={mediaItem} />
         ))}
       </div>
-      <Button variant="success" onClick={addPage}>
+      <Button className="mb-3" variant="success" onClick={addPage}>
         Show more
       </Button>
     </motion.div>
