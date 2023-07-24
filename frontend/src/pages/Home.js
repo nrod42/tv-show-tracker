@@ -11,6 +11,7 @@ import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import rightArrow from "../img/arrow-right.svg";
+import defaultMediaIcon from "../img/default_media_icon.svg";
 import { DarkModeContext } from "../DarkModeContext";
 import styles from "./Home.module.css";
 
@@ -90,7 +91,7 @@ const Home = () => {
       <Row className={styles.row}>
         <img
           className={styles.randomBackdrop}
-          src={randomBackdrop.backdrop}
+          src={randomBackdrop.backdrop !== null ? randomBackdrop.backdrop : defaultMediaIcon}
           alt={`${randomBackdrop.title} poster`}
         />
         <div className={styles.titleWrapper}>

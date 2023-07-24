@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { getActorPics } from "../API/getMedia";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import defaultImg from "../../img/defaultImg.webp";
+// import defaultImg from "../../img/defaultImg.webp";
 import { DarkModeContext } from "../../DarkModeContext";
+import defaultMediaIcon from "../../img/default_media_icon.svg";
 
 const PersonCard = ({ person }) => {
   const { darkMode } = useContext(DarkModeContext);
@@ -31,7 +32,7 @@ const PersonCard = ({ person }) => {
       <Card.Link as={Link} to={`/tv-show-tracker/people/${id}`}>
         <Card.Img
           variant="top"
-          src={actorPic !== null ? actorPic : defaultImg}
+          src={actorPic !== null ? actorPic : defaultMediaIcon}
         />
       </Card.Link>
       <Card.Body>

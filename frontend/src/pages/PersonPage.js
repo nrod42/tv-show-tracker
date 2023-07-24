@@ -93,7 +93,7 @@ const PersonPage = () => {
           </Col>
         </Row>
         <div>
-          <h2>Acting Roles</h2>
+          <h2 className="text-center mt-3 mb-3">Acting Roles</h2>
           <div>
             {actorRoles
               .sort((a, b) => {

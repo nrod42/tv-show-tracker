@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import defaultMediaIcon from '../img/default_media_icon.svg';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -25,7 +26,7 @@ const ActorPageRole = ({ roleInfo }) => {
                 : `/tv-show-tracker/movies/${id}`
             }
           >
-            <img src={poster} alt={`${title} poster`} />
+            <img src={poster !== null ? poster : defaultMediaIcon} alt={`${title} poster`} style={{width: '45px', height: 'auto'}}/>
           </Link>
         </Col>
         <Col

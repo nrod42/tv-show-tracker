@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import AddToListBtn from "../AddToListBtn";
 import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
-import defaultImg from "../../img/defaultImg.webp";
+// import defaultImg from "../../img/defaultImg.webp";
 import { DarkModeContext } from "../../DarkModeContext";
+import defaultMediaIcon from '../../img/default_media_icon.svg';
 
 const MediaCard = ({ mediaData, setReload }) => {
   const { darkMode } = useContext(DarkModeContext);
@@ -26,7 +27,7 @@ const MediaCard = ({ mediaData, setReload }) => {
         <Card.Img
           variant="top"
           style={{ height: "278px" }}
-          src={poster !== null ? poster : defaultImg}
+          src={poster !== null ? poster : defaultMediaIcon}
         />
       </Card.Link>
       <AddToListBtn id={id} type={type} />

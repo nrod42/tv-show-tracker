@@ -1,0 +1,24 @@
+
+.loginPageLight {
+    background: #F8F9FA ;
+    color: black;
+    transition: background 0.3s, color 0.3s; 
+}
+
+.loginPageDark {
+    background: #212529;
+    transition: background 0.3s;
+}
+
+.loginPageDark * {
+    color: white;
+    transition: color 0.3s;
+}
+
+.loginPageLight, .loginPageDark {
+    min-height: 100vh;
+}
+
+.container {
+    margin-top: 100px;
+}

@@ -12,9 +12,7 @@ const fetchMedia = async (url, type) => {
       )
       .map((media) => ({
         id: media.id || "",
-        poster: `https://image.tmdb.org/t/p/w185/${
-          media.poster_path || "default_poster_path.jpg"
-        }`,
+        poster: media.poster_path ? `https://image.tmdb.org/t/p/w185/${media.poster_path}` : null,
         title: media.title || media.name || "Unknown",
         rating: media.vote_average || 0,
         year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
@@ -61,10 +59,9 @@ const getMediaDetails = async (id, type) => {
 
     const details = {
       id: media.id,
-      poster: `https://image.tmdb.org/t/p/w185/${media.poster_path || ""}`,
-      backdrop: `https://image.tmdb.org/t/p/original/${
-        media.backdrop_path || "default_poster_path.jpg"
-      }`,
+      poster: media.poster_path ? `https://image.tmdb.org/t/p/w185/${media.poster_path}` : null,
+      backdrop: media.backdrop_path ? `https://image.tmdb.org/t/p/original/${
+        media.backdrop_path}` : null,
       title: media.title || media.name,
       genres: media.genres
         ? media.genres
@@ -136,9 +133,7 @@ const getActorRoles = async (actorId) => {
     const roles = await response.json();
     const data = roles.cast.map((role) => ({
       id: role.id || "",
-      poster: `https://image.tmdb.org/t/p/w45/${
-        role.poster_path || "default_poster_path.jpg"
-      }`,
+      poster: role.poster_path ? `https://image.tmdb.org/t/p/w45/${role.poster_path}` : null,
       title: role.title || role.name || "Unknown",
       role: role.character,
       rating: role.vote_average || 0,
@@ -158,7 +153,8 @@ const getActorPics = async (id) => {
     const url = `https://api.themoviedb.org/3/person/${id}/images?api_key=${API_KEY}`;
     const response = await fetch(url, { mode: "cors" });
     const pic = await response.json();
-    return `https://image.tmdb.org/t/p/w185/${pic.profiles[0]?.file_path}`;
+    // console.log(pic.profiles)
+    return pic.profiles[0] ? `https://image.tmdb.org/t/p/w185/${pic.profiles[0].file_path}` : null;
   } catch (error) {
     console.error("Error: getActorPics", error);
   }
@@ -173,9 +169,7 @@ const getSimilarMedia = async (mediaId, type, page = 1) => {
 
     return similar.results.map((media) => ({
       id: media.id || "", // Use empty string as default value if id is undefined
-      poster: `https://image.tmdb.org/t/p/w185/${
-        media.poster_path || "default_poster_path.jpg"
-      }`,
+      poster: media.poster_path ? `https://image.tmdb.org/t/p/w185/${media.poster_path}` : null,
       title: media.title || media.name || "Unknown", // Use 'Unknown' as default value if title and name are undefined
       rating: media.vote_average || 0, // Use 0 as default value if vote_average is undefined
       year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
@@ -195,9 +189,7 @@ const getRecMedia = async (movieId, type, page = 1) => {
 
     return rec.results.map((media) => ({
       id: media.id || "",
-      poster: `https://image.tmdb.org/t/p/w185/${
-        media.poster_path || "default_poster_path.jpg"
-      }`,
+      poster: media.poster_path ? `https://image.tmdb.org/t/p/w185/${media.poster_path}` : null,
       title: media.title || media.name || "Unknown",
       rating: media.vote_average || 0,
       year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
@@ -231,7 +223,7 @@ const getResults = async (query) => {
     const { results } = await response.json();
     return results.map((result) => ({
       id: result.id,
-      poster: `https://image.tmdb.org/t/p/w185/${result.poster_path}`,
+      poster: result.poster_path ? `https://image.tmdb.org/t/p/w185/${result.poster_path}` : null,
       title: result.media_type === "movie" ? result.title : result.name,
       rating: result.vote_average,
       year:

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Card from "react-bootstrap/Card";
-import defaultImg from "../../img/defaultImg.webp";
+import defaultMediaIcon from '../../img/default_media_icon.svg'
 import { DarkModeContext } from "../../DarkModeContext";
 
 const SeasonCard = ({ season }) => {
@@ -23,8 +23,9 @@ const SeasonCard = ({ season }) => {
         src={
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w185/${poster_path}`
-            : defaultImg
+            : defaultMediaIcon
         }
+        alt={`${season_number} poster`}
       />
       <Card.Body style={{ textAlign: "center" }}>
         <Card.Title>

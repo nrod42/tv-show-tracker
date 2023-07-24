@@ -1,0 +1,24 @@
+
+.registerPageLight {
+    background: #F8F9FA ;
+    color: black;
+    transition: background 0.3s, color 0.3s; 
+}
+
+.registerPageDark {
+    background: #212529;
+    transition: background 0.3s;
+}
+
+.registerPageDark * {
+    color: white;
+    transition: color 0.3s;
+}
+
+.registerPageLight, .registerPageDark {
+    min-height: 100vh;
+}
+
+.container {
+    margin-top: 100px;
+}

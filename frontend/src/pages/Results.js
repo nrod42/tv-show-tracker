@@ -25,7 +25,7 @@ const Results = ({ searchQuery }) => {
     ));
   };
 
-  const loadResults = async () => {
+  const loadMoreResults = async () => {
     // Load more results from the API
     const newResults = await getResults(searchQuery, page);
     // Append new results to existing results
@@ -81,7 +81,7 @@ const Results = ({ searchQuery }) => {
       </ButtonGroup>
       <h1>Results:</h1>
       <div className={styles.cardGrid}>{filterResults()}</div>
-      <Button variant="secondary" onClick={loadResults}>
+      <Button className="mb-3" variant="success" onClick={loadMoreResults}>
         Show more
       </Button>
     </div>
