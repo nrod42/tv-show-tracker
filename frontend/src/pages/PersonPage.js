@@ -80,16 +80,18 @@ const PersonPage = () => {
             ) : (
               <p>{String(biography).slice(0, 300)}...</p>
             )}
-            {!showFullBio && (
-              <Button variant="link" onClick={handleShowFullBio}>
-                Show More
-              </Button>
-            )}
-            {showFullBio && (
-              <Button variant="link" onClick={handleShowFullBio}>
-                Show Less
-              </Button>
-            )}
+            <div className="d-flex justify-content-center">
+              {!showFullBio && (
+                <Button variant="link" className="d-flex justify-content-center" onClick={handleShowFullBio}>
+                  Show More
+                </Button>
+              )}
+              {showFullBio && (
+                <Button variant="link" className="d-flex justify-content-center" onClick={handleShowFullBio}>
+                  Show Less
+                </Button>
+              )}
+            </div>
           </Col>
         </Row>
         <div>

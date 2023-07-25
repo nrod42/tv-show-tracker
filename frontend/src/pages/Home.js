@@ -10,7 +10,8 @@ import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import rightArrow from "../img/arrow-right.svg";
+import rightArrowBlack from "../img/right_arrow_black.svg";
+import rightArrowWhite from '../img/right_arrow_white.svg';
 import defaultMediaIcon from "../img/default_media_icon.svg";
 import { DarkModeContext } from "../DarkModeContext";
 import styles from "./Home.module.css";
@@ -116,7 +117,7 @@ const Home = () => {
           <h2 className="ms-5 mt-5 mb-3">
             Popular Movies
             <img
-              src={rightArrow}
+              src={darkMode ? rightArrowWhite : rightArrowBlack}
               style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
           </h2>
@@ -127,7 +128,7 @@ const Home = () => {
           <h2 className="ms-5 mt-5 mb-3">
             Top Rated Movies
             <img
-              src={rightArrow}
+              src={darkMode ? rightArrowWhite : rightArrowBlack}
               style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
           </h2>
@@ -138,7 +139,7 @@ const Home = () => {
           <h2 className="ms-5 mt-5 mb-3">
             Popular TV
             <img
-              src={rightArrow}
+              src={darkMode ? rightArrowWhite : rightArrowBlack}
               style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
           </h2>
@@ -149,7 +150,7 @@ const Home = () => {
           <h2 className="ms-5 mt-5 mb-3">
             Top Rated TV
             <img
-              src={rightArrow}
+              src={darkMode ? rightArrowWhite : rightArrowBlack}
               style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
           </h2>
