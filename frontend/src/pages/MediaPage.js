@@ -7,7 +7,6 @@ import {
   getRecMedia,
   getMediaTrailer,
 } from "../components/API/getMedia";
-import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
 import SeasonCard from "../components/Cards/SeasonCard";
 import PersonCard from "../components/Cards/PersonCard";
@@ -66,6 +65,7 @@ const MediaPage = () => {
   const fetchTrailer = async () => {
     setTrailer(await getMediaTrailer(id, mediaType));
   };
+  
 
   useEffect(() => {
     // Scroll to top on component mount
@@ -100,46 +100,55 @@ const MediaPage = () => {
           </Col>
         </Row>
 
-        {/* Render seasons strip for TV shows */}
+        {/* Render seasons for TV shows */}
         {mediaType === "tv" && (
           <>
-            <h2 className='text-center ms-5 mt-5 mb-3'>Seasons</h2>
-            <Strip
-              array={seasons.map((season) => (
-                <SeasonCard key={season.id} season={season} />
+            <h2 className='text-center mt-5 mb-5'>Seasons</h2>
+            <Row>
+              {seasons.map((season) => (
+                <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
+                  <SeasonCard season={season} />
+                </Col>
               ))}
-            />
+            </Row>
           </>
         )}
 
-        {/* Render strip for starring cast */}
+        {/* Render cast */}
         <>
-          <h2 className='text-center ms-5 mt-5 mb-3'>Starring</h2>
-          <Strip
-            array={cast.map((person) => (
-              <PersonCard key={person.id} person={person} />
-            ))}
-          />
+          <h2 className='text-center mt-5 mb-5'>Cast</h2>
+          <Row>
+            {cast.map((person) => (
+              <Col key={person.id} xs={6} sm={4} md={3} lg={2}>
+                <PersonCard person={person} />
+              </Col>
+            )).slice(0,6)}
+          </Row>
         </>
 
         {/* Render strip for recommended media */}
         <>
-          <h2 className='text-center ms-5 mt-5 mb-3'>Recommended</h2>
-          <Strip
-            array={recMedia.map((media) => (
-              <MediaCard key={media.id} mediaData={media} />
-            ))}
-          />
+          <h2 className='text-center mt-5 mb-5'>Recommended</h2>
+          <Row>
+            {recMedia.map((media) => (
+              <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
+                <MediaCard mediaData={media} />
+              </Col>
+            )).slice(0,6)}
+          </Row>
         </>
 
         {/* Render strip for similar media */}
         <>
-          <h2 className='text-center ms-5 mt-5 mb-3'>Similar</h2>
-          <Strip
-            array={similarMedia.map((media) => (
-              <MediaCard key={media.id} mediaData={media} />
-            ))}
-          />
+          <h2 className='text-center mt-5 mb-5'>Similar</h2>
+          <Row>
+            {similarMedia.map((media) => (
+                <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
+                  <MediaCard mediaData={media} />
+                </Col>
+            )).slice(0,6)}
+          </Row>
+
         </>
       </Container>
       

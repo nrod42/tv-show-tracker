@@ -22,22 +22,18 @@ const PersonCard = ({ person }) => {
   return (
     <Card
       bg={darkMode ? "dark" : "light"}
-      style={{
-        textAlign: "center",
-        minWidth: "185px",
-        width: "185px",
-        border: "none",
-      }}
+      style={{border: "none" }}
     >
       <Card.Link as={Link} to={`/tv-show-tracker/people/${id}`}>
         <Card.Img
           variant="top"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           src={actorPic !== null ? actorPic : defaultMediaIcon}
         />
       </Card.Link>
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Subtitle>{character}</Card.Subtitle>
+      <Card.Body className="text-center" style={{ padding: '1rem' }}>
+        <Card.Title style={{ fontSize: '1rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>{name}</Card.Title>
+        <Card.Subtitle style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>{character}</Card.Subtitle>
       </Card.Body>
     </Card>
   );

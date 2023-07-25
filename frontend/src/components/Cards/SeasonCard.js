@@ -10,16 +10,11 @@ const SeasonCard = ({ season }) => {
   return (
     <Card
       bg={darkMode ? "dark" : "light"}
-      style={{
-        textAlign: "center",
-        minWidth: "185px",
-        width: "185px",
-        border: "none",
-      }}
+      style={{ border: "none" }}
     >
       <Card.Img
         variant="top"
-        style={{ height: "278px" }}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         src={
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w185/${poster_path}`
@@ -27,11 +22,11 @@ const SeasonCard = ({ season }) => {
         }
         alt={`${season_number} poster`}
       />
-      <Card.Body style={{ textAlign: "center" }}>
-        <Card.Title>
+      <Card.Body className="text-center" style={{ padding: '1rem' }}>
+        <Card.Title style={{ fontSize: '1rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
           {season_number === 0 ? "Specials" : `Season ${season_number}`}
         </Card.Title>
-        <Card.Subtitle>{episode_count} Episodes</Card.Subtitle>
+        <Card.Subtitle style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>{episode_count} Episodes</Card.Subtitle>
       </Card.Body>
     </Card>
   );

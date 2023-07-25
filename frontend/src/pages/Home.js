@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { DarkModeContext } from "../DarkModeContext";
 import {
   getTopMedia,
   getPopularMedia,
   getMediaDetails,
 } from "../components/API/getMedia";
-import Strip from "../components/Strip";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import rightArrowBlack from "../img/right_arrow_black.svg";
 import rightArrowWhite from '../img/right_arrow_white.svg';
 import defaultMediaIcon from "../img/default_media_icon.svg";
-import { DarkModeContext } from "../DarkModeContext";
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -28,29 +28,21 @@ const Home = () => {
   const fetchData = async () => {
     const [
       topTVResult,
-      topTVPage2Result,
       popTVResult,
-      popTVPage2Result,
       topMoviesResult,
-      topMoviesPage2Result,
       popMoviesResult,
-      popMoviesPage2Result,
     ] = await Promise.all([
       getTopMedia("tv"),
-      getTopMedia("tv", 2),
       getPopularMedia("tv"),
-      getPopularMedia("tv", 2),
       getTopMedia("movie"),
-      getTopMedia("movie", 2),
       getPopularMedia("movie"),
-      getPopularMedia("movie", 2),
     ]);
 
     // Merge results of multiple API calls into respective state variables
-    setTopTV([...topTVResult, ...topTVPage2Result]);
-    setPopularTV([...popTVResult, ...popTVPage2Result]);
-    setTopMovies([...topMoviesResult, ...topMoviesPage2Result]);
-    setPopularMovies([...popMoviesResult, ...popMoviesPage2Result]);
+    setTopTV([...topTVResult]);
+    setPopularTV([...popTVResult]);
+    setTopMovies([...topMoviesResult]);
+    setPopularMovies([...popMoviesResult]);
   };
 
   // Fetches random media item from the combined list of top TV shows and top movies
@@ -78,7 +70,11 @@ const Home = () => {
   }, [topTV]);
 
   const renderMediaCards = (array) => {
-    return array.map((media) => <MediaCard key={media.id} mediaData={media} />);
+    return array.map((media) => (
+      <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
+        <MediaCard mediaData={media} />
+      </Col>
+    ));
   };
 
   return (
@@ -111,52 +107,51 @@ const Home = () => {
           </div>
         </Link>
       </Row>
+
       <Container className={styles.container}>
         <Link to={"/tv-show-tracker/movies/popular"}>
-          {/* className='d-flex flex-row justify-content-center align-items-center'  */}
-          <h2 className="ms-5 mt-5 mb-3">
-            Popular Movies
+        <div className="d-flex align-items-center mt-5 mb-5">
+            <h2>Popular Movies</h2>
             <img
-              src={darkMode ? rightArrowWhite : rightArrowBlack}
-              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+                src={darkMode ? rightArrowWhite : rightArrowBlack}
+                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
-          </h2>
+          </div>
         </Link>
-        <p className="ms-5">Popular Movies</p>
-        <Strip array={renderMediaCards(popularMovies)} />
+        <Row>{renderMediaCards(popularMovies).slice(0,6)} </Row>
+        
         <Link to={"/tv-show-tracker/movies/top-rated"}>
-          <h2 className="ms-5 mt-5 mb-3">
-            Top Rated Movies
+        <div className="d-flex align-items-center mt-5 mb-5">
+            <h2>Top Rated Movies</h2>
             <img
-              src={darkMode ? rightArrowWhite : rightArrowBlack}
-              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+                src={darkMode ? rightArrowWhite : rightArrowBlack}
+                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
-          </h2>
+          </div>
         </Link>
-        <p className="ms-5">Top Movies</p>
-        <Strip array={renderMediaCards(topMovies)} />
+        <Row>{renderMediaCards(topMovies).slice(0,6)}</Row>
+        
         <Link to={"/tv-show-tracker/tv/popular"}>
-          <h2 className="ms-5 mt-5 mb-3">
-            Popular TV
+        <div className="d-flex align-items-center mt-5 mb-5">
+            <h2>Popular TV</h2>
             <img
-              src={darkMode ? rightArrowWhite : rightArrowBlack}
-              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+                src={darkMode ? rightArrowWhite : rightArrowBlack}
+                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
-          </h2>
+          </div>
         </Link>
-        <p className="ms-5">Popular Shows</p>
-        <Strip array={renderMediaCards(popularTV)} />
+        <Row>{renderMediaCards(popularTV).slice(0,6)}</Row>
+        
         <Link to={"/tv-show-tracker/tv/top-rated"}>
-          <h2 className="ms-5 mt-5 mb-3">
-            Top Rated TV
+          <div className="d-flex align-items-center mt-5 mb-5">
+            <h2>Top Rated TV</h2>
             <img
-              src={darkMode ? rightArrowWhite : rightArrowBlack}
-              style={{ height: "25px", width: "auto", marginLeft: "10px" }}
+                src={darkMode ? rightArrowWhite : rightArrowBlack}
+                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
             />
-          </h2>
+          </div>
         </Link>
-        <p className="ms-5">Top TV</p>
-        <Strip array={renderMediaCards(topTV)} />
+        <Row>{renderMediaCards(topTV).slice(0,6)}</Row>
       </Container>
     </motion.div>
   );

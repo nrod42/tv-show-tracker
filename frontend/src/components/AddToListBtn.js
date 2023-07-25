@@ -73,7 +73,7 @@ const AddToListBtn = ({ id, type }) => {
         variant="success"
         style={{
           borderTopLeftRadius: "0",
-          borderTopRightRadius: "0",
+          borderTopRightRadius: "5px",
           position: "absolute",
           right: "0",
           top: "0",

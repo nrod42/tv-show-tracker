@@ -1,0 +1,31 @@
+/* MediaCard.module.css
+
+@media (max-width: 576px) {
+    .mediaCard {
+    max-width: 100%;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+    .mediaCard {
+        max-width: 50%;
+}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .mediaCard {
+        max-width: 33.33%;
+    }
+}
+
+@media (min-width: 992px) {
+    .mediaCard {
+        max-width: 25%;
+    }
+}
+
+.mediaImage {
+    height: 278px;
+    width: 100%;
+    object-fit: cover;
+} */
