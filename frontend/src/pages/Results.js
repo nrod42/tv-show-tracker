@@ -5,8 +5,11 @@ import MediaCard from "../components/Cards/MediaCard";
 import { getResults } from "../components/API/getMedia";
 import { DarkModeContext } from "../DarkModeContext";
 import styles from "./ResultsPage.module.css";
+import { useParams } from "react-router-dom";
 
-const Results = ({ searchQuery }) => {
+const Results = () => {
+  // query should not be a prop but instead the query should be extracted from the url
+  const { query } = useParams()
   const { darkMode } = useContext(DarkModeContext);
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
@@ -27,7 +30,7 @@ const Results = ({ searchQuery }) => {
 
   const loadMoreResults = async () => {
     // Load more results from the API
-    const newResults = await getResults(searchQuery, page);
+    const newResults = await getResults(query, page);
     // Append new results to existing results
     setResults((prevResults) => [...prevResults, ...newResults]);
     setPage((prevPage) => prevPage + 1);
@@ -41,11 +44,11 @@ const Results = ({ searchQuery }) => {
   useEffect(() => {
     // Load initial results when searchQuery or page changes
     (async () => {
-      const initialResults = await getResults(searchQuery, page);
+      const initialResults = await getResults(query, page);
       setResults(initialResults);
       setPage((prevPage) => prevPage + 1);
     })();
-  }, [searchQuery, page]);
+  }, [query, page]);
 
   useEffect(() => {
     // Reset filter type when results change

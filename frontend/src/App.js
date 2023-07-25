@@ -1,18 +1,18 @@
 import React, { useState } from "react";
+import { DarkModeContextProvider } from "./DarkModeContext";
 import { UserContextProvider } from "./UserContext";
 import Nav from "./components/Nav";
 import AnimatedRoutes from "./AnimatedRoutes";
-import { DarkModeContextProvider } from "./DarkModeContext";
 
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState([]);
 
   return (
     <div className="App">
       <DarkModeContextProvider>
         <UserContextProvider>
-          <Nav setSearchQuery={setSearchQuery} />
-          <AnimatedRoutes searchQuery={searchQuery} />
+          <Nav />
+          <AnimatedRoutes />
         </UserContextProvider>
         <footer>© {new Date().getFullYear()} - Nigel Rodriguez</footer>
       </DarkModeContextProvider>

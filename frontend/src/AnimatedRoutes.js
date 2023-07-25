@@ -18,7 +18,7 @@ import LoginPage from "./pages/LoginPage";
 import { AnimatePresence } from "framer-motion";
 import PersonPage from "./pages/PersonPage";
 
-const AnimatedRoutes = ({ searchQuery }) => {
+const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
@@ -28,8 +28,8 @@ const AnimatedRoutes = ({ searchQuery }) => {
         <Route path="tv-show-tracker/register" element={<RegisterPage />} />
         <Route path="tv-show-tracker/login" element={<LoginPage />} />
         <Route
-          path="/tv-show-tracker/results"
-          element={<Results searchQuery={searchQuery} />}
+          path="/tv-show-tracker/results/:query"
+          element={<Results />}
         />
         <Route path="/tv-show-tracker/lists" element={<Lists />}></Route>
         <Route

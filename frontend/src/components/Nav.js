@@ -178,7 +178,7 @@ import darkModeIcon from "../img/dark_mode_icon.svg";
 import styles from "./Nav.module.css";
 import { API_URL } from "../apiConfig";
 
-const Navi = ({ setSearchQuery }) => {
+const Navi = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
   const { userInfo, setUserInfo } = useContext(UserContext);
 
@@ -220,8 +220,8 @@ const Navi = ({ setSearchQuery }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate("/tv-show-tracker/results");
-    setSearchQuery(searchInput);
+    // setSearchQuery(searchInput);
+    navigate(`/tv-show-tracker/results/${searchInput}`);
   };
 
   const handleDarkMode = () => {
