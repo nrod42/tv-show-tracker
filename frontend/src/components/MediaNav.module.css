@@ -3,3 +3,15 @@
 .mediaNavLight, .mediaNavDark {
     margin: 90px 0 20px 0;
 }
+
+/* MediaNav.module.css */
+.customPink .btn-secondary {
+    background-color: pink;
+    color: white;
+  }
+  
+  .customPinkOutline .btn-outline-secondary {
+    color: pink;
+    border-color: pink;
+  }
+  

@@ -5,6 +5,7 @@ import MediaCard from "../components/Cards/MediaCard";
 import { motion } from "framer-motion";
 import styles from "./CategoryPage.module.css";
 import { DarkModeContext } from "../DarkModeContext";
+import uniqid from "uniqid";
 
 const CategoryPage = ({ type, title, getMedia }) => {
   const { darkMode } = useContext(DarkModeContext);
@@ -38,11 +39,11 @@ const CategoryPage = ({ type, title, getMedia }) => {
       <div className={styles.cardGrid}>
         {/* Map through the media array and render MediaCard components */}
         {media.map((mediaItem) => (
-          <MediaCard key={mediaItem.id} mediaData={mediaItem} />
+          <MediaCard key={uniqid()} mediaData={mediaItem} />
         ))}
       </div>
-      <Button className="mb-3" variant="success" onClick={addPage}>
-        Show more
+      <Button className="mb-5" variant="success" onClick={addPage}>
+        Show More
       </Button>
     </motion.div>
   );

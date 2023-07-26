@@ -6,17 +6,19 @@ import { getResults } from "../components/API/getMedia";
 import { DarkModeContext } from "../DarkModeContext";
 import styles from "./ResultsPage.module.css";
 import { useParams } from "react-router-dom";
+import uniqid from "uniqid";
 
 const Results = () => {
-  // query should not be a prop but instead the query should be extracted from the url
-  const { query } = useParams()
+  const { query } = useParams();
   const { darkMode } = useContext(DarkModeContext);
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
   const [filterType, setFilterType] = useState("all");
 
   const filterResults = () => {
-    let filteredResults = results;
+    let filteredResults = results.filter((result) => result.title !== "-");
+    // console.log(filteredResults);
+
     if (filterType === "movie") {
       filteredResults = results.filter((result) => result.type === "movie");
     } else if (filterType === "tv") {
@@ -24,7 +26,7 @@ const Results = () => {
     }
     // Render filtered results as MediaCards
     return filteredResults.map((result) => (
-      <MediaCard key={result.id} mediaData={result} />
+      <MediaCard key={uniqid()} mediaData={result} />
     ));
   };
 
@@ -48,7 +50,7 @@ const Results = () => {
       setResults(initialResults);
       setPage((prevPage) => prevPage + 1);
     })();
-  }, [query, page]);
+  }, []);
 
   useEffect(() => {
     // Reset filter type when results change
@@ -61,31 +63,31 @@ const Results = () => {
     >
       <ButtonGroup aria-label="filter buttons">
         <Button
-          variant="success"
-          onClick={() => handleFilter("")}
+          variant="outline-success"
+          onClick={() => handleFilter("all")}
           active={filterType === "all"}
         >
           All
         </Button>
         <Button
-          variant="success"
+          variant="outline-success"
           onClick={() => handleFilter("movie")}
           active={filterType === "movie"}
         >
           Movies
         </Button>
         <Button
-          variant="success"
+          variant="outline-success"
           onClick={() => handleFilter("tv")}
           active={filterType === "tv"}
         >
-          Series
+          TV
         </Button>
       </ButtonGroup>
       <h1>Results:</h1>
       <div className={styles.cardGrid}>{filterResults()}</div>
-      <Button className="mb-3" variant="success" onClick={loadMoreResults}>
-        Show more
+      <Button className="mb-5" variant="success" onClick={loadMoreResults}>
+        Show More
       </Button>
     </div>
   );
