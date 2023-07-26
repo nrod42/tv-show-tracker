@@ -4,6 +4,10 @@ import { getMediaDetails } from "../components/API/getMedia";
 import { API_URL } from "../apiConfig";
 import { DarkModeContext } from "../DarkModeContext";
 import { UserContext } from "../UserContext";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import uniqid from 'uniqid';
 import styles from "./ListPage.module.css";
 
 const ListPage = ({ listType, title }) => {
@@ -57,12 +61,16 @@ const ListPage = ({ listType, title }) => {
 
   return (
     <div className={darkMode ? styles.listPageDark : styles.listPageLight}>
-      <h2>{title}</h2>
-      <div className={styles.cardGrid}>
-        {list?.map((media) => (
-          <MediaCard key={media.id} mediaData={media} setReload={setReload} />
-        ))}
-      </div>
+      <Container className="text-center">
+        <h2 className="mb-5">{title}</h2>
+        <Row>
+          {list?.map((media) => (
+            <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
+              <MediaCard mediaData={media} setReload={setReload} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 };

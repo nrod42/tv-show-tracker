@@ -1,4 +1,7 @@
 import { useState, useEffect, useContext } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
@@ -26,7 +29,9 @@ const Results = () => {
     }
     // Render filtered results as MediaCards
     return filteredResults.map((result) => (
-      <MediaCard key={uniqid()} mediaData={result} />
+      <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
+        <MediaCard mediaData={result} />
+      </Col>
     ));
   };
 
@@ -61,7 +66,7 @@ const Results = () => {
     <div
       className={darkMode ? styles.resultsPageDark : styles.resultsPageLight}
     >
-      <ButtonGroup aria-label="filter buttons">
+      <ButtonGroup className="mt-3 mb-2" aria-label="filter buttons">
         <Button
           variant="outline-success"
           onClick={() => handleFilter("all")}
@@ -84,11 +89,13 @@ const Results = () => {
           TV
         </Button>
       </ButtonGroup>
-      <h1>Results:</h1>
-      <div className={styles.cardGrid}>{filterResults()}</div>
-      <Button className="mb-5" variant="success" onClick={loadMoreResults}>
-        Show More
-      </Button>
+      <Container className="text-center">
+        <h2 className="mb-5">Results:</h2>
+        <Row>{filterResults()}</Row>
+        <Button className="mb-5" variant="success" onClick={loadMoreResults}>
+          Show More
+        </Button>
+      </Container>
     </div>
   );
 };

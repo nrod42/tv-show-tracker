@@ -63,7 +63,7 @@ const getMediaDetails = async (id, type) => {
     const details = {
       id: media.id,
       poster: media.poster_path
-        ? `https://image.tmdb.org/t/p/w185/${media.poster_path}`
+        ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
         : null,
       backdrop: media.backdrop_path
         ? `https://image.tmdb.org/t/p/original/${media.backdrop_path}`

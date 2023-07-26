@@ -9,13 +9,12 @@ const MediaPagePoster = ({ id, mediaInfo, mediaType, setLgShow }) => {
     <div
       className="d-flex flex-column justify-content-center"
       style={{
-        position: "absolute",
-        bottom: "50px",
-        left: "80px",
+        marginTop: "-200px", // Use negative margin to create the overlap effect
+        position: 'relative',
       }}
     >
       {/* Render the poster image */}
-      <img src={poster} alt={`${title} poster`} />
+      <img src={poster} alt={`${title} poster`} style={{height: '100%', width: '100%', objectFit: 'cover'}} />
 
       {/* Render the "Add to List" button */}
       <AddToListBtn id={id} type={mediaType} />

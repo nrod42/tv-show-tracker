@@ -24,11 +24,3 @@
     gap: 20px;
     padding-top: 70px;
 }
-
-.cardGrid {
-    width: 80%;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(185px, auto));
-    justify-items: center;
-}

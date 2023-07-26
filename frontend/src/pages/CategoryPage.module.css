@@ -24,11 +24,3 @@
     /* padding-top: 100px; */
     min-height: 100vh;
 }
-
-.cardGrid {
-    width: 80%;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(185px, auto));
-    justify-items: center;
-}

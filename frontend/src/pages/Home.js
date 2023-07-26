@@ -118,7 +118,7 @@ const Home = () => {
             />
           </div>
         </Link>
-        <Row>{renderMediaCards(popularMovies).slice(0,6)} </Row>
+        <Row>{renderMediaCards(popularMovies).slice(0,6)}</Row>
         
         <Link to={"/tv-show-tracker/movies/top-rated"}>
         <div className="d-flex align-items-center mt-5 mb-5">
@@ -132,7 +132,7 @@ const Home = () => {
         <Row>{renderMediaCards(topMovies).slice(0,6)}</Row>
         
         <Link to={"/tv-show-tracker/tv/popular"}>
-        <div className="d-flex align-items-center mt-5 mb-5">
+          <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Popular TV</h2>
             <img
                 src={darkMode ? rightArrowWhite : rightArrowBlack}

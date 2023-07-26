@@ -84,8 +84,16 @@ const MediaPage = () => {
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
       <Container style={{ marginTop: "40px" }}>
-        <Row>
-          <Col lg={3} sm={12} className={styles.posterWrapper}>
+        <Row 
+            // style={{
+            //   position: "absolute",
+            //   top: "25%",
+            //   left: "0",
+            // }} 
+        >
+          <Col lg={3} sm={12} 
+          className={styles.posterWrapper}
+          >
             {/* Render the media poster and related buttons */}
             <MediaPagePoster
               id={id}
@@ -126,7 +134,7 @@ const MediaPage = () => {
           </Row>
         </>
 
-        {/* Render strip for recommended media */}
+        {/* Render recommended media */}
         <>
           <h2 className='text-center mt-5 mb-5'>Recommended</h2>
           <Row>
@@ -138,7 +146,7 @@ const MediaPage = () => {
           </Row>
         </>
 
-        {/* Render strip for similar media */}
+        {/* Render similar media */}
         <>
           <h2 className='text-center mt-5 mb-5'>Similar</h2>
           <Row>

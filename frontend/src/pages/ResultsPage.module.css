@@ -26,11 +26,3 @@
     padding-top: 70px;
 }
 /* End of Dark Mode */
-
-.cardGrid {
-    width: 80%;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(185px, auto));
-    justify-items: center;
-}

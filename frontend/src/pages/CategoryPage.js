@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import MediaNav from "../components/MediaNav";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import MediaCard from "../components/Cards/MediaCard";
 import { motion } from "framer-motion";
 import styles from "./CategoryPage.module.css";
@@ -30,21 +33,22 @@ const CategoryPage = ({ type, title, getMedia }) => {
   return (
     <motion.div
       className={darkMode ? styles.categoryPageDark : styles.categoryPageLight}
-      // initial={{ width: 0 }}
-      // animate={{ width: "100%" }}
-      // exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <MediaNav type={type} /> {/* Component for displaying media navigation */}
-      <h2>{title}</h2> {/* Title of the category page */}
-      <div className={styles.cardGrid}>
-        {/* Map through the media array and render MediaCard components */}
-        {media.map((mediaItem) => (
-          <MediaCard key={uniqid()} mediaData={mediaItem} />
-        ))}
-      </div>
-      <Button className="mb-5" variant="success" onClick={addPage}>
-        Show More
-      </Button>
+      <Container className="text-center">
+        <h2 className="mb-5">{title}</h2> {/* Title of the category page */}
+        <Row>
+          {/* Map through the media array and render MediaCard components */}
+          {media.map((mediaItem) => (
+            <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
+              <MediaCard mediaData={mediaItem} />
+            </Col>
+          ))}
+        </Row>
+        <Button className="mb-5" variant="success" onClick={addPage}>
+          Show More
+        </Button>
+      </Container>
     </motion.div>
   );
 };
