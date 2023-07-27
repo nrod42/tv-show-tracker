@@ -17,6 +17,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import { AnimatePresence } from "framer-motion";
 import PersonPage from "./pages/PersonPage";
+import FullCreditsPage from "./pages/FullCreditsPage";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -27,10 +28,7 @@ const AnimatedRoutes = () => {
         <Route path="/tv-show-tracker" element={<Home />} />
         <Route path="tv-show-tracker/register" element={<RegisterPage />} />
         <Route path="tv-show-tracker/login" element={<LoginPage />} />
-        <Route
-          path="/tv-show-tracker/results/:query"
-          element={<Results />}
-        />
+        <Route path="/tv-show-tracker/results/:query" element={<Results />} />
         <Route path="/tv-show-tracker/lists" element={<Lists />}></Route>
         <Route
           path="/tv-show-tracker/lists/currently-watching"
@@ -134,6 +132,10 @@ const AnimatedRoutes = () => {
         <Route
           path={`/tv-show-tracker/people/:actorId`}
           element={<PersonPage />}
+        />
+        <Route
+          path={`/tv-show-tracker/:mediaType/:id`}
+          element={<FullCreditsPage />}
         />
       </Routes>
     </AnimatePresence>

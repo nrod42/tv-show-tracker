@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   getMediaDetails,
   getMediaCredits,
@@ -17,14 +17,13 @@ import MediaPageTrailerModal from "../components/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import styles from './MediaPage.module.css';
+import styles from "./MediaPage.module.css";
 import { DarkModeContext } from "../DarkModeContext";
-
 
 const MediaPage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { id } = useParams();
-  
+
   const [mediaInfo, setMediaInfo] = useState("");
   const [seasons, setSeasons] = useState([]);
   const [cast, setCast] = useState([]);
@@ -33,7 +32,6 @@ const MediaPage = () => {
   const [trailer, setTrailer] = useState("");
   const [lgShow, setLgShow] = useState(false);
 
-  
   const mediaType = window.location.pathname.includes("shows") ? "tv" : "movie";
 
   // Fetch media details
@@ -65,7 +63,6 @@ const MediaPage = () => {
   const fetchTrailer = async () => {
     setTrailer(await getMediaTrailer(id, mediaType));
   };
-  
 
   useEffect(() => {
     // Scroll to top on component mount
@@ -84,16 +81,8 @@ const MediaPage = () => {
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
       <Container style={{ marginTop: "40px" }}>
-        <Row 
-            // style={{
-            //   position: "absolute",
-            //   top: "25%",
-            //   left: "0",
-            // }} 
-        >
-          <Col lg={3} sm={12} 
-          className={styles.posterWrapper}
-          >
+        <Row>
+          <Col lg={3} sm={12} className={styles.posterWrapper}>
             {/* Render the media poster and related buttons */}
             <MediaPagePoster
               id={id}
@@ -111,7 +100,7 @@ const MediaPage = () => {
         {/* Render seasons for TV shows */}
         {mediaType === "tv" && (
           <>
-            <h2 className='text-center mt-5 mb-5'>Seasons</h2>
+            <h2 className="text-center mt-5 mb-5">Seasons</h2>
             <Row>
               {seasons.map((season) => (
                 <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
@@ -124,42 +113,50 @@ const MediaPage = () => {
 
         {/* Render cast */}
         <>
-          <h2 className='text-center mt-5 mb-5'>Cast</h2>
+          <h2 className="text-center mt-5 mb-5">Cast</h2>
+          <Link to={`/tv-show-tracker/${mediaType}/${id}`}>
+            See full cast & crew
+          </Link>
           <Row>
-            {cast.map((person) => (
-              <Col key={person.id} xs={6} sm={4} md={3} lg={2}>
-                <PersonCard person={person} />
-              </Col>
-            )).slice(0,6)}
+            {cast
+              .map((person) => (
+                <Col key={person.id} xs={6} sm={4} md={3} lg={2}>
+                  <PersonCard person={person} />
+                </Col>
+              ))
+              .slice(0, 6)}
           </Row>
         </>
 
         {/* Render recommended media */}
         <>
-          <h2 className='text-center mt-5 mb-5'>Recommended</h2>
+          <h2 className="text-center mt-5 mb-5">Recommended</h2>
           <Row>
-            {recMedia.map((media) => (
-              <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
-                <MediaCard mediaData={media} />
-              </Col>
-            )).slice(0,6)}
+            {recMedia
+              .map((media) => (
+                <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
+                  <MediaCard mediaData={media} />
+                </Col>
+              ))
+              .slice(0, 6)}
           </Row>
         </>
 
         {/* Render similar media */}
         <>
-          <h2 className='text-center mt-5 mb-5'>Similar</h2>
+          <h2 className="text-center mt-5 mb-5">Similar</h2>
           <Row>
-            {similarMedia.map((media) => (
+            {similarMedia
+              .map((media) => (
                 <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
                   <MediaCard mediaData={media} />
                 </Col>
-            )).slice(0,6)}
+              ))
+              .slice(0, 6)}
           </Row>
-
         </>
       </Container>
-      
+
       {/* Render the trailer modal */}
       <MediaPageTrailerModal
         lgShow={lgShow}

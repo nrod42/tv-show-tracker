@@ -4,14 +4,10 @@
     margin: 90px 0 20px 0;
 }
 
-/* MediaNav.module.css */
-.customPink .btn-secondary {
-    background-color: pink;
-    color: white;
-  }
+.bg-pink {
+background-color: pink !important;
+}
   
-  .customPinkOutline .btn-outline-secondary {
-    color: pink;
-    border-color: pink;
-  }
-  
+.text-pink {
+color: pink !important;
+}

@@ -1,0 +1,24 @@
+
+.fullCreditsPageLight {
+    background: #F8F9FA ;
+    color: black;
+    transition: background 0.3s, color 0.3s; 
+}
+
+.fullCreditsPageDark {
+    background: #212529;
+    transition: background 0.3s;
+}
+
+.fullCreditsPageDark * {
+    color: white;
+    transition: color 0.3s;
+}
+
+.fullCreditsPageLight, .fullCreditsPageDark {
+    min-height: 100vh;
+}
+
+.container {
+    margin-top: 100px;
+}
