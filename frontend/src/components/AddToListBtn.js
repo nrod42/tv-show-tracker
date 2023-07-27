@@ -4,6 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { API_URL } from "../apiConfig";
+import { Link } from "react-router-dom";
 
 const AddToListBtn = ({ id, type }) => {
   const { userInfo } = useContext(UserContext);
@@ -69,6 +70,7 @@ const AddToListBtn = ({ id, type }) => {
 
   return (
     <OverlayTrigger trigger="click" placement="right" overlay={tooltip}>
+      {userInfo ? (
       <Button
         variant="success"
         style={{
@@ -77,11 +79,25 @@ const AddToListBtn = ({ id, type }) => {
           position: "absolute",
           right: "0",
           top: "0",
-          // fontSize: "32px",
         }}
       >
         +
       </Button>
+      ) : 
+      (<Link to={'/tv-show-tracker/register'}>
+          <Button
+          variant="success"
+          style={{
+            borderTopLeftRadius: "0",
+            borderTopRightRadius: "0",
+            position: "absolute",
+            right: "0",
+            top: "0",
+          }}
+          >
+            +
+          </Button>
+      </Link>)}
     </OverlayTrigger>
   );
 };

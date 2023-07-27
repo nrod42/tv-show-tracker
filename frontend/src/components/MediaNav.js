@@ -34,6 +34,10 @@ const MediaNav = ({ type }) => {
         border: accentColor,
         color: "#FFF",
         boxShadow: "none",
+        fontSize: '0.8rem',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       };
     } else {
       return {
@@ -42,6 +46,7 @@ const MediaNav = ({ type }) => {
         color: accentColor,
         border: `1px solid ${accentColor}`,
         boxShadow: "none",
+        fontSize: '0.8rem',
       };
     }
   };

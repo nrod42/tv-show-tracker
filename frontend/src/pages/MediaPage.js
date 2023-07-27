@@ -97,21 +97,28 @@ const MediaPage = () => {
           </Col>
         </Row>
 
-        {/* Render seasons for TV shows */}
-        {mediaType === "tv" && (
-          <>
-            <h2 className="text-center mt-5 mb-5">Seasons</h2>
-            <Row>
-              {seasons.map((season) => (
-                <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
-                  <SeasonCard season={season} />
-                </Col>
-              ))}
-            </Row>
-          </>
-        )}
+         {/* Render seasons for TV shows */}
+      {mediaType === "tv" && seasons.length > 0 && (
+        <>
+          <h2 className="text-center mt-5 mb-5">Seasons</h2>
+          <Row>
+            {seasons.map((season) => (
+              <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
+                <SeasonCard season={season} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      )}
+      {mediaType === "tv" && seasons.length === 0 && (
+        <>
+        <h2 className="text-center mt-5 mb-5">Seasons</h2>
+        <p className="text-center mt-5 mb-5">Not Available</p>
+      </>
+      )}
 
-        {/* Render cast */}
+      {/* Render cast */}
+      {cast.length > 0 && (
         <>
           <h2 className="text-center mt-5 mb-5">Cast</h2>
           <Link to={`/tv-show-tracker/${mediaType}/${id}`}>
@@ -127,8 +134,16 @@ const MediaPage = () => {
               .slice(0, 6)}
           </Row>
         </>
+      )}
+      {cast.length === 0 && 
+        <>
+        <h2 className="text-center mt-5 mb-5">Cast</h2>
+        <p className="text-center mt-5 mb-5">Not Available</p>
+      </>
+      }
 
-        {/* Render recommended media */}
+      {/* Render recommended media */}
+      {recMedia.length > 0 && (
         <>
           <h2 className="text-center mt-5 mb-5">Recommended</h2>
           <Row>
@@ -141,8 +156,16 @@ const MediaPage = () => {
               .slice(0, 6)}
           </Row>
         </>
+      )}
+      {recMedia.length === 0 && 
+        <>
+          <h2 className="text-center mt-5 mb-5">Recommended</h2>
+          <p className="text-center mt-5 mb-5">Not Available</p>
+        </>
+      }
 
-        {/* Render similar media */}
+      {/* Render similar media */}
+      {similarMedia.length > 0 && (
         <>
           <h2 className="text-center mt-5 mb-5">Similar</h2>
           <Row>
@@ -155,6 +178,13 @@ const MediaPage = () => {
               .slice(0, 6)}
           </Row>
         </>
+      )}
+      {similarMedia.length === 0 && 
+        <>
+          <h2 className="text-center mt-5 mb-5">Similar</h2>
+          <p className="text-center mt-5 mb-5">Not Available</p>
+        </>
+      }
       </Container>
 
       {/* Render the trailer modal */}
