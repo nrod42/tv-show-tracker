@@ -27,6 +27,7 @@ const MediaPage = () => {
   const [mediaInfo, setMediaInfo] = useState("");
   const [seasons, setSeasons] = useState([]);
   const [cast, setCast] = useState([]);
+  const [crew, setCrew] = useState([]);
   const [similarMedia, setSimilarMedia] = useState([]);
   const [recMedia, setRecMedia] = useState([]);
   const [trailer, setTrailer] = useState("");
@@ -47,6 +48,7 @@ const MediaPage = () => {
   const fetchMediaCredits = async () => {
     const credits = await getMediaCredits(id, mediaType);
     setCast(credits.cast);
+    setCrew(credits.crew);
   };
 
   // Fetch similar media
@@ -93,7 +95,7 @@ const MediaPage = () => {
           </Col>
           <Col lg={9} sm={12}>
             {/* Render the media information section */}
-            <MediaPageInfoSection mediaInfo={mediaInfo} mediaType={mediaType} />
+            <MediaPageInfoSection mediaInfo={{...mediaInfo, crew: crew}} mediaType={mediaType} />
           </Col>
         </Row>
 

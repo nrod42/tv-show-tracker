@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./MediaPageInfoSection.module.css";
 
 const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
-  const { title, year, genres, rating, plot, seasonNum, episodeNum } =
+  const { title, year, genres, rating, plot, seasonNum, episodeNum, crew } =
     mediaInfo;
 
   return (
@@ -32,6 +32,7 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
       <p>
         <strong>Rating:</strong> {rating}
       </p>
+      {crew.map((member) => <p>{member}</p>)}
       <div className="plotSection">{plot}</div>
     </>
   );

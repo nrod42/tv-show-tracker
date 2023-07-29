@@ -42,6 +42,7 @@ const LoginPage = () => {
   return (
     <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
       <Container className={styles.container}>
+        <h2 className="text-center">Login To Your Account</h2>
         <Form
           className="d-flex flex-column justify-content-center"
           onSubmit={handleSubmit}
