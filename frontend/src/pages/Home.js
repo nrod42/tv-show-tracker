@@ -2,11 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { DarkModeContext } from "../DarkModeContext";
-import {
-  getTopMedia,
-  getPopularMedia,
-  getMediaDetails,
-} from "../components/API/getMedia";
+import { MediaContext } from "../MediaContext";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -18,56 +14,7 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const [topTV, setTopTV] = useState([]);
-  const [popularTV, setPopularTV] = useState([]);
-  const [topMovies, setTopMovies] = useState([]);
-  const [popularMovies, setPopularMovies] = useState([]);
-  const [randomBackdrop, setRandomBackdrop] = useState("");
-
-  // Fetches data for top TV shows, popular TV shows, top movies, and popular movies
-  const fetchData = async () => {
-    const [
-      topTVResult,
-      popTVResult,
-      topMoviesResult,
-      popMoviesResult,
-    ] = await Promise.all([
-      getTopMedia("tv"),
-      getPopularMedia("tv"),
-      getTopMedia("movie"),
-      getPopularMedia("movie"),
-    ]);
-
-    // Merge results of multiple API calls into respective state variables
-    setTopTV([...topTVResult]);
-    setPopularTV([...popTVResult]);
-    setTopMovies([...topMoviesResult]);
-    setPopularMovies([...popMoviesResult]);
-  };
-
-  // Fetches random media item from the combined list of top TV shows and top movies
-  const fetchRandomMedia = async () => {
-    const topMedia = [...topTV, ...topMovies];
-    const randomIndex = Math.floor(Math.random() * topMedia.length);
-    const randomTopMedia = topMedia[randomIndex] || [];
-
-    // Fetch details of the random media item
-    const randomDetails =
-      randomTopMedia.type === "tv"
-        ? await getMediaDetails(randomTopMedia.id, "tv")
-        : await getMediaDetails(randomTopMedia.id, "movie");
-    setRandomBackdrop(randomDetails);
-  };
-
-  useEffect(() => {
-    // Fetch data on component mount
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    // Fetch random media when topTV state updates
-    fetchRandomMedia();
-  }, [topTV]);
+  const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } = useContext(MediaContext)
 
   const renderMediaCards = (array) => {
     return array.map((media) => (

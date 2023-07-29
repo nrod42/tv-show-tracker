@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./MediaPageInfoSection.module.css";
 
 const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
-  const { title, year, genres, rating, plot, seasonNum, episodeNum, crew } =
+  const { title, year, genres, rating, plot, seasonNum, episodeNum, createdBy, crew } =
     mediaInfo;
 
   return (
@@ -11,6 +11,36 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
       <div className={styles.titleSection}>
         <p>{title}</p>
         <p>({year?.split("-")[0]})</p>
+      </div>
+
+      <div>
+        <strong>{mediaType === "tv" ? 'Creator: ' : 'Director: '}</strong>
+        {mediaType === "tv" ? (
+          <span>
+            {createdBy
+              ?.map((creator) => creator.name)
+              .join(", ")}
+          </span>
+        ) : (
+          <span>
+            {crew
+              ?.filter((member) => member.job === "Director")
+              .map((director) => director.name)
+              .join(", ")}
+          </span>
+        )}
+      </div>
+
+      <div>
+        <strong>Writers: </strong>
+        <span>
+          {[...new Set(
+            crew
+            ?.filter((member) => ["Writer", "Screenplay", "Story"].includes(member.job))
+            .map((writer) => writer.name)
+          )].join(", ")}
+          {/* {console.log(crew)} */}
+        </span>
       </div>
 
       {/* Render season information for TV shows */}
@@ -27,23 +57,7 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
 
       {/* Render genres, rating, and plot */}
 
-      <div>
-        <strong>Directors: </strong>
-        {crew
-          .filter((member) => member.job === "Director")
-          .map((director) => (
-            <p>{director.original_name}</p>
-          ))}
-      </div>
 
-      <div>
-        <strong>Writers: </strong>
-        {crew
-          .filter((member) => member.job === "Writer")
-          .map((writer) => (
-            <p>{writer.original_name}</p>
-          ))}
-      </div>
 
       <p>
         <strong>Rating:</strong> {rating}

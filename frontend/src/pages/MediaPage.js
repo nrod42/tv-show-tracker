@@ -40,6 +40,11 @@ const MediaPage = () => {
     const mediaInfo = await getMediaDetails(id, mediaType);
     setMediaInfo(mediaInfo);
     if (mediaType === "tv") {
+      // Checks for season 0 (Specials season), and moves it to end of array
+      if (mediaInfo.seasonsInfo[0].season_number === 0) {
+        const seasonZero = mediaInfo.seasonsInfo.shift();
+        mediaInfo.seasonsInfo.push(seasonZero);
+      }
       setSeasons(mediaInfo.seasonsInfo);
     }
   };
@@ -70,12 +75,16 @@ const MediaPage = () => {
     // Scroll to top on component mount
     window.scrollTo(0, 0);
 
-    // Fetch media details, credits, similar media, rec media, and trailer
-    fetchMediaDetails();
-    fetchMediaCredits();
-    fetchSimilarMedia();
-    fetchRecMedia();
-    fetchTrailer();
+    const fetchData = async () => {
+      await fetchMediaDetails();
+      await fetchMediaCredits();
+      await fetchSimilarMedia();
+      await fetchRecMedia();
+      await fetchTrailer();
+    };
+
+    fetchData();
+
   }, [id]);
 
   return (
@@ -96,7 +105,7 @@ const MediaPage = () => {
           <Col lg={9} sm={12}>
             {/* Render the media information section */}
             <MediaPageInfoSection
-              mediaInfo={{ ...mediaInfo, crew: crew }}
+              mediaInfo={{...mediaInfo, crew: crew}}
               mediaType={mediaType}
             />
           </Col>

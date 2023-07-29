@@ -3,18 +3,20 @@ import { DarkModeContextProvider } from "./DarkModeContext";
 import { UserContextProvider } from "./UserContext";
 import Nav from "./components/Nav";
 import AnimatedRoutes from "./AnimatedRoutes";
+import { MediaContextProvider } from "./MediaContext";
 
 const App = () => {
-  // const [searchQuery, setSearchQuery] = useState([]);
 
   return (
     <div className="App">
       <DarkModeContextProvider>
         <UserContextProvider>
-          <Nav />
-          <AnimatedRoutes />
+          <MediaContextProvider>
+            <Nav />
+            <AnimatedRoutes />
+            <footer>© {new Date().getFullYear()} - Nigel Rodriguez</footer>
+          </MediaContextProvider>
         </UserContextProvider>
-        <footer>© {new Date().getFullYear()} - Nigel Rodriguez</footer>
       </DarkModeContextProvider>
     </div>
   );

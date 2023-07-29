@@ -59,7 +59,6 @@ const getMediaDetails = async (id, type) => {
     const url = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${API_KEY}&language=en-US`;
     const response = await fetch(url, { mode: "cors" });
     const media = await response.json();
-
     const details = {
       id: media.id,
       poster: media.poster_path
@@ -71,10 +70,10 @@ const getMediaDetails = async (id, type) => {
       title: media.title || media.name,
       genres: media.genres
         ? media.genres
-            .map((genre, index) =>
-              index < media.genres.length - 1 ? `${genre.name}, ` : genre.name
+            .map((genre) =>
+              genre.name
             )
-            .join("")
+            .join(", ")
         : null,
       rating: media.vote_average,
       plot: media.overview,
@@ -88,8 +87,9 @@ const getMediaDetails = async (id, type) => {
       details.seasonNum = media.number_of_seasons;
       details.episodeNum = media.number_of_episodes;
       details.seasonsInfo = media.seasons;
+      details.createdBy = media.created_by;
     }
-
+    // console.log(details.createdBy)
     return details;
   } catch (error) {
     console.error("Error:API", error);
@@ -102,7 +102,7 @@ const getMediaCredits = async (mediaId, type) => {
     const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US&language=en-US`;
     const response = await fetch(url, { mode: "cors" });
     const credits = await response.json();
-
+    // console.log(credits.crew.filter(member => member.job === "Writing"))
     return {
       cast: credits.cast,
       crew: credits.crew,
@@ -161,7 +161,6 @@ const getActorPics = async (id) => {
     const url = `https://api.themoviedb.org/3/person/${id}/images?api_key=${API_KEY}`;
     const response = await fetch(url, { mode: "cors" });
     const pic = await response.json();
-    // console.log(pic.profiles)
     return pic.profiles[0]
       ? `https://image.tmdb.org/t/p/w342/${pic.profiles[0].file_path}`
       : null;
