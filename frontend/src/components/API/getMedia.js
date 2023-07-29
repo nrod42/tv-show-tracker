@@ -102,7 +102,7 @@ const getMediaCredits = async (mediaId, type) => {
     const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US&language=en-US`;
     const response = await fetch(url, { mode: "cors" });
     const credits = await response.json();
-    console.log(credits);
+
     return {
       cast: credits.cast,
       crew: credits.crew,

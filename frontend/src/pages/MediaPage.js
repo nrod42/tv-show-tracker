@@ -95,98 +95,101 @@ const MediaPage = () => {
           </Col>
           <Col lg={9} sm={12}>
             {/* Render the media information section */}
-            <MediaPageInfoSection mediaInfo={{...mediaInfo, crew: crew}} mediaType={mediaType} />
+            <MediaPageInfoSection
+              mediaInfo={{ ...mediaInfo, crew: crew }}
+              mediaType={mediaType}
+            />
           </Col>
         </Row>
 
-         {/* Render seasons for TV shows */}
-      {mediaType === "tv" && seasons.length > 0 && (
-        <>
-          <h2 className="text-center mt-5 mb-5">Seasons</h2>
-          <Row>
-            {seasons.map((season) => (
-              <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
-                <SeasonCard season={season} />
-              </Col>
-            ))}
-          </Row>
-        </>
-      )}
-      {mediaType === "tv" && seasons.length === 0 && (
-        <>
-        <h2 className="text-center mt-5 mb-5">Seasons</h2>
-        <p className="text-center mt-5 mb-5">Not Available</p>
-      </>
-      )}
-
-      {/* Render cast */}
-      {cast.length > 0 && (
-        <>
-          <h2 className="text-center mt-5 mb-5">Cast</h2>
-          <Link to={`/tv-show-tracker/${mediaType}/${id}`}>
-            See full cast & crew
-          </Link>
-          <Row>
-            {cast
-              .map((person) => (
-                <Col key={person.id} xs={6} sm={4} md={3} lg={2}>
-                  <PersonCard person={person} />
+        {/* Render seasons for TV shows */}
+        {mediaType === "tv" && seasons.length > 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Seasons</h2>
+            <Row>
+              {seasons.map((season) => (
+                <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
+                  <SeasonCard season={season} />
                 </Col>
-              ))
-              .slice(0, 6)}
-          </Row>
-        </>
-      )}
-      {cast.length === 0 && 
-        <>
-        <h2 className="text-center mt-5 mb-5">Cast</h2>
-        <p className="text-center mt-5 mb-5">Not Available</p>
-      </>
-      }
+              ))}
+            </Row>
+          </>
+        )}
+        {mediaType === "tv" && seasons.length === 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Seasons</h2>
+            <p className="text-center mt-5 mb-5">Not Available</p>
+          </>
+        )}
 
-      {/* Render recommended media */}
-      {recMedia.length > 0 && (
-        <>
-          <h2 className="text-center mt-5 mb-5">Recommended</h2>
-          <Row>
-            {recMedia
-              .map((media) => (
-                <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
-                  <MediaCard mediaData={media} />
-                </Col>
-              ))
-              .slice(0, 6)}
-          </Row>
-        </>
-      )}
-      {recMedia.length === 0 && 
-        <>
-          <h2 className="text-center mt-5 mb-5">Recommended</h2>
-          <p className="text-center mt-5 mb-5">Not Available</p>
-        </>
-      }
+        {/* Render cast */}
+        {cast.length > 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Cast</h2>
+            <Link to={`/tv-show-tracker/${mediaType}/${id}`}>
+              See full cast & crew
+            </Link>
+            <Row>
+              {cast
+                .map((person) => (
+                  <Col key={person.id} xs={6} sm={4} md={3} lg={2}>
+                    <PersonCard person={person} />
+                  </Col>
+                ))
+                .slice(0, 6)}
+            </Row>
+          </>
+        )}
+        {cast.length === 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Cast</h2>
+            <p className="text-center mt-5 mb-5">Not Available</p>
+          </>
+        )}
 
-      {/* Render similar media */}
-      {similarMedia.length > 0 && (
-        <>
-          <h2 className="text-center mt-5 mb-5">Similar</h2>
-          <Row>
-            {similarMedia
-              .map((media) => (
-                <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
-                  <MediaCard mediaData={media} />
-                </Col>
-              ))
-              .slice(0, 6)}
-          </Row>
-        </>
-      )}
-      {similarMedia.length === 0 && 
-        <>
-          <h2 className="text-center mt-5 mb-5">Similar</h2>
-          <p className="text-center mt-5 mb-5">Not Available</p>
-        </>
-      }
+        {/* Render recommended media */}
+        {recMedia.length > 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Recommended</h2>
+            <Row>
+              {recMedia
+                .map((media) => (
+                  <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
+                    <MediaCard mediaData={media} />
+                  </Col>
+                ))
+                .slice(0, 6)}
+            </Row>
+          </>
+        )}
+        {recMedia.length === 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Recommended</h2>
+            <p className="text-center mt-5 mb-5">Not Available</p>
+          </>
+        )}
+
+        {/* Render similar media */}
+        {similarMedia.length > 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Similar</h2>
+            <Row>
+              {similarMedia
+                .map((media) => (
+                  <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
+                    <MediaCard mediaData={media} />
+                  </Col>
+                ))
+                .slice(0, 6)}
+            </Row>
+          </>
+        )}
+        {similarMedia.length === 0 && (
+          <>
+            <h2 className="text-center mt-5 mb-5">Similar</h2>
+            <p className="text-center mt-5 mb-5">Not Available</p>
+          </>
+        )}
       </Container>
 
       {/* Render the trailer modal */}

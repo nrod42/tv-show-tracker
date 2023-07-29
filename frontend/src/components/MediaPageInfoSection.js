@@ -26,13 +26,32 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
       )}
 
       {/* Render genres, rating, and plot */}
-      <p>
-        <strong>Genres:</strong> {genres}
-      </p>
+
+      <div>
+        <strong>Directors: </strong>
+        {crew
+          .filter((member) => member.job === "Director")
+          .map((director) => (
+            <p>{director.original_name}</p>
+          ))}
+      </div>
+
+      <div>
+        <strong>Writers: </strong>
+        {crew
+          .filter((member) => member.job === "Writer")
+          .map((writer) => (
+            <p>{writer.original_name}</p>
+          ))}
+      </div>
+
       <p>
         <strong>Rating:</strong> {rating}
       </p>
-      {crew.map((member) => <p>{member}</p>)}
+      <p>
+        <strong>Genres:</strong> {genres}
+      </p>
+
       <div className="plotSection">{plot}</div>
     </>
   );
