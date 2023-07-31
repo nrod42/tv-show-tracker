@@ -56,7 +56,7 @@ const Home = () => {
       </Row>
 
       <Container className={styles.container}>
-        <Link to={"/tv-show-tracker/movies/popular"}>
+        <Link to={"/tv-show-tracker/movie/category/popular"}>
         <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Popular Movies</h2>
             <img
@@ -67,7 +67,7 @@ const Home = () => {
         </Link>
         <Row>{renderMediaCards(popularMovies).slice(0,6)}</Row>
         
-        <Link to={"/tv-show-tracker/movies/top-rated"}>
+        <Link to={"/tv-show-tracker/movie/category/top-rated"}>
         <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Top Rated Movies</h2>
             <img
@@ -78,7 +78,7 @@ const Home = () => {
         </Link>
         <Row>{renderMediaCards(topMovies).slice(0,6)}</Row>
         
-        <Link to={"/tv-show-tracker/tv/popular"}>
+        <Link to={"/tv-show-tracker/tv/category/popular"}>
           <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Popular TV</h2>
             <img
@@ -89,7 +89,7 @@ const Home = () => {
         </Link>
         <Row>{renderMediaCards(popularTV).slice(0,6)}</Row>
         
-        <Link to={"/tv-show-tracker/tv/top-rated"}>
+        <Link to={"/tv-show-tracker/tv/category/top-rated"}>
           <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Top Rated TV</h2>
             <img

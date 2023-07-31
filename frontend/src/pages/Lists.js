@@ -44,16 +44,9 @@ const Lists = () => {
 
       {/* Render the Currently Watching watch list */}
       <WatchList
-        title="Currently Watching"
-        link="/tv-show-tracker/lists/currently-watching"
+        title="Watching"
+        link="/tv-show-tracker/lists/watching"
         userData={userData?.watching}
-      />
-
-      {/* Render the Want To Watch watch list */}
-      <WatchList
-        title="Want To Watch"
-        link="/tv-show-tracker/lists/want-to-watch"
-        userData={userData?.wantToWatch}
       />
 
       {/* Render the Completed watch list */}
@@ -61,6 +54,13 @@ const Lists = () => {
         title="Completed"
         link="/tv-show-tracker/lists/completed"
         userData={userData?.completed}
+      />
+
+      {/* Render the Want To Watch watch list */}
+      <WatchList
+        title="Planning"
+        link="/tv-show-tracker/lists/planning"
+        userData={userData?.planning}
       />
 
       {/* Render the Dropped watch list */}

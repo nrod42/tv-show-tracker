@@ -9,13 +9,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import uniqid from 'uniqid';
 import styles from "./ListPage.module.css";
+import { useParams } from "react-router-dom";
 
-const ListPage = ({ listType, title }) => {
+const ListPage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { userInfo } = useContext(UserContext);
+  const { listType } = useParams();
   const [userData, setUserData] = useState([]);
   const [list, setList] = useState([]);
   const [reload, setReload] = useState(false);
+  // const [listName, setListName] = useState("")
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -62,7 +65,7 @@ const ListPage = ({ listType, title }) => {
   return (
     <div className={darkMode ? styles.listPageDark : styles.listPageLight}>
       <Container className="text-center">
-        <h2 className="mb-5">{title}</h2>
+        <h2 className="mb-5">{listType.charAt(0).toUpperCase() + listType.slice(1)}</h2>
         <Row>
           {list?.map((media) => (
             <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>

@@ -22,7 +22,7 @@ import { DarkModeContext } from "../DarkModeContext";
 
 const MediaPage = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const { id } = useParams();
+  const { id, mediaType } = useParams();
 
   const [mediaInfo, setMediaInfo] = useState("");
   const [seasons, setSeasons] = useState([]);
@@ -33,7 +33,7 @@ const MediaPage = () => {
   const [trailer, setTrailer] = useState("");
   const [lgShow, setLgShow] = useState(false);
 
-  const mediaType = window.location.pathname.includes("shows") ? "tv" : "movie";
+  // const mediaType = window.location.pathname.includes("shows") ? "tv" : "movie";
 
   // Fetch media details
   const fetchMediaDetails = async () => {

@@ -16,7 +16,7 @@ const UserSchema = new Schema(
       movies: [{ type: String }],
       tvShows: [{ type: String }],
     },
-    wantToWatch: {
+    planning: {
       movies: [{ type: String }],
       tvShows: [{ type: String }],
     },

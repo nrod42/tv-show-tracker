@@ -85,10 +85,10 @@ const Navi = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-start">
           <Nav className={`text-center ${styles.navLinks}`}>
-            <Nav.Link as={Link} to="/tv-show-tracker/movies/top-rated">
+            <Nav.Link as={Link} to="/tv-show-tracker/movie/category/top-rated">
               Movies
             </Nav.Link>
-            <Nav.Link as={Link} to="/tv-show-tracker/tv/top-rated">
+            <Nav.Link as={Link} to="/tv-show-tracker/tv/category/top-rated">
               TV
             </Nav.Link>
             {userInfo && (

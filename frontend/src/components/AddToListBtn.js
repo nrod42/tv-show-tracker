@@ -53,13 +53,13 @@ const AddToListBtn = ({ id, type }) => {
       ></div>
       <ButtonGroup vertical>
         <Button variant="secondary" onClick={() => addToList("watching")}>
-          Currently Watching
-        </Button>
-        <Button variant="secondary" onClick={() => addToList("wantToWatch")}>
-          Want to Watch
+          Watching
         </Button>
         <Button variant="secondary" onClick={() => addToList("completed")}>
           Completed
+        </Button>
+        <Button variant="secondary" onClick={() => addToList("planning")}>
+          Planning
         </Button>
         <Button variant="secondary" onClick={() => addToList("dropped")}>
           Dropped
