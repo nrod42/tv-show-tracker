@@ -24,7 +24,11 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
+      "https://nrod42.github.io",
+      "https://nrod42.github.io/",
+      "https://nrod42.github.io/tv-show-tracker",
       "https://nrod42.github.io/tv-show-tracker/",
+      "https://trakr.onrender.com",
 
     ],
   })
