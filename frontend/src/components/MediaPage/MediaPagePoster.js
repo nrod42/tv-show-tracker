@@ -1,7 +1,7 @@
 import React from "react";
-import AddToListBtn from "../components/AddToListBtn";
+import AddToListBtn from "../../components/AddToListBtn";
 import Button from "react-bootstrap/Button";
-import defaultMediaIcon from '../img/default_media_icon.svg';
+import defaultMediaIcon from '../../img/default_media_icon.svg';
 
 const MediaPagePoster = ({ id, mediaInfo, mediaType, setLgShow }) => {
   const { title, poster } = mediaInfo;
@@ -12,6 +12,7 @@ const MediaPagePoster = ({ id, mediaInfo, mediaType, setLgShow }) => {
       style={{
         marginTop: "-250px", // Use negative margin to create the overlap effect
         position: 'relative',
+        maxWidth: '342px',
       }}
     >
       {/* Render the poster image */}

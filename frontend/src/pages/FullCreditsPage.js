@@ -24,7 +24,6 @@ const FullCreditsPage = () => {
 
   useEffect(() => {
     fetchMediaCredits();
-    console.log(crew);
   }, []);
 
   return (

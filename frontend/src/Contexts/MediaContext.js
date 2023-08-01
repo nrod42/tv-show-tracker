@@ -9,19 +9,34 @@ const MediaContextProvider = ({ children }) => {
     const [popularMovies, setPopularMovies] = useState([]);
     const [randomBackdrop, setRandomBackdrop] = useState("");
 
+
+    const fetchTopMedia = async (type) => {
+      let topMedia = await getTopMedia(type);
+      let page = 1;
+      while (topMedia.length < 6) {
+        page++
+        topMedia = [...topMedia, ...await getTopMedia(type, page)];  
+      }
+      return topMedia;
+    }
+
+    const fetchPopMedia = async (type) => {
+      let popMedia = await getPopularMedia(type);
+      let page = 1;
+      while (popMedia.length < 6) {
+        page++
+        popMedia = [...popMedia, ...await getPopularMedia(type, page)];  
+      }
+      return popMedia;
+    }
+
     // Fetches data for top TV shows, popular TV shows, top movies, and popular movies
     const fetchData = async () => {
-        const [
-          topTVResult,
-          popTVResult,
-          topMoviesResult,
-          popMoviesResult,
-        ] = await Promise.all([
-          getTopMedia("tv"),
-          getPopularMedia("tv"),
-          getTopMedia("movie"),
-          getPopularMedia("movie"),
-        ]);
+        const topTVResult = await fetchTopMedia('tv');
+        const topMoviesResult = await fetchTopMedia('movie');
+        const popTVResult = await fetchPopMedia('tv');
+        const popMoviesResult = await fetchPopMedia('movie');
+
     
         // Merge results of multiple API calls into respective state variables
         setTopTV([...topTVResult]);
@@ -30,7 +45,7 @@ const MediaContextProvider = ({ children }) => {
         setPopularMovies([...popMoviesResult]);
     };
 
-      // Fetches random media item from the combined list of top TV shows and top movies
+    // Fetches random media item from the combined list of top TV shows and top movies
     const fetchRandomMedia = async () => {
         const topMedia = [...topTV, ...topMovies];
         const randomIndex = Math.floor(Math.random() * topMedia.length);

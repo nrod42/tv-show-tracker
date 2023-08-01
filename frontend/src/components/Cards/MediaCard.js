@@ -14,7 +14,7 @@ const MediaCard = ({ mediaData, setReload }) => {
     <Card bg={darkMode ? "dark" : "light"} style={{ border: "none" }}>
       <Card.Link
         as={Link}
-        to={type === "tv" ? `/tv/${id}` : `/movie/${id}`}
+        to={`/${type}/${id}`}
       >
         <Card.Img
           variant="top"

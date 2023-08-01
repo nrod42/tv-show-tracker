@@ -11,10 +11,10 @@ import {
 import MediaCard from "../components/Cards/MediaCard";
 import SeasonCard from "../components/Cards/SeasonCard";
 import PersonCard from "../components/Cards/PersonCard";
-import MediaPageInfoSection from "../components/MediaPageInfoSection";
-import MediaPageBackdrop from "../components/MediaPageBackdrop";
-import MediaPagePoster from "../components/MediaPagePoster";
-import MediaPageTrailerModal from "../components/MediaPageTrailerModal";
+import MediaPageInfoSection from "../components/MediaPage/MediaPageInfoSection";
+import MediaPageBackdrop from "../components/MediaPage/MediaPageBackdrop";
+import MediaPagePoster from "../components/MediaPage/MediaPagePoster";
+import MediaPageTrailerModal from "../components/MediaPage/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -95,7 +95,7 @@ const MediaPage = () => {
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
       <Container style={{ marginTop: "40px" }}>
-        <Row>
+        <Row className="mb-5">
           <Col lg={3} sm={12} className={styles.posterWrapper}>
             {/* Render the media poster and related buttons */}
             <MediaPagePoster
@@ -117,7 +117,7 @@ const MediaPage = () => {
         {/* Render seasons for TV shows */}
         {mediaType === "tv" && seasons.length > 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Seasons</h2>
+            <h2 className="mt-5 mb-5">Seasons</h2>
             <Row>
               {seasons.map((season) => (
                 <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
@@ -129,7 +129,7 @@ const MediaPage = () => {
         )}
         {mediaType === "tv" && seasons.length === 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Seasons</h2>
+            <h2 className="mt-5 mb-5">Seasons</h2>
             <p className="text-center mt-5 mb-5">Not Available</p>
           </>
         )}
@@ -167,7 +167,15 @@ const MediaPage = () => {
         {/* Render recommended media */}
         {recMedia.length > 0 && (
           <>
-            <h2 className="mt-5 mb-5">Recommended</h2>
+            <Link to={`/${mediaType}/related/recommended/${id}`}>
+              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
+                <div className="d-flex flex-row justify-content-center align-items-center">
+                  <h2 style={{margin: 0}}>Recommended</h2>
+                  <img src={darkMode ? rightArrowWhite : rightArrowBlack}  style={{ height: "25px", width: "auto", marginLeft: "10px" }}></img>
+                </div>
+                <span>Show More</span>
+              </div>
+            </Link>
             <Row>
               {recMedia
                 .map((media) => (
@@ -189,7 +197,15 @@ const MediaPage = () => {
         {/* Render similar media */}
         {similarMedia.length > 0 && (
           <>
-            <h2 className="mt-5 mb-5">Similar</h2>
+            <Link to={`/${mediaType}/related/similar/${id}`}>
+              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
+                <div className="d-flex flex-row justify-content-center align-items-center">
+                  <h2 style={{margin: 0}}>Similar</h2>
+                  <img src={darkMode ? rightArrowWhite : rightArrowBlack}  style={{ height: "25px", width: "auto", marginLeft: "10px" }}></img>
+                </div>
+                <span>Show More</span>
+              </div>
+            </Link>
             <Row>
               {similarMedia
                 .map((media) => (

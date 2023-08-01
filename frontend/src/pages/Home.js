@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <motion.div
       className={darkMode ? styles.homePageDark : styles.homePageLight}
-      style={{ overflowX: "hidden" }}
+      style={{ overflowX: "hidden"}}
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
@@ -41,7 +41,7 @@ const Home = () => {
         <div className={styles.titleWrapper}>
           <h1 className={styles.title}>Welcome to Track TV</h1>
           <h2 className={styles.title}>
-            Keep track of your favorite Movies and TV Shows
+            Keep track of your favorite movies and shows
           </h2>
         </div>
         <Link

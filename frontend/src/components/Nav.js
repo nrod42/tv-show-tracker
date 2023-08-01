@@ -130,7 +130,7 @@ const Navi = () => {
             )}
             <img
               src={darkMode ? lightModeIcon : darkModeIcon}
-              className={styles.darkModeToggle}
+              className={`${styles.darkModeToggle} ms-3 me-3`}
               alt="dark mode"
               style={{ width: "30px", height: "auto" }}
               onClick={handleDarkMode}

@@ -12,6 +12,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import PersonPage from "./pages/PersonPage";
 import FullCreditsPage from "./pages/FullCreditsPage";
+import RelatedMediaPage from "./pages/RelatedMediaPage";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const AnimatedRoutes = () => {
         <Route path="/:mediaType/:id" element={<MediaPage />} />
         <Route path="/:mediaType/credits/:id" element={<FullCreditsPage />} />
         <Route path="/:mediaType/category/:category" element={<CategoryPage />} />
+        <Route path="/:mediaType/related/:relation/:id" element={<RelatedMediaPage />} />
         <Route path="/people/:actorId" element={<PersonPage />} />
 
       </Routes>

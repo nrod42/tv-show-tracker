@@ -1,5 +1,5 @@
 import React from "react";
-import defaultMediaIcon from '../img/default_media_icon.svg';
+import defaultMediaIcon from '../../img/default_media_icon.svg';
 
 const MediaPageBackdrop = ({ mediaInfo }) => {
   const { title, backdrop } = mediaInfo;

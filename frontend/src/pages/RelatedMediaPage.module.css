@@ -1,0 +1,28 @@
+
+/* Start of Dark Mode */
+.relatedMediaPageLight {
+    background: #F8F9FA ;
+    color: black;
+    transition: background 0.3s, color 0.3s; 
+}
+
+.relatedMediaPageDark {
+    background: #212529;
+    transition: background 0.3s; 
+}
+
+.relatedMediaPageDark * {
+    color: white;
+    transition: color 0.3s;
+}
+
+.relatedMediaPageLight, .relatedMediaPageDark {
+    /* width: 100%; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 100px;
+}
+/* End of Dark Mode */

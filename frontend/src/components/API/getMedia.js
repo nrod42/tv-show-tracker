@@ -197,7 +197,7 @@ const getRecMedia = async (movieId, type, page = 1) => {
     const url = `https://api.themoviedb.org/3/${mediaType}/${movieId}/recommendations?api_key=${API_KEY}&language&en-US&language=en-US&page=${page}`;
     const response = await fetch(url, { mode: "cors" });
     const rec = await response.json();
-
+    // console.log(rec)
     return rec.results.map((media) => ({
       id: media.id || "",
       poster: media.poster_path

@@ -20,7 +20,6 @@ const Results = () => {
 
   const filterResults = () => {
     let filteredResults = results.filter((result) => result.title !== "-");
-    // console.log(filteredResults);
 
     if (filterType === "movie") {
       filteredResults = results.filter((result) => result.type === "movie");

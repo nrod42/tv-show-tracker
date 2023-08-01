@@ -34,7 +34,7 @@ const MediaNav = () => {
         border: accentColor,
         color: "#FFF",
         boxShadow: "none",
-        fontSize: '0.85rem',
+        fontSize: '0.85em',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -46,14 +46,14 @@ const MediaNav = () => {
         color: accentColor,
         border: `1px solid ${accentColor}`,
         boxShadow: "none",
-        fontSize: '0.85rem',
+        fontSize: '0.85em',
       };
     }
   };
 
   return (
     <ButtonGroup
-      className={darkMode ? styles.mediaNavDark : styles.mediaNavLight}
+      className={`${darkMode ? styles.mediaNavDark : styles.mediaNavLight} mt-3 mb-3`}
     >
       {tabs.map((item) => (
         <Button
