@@ -22,16 +22,19 @@ const mongoDB = process.env.MONGO_URL;
 app.use(
   cors({
     credentials: true,
-    origin: 
-      '*',
-      // "http://localhost:3000",
-      // "https://nrod42.github.io",
-      // "https://nrod42.github.io/",
-      // "https://trakr.onrender.com",
-      // "https://trakr.onrender.com/",
-      // "https://cinetrakr.onrender.com",
-      // "https://cinetrakr.onrender.com/",
-    
+    origin: [
+      "http://localhost:3000",
+      "https://nrod42.github.io",
+      "https://nrod42.github.io/",
+      "https://trakr.onrender.com",
+      "https://trakr.onrender.com/",
+      "http://trakr.onrender.com",
+      "http://trakr.onrender.com/",
+      "https://cinetrakr.onrender.com",
+      "https://cinetrakr.onrender.com/",
+      "http://cinetrakr.onrender.com",
+      "http://cinetrakr.onrender.com/",
+    ],
   })
 );
 app.use(logger("dev"));
