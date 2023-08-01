@@ -19,16 +19,16 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
-        <Route path="/tv-show-tracker" element={<Home />} />
-        <Route path="/tv-show-tracker/register" element={<RegisterPage />} />
-        <Route path="/tv-show-tracker/login" element={<LoginPage />} />
-        <Route path="/tv-show-tracker/results/:query" element={<Results />} />
-        <Route path="/tv-show-tracker/lists" element={<Lists />} />
-        <Route path="/tv-show-tracker/lists/:listType" element={<ListPage />} />
-        <Route path="/tv-show-tracker/:mediaType/:id" element={<MediaPage />} />
-        <Route path="/tv-show-tracker/:mediaType/credits/:id" element={<FullCreditsPage />} />
-        <Route path="/tv-show-tracker/:mediaType/category/:category" element={<CategoryPage />} />
-        <Route path="/tv-show-tracker/people/:actorId" element={<PersonPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/results/:query" element={<Results />} />
+        <Route path="/lists" element={<Lists />} />
+        <Route path="/lists/:listType" element={<ListPage />} />
+        <Route path="/:mediaType/:id" element={<MediaPage />} />
+        <Route path="/:mediaType/credits/:id" element={<FullCreditsPage />} />
+        <Route path="/:mediaType/category/:category" element={<CategoryPage />} />
+        <Route path="/people/:actorId" element={<PersonPage />} />
 
       </Routes>
     </AnimatePresence>

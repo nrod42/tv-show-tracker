@@ -22,8 +22,8 @@ const ActorPageRole = ({ roleInfo }) => {
           <Link
             to={
               type === "tv"
-                ? `/tv-show-tracker/tv/${id}`
-                : `/tv-show-tracker/movie/${id}`
+                ? `/tv/${id}`
+                : `/movie/${id}`
             }
           >
             <img src={poster !== null ? poster : defaultMediaIcon} alt={`${title} poster`} style={{width: '45px', height: 'auto'}}/>
@@ -41,8 +41,8 @@ const ActorPageRole = ({ roleInfo }) => {
           <Link
             to={
               type === "tv"
-                ? `/tv-show-tracker/tv/${id}`
-                : `/tv-show-tracker/movie/${id}`
+                ? `/tv/${id}`
+                : `/movie/${id}`
             }
           >
             <div>

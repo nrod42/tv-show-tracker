@@ -24,10 +24,13 @@ const RegisterPage = () => {
 
   async function register(e) {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert('Passwords do no match. Please make sure they match')
       return
     }
+
+    // sends valid registration to backend
     try {
       const response = await fetch(`${API_URL}/register`, {
         method: "POST",
@@ -42,7 +45,7 @@ const RegisterPage = () => {
       });
       if (response.ok) {
         alert("registration successful");
-        navigate("/tv-show-tracker/login");
+        navigate("/login");
       } else {
         alert("registration failed");
       }
@@ -140,7 +143,7 @@ const RegisterPage = () => {
           
         </Form>
         <div className="text-center">
-          <Link to="/tv-show-tracker/login">
+          <Link to="/login">
             <Button variant="link">Already have an account? Login</Button>
           </Link>
         </div>

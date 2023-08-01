@@ -137,7 +137,7 @@ const MediaPage = () => {
         {/* Render cast */}
         {cast.length > 0 && (
           <>
-            <Link to={`/tv-show-tracker/${mediaType}/credits/${id}`}>
+            <Link to={`/${mediaType}/credits/${id}`}>
               <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <h2 style={{margin: 0}}>Cast</h2>

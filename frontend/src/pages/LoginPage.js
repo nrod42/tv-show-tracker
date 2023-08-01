@@ -31,7 +31,7 @@ const LoginPage = () => {
       if (response.ok) {
         const userInfo = await response.json();
         setUserInfo(userInfo);
-        navigate("/tv-show-tracker");
+        navigate("/");
       } else {
         alert("Wrong credentials");
       }
@@ -74,7 +74,7 @@ const LoginPage = () => {
           </Button>
         </Form>
         <div className="text-center">
-          <Link to="/tv-show-tracker/register">
+          <Link to="/register">
             <Button variant="link">Don't have an account? Register</Button>
           </Link>
         </div>

@@ -23,7 +23,7 @@ const PersonCard = ({ person }) => {
       bg={darkMode ? "dark" : "light"}
       style={{border: "none" }}
     >
-      <Card.Link as={Link} to={`/tv-show-tracker/people/${id}`}>
+      <Card.Link as={Link} to={`/people/${id}`}>
         <Card.Img
           variant="top"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}

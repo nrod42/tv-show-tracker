@@ -45,9 +45,7 @@ const Home = () => {
           </h2>
         </div>
         <Link
-          to={`/tv-show-tracker/${
-            randomBackdrop.type === "tv" ? "shows" : "movies"
-          }/${randomBackdrop.id}`}
+          to={`/${randomBackdrop.type}/${randomBackdrop.id}`}
         >
           <div className={styles.randomBackdropInfo}>
             {randomBackdrop.title} ({randomBackdrop.year})
@@ -56,7 +54,7 @@ const Home = () => {
       </Row>
 
       <Container className={styles.container}>
-        <Link to={"/tv-show-tracker/movie/category/popular"}>
+        <Link to={"/movie/category/popular"}>
         <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Popular Movies</h2>
             <img
@@ -67,7 +65,7 @@ const Home = () => {
         </Link>
         <Row>{renderMediaCards(popularMovies).slice(0,6)}</Row>
         
-        <Link to={"/tv-show-tracker/movie/category/top-rated"}>
+        <Link to={"/movie/category/top-rated"}>
         <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Top Rated Movies</h2>
             <img
@@ -78,7 +76,7 @@ const Home = () => {
         </Link>
         <Row>{renderMediaCards(topMovies).slice(0,6)}</Row>
         
-        <Link to={"/tv-show-tracker/tv/category/popular"}>
+        <Link to={"/tv/category/popular"}>
           <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Popular TV</h2>
             <img
@@ -89,7 +87,7 @@ const Home = () => {
         </Link>
         <Row>{renderMediaCards(popularTV).slice(0,6)}</Row>
         
-        <Link to={"/tv-show-tracker/tv/category/top-rated"}>
+        <Link to={"/tv/category/top-rated"}>
           <div className="d-flex align-items-center mt-5 mb-5">
             <h2>Top Rated TV</h2>
             <img

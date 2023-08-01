@@ -45,28 +45,28 @@ const Lists = () => {
       {/* Render the Currently Watching watch list */}
       <WatchList
         title="Watching"
-        link="/tv-show-tracker/lists/watching"
+        link="/lists/watching"
         userData={userData?.watching}
       />
 
       {/* Render the Completed watch list */}
       <WatchList
         title="Completed"
-        link="/tv-show-tracker/lists/completed"
+        link="/lists/completed"
         userData={userData?.completed}
       />
 
       {/* Render the Want To Watch watch list */}
       <WatchList
         title="Planning"
-        link="/tv-show-tracker/lists/planning"
+        link="/lists/planning"
         userData={userData?.planning}
       />
 
       {/* Render the Dropped watch list */}
       <WatchList
         title="Dropped"
-        link="/tv-show-tracker/lists/dropped"
+        link="/lists/dropped"
         userData={userData?.dropped}
       />
     </div>

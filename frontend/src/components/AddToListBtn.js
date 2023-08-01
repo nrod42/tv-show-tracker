@@ -84,7 +84,7 @@ const AddToListBtn = ({ id, type }) => {
         +
       </Button>
       ) : 
-      (<Link to={'/tv-show-tracker/register'}>
+      (<Link to={'/register'}>
           <Button
           variant="success"
           style={{

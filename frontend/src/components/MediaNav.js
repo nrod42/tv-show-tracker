@@ -59,7 +59,7 @@ const MediaNav = () => {
         <Button
           key={item.key}
           as={Link}
-          to={`/tv-show-tracker${item.path}`}
+          to={item.path}
           style={getButtonStyle(item.key)}
         >
           {item.title}

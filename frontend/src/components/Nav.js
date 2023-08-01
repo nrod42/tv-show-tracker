@@ -51,7 +51,7 @@ const Navi = () => {
 
   const logout = () => {
     Cookies.remove("token");
-    navigate("/tv-show-tracker");
+    navigate("/");
     setUserInfo(null);
   };
 
@@ -59,7 +59,7 @@ const Navi = () => {
     e.preventDefault();
     if (searchInput === "") return;
     const formattedQuery = searchInput.replace(" ", "-"); // Replace spaces with dashes
-    navigate(`/tv-show-tracker/results/${encodeURIComponent(formattedQuery)}`);
+    navigate(`/results/${encodeURIComponent(formattedQuery)}`);
   };
 
   const handleDarkMode = () => {
@@ -77,7 +77,7 @@ const Navi = () => {
       <Container fluid>
         <Navbar.Brand
           as={Link}
-          to="/tv-show-tracker"
+          to="/"
           className={styles.navbarBrand}
         >
           <img src={logo} alt="logo" className={styles.logo} />
@@ -86,14 +86,14 @@ const Navi = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-start">
           <Nav className={`text-center ${styles.navLinks}`}>
-            <Nav.Link as={Link} to="/tv-show-tracker/movie/category/top-rated">
+            <Nav.Link as={Link} to="/movie/category/top-rated">
               Movies
             </Nav.Link>
-            <Nav.Link as={Link} to="/tv-show-tracker/tv/category/top-rated">
+            <Nav.Link as={Link} to="/tv/category/top-rated">
               TV
             </Nav.Link>
             {userInfo && (
-              <Nav.Link as={Link} to="/tv-show-tracker/lists">
+              <Nav.Link as={Link} to="/lists">
                 Lists
               </Nav.Link>
             )}
@@ -118,10 +118,10 @@ const Navi = () => {
           <Nav className={`text-center ${styles.navLinks}`}>
             {!userInfo ? (
               <>
-                <Nav.Link as={Link} to="/tv-show-tracker/register">
+                <Nav.Link as={Link} to="/register">
                   Register
                 </Nav.Link>
-                <Nav.Link as={Link} to="/tv-show-tracker/login">
+                <Nav.Link as={Link} to="/login">
                   Login
                 </Nav.Link>
               </>
