@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 import {
   getMediaDetails,
   getMediaCredits,
@@ -17,8 +18,10 @@ import MediaPageTrailerModal from "../components/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import rightArrowBlack from "../img/right_arrow_black.svg";
+import rightArrowWhite from "../img/right_arrow_white.svg";
 import styles from "./MediaPage.module.css";
-import { DarkModeContext } from "../DarkModeContext";
+
 
 const MediaPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -134,9 +137,14 @@ const MediaPage = () => {
         {/* Render cast */}
         {cast.length > 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Cast</h2>
-            <Link to={`/tv-show-tracker/${mediaType}/${id}`}>
-              See full cast & crew
+            <Link to={`/tv-show-tracker/${mediaType}/credits/${id}`}>
+              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
+                <div className="d-flex flex-row justify-content-center align-items-center">
+                  <h2 style={{margin: 0}}>Cast</h2>
+                  <img src={darkMode ? rightArrowWhite : rightArrowBlack}  style={{ height: "25px", width: "auto", marginLeft: "10px" }}></img>
+                </div>
+                <span>Full Cast & Crew</span>
+              </div>
             </Link>
             <Row>
               {cast
@@ -151,7 +159,7 @@ const MediaPage = () => {
         )}
         {cast.length === 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Cast</h2>
+            <h2 className="mt-5 mb-5">Cast</h2>
             <p className="text-center mt-5 mb-5">Not Available</p>
           </>
         )}
@@ -159,7 +167,7 @@ const MediaPage = () => {
         {/* Render recommended media */}
         {recMedia.length > 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Recommended</h2>
+            <h2 className="mt-5 mb-5">Recommended</h2>
             <Row>
               {recMedia
                 .map((media) => (
@@ -173,7 +181,7 @@ const MediaPage = () => {
         )}
         {recMedia.length === 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Recommended</h2>
+            <h2 className="mt-5 mb-5">Recommended</h2>
             <p className="text-center mt-5 mb-5">Not Available</p>
           </>
         )}
@@ -181,7 +189,7 @@ const MediaPage = () => {
         {/* Render similar media */}
         {similarMedia.length > 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Similar</h2>
+            <h2 className="mt-5 mb-5">Similar</h2>
             <Row>
               {similarMedia
                 .map((media) => (
@@ -195,7 +203,7 @@ const MediaPage = () => {
         )}
         {similarMedia.length === 0 && (
           <>
-            <h2 className="text-center mt-5 mb-5">Similar</h2>
+            <h2 className="mt-5 mb-5">Similar</h2>
             <p className="text-center mt-5 mb-5">Not Available</p>
           </>
         )}

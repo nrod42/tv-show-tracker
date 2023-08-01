@@ -1,9 +1,10 @@
 import React from "react";
-import { DarkModeContextProvider } from "./DarkModeContext";
-import { UserContextProvider } from "./UserContext";
+import { DarkModeContextProvider } from "./Contexts/DarkModeContext";
+import { MediaContextProvider } from "./Contexts/MediaContext";
+import { UserContextProvider } from "./Contexts/UserContext";
 import Nav from "./components/Nav";
 import AnimatedRoutes from "./AnimatedRoutes";
-import { MediaContextProvider } from "./MediaContext";
+
 
 const App = () => {
 

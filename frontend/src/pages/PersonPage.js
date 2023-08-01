@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getActorInfo, getActorRoles } from "../components/API/getMedia";
+
 import { useParams } from "react-router-dom";
-import Container from "react-bootstrap/esm/Container";
-import uniqid from "uniqid";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { getActorInfo, getActorRoles } from "../components/API/getMedia";
+import { format } from "date-fns";
 import ActorPageRole from "../components/ActorPageRole";
+import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { DarkModeContext } from "../DarkModeContext";
-import { format } from "date-fns";
+import uniqid from "uniqid";
 import styles from "./PersonPage.module.css";
 
 const PersonPage = () => {

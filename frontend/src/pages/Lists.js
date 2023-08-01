@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import WatchList from "../components/WatchList";
-import { UserContext } from "../UserContext";
 import { API_URL } from "../apiConfig";
-import { DarkModeContext } from "../DarkModeContext";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { UserContext } from "../Contexts/UserContext";
+import WatchList from "../components/WatchList";
 import styles from "./Lists.module.css";
 
 /**

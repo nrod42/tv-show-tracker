@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import styles from "./MediaNav.module.css";
-import { DarkModeContext } from "../DarkModeContext";
+
 
 const MediaNav = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -33,7 +34,7 @@ const MediaNav = () => {
         border: accentColor,
         color: "#FFF",
         boxShadow: "none",
-        fontSize: '0.8rem',
+        fontSize: '0.85rem',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -45,7 +46,7 @@ const MediaNav = () => {
         color: accentColor,
         border: `1px solid ${accentColor}`,
         boxShadow: "none",
-        fontSize: '0.8rem',
+        fontSize: '0.85rem',
       };
     }
   };

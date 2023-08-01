@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { API_URL } from "../apiConfig";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { UserContext } from "../Contexts/UserContext";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import { DarkModeContext } from "../DarkModeContext";
-import { UserContext } from "../UserContext";
-import { API_URL } from "../apiConfig";
 import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
@@ -47,27 +48,36 @@ const LoginPage = () => {
           className="d-flex flex-column justify-content-center"
           onSubmit={handleSubmit}
         >
-          <Form.Group className="mb-3" controlId="formUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
+          <Row>
+            <Form.Group className="mb-3" controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Form.Group>
+          </Row>
+          <Row>
+            <Form.Group className="mb-3" controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+          </Row>
           <Button variant="success" type="submit">
             Login
           </Button>
         </Form>
+        <div className="text-center">
+          <Link to="/tv-show-tracker/register">
+            <Button variant="link">Don't have an account? Register</Button>
+          </Link>
+        </div>
       </Container>
     </div>
   );

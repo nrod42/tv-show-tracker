@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { DarkModeContext } from "../DarkModeContext";
-import { MediaContext } from "../MediaContext";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { MediaContext } from "../Contexts/MediaContext";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

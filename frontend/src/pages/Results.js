@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,9 +8,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
 import { getResults } from "../components/API/getMedia";
-import { DarkModeContext } from "../DarkModeContext";
 import styles from "./ResultsPage.module.css";
-import { useParams } from "react-router-dom";
 import uniqid from "uniqid";
 
 const Results = () => {

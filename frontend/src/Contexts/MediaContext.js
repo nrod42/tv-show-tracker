@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getTopMedia, getPopularMedia, getMediaDetails } from "./components/API/getMedia";
+import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
 
 const MediaContext = createContext({});
 const MediaContextProvider = ({ children }) => {

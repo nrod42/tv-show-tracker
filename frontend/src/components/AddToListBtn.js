@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { UserContext } from "../UserContext";
+import { Link } from "react-router-dom";
+import { API_URL } from "../apiConfig";
+import { UserContext } from "../Contexts/UserContext";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { API_URL } from "../apiConfig";
-import { Link } from "react-router-dom";
 
 const AddToListBtn = ({ id, type }) => {
   const { userInfo } = useContext(UserContext);

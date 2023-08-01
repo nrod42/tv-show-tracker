@@ -1,5 +1,5 @@
-// const API_KEY = process.env.REACT_APP_API_KEY;
-const API_KEY = "4a82fad1143aa1a462a2f120e4923710";
+const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = "4a82fad1143aa1a462a2f120e4923710";
 
 const fetchMedia = async (url, type) => {
   try {

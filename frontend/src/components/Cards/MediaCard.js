@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { DarkModeContext } from "../../Contexts/DarkModeContext";
 import AddToListBtn from "../AddToListBtn";
 import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
-import { DarkModeContext } from "../../DarkModeContext";
 import defaultMediaIcon from '../../img/default_media_icon.svg';
 
 const MediaCard = ({ mediaData, setReload }) => {

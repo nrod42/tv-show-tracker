@@ -1,22 +1,24 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { DarkModeContext } from "../DarkModeContext";
+import { useNavigate, Link } from "react-router-dom";
+import { API_URL } from "../apiConfig";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { MediaContext } from "../Contexts/MediaContext";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { API_URL } from "../apiConfig";
 import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {
   const { darkMode } = useContext(DarkModeContext);
+  const { randomBackdrop } = useContext(MediaContext);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
 
   const navigate = useNavigate();
 
@@ -35,7 +37,6 @@ const RegisterPage = () => {
           password,
           firstName,
           lastName,
-          //   profilePic: "uploads/default-user-pic.png",
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -51,7 +52,9 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className={darkMode ? styles.registerPageDark : styles.registerPageLight}>
+    <div className={darkMode ? styles.registerPageDark : styles.registerPageLight} 
+      // style={{ backgroundImage: `url(${randomBackdrop.backdrop})` }}
+    >
       <Container className={styles.container}>
         <h2 className="text-center">Create Your Account</h2>
         <Form
@@ -63,6 +66,7 @@ const RegisterPage = () => {
               <Form.Group className="mb-3" controlId="formFirstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
+                  type="text"
                   placeholder="First Name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -73,6 +77,7 @@ const RegisterPage = () => {
               <Form.Group className="mb-3" controlId="formLastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
+                  type="text"
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -132,7 +137,13 @@ const RegisterPage = () => {
           <Button variant="success" type="submit">
             Register
           </Button>
+          
         </Form>
+        <div className="text-center">
+          <Link to="/tv-show-tracker/login">
+            <Button variant="link">Already have an account? Login</Button>
+          </Link>
+        </div>
       </Container>
     </div>
   );

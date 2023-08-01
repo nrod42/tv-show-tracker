@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import MediaCard from "../components/Cards/MediaCard";
-import { getMediaDetails } from "../components/API/getMedia";
+import { useParams } from "react-router-dom";
 import { API_URL } from "../apiConfig";
-import { DarkModeContext } from "../DarkModeContext";
-import { UserContext } from "../UserContext";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { UserContext } from "../Contexts/UserContext";
+import { getMediaDetails } from "../components/API/getMedia";
+import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import uniqid from 'uniqid';
 import styles from "./ListPage.module.css";
-import { useParams } from "react-router-dom";
+
 
 const ListPage = () => {
   const { darkMode } = useContext(DarkModeContext);

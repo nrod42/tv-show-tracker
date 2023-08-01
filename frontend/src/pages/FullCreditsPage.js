@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { getMediaCredits } from "../components/API/getMedia";
-import { DarkModeContext } from "../DarkModeContext";
 import PersonCard from "../components/Cards/PersonCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

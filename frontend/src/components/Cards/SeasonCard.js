@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { DarkModeContext } from "../../Contexts/DarkModeContext";
 import Card from "react-bootstrap/Card";
 import defaultMediaIcon from "../../img/default_media_icon.svg";
-import { DarkModeContext } from "../../DarkModeContext";
 
 const SeasonCard = ({ season }) => {
   const { darkMode } = useContext(DarkModeContext);

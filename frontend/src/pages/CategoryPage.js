@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../DarkModeContext";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { motion } from "framer-motion";
 import MediaNav from "../components/MediaNav";
 import MediaCard from "../components/Cards/MediaCard";

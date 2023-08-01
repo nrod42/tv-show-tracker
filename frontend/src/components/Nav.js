@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { DarkModeContext } from "../DarkModeContext";
-import { UserContext } from "../UserContext";
+import { API_URL } from "../apiConfig";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { UserContext } from "../Contexts/UserContext";
 import Cookies from "js-cookie";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -12,7 +13,7 @@ import logo from "../img/popcorn.png";
 import lightModeIcon from "../img/light_mode_icon.svg";
 import darkModeIcon from "../img/dark_mode_icon.svg";
 import styles from "./Nav.module.css";
-import { API_URL } from "../apiConfig";
+
 
 const Navi = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
