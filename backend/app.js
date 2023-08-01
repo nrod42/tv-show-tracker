@@ -22,19 +22,18 @@ const mongoDB = process.env.MONGO_URL;
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:3000",
-      "https://nrod42.github.io",
-      "https://nrod42.github.io/",
-      "https://nrod42.github.io/tv-show-tracker",
-      "https://nrod42.github.io/tv-show-tracker/",
-      "https://trakr.onrender.com",
-      "https://cinetrakr.onrender.com/",
-      "https://cinetrakr.onrender.com/tv-show-tracker",
-
-    ],
+    origin: 
+      '*',
+      // "http://localhost:3000",
+      // "https://nrod42.github.io",
+      // "https://nrod42.github.io/",
+      // "https://trakr.onrender.com",
+      // "https://trakr.onrender.com/",
+      // "https://cinetrakr.onrender.com",
+      // "https://cinetrakr.onrender.com/",
+    
   })
-); //issue when deploying?
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
