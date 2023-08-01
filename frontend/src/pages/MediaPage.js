@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
 import {
   getMediaDetails,
@@ -8,20 +8,17 @@ import {
   getRecMedia,
   getMediaTrailer,
 } from "../components/API/getMedia";
-import MediaCard from "../components/Cards/MediaCard";
 import SeasonCard from "../components/Cards/SeasonCard";
-import PersonCard from "../components/Cards/PersonCard";
+
 import MediaPageInfoSection from "../components/MediaPage/MediaPageInfoSection";
 import MediaPageBackdrop from "../components/MediaPage/MediaPageBackdrop";
 import MediaPagePoster from "../components/MediaPage/MediaPagePoster";
+import MediaPageMediaSection from "../components/MediaPage/MediaPageMediaSection";
 import MediaPageTrailerModal from "../components/MediaPage/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import rightArrowBlack from "../img/right_arrow_black.svg";
-import rightArrowWhite from "../img/right_arrow_white.svg";
 import styles from "./MediaPage.module.css";
-
 
 const MediaPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -74,26 +71,27 @@ const MediaPage = () => {
     setTrailer(await getMediaTrailer(id, mediaType));
   };
 
+  const fetchAllData = async () => {
+    await fetchMediaDetails();
+    await fetchMediaCredits();
+    await fetchSimilarMedia();
+    await fetchRecMedia();
+    await fetchTrailer();
+  };
+
   useEffect(() => {
     // Scroll to top on component mount
     window.scrollTo(0, 0);
-
-    const fetchData = async () => {
-      await fetchMediaDetails();
-      await fetchMediaCredits();
-      await fetchSimilarMedia();
-      await fetchRecMedia();
-      await fetchTrailer();
-    };
-
-    fetchData();
+    fetchAllData();
 
   }, [id]);
 
   return (
     <div className={darkMode ? styles.mediaPageDark : styles.mediaPageLight}>
+
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
+      
       <Container style={{ marginTop: "40px" }}>
         <Row className="mb-5">
           <Col lg={3} sm={12} className={styles.posterWrapper}>
@@ -116,7 +114,7 @@ const MediaPage = () => {
 
         {/* Render seasons for TV shows */}
         {mediaType === "tv" && seasons.length > 0 && (
-          <>
+          <section>
             <h2 className="mt-5 mb-5">Seasons</h2>
             <Row>
               {seasons.map((season) => (
@@ -125,104 +123,24 @@ const MediaPage = () => {
                 </Col>
               ))}
             </Row>
-          </>
+          </section>
         )}
         {mediaType === "tv" && seasons.length === 0 && (
-          <>
+          <section>
             <h2 className="mt-5 mb-5">Seasons</h2>
             <p className="text-center mt-5 mb-5">Not Available</p>
-          </>
+          </section>
         )}
 
         {/* Render cast */}
-        {cast.length > 0 && (
-          <>
-            <Link to={`/${mediaType}/credits/${id}`}>
-              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                  <h2 style={{margin: 0}}>Cast</h2>
-                  <img src={darkMode ? rightArrowWhite : rightArrowBlack}  style={{ height: "25px", width: "auto", marginLeft: "10px" }}></img>
-                </div>
-                <span>Full Cast & Crew</span>
-              </div>
-            </Link>
-            <Row>
-              {cast
-                .map((person) => (
-                  <Col key={person.id} xs={6} sm={4} md={3} lg={2}>
-                    <PersonCard person={person} />
-                  </Col>
-                ))
-                .slice(0, 6)}
-            </Row>
-          </>
-        )}
-        {cast.length === 0 && (
-          <>
-            <h2 className="mt-5 mb-5">Cast</h2>
-            <p className="text-center mt-5 mb-5">Not Available</p>
-          </>
-        )}
+        <MediaPageMediaSection id={id} mediaType={mediaType} media={cast} title={'cast'}/>
 
         {/* Render recommended media */}
-        {recMedia.length > 0 && (
-          <>
-            <Link to={`/${mediaType}/related/recommended/${id}`}>
-              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                  <h2 style={{margin: 0}}>Recommended</h2>
-                  <img src={darkMode ? rightArrowWhite : rightArrowBlack}  style={{ height: "25px", width: "auto", marginLeft: "10px" }}></img>
-                </div>
-                <span>Show More</span>
-              </div>
-            </Link>
-            <Row>
-              {recMedia
-                .map((media) => (
-                  <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
-                    <MediaCard mediaData={media} />
-                  </Col>
-                ))
-                .slice(0, 6)}
-            </Row>
-          </>
-        )}
-        {recMedia.length === 0 && (
-          <>
-            <h2 className="mt-5 mb-5">Recommended</h2>
-            <p className="text-center mt-5 mb-5">Not Available</p>
-          </>
-        )}
-
+        <MediaPageMediaSection id={id} mediaType={mediaType} media={recMedia} title={'recommended'} />
+        
         {/* Render similar media */}
-        {similarMedia.length > 0 && (
-          <>
-            <Link to={`/${mediaType}/related/similar/${id}`}>
-              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                  <h2 style={{margin: 0}}>Similar</h2>
-                  <img src={darkMode ? rightArrowWhite : rightArrowBlack}  style={{ height: "25px", width: "auto", marginLeft: "10px" }}></img>
-                </div>
-                <span>Show More</span>
-              </div>
-            </Link>
-            <Row>
-              {similarMedia
-                .map((media) => (
-                  <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
-                    <MediaCard mediaData={media} />
-                  </Col>
-                ))
-                .slice(0, 6)}
-            </Row>
-          </>
-        )}
-        {similarMedia.length === 0 && (
-          <>
-            <h2 className="mt-5 mb-5">Similar</h2>
-            <p className="text-center mt-5 mb-5">Not Available</p>
-          </>
-        )}
+        <MediaPageMediaSection id={id} mediaType={mediaType} media={similarMedia} title={'similar'} />
+        
       </Container>
 
       {/* Render the trailer modal */}
