@@ -29,6 +29,8 @@ app.use(
       "https://nrod42.github.io/tv-show-tracker",
       "https://nrod42.github.io/tv-show-tracker/",
       "https://trakr.onrender.com",
+      "https://cinetrakr.onrender.com/",
+      "https://cinetrakr.onrender.com/tv-show-tracker",
 
     ],
   })
