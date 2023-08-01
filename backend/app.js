@@ -24,9 +24,8 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "http://localhost:3000/",
-      "https://localhost:3000",
-      "http://localhost:3000/tv-show-tracker",
+      "https://nrod42.github.io/tv-show-tracker/",
+
     ],
   })
 ); //issue when deploying?
