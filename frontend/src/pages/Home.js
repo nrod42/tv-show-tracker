@@ -3,26 +3,15 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { MediaContext } from "../Contexts/MediaContext";
-import MediaCard from "../components/Cards/MediaCard";
+import CardStripSection from "../components/CardStripSection";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import rightArrowBlack from "../img/right_arrow_black.svg";
-import rightArrowWhite from '../img/right_arrow_white.svg';
 import defaultMediaIcon from "../img/default_media_icon.svg";
 import styles from "./Home.module.css";
 
 const Home = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } = useContext(MediaContext)
-
-  const renderMediaCards = (array) => {
-    return array.map((media) => (
-      <Col key={media.id} xs={6} sm={4} md={3} lg={2}>
-        <MediaCard mediaData={media} />
-      </Col>
-    ));
-  };
+  const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } = useContext(MediaContext);
 
   return (
     <motion.div
@@ -54,49 +43,17 @@ const Home = () => {
       </Row>
 
       <Container className={styles.container}>
-        <Link to={"/movie/category/popular"}>
-        <div className="d-flex align-items-center mt-5 mb-5">
-            <h2>Popular Movies</h2>
-            <img
-                src={darkMode ? rightArrowWhite : rightArrowBlack}
-                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
-            />
-          </div>
-        </Link>
-        <Row>{renderMediaCards(popularMovies).slice(0,6)}</Row>
+        {/* Render Popular Movies */}
+        <CardStripSection media={popularMovies} title={'Popular Movies'} linkTo={"/movie/category/popular"} />
         
-        <Link to={"/movie/category/top-rated"}>
-        <div className="d-flex align-items-center mt-5 mb-5">
-            <h2>Top Rated Movies</h2>
-            <img
-                src={darkMode ? rightArrowWhite : rightArrowBlack}
-                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
-            />
-          </div>
-        </Link>
-        <Row>{renderMediaCards(topMovies).slice(0,6)}</Row>
+        {/* Render Top Rated Movies */}
+        <CardStripSection media={topMovies} title={'Top Rated Movies'} linkTo={"/movie/category/top-rated"} />
         
-        <Link to={"/tv/category/popular"}>
-          <div className="d-flex align-items-center mt-5 mb-5">
-            <h2>Popular TV</h2>
-            <img
-                src={darkMode ? rightArrowWhite : rightArrowBlack}
-                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
-            />
-          </div>
-        </Link>
-        <Row>{renderMediaCards(popularTV).slice(0,6)}</Row>
+        {/* Render Popular Shows */}
+        <CardStripSection media={popularTV} title={'Popular Shows'} linkTo={"/tv/category/popular"} />
         
-        <Link to={"/tv/category/top-rated"}>
-          <div className="d-flex align-items-center mt-5 mb-5">
-            <h2>Top Rated TV</h2>
-            <img
-                src={darkMode ? rightArrowWhite : rightArrowBlack}
-                style={{ height: "25px", width: "auto", marginLeft: "10px" }}
-            />
-          </div>
-        </Link>
-        <Row>{renderMediaCards(topTV).slice(0,6)}</Row>
+        {/* Render Top Rated Shows */}
+        <CardStripSection media={topTV} title={'Top Rated Shows'} linkTo={"/tv/category/top-rated"} />
       </Container>
     </motion.div>
   );

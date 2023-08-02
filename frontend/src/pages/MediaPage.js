@@ -9,11 +9,10 @@ import {
   getMediaTrailer,
 } from "../components/API/getMedia";
 import SeasonCard from "../components/Cards/SeasonCard";
-
+import CardStripSection from "../components/CardStripSection";
 import MediaPageInfoSection from "../components/MediaPage/MediaPageInfoSection";
 import MediaPageBackdrop from "../components/MediaPage/MediaPageBackdrop";
 import MediaPagePoster from "../components/MediaPage/MediaPagePoster";
-import MediaPageMediaSection from "../components/MediaPage/MediaPageMediaSection";
 import MediaPageTrailerModal from "../components/MediaPage/MediaPageTrailerModal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -91,7 +90,7 @@ const MediaPage = () => {
 
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
-      
+
       <Container style={{ marginTop: "40px" }}>
         <Row className="mb-5">
           <Col lg={3} sm={12} className={styles.posterWrapper}>
@@ -114,32 +113,17 @@ const MediaPage = () => {
 
         {/* Render seasons for TV shows */}
         {mediaType === "tv" && seasons.length > 0 && (
-          <section>
-            <h2 className="mt-5 mb-5">Seasons</h2>
-            <Row>
-              {seasons.map((season) => (
-                <Col key={season.id} xs={6} sm={4} md={3} lg={2}>
-                  <SeasonCard season={season} />
-                </Col>
-              ))}
-            </Row>
-          </section>
-        )}
-        {mediaType === "tv" && seasons.length === 0 && (
-          <section>
-            <h2 className="mt-5 mb-5">Seasons</h2>
-            <p className="text-center mt-5 mb-5">Not Available</p>
-          </section>
+          <CardStripSection media={seasons} title={"Seasons"} />
         )}
 
         {/* Render cast */}
-        <MediaPageMediaSection id={id} mediaType={mediaType} media={cast} title={'cast'}/>
+        <CardStripSection media={cast} title={'Cast'} linkTo={`/${mediaType}/credits/${id}`}/>
 
         {/* Render recommended media */}
-        <MediaPageMediaSection id={id} mediaType={mediaType} media={recMedia} title={'recommended'} />
+        <CardStripSection media={recMedia} title={'Recommended'} linkTo={`/${mediaType}/related/recommended/${id}`} />
         
         {/* Render similar media */}
-        <MediaPageMediaSection id={id} mediaType={mediaType} media={similarMedia} title={'similar'} />
+        <CardStripSection media={similarMedia} title={'Similar'} linkTo={`/${mediaType}/related/similar/${id}`} />
         
       </Container>
 
