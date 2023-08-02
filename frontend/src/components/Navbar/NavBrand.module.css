@@ -1,0 +1,11 @@
+.navbarBrand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 20px;
+    width: auto;
+}

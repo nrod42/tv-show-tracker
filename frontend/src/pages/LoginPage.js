@@ -40,7 +40,7 @@ const LoginPage = () => {
         alert("Wrong credentials");
       }
     } catch (error) {
-      console.error('Error Logging', error);
+      console.error('Error logging in', error);
     } finally {
       setLoading(false)
     }
@@ -50,6 +50,7 @@ const LoginPage = () => {
     <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
       <Container className={styles.container}>
         <h2 className="text-center">Login To Your Account</h2>
+        
         {loading ? (
           <ColorRing
             visible={true}
@@ -90,6 +91,11 @@ const LoginPage = () => {
             Login
           </Button>
         </Form>)}
+        <p className="text-center"><strong>Guest Account</strong></p>
+        <p className="text-center">
+          <span><strong>Username: </strong>Guest </span>
+          <span><strong>Password: </strong>Guest</span>
+        </p>
         <div className="text-center">
           <Link to="/register">
             <Button variant="link">Don't have an account? Register</Button>

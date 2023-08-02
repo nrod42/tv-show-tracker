@@ -39,7 +39,6 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
             ?.filter((member) => ["Writer", "Screenplay", "Story"].includes(member.job))
             .map((writer) => writer.name)
           )].join(", ")}
-          {/* {console.log(crew)} */}
         </span>
       </div>
 

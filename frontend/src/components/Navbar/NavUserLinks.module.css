@@ -1,0 +1,5 @@
+
+.darkModeToggle:hover {
+    cursor: pointer;
+    filter: brightness(85%);
+}

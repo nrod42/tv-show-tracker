@@ -1,0 +1,20 @@
+.searchbarWrapper {
+    position: relative; 
+}
+
+.searchForm {
+    display: flex;
+    width: 100%;
+}   
+
+.suggestionsDropdown {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%; 
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0; 
+    margin: 0; 
+    list-style: none;
+}
