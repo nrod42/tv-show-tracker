@@ -21,7 +21,7 @@ const Home = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-      <Row className={styles.row}>
+      <Row className={styles.randomBackdropWrapper}>
         <img
           className={styles.randomBackdrop}
           src={randomBackdrop.backdrop !== null ? randomBackdrop.backdrop : defaultMediaIcon}

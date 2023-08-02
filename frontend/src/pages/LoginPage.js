@@ -8,11 +8,13 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import styles from './LoginPage.module.css';
+import { ColorRing } from 'react-loader-spinner';
 
 const LoginPage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,7 +22,9 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      setLoading(true);
       const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         body: JSON.stringify({ username, password }),
@@ -36,7 +40,9 @@ const LoginPage = () => {
         alert("Wrong credentials");
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error Logging', error);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -44,7 +50,18 @@ const LoginPage = () => {
     <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
       <Container className={styles.container}>
         <h2 className="text-center">Login To Your Account</h2>
-        <Form
+        {loading ? (
+          <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#198754']}
+          />)
+        :
+        (<Form
           className="d-flex flex-column justify-content-center"
           onSubmit={handleSubmit}
         >
@@ -72,7 +89,7 @@ const LoginPage = () => {
           <Button variant="success" type="submit">
             Login
           </Button>
-        </Form>
+        </Form>)}
         <div className="text-center">
           <Link to="/register">
             <Button variant="link">Don't have an account? Register</Button>

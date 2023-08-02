@@ -9,6 +9,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from './RegisterPage.module.css';
+import { ColorRing } from 'react-loader-spinner';
+
 
 const RegisterPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -19,6 +21,7 @@ const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,6 +35,7 @@ const RegisterPage = () => {
 
     // sends valid registration to backend
     try {
+      setLoading(true);
       const response = await fetch(`${API_URL}/register`, {
         method: "POST",
         body: JSON.stringify({
@@ -50,7 +54,9 @@ const RegisterPage = () => {
         alert("registration failed");
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error registering', error);
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -60,7 +66,19 @@ const RegisterPage = () => {
     >
       <Container className={styles.container}>
         <h2 className="text-center">Create Your Account</h2>
-        <Form
+        
+        {loading ? (
+          <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#198754']}
+          />)
+        :
+        (<Form
           className="d-flex flex-column justify-content-center"
           onSubmit={register}
         >
@@ -141,7 +159,8 @@ const RegisterPage = () => {
             Register
           </Button>
           
-        </Form>
+        </Form>)}
+
         <div className="text-center">
           <Link to="/login">
             <Button variant="link">Already have an account? Login</Button>

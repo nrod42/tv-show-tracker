@@ -23,7 +23,7 @@
     margin-top: 40px;
 }
 
-.row {
+.randomBackdropWrapper {
     height: 700px;
     position: relative;
 }
@@ -31,7 +31,7 @@
 .randomBackdrop {
     filter: brightness(40%);
     max-height: 100%;
-    max-width: 100%;
+    /* max-width: 100%; */
     width: 100%;
     min-height: 100%;
     object-fit: cover;

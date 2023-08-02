@@ -9,7 +9,6 @@ import rightArrowWhite from '../img/right_arrow_white.svg';
 import rightArrowBlack from '../img/right_arrow_black.svg';
 import SeasonCard from './Cards/SeasonCard';
 
-
 const CardStripSection = ({media, title, linkTo}) => {
     const {darkMode} = useContext(DarkModeContext);
 
