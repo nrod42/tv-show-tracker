@@ -1,9 +1,7 @@
-import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { API_URL } from "../apiConfig";
+import React, { useState, useEffect, useContext } from "react";
+
 import { DarkModeContext } from "../Contexts/DarkModeContext";
-import { UserContext } from "../Contexts/UserContext";
-import Cookies from "js-cookie";
+
 import NavBrand from "./Navbar/NavBrand";
 import NavCatLinks from "./Navbar/NavCatLinks";
 import NavSearchbar from "./Navbar/NavSearchbar";
@@ -17,73 +15,47 @@ import styles from "./Nav.module.css";
 
 const Navi = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
-  const { userInfo, setUserInfo } = useContext(UserContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Verify User Profile
-    const fetchUserProfile = async () => {
-      try {
-        const token = Cookies.get("token");
-        if (!token) {
-          setUserInfo(null);
-          return; // Skip fetching the user profile if no token exists
-        }
-
-        const response = await fetch(`${API_URL}/profile`, {
-          credentials: "include",
-        });
-        if (response.ok) {
-          const userInfo = await response.json();
-          setUserInfo(userInfo);
-        } else {
-          setUserInfo(null);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserProfile();
-  }, [setUserInfo]);
+  const [collapseOpen, setCollapseOpen] = useState(false); // State for collapsible
 
   const handleDarkMode = () => {
     setDarkMode((prevState) => !prevState);
   };
 
-  const logout = () => {
-    Cookies.remove("token");
-    navigate("/");
-    setUserInfo(null);
+  const handleCollapseToggle = () => {
+    setCollapseOpen((prevOpen) => !prevOpen); // Toggle the collapsible state
+  };
+
+  const handleNavLinkClick = () => {
+    setCollapseOpen(false); // Close the collapsible when a link is clicked
   };
 
   return (
     <Navbar
-      bg="dark"
-      variant="dark"
+      bg={darkMode ? "dark" : "light"}
+      variant={darkMode ? "dark" : "light"}
       expand="lg"
       className={`mb-3 ${styles.navbar}`}
       fixed="top"
     >
       <Container fluid>
         <NavBrand />
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Row className=" align-items-center w-100">
-            {/* Display order changes on small screens (mobile) */}
+        <Navbar.Toggle onClick={handleCollapseToggle} /> {/* Toggle collapsible */}
+        <Navbar.Collapse in={collapseOpen}>
+          <Row className="align-items-center w-100">
             <Col sm={12} md={6} lg={4} className="mb-3 mb-md-0">
-              <NavCatLinks userInfo={userInfo} />
+              <NavCatLinks
+                
+                handleNavLinkClick={handleNavLinkClick}
+              />
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-3 mb-md-0">
               <NavSearchbar />
             </Col>
-            <Col sm={12} md={12} lg={4} className="d-flex justify-content-end">
+            <Col sm={12} md={12} lg={4} className={`d-flex ${styles.navContainer}`}>
               <NavUserLinks
-                userInfo={userInfo}
-                logout={logout}
                 darkMode={darkMode}
                 handleDarkMode={handleDarkMode}
+                handleNavLinkClick={handleNavLinkClick}
               />
             </Col>
           </Row>

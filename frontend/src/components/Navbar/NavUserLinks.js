@@ -1,19 +1,61 @@
-import React from "react";
+import React, { useEffect, useContext} from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import lightModeIcon from "../../img/light_mode_icon.svg";
 import darkModeIcon from "../../img/dark_mode_icon.svg";
 import styles from "./NavUserLinks.module.css";
+import { UserContext } from "../../Contexts/UserContext";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../apiConfig";
 
-const NavUserLinks = ({ userInfo, logout, darkMode, handleDarkMode }) => {
+const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
+ 
+  const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useContext(UserContext);
+
+  useEffect(() => {
+    // Verify User Profile
+    const fetchUserProfile = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) {
+          setUserInfo(null);
+          return;
+        }
+
+        const response = await fetch(`${API_URL}/profile`, {
+          credentials: "include",
+        });
+        if (response.ok) {
+          const userInfo = await response.json();
+          setUserInfo(userInfo);
+        } else {
+          setUserInfo(null);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserProfile();
+  }, [setUserInfo]);
+
+  const logout = () => {
+    Cookies.remove("token");
+    navigate("/");
+    setUserInfo(null);
+    handleNavLinkClick();
+  };
+
   return (
-    <Nav className={`text-center ${styles.navLinks}`}>
+    <Nav className="text-center">
       {!userInfo ? (
         <>
-          <Nav.Link as={Link} to="/register">
+          <Nav.Link as={Link} to="/register" onClick={handleNavLinkClick}>
             Register
           </Nav.Link>
-          <Nav.Link as={Link} to="/login">
+          <Nav.Link as={Link} to="/login" onClick={handleNavLinkClick}>
             Login
           </Nav.Link>
         </>
@@ -22,7 +64,7 @@ const NavUserLinks = ({ userInfo, logout, darkMode, handleDarkMode }) => {
       )}
       <img
         src={darkMode ? lightModeIcon : darkModeIcon}
-        className={`${styles.darkModeToggle} ms-3 me-3`}
+        className={`${styles.darkModeToggle} ms-3`}
         alt="dark mode"
         style={{ width: "30px", height: "auto" }}
         onClick={handleDarkMode}

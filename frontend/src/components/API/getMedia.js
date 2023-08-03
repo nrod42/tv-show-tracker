@@ -4,7 +4,7 @@ const fetchMedia = async (url, type) => {
   try {
     const response = await fetch(url, { mode: "cors" });
     const { results } = await response.json();
-    // console.log(results)
+    // console.log(results.filter((media) => media.original_language !== "hi" && media.original_language !== "tl"))
     return results
       .filter(
         (media) =>
@@ -68,7 +68,11 @@ const getMediaDetails = async (id, type) => {
         : null,
       title: media.title || media.name,
       genres: media.genres
-        ? media.genres.map((genre) => genre.name).join(", ")
+        ? media.genres
+            .map((genre) =>
+              genre.name
+            )
+            .join(", ")
         : null,
       rating: media.vote_average,
       plot: media.overview,
@@ -84,7 +88,6 @@ const getMediaDetails = async (id, type) => {
       details.seasonsInfo = media.seasons;
       details.createdBy = media.created_by;
     }
-    // console.log(details.createdBy)
     return details;
   } catch (error) {
     console.error("Error:API", error);
@@ -192,7 +195,6 @@ const getRecMedia = async (movieId, type, page = 1) => {
     const url = `https://api.themoviedb.org/3/${mediaType}/${movieId}/recommendations?api_key=${API_KEY}&language&en-US&language=en-US&page=${page}`;
     const response = await fetch(url, { mode: "cors" });
     const rec = await response.json();
-    // console.log(rec)
     return rec.results.map((media) => ({
       id: media.id || "",
       poster: media.poster_path
@@ -226,6 +228,7 @@ const getResults = async (query) => {
     const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
     const response = await fetch(url, { mode: "cors" });
     const { results } = await response.json();
+    // console.log(results)
     return results.map((result) => ({
       id: result.id,
       poster: result.poster_path

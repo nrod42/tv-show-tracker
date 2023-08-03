@@ -1,4 +1,23 @@
 
 .navbar {
     filter: opacity(0.95);
+    max-width: 100vw;
 }
+
+/* Default layout for all screen sizes */
+.navContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Layout for medium screens (768px and larger) */
+  @media (min-width: 768px) {
+    .navContainer {
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+  }

@@ -13,6 +13,7 @@ const NavSearchbar = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   const inputRef = useRef(null); // Create a ref for the input element
+  const suggestionsRef = useRef(null); // Create a ref for the suggestions dropdown
 
   const handleInputChange = async (e) => {
     setSearchInput(e.target.value);
@@ -39,49 +40,70 @@ const NavSearchbar = () => {
     inputRef.current.blur();
   };
 
+  const handleParentBlur = () => {
+    // Delay the onBlur event to check if focus has moved to suggestions
+    setTimeout(() => {
+      // If the currently active element is not a child of the suggestions div, hide the suggestions
+      if (!suggestionsRef.current.contains(document.activeElement)) {
+        setIsFocused(false);
+      }
+    }, 0);
+  };
+
   return (
-    <div className={styles.searchbarWrapper}>
+    <div
+      className={styles.searchbarWrapper}
+      onFocus={() => setIsFocused(true)}
+      onBlur={handleParentBlur}
+    >
       <Form onSubmit={handleSearch} className={styles.searchForm}>
-        <Form.Control
-          ref={inputRef}
-          onChange={handleInputChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          value={searchInput}
-          className="me-2"
-        />
-        {isFocused && suggestions.length > 0 && (
-          <ul className={styles.suggestionsDropdown}>
-            {/* Apply styling to the suggestions dropdown */}
-            {suggestions.map((suggestion) => (
-              <li key={suggestion.id}>
-                <Link to={`/${suggestion.type}/${suggestion.id}`}>
-                  <div className="d-flex flex-row align-items-center justify-content-start gap-1">
-                    <div style={{ maxWidth: "60px" }}>
-                      <img
-                        src={suggestion.poster}
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          objectFit: "cover",
-                        }}
-                      ></img>
-                    </div>
-                    <div>
+        <div className={styles.inputContainer}>
+          <Form.Control
+            ref={inputRef}
+            onChange={handleInputChange}
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            value={searchInput}
+            className="me-2"
+          />
+          {isFocused && suggestions.length > 0 && (
+            <ul
+              className={styles.suggestionsDropdown}
+              ref={suggestionsRef}
+              tabIndex={-1} // Make suggestions focusable
+            >
+              {/* Apply styling to the suggestions dropdown */}
+              {suggestions.map((suggestion) => (
+                <li key={suggestion.id}>
+                  <Link
+                    to={`/${suggestion.type}/${suggestion.id}`}
+                    onClick={() => setIsFocused(false)} // Close suggestions on link click
+                  >
+                    <div className="d-flex flex-row align-items-center justify-content-start gap-1">
+                      <div style={{ maxWidth: "60px" }}>
+                        <img
+                          src={suggestion.poster}
+                          style={{
+                            height: "100%",
+                            width: "100%",
+                            objectFit: "cover",
+                          }}
+                        ></img>
+                      </div>
                       <div>
-                        {suggestion.title} ({suggestion.year}){" "}
-                        {suggestion.type.toUpperCase()}
+                        <div>
+                          {suggestion.title} ({suggestion.year}){" "}
+                          {suggestion.type.toUpperCase()}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         <Button variant="success" type="submit">
           <img src={searchIcon} style={{ width: "20px" }} alt="Search" />
         </Button>

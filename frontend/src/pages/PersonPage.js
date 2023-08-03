@@ -22,7 +22,6 @@ const PersonPage = () => {
   // const [totalRoles, setTotalRoles] = useState(0);
 
   const { name, profile_path, birthday, place_of_birth, biography } = actorInfo;
-  // const { id, poster, title, rating, year, type } = mediaData;
 
   const fetchActorInfo = async () => {
     const info = await getActorInfo(actorId);
@@ -58,7 +57,6 @@ const PersonPage = () => {
       <Container style={{ marginTop: "80px" }}>
         <Row
           className="actorInfo"
-          // style={{ display: "flex", gap: "20px" }}
         >
           <Col md={2} className="actorProfile">
             <img
@@ -70,7 +68,7 @@ const PersonPage = () => {
             <h2>{name}</h2>
             <p>
               <strong>Birthday: </strong>
-              {/* {format(new Date(birthday), "MM d, yyyy")} */}
+              {birthday ? format(new Date(birthday), "MMMM d, yyyy") : 'N/A'}
             </p>
             <p>
               <strong>Place of Birth:</strong> {place_of_birth}
