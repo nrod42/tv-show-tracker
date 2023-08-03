@@ -8,9 +8,8 @@ import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import uniqid from 'uniqid';
+import uniqid from "uniqid";
 import styles from "./ListPage.module.css";
-
 
 const ListPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -66,7 +65,9 @@ const ListPage = () => {
   return (
     <div className={darkMode ? styles.listPageDark : styles.listPageLight}>
       <Container className="text-center">
-        <h2 className="mb-5">{listType.charAt(0).toUpperCase() + listType.slice(1)}</h2>
+        <h2 className="mb-5">
+          {listType.charAt(0).toUpperCase() + listType.slice(1)}
+        </h2>
         <Row>
           {list?.map((media) => (
             <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>

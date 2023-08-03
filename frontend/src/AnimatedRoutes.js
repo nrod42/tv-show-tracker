@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -28,10 +27,15 @@ const AnimatedRoutes = () => {
         <Route path="/lists/:listType" element={<ListPage />} />
         <Route path="/:mediaType/:id" element={<MediaPage />} />
         <Route path="/:mediaType/credits/:id" element={<FullCreditsPage />} />
-        <Route path="/:mediaType/category/:category" element={<CategoryPage />} />
-        <Route path="/:mediaType/related/:relation/:id" element={<RelatedMediaPage />} />
+        <Route
+          path="/:mediaType/category/:category"
+          element={<CategoryPage />}
+        />
+        <Route
+          path="/:mediaType/related/:relation/:id"
+          element={<RelatedMediaPage />}
+        />
         <Route path="/people/:actorId" element={<PersonPage />} />
-
       </Routes>
     </AnimatePresence>
   );

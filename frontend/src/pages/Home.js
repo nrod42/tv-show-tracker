@@ -11,12 +11,13 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } = useContext(MediaContext);
+  const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } =
+    useContext(MediaContext);
 
   return (
     <motion.div
       className={darkMode ? styles.homePageDark : styles.homePageLight}
-      style={{ overflowX: "hidden"}}
+      style={{ overflowX: "hidden" }}
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
@@ -24,7 +25,11 @@ const Home = () => {
       <Row className={styles.randomBackdropWrapper}>
         <img
           className={styles.randomBackdrop}
-          src={randomBackdrop.backdrop !== null ? randomBackdrop.backdrop : defaultMediaIcon}
+          src={
+            randomBackdrop.backdrop !== null
+              ? randomBackdrop.backdrop
+              : defaultMediaIcon
+          }
           alt={`${randomBackdrop.title} poster`}
         />
         <div className={styles.titleWrapper}>
@@ -33,9 +38,7 @@ const Home = () => {
             Keep track of your favorite movies and shows
           </h2>
         </div>
-        <Link
-          to={`/${randomBackdrop.type}/${randomBackdrop.id}`}
-        >
+        <Link to={`/${randomBackdrop.type}/${randomBackdrop.id}`}>
           <div className={styles.randomBackdropInfo}>
             {randomBackdrop.title} ({randomBackdrop.year})
           </div>
@@ -44,16 +47,32 @@ const Home = () => {
 
       <Container className={styles.container}>
         {/* Render Popular Movies */}
-        <CardStripSection media={popularMovies} title={'Popular Movies'} linkTo={"/movie/category/popular"} />
-        
+        <CardStripSection
+          media={popularMovies}
+          title={"Popular Movies"}
+          linkTo={"/movie/category/popular"}
+        />
+
         {/* Render Top Rated Movies */}
-        <CardStripSection media={topMovies} title={'Top Rated Movies'} linkTo={"/movie/category/top-rated"} />
-        
+        <CardStripSection
+          media={topMovies}
+          title={"Top Rated Movies"}
+          linkTo={"/movie/category/top-rated"}
+        />
+
         {/* Render Popular Shows */}
-        <CardStripSection media={popularTV} title={'Popular Shows'} linkTo={"/tv/category/popular"} />
-        
+        <CardStripSection
+          media={popularTV}
+          title={"Popular Shows"}
+          linkTo={"/tv/category/popular"}
+        />
+
         {/* Render Top Rated Shows */}
-        <CardStripSection media={topTV} title={'Top Rated Shows'} linkTo={"/tv/category/top-rated"} />
+        <CardStripSection
+          media={topTV}
+          title={"Top Rated Shows"}
+          linkTo={"/tv/category/top-rated"}
+        />
       </Container>
     </motion.div>
   );

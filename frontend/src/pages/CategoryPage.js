@@ -38,44 +38,43 @@ const CategoryPage = () => {
     switch (category) {
       case "popular":
         mediaData = await getPopularMedia(mediaType, page);
-        setTitle('Popular');
+        setTitle("Popular");
         break;
       case "now-playing":
         mediaData = await getNowPlayingMovies(page);
-        setTitle('Now Playing');
+        setTitle("Now Playing");
         break;
       case "upcoming":
         mediaData = await getUpcomingMovies(page);
-        setTitle('Upcoming');
+        setTitle("Upcoming");
         break;
       case "airing-today":
         mediaData = await getAiringTodayTV(page);
-        setTitle('Airing Today');
+        setTitle("Airing Today");
         break;
       default:
         mediaData = await getTopMedia(mediaType, page);
-        setTitle('Top Rated');
+        setTitle("Top Rated");
     }
 
-  // Filter out duplicate media items and add only the new ones to the state
-  setMedia((prevMedia) => {
-    const uniqueMediaData = mediaData.filter(
-      (mediaItem) => !prevMedia.some((prevItem) => prevItem.id === mediaItem.id)
-    );
-    return [...prevMedia, ...uniqueMediaData];
-  });
+    // Filter out duplicate media items and add only the new ones to the state
+    setMedia((prevMedia) => {
+      const uniqueMediaData = mediaData.filter(
+        (mediaItem) =>
+          !prevMedia.some((prevItem) => prevItem.id === mediaItem.id)
+      );
+      return [...prevMedia, ...uniqueMediaData];
+    });
   };
 
   useEffect(() => {
     fetchPage();
-  }, [page])
+  }, [page]);
 
   useEffect(() => {
     // Clear media state when the category changes
     setMedia([]);
   }, [category]);
-
-
 
   return (
     <motion.div

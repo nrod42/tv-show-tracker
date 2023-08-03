@@ -5,9 +5,7 @@ import { UserContextProvider } from "./Contexts/UserContext";
 import Nav from "./components/Nav";
 import AnimatedRoutes from "./AnimatedRoutes";
 
-
 const App = () => {
-
   return (
     <div className="App">
       <DarkModeContextProvider>

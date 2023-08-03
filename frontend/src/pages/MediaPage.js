@@ -8,7 +8,6 @@ import {
   getRecMedia,
   getMediaTrailer,
 } from "../components/API/getMedia";
-import SeasonCard from "../components/Cards/SeasonCard";
 import CardStripSection from "../components/CardStripSection";
 import MediaPageInfoSection from "../components/MediaPage/MediaPageInfoSection";
 import MediaPageBackdrop from "../components/MediaPage/MediaPageBackdrop";
@@ -82,12 +81,10 @@ const MediaPage = () => {
     // Scroll to top on component mount
     window.scrollTo(0, 0);
     fetchAllData();
-
   }, [id]);
 
   return (
     <div className={darkMode ? styles.mediaPageDark : styles.mediaPageLight}>
-
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
 
@@ -105,7 +102,7 @@ const MediaPage = () => {
           <Col lg={9} sm={12}>
             {/* Render the media information section */}
             <MediaPageInfoSection
-              mediaInfo={{...mediaInfo, crew: crew}}
+              mediaInfo={{ ...mediaInfo, crew: crew }}
               mediaType={mediaType}
             />
           </Col>
@@ -117,14 +114,25 @@ const MediaPage = () => {
         )}
 
         {/* Render cast */}
-        <CardStripSection media={cast} title={'Cast'} linkTo={`/${mediaType}/credits/${id}`}/>
+        <CardStripSection
+          media={cast}
+          title={"Cast"}
+          linkTo={`/${mediaType}/credits/${id}`}
+        />
 
         {/* Render recommended media */}
-        <CardStripSection media={recMedia} title={'Recommended'} linkTo={`/${mediaType}/related/recommended/${id}`} />
-        
+        <CardStripSection
+          media={recMedia}
+          title={"Recommended"}
+          linkTo={`/${mediaType}/related/recommended/${id}`}
+        />
+
         {/* Render similar media */}
-        <CardStripSection media={similarMedia} title={'Similar'} linkTo={`/${mediaType}/related/similar/${id}`} />
-        
+        <CardStripSection
+          media={similarMedia}
+          title={"Similar"}
+          linkTo={`/${mediaType}/related/similar/${id}`}
+        />
       </Container>
 
       {/* Render the trailer modal */}

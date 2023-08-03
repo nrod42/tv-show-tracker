@@ -71,21 +71,7 @@ const AddToListBtn = ({ id, type }) => {
   return (
     <OverlayTrigger trigger="click" placement="right" overlay={tooltip}>
       {userInfo ? (
-      <Button
-        variant="success"
-        style={{
-          borderTopLeftRadius: "0",
-          borderTopRightRadius: "0",
-          position: "absolute",
-          right: "0",
-          top: "0",
-        }}
-      >
-        +
-      </Button>
-      ) : 
-      (<Link to={'/register'}>
-          <Button
+        <Button
           variant="success"
           style={{
             borderTopLeftRadius: "0",
@@ -94,10 +80,25 @@ const AddToListBtn = ({ id, type }) => {
             right: "0",
             top: "0",
           }}
+        >
+          +
+        </Button>
+      ) : (
+        <Link to={"/register"}>
+          <Button
+            variant="success"
+            style={{
+              borderTopLeftRadius: "0",
+              borderTopRightRadius: "0",
+              position: "absolute",
+              right: "0",
+              top: "0",
+            }}
           >
             +
           </Button>
-      </Link>)}
+        </Link>
+      )}
     </OverlayTrigger>
   );
 };

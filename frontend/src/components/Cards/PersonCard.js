@@ -19,20 +19,27 @@ const PersonCard = ({ person }) => {
   }, [id]);
 
   return (
-    <Card
-      bg={darkMode ? "dark" : "light"}
-      style={{border: "none" }}
-    >
+    <Card bg={darkMode ? "dark" : "light"} style={{ border: "none" }}>
       <Card.Link as={Link} to={`/people/${id}`}>
         <Card.Img
           variant="top"
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
           src={actorPic !== null ? actorPic : defaultMediaIcon}
         />
       </Card.Link>
-      <Card.Body className="text-center" style={{ padding: '1rem' }}>
-        <Card.Title style={{ fontSize: '1rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>{name}</Card.Title>
-        <Card.Subtitle style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>{character}</Card.Subtitle>
+      <Card.Body className="text-center" style={{ padding: "1rem" }}>
+        <Card.Title
+          style={{
+            fontSize: "1rem",
+            fontWeight: "bold",
+            marginBottom: "0.5rem",
+          }}
+        >
+          {name}
+        </Card.Title>
+        <Card.Subtitle style={{ fontSize: "0.9rem", marginBottom: "0.5rem" }}>
+          {character}
+        </Card.Subtitle>
       </Card.Body>
     </Card>
   );

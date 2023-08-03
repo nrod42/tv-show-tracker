@@ -83,12 +83,20 @@ const PersonPage = () => {
             )}
             <div className="d-flex justify-content-center">
               {!showFullBio && (
-                <Button variant="link" className="d-flex justify-content-center" onClick={handleShowFullBio}>
+                <Button
+                  variant="link"
+                  className="d-flex justify-content-center"
+                  onClick={handleShowFullBio}
+                >
                   Show More
                 </Button>
               )}
               {showFullBio && (
-                <Button variant="link" className="d-flex justify-content-center" onClick={handleShowFullBio}>
+                <Button
+                  variant="link"
+                  className="d-flex justify-content-center"
+                  onClick={handleShowFullBio}
+                >
                   Show Less
                 </Button>
               )}

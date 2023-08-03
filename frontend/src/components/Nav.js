@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../apiConfig";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { UserContext } from "../Contexts/UserContext";
-import { getResults } from "./API/getMedia";
 import Cookies from "js-cookie";
 import NavBrand from "./Navbar/NavBrand";
 import NavCatLinks from "./Navbar/NavCatLinks";
@@ -11,6 +10,9 @@ import NavSearchbar from "./Navbar/NavSearchbar";
 import NavUserLinks from "./Navbar/NavUserLinks";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 import styles from "./Nav.module.css";
 
 const Navi = () => {
@@ -18,8 +20,6 @@ const Navi = () => {
   const { userInfo, setUserInfo } = useContext(UserContext);
 
   const navigate = useNavigate();
-  const [searchInput, setSearchInput] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     // Verify User Profile
@@ -58,26 +58,6 @@ const Navi = () => {
     setUserInfo(null);
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (searchInput === "") return;
-    const formattedQuery = searchInput.replace(" ", "-"); // Replace spaces with dashes
-    navigate(`/results/${encodeURIComponent(formattedQuery)}`);
-  };
-
-  const handleInputChange = async (e) => {
-    setSearchInput(e.target.value)
-    const formattedQuery = searchInput.replace(" ", "-"); // Replace spaces with dashes
-
-    // Fetch search suggestions from your API
-    try {
-      const results = await getResults(formattedQuery);
-      setSuggestions(results.slice(0,3));
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <Navbar
       bg="dark"
@@ -90,11 +70,23 @@ const Navi = () => {
         <NavBrand />
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <div className="d-flex align-items-center justify-content-between w-100">
-            <NavCatLinks userInfo={userInfo}/>
-            <NavSearchbar searchInput={searchInput} handleInputChange={handleInputChange} handleSearch={handleSearch} suggestions={suggestions}/>
-            <NavUserLinks userInfo={userInfo} logout={logout} darkMode={darkMode} handleDarkMode={handleDarkMode}/>
-          </div>
+          <Row className=" align-items-center w-100">
+            {/* Display order changes on small screens (mobile) */}
+            <Col sm={12} md={6} lg={4} className="mb-3 mb-md-0">
+              <NavCatLinks userInfo={userInfo} />
+            </Col>
+            <Col sm={12} md={6} lg={4} className="mb-3 mb-md-0">
+              <NavSearchbar />
+            </Col>
+            <Col sm={12} md={12} lg={4} className="d-flex justify-content-end">
+              <NavUserLinks
+                userInfo={userInfo}
+                logout={logout}
+                darkMode={darkMode}
+                handleDarkMode={handleDarkMode}
+              />
+            </Col>
+          </Row>
         </Navbar.Collapse>
       </Container>
     </Navbar>

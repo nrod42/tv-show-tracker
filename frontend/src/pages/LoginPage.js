@@ -7,8 +7,8 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import styles from './LoginPage.module.css';
-import { ColorRing } from 'react-loader-spinner';
+import styles from "./LoginPage.module.css";
+import { ColorRing } from "react-loader-spinner";
 
 const LoginPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -40,9 +40,9 @@ const LoginPage = () => {
         alert("Wrong credentials");
       }
     } catch (error) {
-      console.error('Error logging in', error);
+      console.error("Error logging in", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -50,7 +50,7 @@ const LoginPage = () => {
     <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
       <Container className={styles.container}>
         <h2 className="text-center">Login To Your Account</h2>
-        
+
         {loading ? (
           <ColorRing
             visible={true}
@@ -59,42 +59,49 @@ const LoginPage = () => {
             ariaLabel="blocks-loading"
             wrapperStyle={{}}
             wrapperClass="blocks-wrapper"
-            colors={['#198754']}
-          />)
-        :
-        (<Form
-          className="d-flex flex-column justify-content-center"
-          onSubmit={handleSubmit}
-        >
-          <Row>
-            <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </Form.Group>
-          </Row>
-          <Row>
-            <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
-          </Row>
-          <Button variant="success" type="submit">
-            Login
-          </Button>
-        </Form>)}
-        <p className="text-center"><strong>Guest Account</strong></p>
+            colors={["#198754"]}
+          />
+        ) : (
+          <Form
+            className="d-flex flex-column justify-content-center"
+            onSubmit={handleSubmit}
+          >
+            <Row>
+              <Form.Group className="mb-3" controlId="formUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group>
+            </Row>
+            <Row>
+              <Form.Group className="mb-3" controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+            </Row>
+            <Button variant="success" type="submit">
+              Login
+            </Button>
+          </Form>
+        )}
         <p className="text-center">
-          <span><strong>Username: </strong>Guest </span>
-          <span><strong>Password: </strong>Guest</span>
+          <strong>Guest Account</strong>
+        </p>
+        <p className="text-center">
+          <span>
+            <strong>Username: </strong>Guest{" "}
+          </span>
+          <span>
+            <strong>Password: </strong>Guest
+          </span>
         </p>
         <div className="text-center">
           <Link to="/register">

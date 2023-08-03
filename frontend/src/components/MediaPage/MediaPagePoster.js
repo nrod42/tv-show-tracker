@@ -1,7 +1,7 @@
 import React from "react";
 import AddToListBtn from "../../components/AddToListBtn";
 import Button from "react-bootstrap/Button";
-import defaultMediaIcon from '../../img/default_media_icon.svg';
+import defaultMediaIcon from "../../img/default_media_icon.svg";
 
 const MediaPagePoster = ({ id, mediaInfo, mediaType, setLgShow }) => {
   const { title, poster } = mediaInfo;
@@ -11,20 +11,20 @@ const MediaPagePoster = ({ id, mediaInfo, mediaType, setLgShow }) => {
       className="d-flex flex-column justify-content-center"
       style={{
         marginTop: "-250px", // Use negative margin to create the overlap effect
-        position: 'relative',
-        maxWidth: '342px',
+        position: "relative",
+        maxWidth: "342px",
       }}
     >
       {/* Render the poster image */}
-      <img 
-        src={poster !== null ? poster : defaultMediaIcon} 
-        alt={`${title} poster`} 
+      <img
+        src={poster !== null ? poster : defaultMediaIcon}
+        alt={`${title} poster`}
         style={{
-          height: '100%', 
-          width: '100%', 
-          objectFit: 'cover', 
-          backgroundColor: 'white',
-        }} 
+          height: "100%",
+          width: "100%",
+          objectFit: "cover",
+          backgroundColor: "white",
+        }}
       />
 
       {/* Render the "Add to List" button */}

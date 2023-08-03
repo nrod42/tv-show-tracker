@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import defaultMediaIcon from '../img/default_media_icon.svg';
+import defaultMediaIcon from "../img/default_media_icon.svg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -19,14 +19,12 @@ const ActorPageRole = ({ roleInfo }) => {
             alignItems: "start",
           }}
         >
-          <Link
-            to={
-              type === "tv"
-                ? `/tv/${id}`
-                : `/movie/${id}`
-            }
-          >
-            <img src={poster !== null ? poster : defaultMediaIcon} alt={`${title} poster`} style={{width: '45px', height: 'auto'}}/>
+          <Link to={type === "tv" ? `/tv/${id}` : `/movie/${id}`}>
+            <img
+              src={poster !== null ? poster : defaultMediaIcon}
+              alt={`${title} poster`}
+              style={{ width: "45px", height: "auto" }}
+            />
           </Link>
         </Col>
         <Col
@@ -38,13 +36,7 @@ const ActorPageRole = ({ roleInfo }) => {
             alignItems: "start",
           }}
         >
-          <Link
-            to={
-              type === "tv"
-                ? `/tv/${id}`
-                : `/movie/${id}`
-            }
-          >
+          <Link to={type === "tv" ? `/tv/${id}` : `/movie/${id}`}>
             <div>
               <strong>{title}</strong>
             </div>
