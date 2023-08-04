@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
 import PersonCard from "./Cards/PersonCard";
 import MediaCard from "./Cards/MediaCard";
 import Row from "react-bootstrap/Row";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../../Contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext";
 import { getActorPics } from "../API/getMedia";
 import Card from "react-bootstrap/Card";
 import defaultMediaIcon from "../../img/default_media_icon.svg";

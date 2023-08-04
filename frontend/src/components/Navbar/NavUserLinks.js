@@ -1,16 +1,15 @@
-import React, { useEffect, useContext} from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import lightModeIcon from "../../img/light_mode_icon.svg";
 import darkModeIcon from "../../img/dark_mode_icon.svg";
 import styles from "./NavUserLinks.module.css";
-import { UserContext } from "../../Contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../apiConfig";
 
 const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
- 
   const navigate = useNavigate();
   const { userInfo, setUserInfo } = useContext(UserContext);
 
@@ -64,8 +63,8 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
       )}
       <img
         src={darkMode ? lightModeIcon : darkModeIcon}
-        className={`${styles.darkModeToggle} ms-3`}
         alt="dark mode"
+        className={`${styles.darkModeToggle} ms-3`}
         style={{ width: "30px", height: "auto" }}
         onClick={handleDarkMode}
       />

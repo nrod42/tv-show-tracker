@@ -1,0 +1,12 @@
+.suggestionsDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 10px;
+    list-style: none;
+    z-index: 1000;
+}

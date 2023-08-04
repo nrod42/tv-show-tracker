@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { API_URL } from "../apiConfig";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
-import { UserContext } from "../Contexts/UserContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
+import { UserContext } from "../contexts/UserContext";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";

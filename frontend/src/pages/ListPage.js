@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../apiConfig";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
-import { UserContext } from "../Contexts/UserContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
+import { UserContext } from "../contexts/UserContext";
 import { getMediaDetails } from "../components/API/getMedia";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";

@@ -1,16 +1,24 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
-import { UserContext } from "../../Contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 
-const NavCatLinks = ({handleNavLinkClick}) => {
-  const {userInfo} = useContext(UserContext);
+const NavCatLinks = ({ handleNavLinkClick }) => {
+  const { userInfo } = useContext(UserContext);
   return (
     <Nav className={"text-center"}>
-      <Nav.Link as={Link} to="/movie/category/top-rated" onClick={handleNavLinkClick}>
+      <Nav.Link
+        as={Link}
+        to="/movie/category/top-rated"
+        onClick={handleNavLinkClick}
+      >
         Movies
       </Nav.Link>
-      <Nav.Link as={Link} to="/tv/category/top-rated" onClick={handleNavLinkClick}>
+      <Nav.Link
+        as={Link}
+        to="/tv/category/top-rated"
+        onClick={handleNavLinkClick}
+      >
         TV
       </Nav.Link>
       {userInfo && (

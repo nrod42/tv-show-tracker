@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
-import { MediaContext } from "../Contexts/MediaContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
+import { MediaContext } from "../contexts/MediaContext";
 import CardStripSection from "../components/CardStripSection";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import defaultMediaIcon from "../img/default_media_icon.svg";
-import styles from "./Home.module.css";
+import styles from "./HomePage.module.css";
 
-const Home = () => {
+const HomePage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } =
     useContext(MediaContext);
@@ -77,4 +77,4 @@ const Home = () => {
     </motion.div>
   );
 };
-export default Home;
+export default HomePage;

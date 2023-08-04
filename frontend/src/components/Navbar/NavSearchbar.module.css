@@ -3,27 +3,7 @@
     width: 100%;
 }   
 
-/* Styles for the input container */
 .inputContainer {
     position: relative;
     width: 100%;
   }
-  
-  /* Styles for the suggestions dropdown */
-.suggestionsDropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-top: none;
-    padding: 10px;
-    list-style: none;
-    z-index: 1000;
-}
-  
-/* Additional styling for the suggestions list items */
-.suggestionsDropdown li {
-    margin-top: 5px;
-}

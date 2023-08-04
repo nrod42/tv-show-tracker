@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
 import { getMediaCredits } from "../components/API/getMedia";
 import PersonCard from "../components/Cards/PersonCard";
 import Container from "react-bootstrap/Container";

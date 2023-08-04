@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage";
 import Results from "./pages/Results";
 import Lists from "./pages/Lists";
 import ListPage from "./pages/ListPage";
@@ -19,7 +19,7 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/results/:query" element={<Results />} />

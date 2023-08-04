@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

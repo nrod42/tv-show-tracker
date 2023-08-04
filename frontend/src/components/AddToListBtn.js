@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../apiConfig";
-import { UserContext } from "../Contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";

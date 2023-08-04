@@ -1,8 +1,8 @@
 import React from "react";
-import { DarkModeContextProvider } from "./Contexts/DarkModeContext";
-import { MediaContextProvider } from "./Contexts/MediaContext";
-import { UserContextProvider } from "./Contexts/UserContext";
-import Nav from "./components/Nav";
+import { DarkModeContextProvider } from "./contexts/DarkModeContext";
+import { MediaContextProvider } from "./contexts/MediaContext";
+import { UserContextProvider } from "./contexts/UserContext";
+import Nav from "./components/Navbar/Nav";
 import AnimatedRoutes from "./AnimatedRoutes";
 
 const App = () => {

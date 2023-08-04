@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { API_URL } from "../apiConfig";
-import { UserContext } from "../Contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import Button from "react-bootstrap/Button";
 
 const RemoveFromListBtn = ({ id, type, setReload }) => {

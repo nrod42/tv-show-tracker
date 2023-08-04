@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { DarkModeContext } from "../../Contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext";
 import Card from "react-bootstrap/Card";
 import defaultMediaIcon from "../../img/default_media_icon.svg";
 

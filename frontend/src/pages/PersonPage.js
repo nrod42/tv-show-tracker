@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
 import { getActorInfo, getActorRoles } from "../components/API/getMedia";
 import { format } from "date-fns";
 import ActorPageRole from "../components/ActorPageRole";
@@ -55,9 +55,7 @@ const PersonPage = () => {
   return (
     <div className={darkMode ? styles.personPageDark : styles.personPageLight}>
       <Container style={{ marginTop: "80px" }}>
-        <Row
-          className="actorInfo"
-        >
+        <Row className="actorInfo">
           <Col md={2} className="actorProfile">
             <img
               src={`https://image.tmdb.org/t/p/w185${profile_path}`}
@@ -68,7 +66,7 @@ const PersonPage = () => {
             <h2>{name}</h2>
             <p>
               <strong>Birthday: </strong>
-              {birthday ? format(new Date(birthday), "MMMM d, yyyy") : 'N/A'}
+              {birthday ? format(new Date(birthday), "MMMM d, yyyy") : "N/A"}
             </p>
             <p>
               <strong>Place of Birth:</strong> {place_of_birth}

@@ -8,7 +8,7 @@ const MediaPageBackdrop = ({ mediaInfo }) => {
     <div className="backdrop" style={{ height: "700px" }}>
       {/* Render the backdrop image */}
       <img
-        className={"backdropImg"}
+        className="backdropImg"
         src={backdrop !== null ? backdrop : defaultMediaIcon}
         alt={`${title} backdrop`}
         style={{

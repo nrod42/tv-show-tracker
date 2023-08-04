@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getResults } from "../API/getMedia";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import searchIcon from "../../img/search_icon.svg";
 import styles from "./NavSearchbar.module.css";
+import NavSearchSuggestions from "./NavSearchSuggestions";
 
 const NavSearchbar = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const NavSearchbar = () => {
     <div
       className={styles.searchbarWrapper}
       onFocus={() => setIsFocused(true)}
-      onBlur={handleParentBlur}
+      onBlur={() => handleParentBlur}
     >
       <Form onSubmit={handleSearch} className={styles.searchForm}>
         <div className={styles.inputContainer}>
@@ -68,44 +69,15 @@ const NavSearchbar = () => {
             className="me-2"
           />
           {isFocused && suggestions.length > 0 && (
-            <ul
-              className={styles.suggestionsDropdown}
+            <NavSearchSuggestions
               ref={suggestionsRef}
-              tabIndex={-1} // Make suggestions focusable
-            >
-              {/* Apply styling to the suggestions dropdown */}
-              {suggestions.map((suggestion) => (
-                <li key={suggestion.id}>
-                  <Link
-                    to={`/${suggestion.type}/${suggestion.id}`}
-                    onClick={() => setIsFocused(false)} // Close suggestions on link click
-                  >
-                    <div className="d-flex flex-row align-items-center justify-content-start gap-1">
-                      <div style={{ maxWidth: "60px" }}>
-                        <img
-                          src={suggestion.poster}
-                          style={{
-                            height: "100%",
-                            width: "100%",
-                            objectFit: "cover",
-                          }}
-                        ></img>
-                      </div>
-                      <div>
-                        <div>
-                          {suggestion.title} ({suggestion.year}){" "}
-                          {suggestion.type.toUpperCase()}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+              suggestions={suggestions}
+              setIsFocused={setIsFocused}
+            />
           )}
         </div>
         <Button variant="success" type="submit">
-          <img src={searchIcon} style={{ width: "20px" }} alt="Search" />
+          <img src={searchIcon} style={{ width: "20px" }} alt="search" />
         </Button>
       </Form>
     </div>

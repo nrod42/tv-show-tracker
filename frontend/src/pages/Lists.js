@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { API_URL } from "../apiConfig";
-import { DarkModeContext } from "../Contexts/DarkModeContext";
-import { UserContext } from "../Contexts/UserContext";
+import { DarkModeContext } from "../contexts/DarkModeContext";
+import { UserContext } from "../contexts/UserContext";
 import WatchList from "../components/WatchList";
 import styles from "./Lists.module.css";
 
