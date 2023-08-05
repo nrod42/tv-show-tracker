@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { API_URL } from "../apiConfig";
 import { DarkModeContext } from "../contexts/DarkModeContext";
@@ -11,17 +11,21 @@ import styles from "./LoginPage.module.css";
 import { ColorRing } from "react-loader-spinner";
 
 const LoginPage = () => {
+  // Context and State variables
   const { darkMode } = useContext(DarkModeContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [shouldAutoSubmit, setShouldAutoSubmit] = useState(false);
 
   const navigate = useNavigate();
-
   const { setUserInfo } = useContext(UserContext);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Submit handler for form
+  const handleSubmit = async (e = null) => {
+    if (e) {
+      e.preventDefault();
+    }
 
     try {
       setLoading(true);
@@ -46,21 +50,26 @@ const LoginPage = () => {
     }
   };
 
-  const setGuestCredentials = async () => {
+  // Handle Guest Login button click
+  const handleGuestLogin = () => {
     setUsername("Guest");
     setPassword("Guest");
+    setShouldAutoSubmit(true);
   };
 
-  const handleGuestLogin = async (e) => {
-    await setGuestCredentials();
-    await handleSubmit(e);
-  };
+  // Automatically submit the form when auto-submit condition is met
+  useEffect(() => {
+    if (shouldAutoSubmit && username === "Guest" && password === "Guest") {
+      handleSubmit();
+    }
+  }, [shouldAutoSubmit, username, password]);
 
   return (
     <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
       <Container className={styles.container}>
         <h2 className="text-center">Login To Your Account</h2>
 
+        {/* Show loading spinner or login form */}
         {loading ? (
           <div className="text-center mt-5 mb-5">
             <ColorRing
@@ -104,6 +113,7 @@ const LoginPage = () => {
             </Button>
           </Form>
         )}
+        {/* Guest login and registration links */}
         <div className="text-center mt-5 mb-5">
           <Button variant="success" onClick={handleGuestLogin}>
             Login with Guest Account
@@ -114,8 +124,7 @@ const LoginPage = () => {
             <Button variant="link">Don't have an account? Register</Button>
           </Link>
         </div>
-      </Container>{" "}
-      -->
+      </Container>
     </div>
   );
 };
