@@ -20,3 +20,23 @@
 .toggleButton::after {
     display: none !important; /* Hide the arrow symbol */
   }
+
+.dropdownMenuDark {
+  background-color: #212529 !important; /* Change to the desired background color */
+  border: none !important; /* Remove the border */
+}
+
+.dropdownMenuLight {
+  background-color: #F8F9FA !important; /* Change to the desired background color */
+  border: none !important; /* Remove the border */
+}
+
+.dropdownItem {
+  color: #198754 !important; /* Set text color */
+  padding: 0.5rem 1rem !important; /* Adjust padding */
+}
+
+.dropdownItem:hover {
+  color: white !important;
+  background-color: #198754 !important; /* Change background color on hover */
+}
