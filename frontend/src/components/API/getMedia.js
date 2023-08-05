@@ -68,11 +68,7 @@ const getMediaDetails = async (id, type) => {
         : null,
       title: media.title || media.name,
       genres: media.genres
-        ? media.genres
-            .map((genre) =>
-              genre.name
-            )
-            .join(", ")
+        ? media.genres.map((genre) => genre.name).join(", ")
         : null,
       rating: media.vote_average,
       plot: media.overview,

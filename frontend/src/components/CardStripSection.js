@@ -18,8 +18,8 @@ const CardStripSection = ({ media, title, linkTo }) => {
         <>
           {/* Strip Heading */}
           {linkTo ? (
-            <Link to={linkTo}>
-              <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
+            <div className="d-flex flex-row justify-content-between align-items-center mt-5 mb-5">
+              <Link to={linkTo}>
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <h2 style={{ margin: 0 }}>{title}</h2>
                   <img
@@ -32,9 +32,11 @@ const CardStripSection = ({ media, title, linkTo }) => {
                     }}
                   ></img>
                 </div>
+              </Link>
+              <Link to={linkTo}>
                 <span>Show More</span>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ) : (
             <h2 className="mt-5 mb-5">{title}</h2>
           )}

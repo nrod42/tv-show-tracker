@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../apiConfig";
 import { UserContext } from "../contexts/UserContext";
 import Dropdown from "react-bootstrap/Dropdown";
-import styles from './AddToListBtn.module.css';
+import styles from "./AddToListBtn.module.css";
 import Button from "react-bootstrap/Button";
 
 const AddToListBtn = ({ id, type }) => {
@@ -42,33 +42,38 @@ const AddToListBtn = ({ id, type }) => {
   };
 
   return (
-    <div
-      className={styles.addToListBtnWrapper}
-    >
+    <div className={styles.addToListBtnWrapper}>
       {userInfo ? (
-      <Dropdown show={isDropdownOpen} onToggle={setIsDropdownOpen}>
-        <Dropdown.Toggle variant="success" id="list-dropdown" className={styles.toggleButton}>
-           +
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={() => handleListSelect("watching")}>
-            Watching
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => handleListSelect("completed")}>
-            Completed
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => handleListSelect("planning")}>
-            Planning
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => handleListSelect("dropped")}>
-            Dropped
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-      ) 
-      : (<Link to={'/register'}><Button variant="success" className={styles.registerBtn}>+</Button></Link>)
-      
-      }
+        <Dropdown show={isDropdownOpen} onToggle={setIsDropdownOpen}>
+          <Dropdown.Toggle
+            variant="success"
+            id="list-dropdown"
+            className={styles.toggleButton}
+          >
+            +
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleListSelect("watching")}>
+              Watching
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleListSelect("completed")}>
+              Completed
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleListSelect("planning")}>
+              Planning
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleListSelect("dropped")}>
+              Dropped
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      ) : (
+        <Link to={"/register"}>
+          <Button variant="success" className={styles.registerBtn}>
+            +
+          </Button>
+        </Link>
+      )}
     </div>
   );
 };

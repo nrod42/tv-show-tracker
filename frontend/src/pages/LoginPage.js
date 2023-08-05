@@ -47,8 +47,8 @@ const LoginPage = () => {
   };
 
   const setGuestCredentials = async () => {
-    setUsername('Guest');
-    setPassword('Guest');
+    setUsername("Guest");
+    setPassword("Guest");
   };
 
   const handleGuestLogin = async (e) => {
@@ -62,15 +62,17 @@ const LoginPage = () => {
         <h2 className="text-center">Login To Your Account</h2>
 
         {loading ? (
-          <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={["#198754", "#198754", "#198754", "#198754", "#198754"]}
-          />
+          <div className="text-center mt-5 mb-5">
+            <ColorRing
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={["#198754", "#198754", "#198754", "#198754", "#198754"]}
+            />
+          </div>
         ) : (
           <Form
             className="d-flex flex-column justify-content-center"
@@ -103,14 +105,17 @@ const LoginPage = () => {
           </Form>
         )}
         <div className="text-center mt-5 mb-5">
-          <Button variant="success" onClick={handleGuestLogin}>Login with Guest Account</Button>
+          <Button variant="success" onClick={handleGuestLogin}>
+            Login with Guest Account
+          </Button>
         </div>
         <div className="text-center">
           <Link to="/register">
             <Button variant="link">Don't have an account? Register</Button>
           </Link>
         </div>
-      </Container>
+      </Container>{" "}
+      -->
     </div>
   );
 };
