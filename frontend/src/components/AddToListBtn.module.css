@@ -1,0 +1,22 @@
+.addToListBtnWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.registerBtn {
+  border-top-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 5px !important;
+}
+
+.toggleButton {
+    border-top-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 5px !important;
+  }
+
+.toggleButton::after {
+    display: none !important; /* Hide the arrow symbol */
+  }

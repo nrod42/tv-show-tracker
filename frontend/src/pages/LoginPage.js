@@ -46,6 +46,16 @@ const LoginPage = () => {
     }
   };
 
+  const setGuestCredentials = async () => {
+    setUsername('Guest');
+    setPassword('Guest');
+  };
+
+  const handleGuestLogin = async (e) => {
+    await setGuestCredentials();
+    await handleSubmit(e);
+  };
+
   return (
     <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
       <Container className={styles.container}>
@@ -59,7 +69,7 @@ const LoginPage = () => {
             ariaLabel="blocks-loading"
             wrapperStyle={{}}
             wrapperClass="blocks-wrapper"
-            colors={["#198754"]}
+            colors={["#198754", "#198754", "#198754", "#198754", "#198754"]}
           />
         ) : (
           <Form
@@ -92,17 +102,9 @@ const LoginPage = () => {
             </Button>
           </Form>
         )}
-        <p className="text-center">
-          <strong>Guest Account</strong>
-        </p>
-        <p className="text-center">
-          <span>
-            <strong>Username: </strong>Guest{" "}
-          </span>
-          <span>
-            <strong>Password: </strong>Guest
-          </span>
-        </p>
+        <div className="text-center mt-5 mb-5">
+          <Button variant="success" onClick={handleGuestLogin}>Login with Guest Account</Button>
+        </div>
         <div className="text-center">
           <Link to="/register">
             <Button variant="link">Don't have an account? Register</Button>

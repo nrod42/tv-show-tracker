@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../apiConfig";
 import { UserContext } from "../contexts/UserContext";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Dropdown from "react-bootstrap/Dropdown";
+import styles from './AddToListBtn.module.css';
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 const AddToListBtn = ({ id, type }) => {
   const { userInfo } = useContext(UserContext);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const addToList = async (list) => {
     try {
@@ -34,72 +35,41 @@ const AddToListBtn = ({ id, type }) => {
     }
   };
 
-  const tooltip = (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <div
-        style={{
-          height: "20px",
-          width: "20px",
-          background: "#6c757d",
-          rotate: "45deg",
-          translate: "14.14px",
-        }}
-      ></div>
-      <ButtonGroup vertical>
-        <Button variant="secondary" onClick={() => addToList("watching")}>
-          Watching
-        </Button>
-        <Button variant="secondary" onClick={() => addToList("completed")}>
-          Completed
-        </Button>
-        <Button variant="secondary" onClick={() => addToList("planning")}>
-          Planning
-        </Button>
-        <Button variant="secondary" onClick={() => addToList("dropped")}>
-          Dropped
-        </Button>
-      </ButtonGroup>
-    </div>
-  );
+  const handleListSelect = (list) => {
+    // setSelectedList(list);
+    addToList(list);
+    setIsDropdownOpen(false); // Close the dropdown after selection
+  };
 
   return (
-    <OverlayTrigger trigger="click" placement="right" overlay={tooltip}>
+    <div
+      className={styles.addToListBtnWrapper}
+    >
       {userInfo ? (
-        <Button
-          variant="success"
-          style={{
-            borderTopLeftRadius: "0",
-            borderTopRightRadius: "0",
-            position: "absolute",
-            right: "0",
-            top: "0",
-          }}
-        >
-          +
-        </Button>
-      ) : (
-        <Link to={"/register"}>
-          <Button
-            variant="success"
-            style={{
-              borderTopLeftRadius: "0",
-              borderTopRightRadius: "0",
-              position: "absolute",
-              right: "0",
-              top: "0",
-            }}
-          >
-            +
-          </Button>
-        </Link>
-      )}
-    </OverlayTrigger>
+      <Dropdown show={isDropdownOpen} onToggle={setIsDropdownOpen}>
+        <Dropdown.Toggle variant="success" id="list-dropdown" className={styles.toggleButton}>
+           +
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => handleListSelect("watching")}>
+            Watching
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => handleListSelect("completed")}>
+            Completed
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => handleListSelect("planning")}>
+            Planning
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => handleListSelect("dropped")}>
+            Dropped
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      ) 
+      : (<Link to={'/register'}><Button variant="success" className={styles.registerBtn}>+</Button></Link>)
+      
+      }
+    </div>
   );
 };
 
