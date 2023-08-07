@@ -17,81 +17,99 @@ import {
   getNowPlayingMovies,
 } from "../components/API/getMedia";
 import uniqid from "uniqid";
+import { MediaContext } from "../contexts/MediaContext";
 
 const CategoryPage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { mediaType, category } = useParams();
+  const { media, updateMediaData } = useContext(MediaContext);
 
-  const [media, setMedia] = useState([]); // State to store the fetched media
-  const [page, setPage] = useState(1); // State to track the current page number
+  const [page, setPage] = useState(1);
   const [title, setTitle] = useState("");
-
-  // Function to increment the page number
-  const addPage = async () => {
+  const [fetchedMedia, setFetchedMedia] = useState([]);
+  // const isFirstRender = useRef(true); // Track initial render
+  
+  const addPage = () => {
     setPage((prev) => prev + 1);
   };
 
-  // Function to fetch a page of media based on the current page and type
-  const fetchPage = async () => {
-    let mediaData = [];
-
+  const fetchMediaData = async (category, mediaType, page) => {
+    console.log('hi')
     switch (category) {
       case "popular":
-        mediaData = await getPopularMedia(mediaType, page);
-        setTitle("Popular");
-        break;
+        setTitle('Popular')
+        return await getPopularMedia(mediaType, page);
       case "now-playing":
-        mediaData = await getNowPlayingMovies(page);
-        setTitle("Now Playing");
-        break;
+        setTitle('Now Playing')
+        return await getNowPlayingMovies(page);
       case "upcoming":
-        mediaData = await getUpcomingMovies(page);
-        setTitle("Upcoming");
-        break;
+        setTitle('Upcoming')
+        return await getUpcomingMovies(page);
       case "airing-today":
-        mediaData = await getAiringTodayTV(page);
-        setTitle("Airing Today");
-        break;
+        setTitle('Airing Today')
+        return await getAiringTodayTV(page);
       default:
-        mediaData = await getTopMedia(mediaType, page);
-        setTitle("Top Rated");
+        setTitle('Top Rated')
+        return await getTopMedia(mediaType, page);
     }
-
-    // Filter out duplicate media items and add only the new ones to the state
-    setMedia((prevMedia) => {
-      const uniqueMediaData = mediaData.filter(
-        (mediaItem) =>
-          !prevMedia.some((prevItem) => prevItem.id === mediaItem.id)
-      );
-      return [...prevMedia, ...uniqueMediaData];
-    });
   };
 
-  useEffect(() => {
-    fetchPage();
-  }, [page]);
+  const fetchPage = async () => {
+    let mediaData = [];
+  
+    const contextCategory =
+      category === "popular"
+        ? mediaType === "tv"
+          ? "popTV"
+          : "popMovies"
+        : category === "top-rated"
+        ? mediaType === "tv"
+          ? "topTV"
+          : "topMovies"
+        : category;
+  
+    if (!media[contextCategory][page]) {
+      mediaData = await fetchMediaData(category, mediaType, page);
+      await updateMediaData(contextCategory, page, mediaData);
+    } else {
+      console.log('success')
+      mediaData = media[contextCategory][page].mediaData;
+    }
+  
+    setFetchedMedia((prevMedia) => {
+      const newMedia = mediaData.filter(
+        (item) => !prevMedia.some((prevItem) => prevItem.id === item.id)
+      );
+      return [...prevMedia, ...newMedia];
+    });
+  };
+  
+  
 
   useEffect(() => {
-    // Clear media state when the category changes
-    setMedia([]);
-  }, [category]);
+    fetchPage();  
+  }, [page]);
+
+
+  const renderMediaCards = () => {
+    return fetchedMedia.map((mediaItem) => (
+      <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
+        <MediaCard mediaData={mediaItem} />
+      </Col>
+    ));
+  };
 
   return (
     <motion.div
       className={darkMode ? styles.categoryPageDark : styles.categoryPageLight}
     >
-      <MediaNav /> {/* Component for displaying media navigation */}
+      <MediaNav />
       <Container className="text-center">
-        <h2 className="mb-5">{title}</h2> {/* Title of the category page */}
+        <h2 className="mb-5">{title}</h2>
         <Row>
-          {/* Map through the media array and render MediaCard components */}
-          {media.map((mediaItem) => (
-            <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
-              <MediaCard mediaData={mediaItem} />
-            </Col>
-          ))}
+          {renderMediaCards()}
         </Row>
-        <Button className="mb-5" variant="success" onClick={addPage}>
+        <Button className="mt-5 mb-5" variant="success" onClick={addPage}>
           Show More
         </Button>
       </Container>

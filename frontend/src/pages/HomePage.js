@@ -1,78 +1,70 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { DarkModeContext } from "../contexts/DarkModeContext";
-import { MediaContext } from "../contexts/MediaContext";
-import CardStripSection from "../components/CardStripSection";
+import { getTopMedia, getPopularMedia } from "../components/API/getMedia";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import defaultMediaIcon from "../img/default_media_icon.svg";
 import styles from "./HomePage.module.css";
+import HomePageBackdrop from "../components/HomePage/HomePageBackdrop";
+import HomePageMain from "../components/HomePage/HomePageMain";
 
 const HomePage = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const { topTV, popularTV, topMovies, popularMovies, randomBackdrop } =
-    useContext(MediaContext);
+  const [topTV, setTopTV] = useState([]);
+  const [popularTV, setPopularTV] = useState([]);
+  const [topMovies, setTopMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+
+  const fetchTopMedia = async (type) => {
+    let topMedia = await getTopMedia(type);
+    let page = 1;
+    while (topMedia.length < 6) {
+      page++;
+      topMedia = [...topMedia, ...(await getTopMedia(type, page))];
+    }
+    return topMedia;
+  };
+
+  const fetchPopMedia = async (type) => {
+    let popMedia = await getPopularMedia(type);
+    let page = 1;
+    while (popMedia.length < 6) {
+      page++;
+      popMedia = [...popMedia, ...(await getPopularMedia(type, page))];
+    }
+    return popMedia;
+  };
+
+  // Fetches data for top TV shows, popular TV shows, top movies, and popular movies
+  const fetchData = async () => {
+    const topTVResult = await fetchTopMedia("tv");
+    const topMoviesResult = await fetchTopMedia("movie");
+    const popTVResult = await fetchPopMedia("tv");
+    const popMoviesResult = await fetchPopMedia("movie");
+
+    // Merge results of multiple API calls into respective state variables
+    setTopTV([...topTVResult]);
+    setPopularTV([...popTVResult]);
+    setTopMovies([...topMoviesResult]);
+    setPopularMovies([...popMoviesResult]);
+  };
+
+  useEffect(() => {
+    // Fetch data on component mount
+    fetchData();
+  }, []);
 
   return (
     <motion.div
-      className={darkMode ? styles.homePageDark : styles.homePageLight}
+      className={`pb-5 ${darkMode ? styles.homePageDark : styles.homePageLight}`}
       style={{ overflowX: "hidden" }}
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-      <Row className={styles.randomBackdropWrapper}>
-        <img
-          className={styles.randomBackdrop}
-          src={
-            randomBackdrop.backdrop !== null
-              ? randomBackdrop.backdrop
-              : defaultMediaIcon
-          }
-          alt={`${randomBackdrop.title} poster`}
-        />
-        <div className={styles.titleWrapper}>
-          <h1 className={styles.title}>Welcome to Track TV</h1>
-          <h2 className={styles.title}>
-            Keep track of your favorite movies and shows
-          </h2>
-        </div>
-        <Link to={`/${randomBackdrop.type}/${randomBackdrop.id}`}>
-          <div className={styles.randomBackdropInfo}>
-            {randomBackdrop.title} ({randomBackdrop.year})
-          </div>
-        </Link>
-      </Row>
-
+      
+      <HomePageBackdrop topTV={topTV} topMovies={topMovies} />
       <Container className={styles.container}>
-        {/* Render Popular Movies */}
-        <CardStripSection
-          media={popularMovies}
-          title={"Popular Movies"}
-          linkTo={"/movie/category/popular"}
-        />
-
-        {/* Render Top Rated Movies */}
-        <CardStripSection
-          media={topMovies}
-          title={"Top Rated Movies"}
-          linkTo={"/movie/category/top-rated"}
-        />
-
-        {/* Render Popular Shows */}
-        <CardStripSection
-          media={popularTV}
-          title={"Popular Shows"}
-          linkTo={"/tv/category/popular"}
-        />
-
-        {/* Render Top Rated Shows */}
-        <CardStripSection
-          media={topTV}
-          title={"Top Rated Shows"}
-          linkTo={"/tv/category/top-rated"}
-        />
+        <HomePageMain popularMovies={popularMovies} topMovies={topMovies} popularTV={popularTV} topTV={topTV} />
       </Container>
     </motion.div>
   );
