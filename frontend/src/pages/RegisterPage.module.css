@@ -17,12 +17,41 @@
 
 .registerPageLight, .registerPageDark {
     min-height: 100vh;
-}
-
-.container {
-    margin-top: 100px;
+    /* position: relative; */
 }
 
 .registerPageLight form, .registerPageDark form {
     padding: 30px;
+}
+
+.container {
+    /* margin-top: 100px; */
+    /* position: relative; */
+}
+
+/* .registerBody {
+    position: absolute;
+} */
+
+.randomBackdropWrapper {
+    /* height: 700px; */
+    position: relative;
+}
+
+.randomBackdrop {
+    filter: brightness(40%);
+    max-height: 100%;
+    /* max-width: 100%; */
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+.registerPageInfo {
+    position: absolute;
+    left: 50%;
+    /* top: calc(50%-300px); */
+    top: calc(50% - 300px);
+    text-align: center;
+    background-color: gray;
 }

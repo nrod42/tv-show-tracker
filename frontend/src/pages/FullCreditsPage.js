@@ -27,7 +27,7 @@ const FullCreditsPage = () => {
   }, []);
 
   return (
-    <div className={darkMode ? styles.mediaPageDark : styles.mediaPageLight}>
+    <div className={`mt-5 ${darkMode ? styles.fullCreditsPageDark : styles.fullCreditsPageLight}`}>
       <Container>
         <h2 className="text-center mt-5 mb-5">Cast</h2>
         <Row>
