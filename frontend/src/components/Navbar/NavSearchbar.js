@@ -20,7 +20,7 @@ const NavSearchbar = () => {
     setSearchInput(e.target.value);
     const formattedQuery = searchInput.replace(" ", "-"); // Replace spaces with dashes
 
-    // Fetch search suggestions from your API
+    // Fetch search suggestions from TMDB API
     try {
       const results = await getResults(formattedQuery);
       setSuggestions(results.slice(0, 3));
@@ -58,7 +58,7 @@ const NavSearchbar = () => {
       onBlur={() => handleParentBlur}
     >
       <Form onSubmit={handleSearch} className={styles.searchForm}>
-        <div className={styles.inputContainer}>
+        <div className={`${styles.inputContainer} me-2`}>
           <Form.Control
             ref={inputRef}
             onChange={handleInputChange}

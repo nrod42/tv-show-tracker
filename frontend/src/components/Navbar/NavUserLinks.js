@@ -19,7 +19,7 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
       try {
         const token = Cookies.get("token");
         if (!token) {
-          setUserInfo(null);
+          setUserInfo(null); // Clear user info if token is not present
           return;
         }
 
@@ -27,10 +27,10 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
           credentials: "include",
         });
         if (response.ok) {
-          const userInfo = await response.json();
+          const userInfo = await response.json(); // Set user info if response is successful
           setUserInfo(userInfo);
         } else {
-          setUserInfo(null);
+          setUserInfo(null); // Clear user info if response is not successful
         }
       } catch (error) {
         console.error(error);
@@ -40,16 +40,18 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
     fetchUserProfile();
   }, [setUserInfo]);
 
+  // Handle user logout
   const logout = () => {
-    Cookies.remove("token");
-    navigate("/");
-    setUserInfo(null);
-    handleNavLinkClick();
+    Cookies.remove("token"); // Remove token from cookies
+    navigate("/"); // Navigate to home page
+    setUserInfo(null); // Clear user info
+    handleNavLinkClick(); // Handle navigation link click
   };
 
   return (
     <Nav className="text-center">
       {!userInfo ? (
+        // Display registration and login links if user is not logged in
         <>
           <Nav.Link as={Link} to="/register" onClick={handleNavLinkClick}>
             Register
@@ -59,14 +61,16 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
           </Nav.Link>
         </>
       ) : (
+        // Display logout link if user is logged in
         <Nav.Link onClick={logout}>Logout</Nav.Link>
       )}
+      {/* Display dark mode toggle icon */}
       <img
         src={darkMode ? lightModeIcon : darkModeIcon}
         alt="dark mode"
         className={`${styles.darkModeToggle} ms-3`}
         style={{ width: "30px", height: "auto" }}
-        onClick={handleDarkMode}
+        onClick={handleDarkMode} // Handle dark mode toggle
       />
     </Nav>
   );

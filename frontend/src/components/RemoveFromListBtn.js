@@ -2,24 +2,16 @@ import React, { useContext } from "react";
 import { API_URL } from "../apiConfig";
 import { UserContext } from "../contexts/UserContext";
 import Button from "react-bootstrap/Button";
+import { useParams } from "react-router-dom";
 
 const RemoveFromListBtn = ({ id, type, setReload }) => {
-  const page = window.location.pathname.split("/");
-  const list = page[3];
-
-  const listMappings = {
-    "currently-watching": "watching",
-    "want-to-watch": "wantToWatch",
-  };
-
-  const listToSend = listMappings[list] || list;
-
+  const { listType } = useParams();
   const { userInfo } = useContext(UserContext);
 
   const removeFromList = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/users/${userInfo.id}/lists/${listToSend}/${type}/${id}`,
+        `${API_URL}/users/${userInfo.id}/lists/${listType}/${type}/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -28,6 +20,7 @@ const RemoveFromListBtn = ({ id, type, setReload }) => {
           credentials: "include",
         }
       );
+      // Forces re render to show updated list
       setReload((prevState) => !prevState);
       if (!response.ok) {
         throw new Error(
@@ -43,7 +36,7 @@ const RemoveFromListBtn = ({ id, type, setReload }) => {
     <div
       onClick={removeFromList}
       className={"removeFromListBtn"}
-      style={{ display: page.includes("lists") ? "block" : "none" }}
+      style={{ display: listType ? "block" : "none" }}
     >
       <Button variant="danger" style={{ width: "100%" }}>
         Remove

@@ -1,10 +1,13 @@
+// Import the API key from the environment variables
 const API_KEY = process.env.REACT_APP_API_KEY;
 
+// Fetches media data from a given URL and type, filters by language, and maps the results
 const fetchMedia = async (url, type) => {
   try {
     const response = await fetch(url, { mode: "cors" });
     const { results } = await response.json();
-    // console.log(results.filter((media) => media.original_language !== "hi" && media.original_language !== "tl"))
+
+    // Filter and map the fetched results
     return results
       .filter(
         (media) =>
@@ -17,7 +20,7 @@ const fetchMedia = async (url, type) => {
           : null,
         title: media.title || media.name || "Unknown",
         rating: media.vote_average || 0,
-        year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
+        year: (media.release_date || media.first_air_date || "").split("-")[0], // Extract year from release_date or first_air_date
         type,
       }));
   } catch (error) {
@@ -25,33 +28,39 @@ const fetchMedia = async (url, type) => {
   }
 };
 
+// Get top-rated media based on type and page
 const getTopMedia = (type, page = 1) => {
   const mediaType = type === "movie" ? "movie" : "tv";
   const url = `https://api.themoviedb.org/3/${mediaType}/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
   return fetchMedia(url, type);
 };
 
+// Get popular media based on type and page
 const getPopularMedia = (type, page = 1) => {
   const mediaType = type === "movie" ? "movie" : "tv";
   const url = `https://api.themoviedb.org/3/${mediaType}/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
   return fetchMedia(url, type);
 };
 
+// Get TV shows airing today based on page
 const getAiringTodayTV = (page = 1) => {
   const url = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${page}`;
   return fetchMedia(url, "tv");
 };
 
+// Get upcoming movies based on page
 const getUpcomingMovies = (page = 1) => {
   const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
   return fetchMedia(url, "movie");
 };
 
+// Get currently playing movies based on page
 const getNowPlayingMovies = (page = 1) => {
   const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`;
   return fetchMedia(url, "movie");
 };
 
+// Get detailed information about a specific media item
 const getMediaDetails = async (id, type) => {
   try {
     const mediaType = type === "movie" ? "movie" : "tv";
@@ -72,10 +81,11 @@ const getMediaDetails = async (id, type) => {
         : null,
       rating: media.vote_average,
       plot: media.overview,
-      year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
+      year: (media.release_date || media.first_air_date || "").split("-")[0], // Extract year from release_date or first_air_date
       type: mediaType,
     };
 
+    // Additional details based on media type
     if (type === "movie") {
       details.runtime = media.runtime;
     } else if (type === "tv") {
@@ -90,13 +100,13 @@ const getMediaDetails = async (id, type) => {
   }
 };
 
+// Get credits for a specific media item
 const getMediaCredits = async (mediaId, type) => {
   try {
     const mediaType = type === "movie" ? "movie" : "tv";
     const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US&language=en-US`;
     const response = await fetch(url, { mode: "cors" });
     const credits = await response.json();
-    // console.log(credits.crew.filter(member => member.job === "Writing"))
     return {
       cast: credits.cast,
       crew: credits.crew,
@@ -106,6 +116,7 @@ const getMediaCredits = async (mediaId, type) => {
   }
 };
 
+// Get information about a specific actor
 const getActorInfo = async (actorId) => {
   try {
     const response = await fetch(
@@ -122,6 +133,7 @@ const getActorInfo = async (actorId) => {
   }
 };
 
+// Get roles of a specific actor
 const getActorRoles = async (actorId) => {
   try {
     const response = await fetch(
@@ -139,7 +151,7 @@ const getActorRoles = async (actorId) => {
       title: role.title || role.name || "Unknown",
       role: role.character,
       rating: role.vote_average || 0,
-      year: (role.release_date || role.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
+      year: (role.release_date || role.first_air_date || "").split("-")[0], // Extract year from release_date or first_air_date
       type: role.media_type,
     }));
     return data;
@@ -150,6 +162,7 @@ const getActorRoles = async (actorId) => {
   }
 };
 
+// Get pictures of a specific actor
 const getActorPics = async (id) => {
   try {
     const url = `https://api.themoviedb.org/3/person/${id}/images?api_key=${API_KEY}`;
@@ -163,6 +176,7 @@ const getActorPics = async (id) => {
   }
 };
 
+// Get media similar to a specific media item
 const getSimilarMedia = async (mediaId, type, page = 1) => {
   try {
     const mediaType = type === "movie" ? "movie" : "tv";
@@ -171,13 +185,13 @@ const getSimilarMedia = async (mediaId, type, page = 1) => {
     const similar = await response.json();
 
     return similar.results.map((media) => ({
-      id: media.id || "", // Use empty string as default value if id is undefined
+      id: media.id || "",
       poster: media.poster_path
         ? `https://image.tmdb.org/t/p/w342/${media.poster_path}`
         : null,
       title: media.title || media.name || "Unknown", // Use 'Unknown' as default value if title and name are undefined
       rating: media.vote_average || 0, // Use 0 as default value if vote_average is undefined
-      year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
+      year: (media.release_date || media.first_air_date || "").split("-")[0], // Extract year from release_date or first_air_date
       type: mediaType || "", // Use empty string as default value if mediaType is undefined
     }));
   } catch (error) {
@@ -185,6 +199,7 @@ const getSimilarMedia = async (mediaId, type, page = 1) => {
   }
 };
 
+// Get recommended media for a specific media item
 const getRecMedia = async (movieId, type, page = 1) => {
   try {
     const mediaType = type === "movie" ? "movie" : "tv";
@@ -198,7 +213,7 @@ const getRecMedia = async (movieId, type, page = 1) => {
         : null,
       title: media.title || media.name || "Unknown",
       rating: media.vote_average || 0,
-      year: (media.release_date || media.first_air_date || "").split("-")[0], // Use empty string as default value if release_date and first_air_date are undefined
+      year: (media.release_date || media.first_air_date || "").split("-")[0], // Extract year from release_date or first_air_date
       type: mediaType || "",
     }));
   } catch (error) {
@@ -206,6 +221,7 @@ const getRecMedia = async (movieId, type, page = 1) => {
   }
 };
 
+// Get trailer video key for a specific media item
 const getMediaTrailer = async (mediaId, type) => {
   try {
     const mediaType = type === "movie" ? "movie" : "tv";
@@ -219,12 +235,12 @@ const getMediaTrailer = async (mediaId, type) => {
   }
 };
 
+// Search for media items based on a query
 const getResults = async (query) => {
   try {
     const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
     const response = await fetch(url, { mode: "cors" });
     const { results } = await response.json();
-    // console.log(results)
     return results.map((result) => ({
       id: result.id,
       poster: result.poster_path

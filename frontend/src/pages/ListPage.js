@@ -18,7 +18,6 @@ const ListPage = () => {
   const [userData, setUserData] = useState([]);
   const [list, setList] = useState([]);
   const [reload, setReload] = useState(false);
-  // const [listName, setListName] = useState("")
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -30,7 +29,7 @@ const ListPage = () => {
           const data = await response.json();
           setUserData(data);
         } else {
-          console.log("Problem getting user info");
+          console.error("Problem getting user info");
         }
       } catch (error) {
         console.error(error);

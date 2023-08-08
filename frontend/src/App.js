@@ -1,6 +1,5 @@
 import React from "react";
 import { DarkModeContextProvider } from "./contexts/DarkModeContext";
-import { MediaContextProvider } from "./contexts/MediaContext";
 import { RandomBackdropContextProvider } from "./contexts/RandomBackdropContext";
 import { UserContextProvider } from "./contexts/UserContext";
 import Nav from "./components/Navbar/Nav";
@@ -12,13 +11,11 @@ const App = () => {
     <div className="App">
       <DarkModeContextProvider>
         <UserContextProvider>
-          <MediaContextProvider>
-            <RandomBackdropContextProvider>
-              <Nav />
-              <AnimatedRoutes />
-              <footer>© {new Date().getFullYear()} - Nigel Rodriguez</footer>
-            </RandomBackdropContextProvider>
-          </MediaContextProvider>
+          <RandomBackdropContextProvider>
+            <Nav />
+            <AnimatedRoutes />
+            <footer>© {new Date().getFullYear()} - Nigel Rodriguez</footer>
+          </RandomBackdropContextProvider>
         </UserContextProvider>
       </DarkModeContextProvider>
     </div>

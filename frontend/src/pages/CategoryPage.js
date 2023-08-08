@@ -17,82 +17,67 @@ import {
   getNowPlayingMovies,
 } from "../components/API/getMedia";
 import uniqid from "uniqid";
-import { MediaContext } from "../contexts/MediaContext";
 
 const CategoryPage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { mediaType, category } = useParams();
-  const { media, updateMediaData } = useContext(MediaContext);
-
-  const [page, setPage] = useState(1);
+  const [media, setMedia] = useState([]); // State to store the fetched media
+  const [page, setPage] = useState(1); // State to track the current page number
   const [title, setTitle] = useState("");
-  const [fetchedMedia, setFetchedMedia] = useState([]);
-  // const isFirstRender = useRef(true); // Track initial render
   
   const addPage = () => {
     setPage((prev) => prev + 1);
   };
 
-  const fetchMediaData = async (category, mediaType, page) => {
-    console.log('hi')
-    switch (category) {
-      case "popular":
-        setTitle('Popular')
-        return await getPopularMedia(mediaType, page);
-      case "now-playing":
-        setTitle('Now Playing')
-        return await getNowPlayingMovies(page);
-      case "upcoming":
-        setTitle('Upcoming')
-        return await getUpcomingMovies(page);
-      case "airing-today":
-        setTitle('Airing Today')
-        return await getAiringTodayTV(page);
-      default:
-        setTitle('Top Rated')
-        return await getTopMedia(mediaType, page);
-    }
-  };
-
+   // Function to fetch a page of media based on the current page and type
   const fetchPage = async () => {
     let mediaData = [];
-  
-    const contextCategory =
-      category === "popular"
-        ? mediaType === "tv"
-          ? "popTV"
-          : "popMovies"
-        : category === "top-rated"
-        ? mediaType === "tv"
-          ? "topTV"
-          : "topMovies"
-        : category;
-  
-    if (!media[contextCategory][page]) {
-      mediaData = await fetchMediaData(category, mediaType, page);
-      await updateMediaData(contextCategory, page, mediaData);
-    } else {
-      console.log('success')
-      mediaData = media[contextCategory][page].mediaData;
+
+    switch (category) {
+      case "popular":
+        mediaData = await getPopularMedia(mediaType, page);
+        setTitle("Popular");
+        break;
+      case "now-playing":
+        mediaData = await getNowPlayingMovies(page);
+        setTitle("Now Playing");
+        break;
+      case "upcoming":
+        mediaData = await getUpcomingMovies(page);
+        setTitle("Upcoming");
+        break;
+      case "airing-today":
+        mediaData = await getAiringTodayTV(page);
+        setTitle("Airing Today");
+        break;
+      default:
+        mediaData = await getTopMedia(mediaType, page);
+        setTitle("Top Rated");
     }
-  
-    setFetchedMedia((prevMedia) => {
-      const newMedia = mediaData.filter(
-        (item) => !prevMedia.some((prevItem) => prevItem.id === item.id)
+
+     
+    // Filter out duplicate media items and add only the new ones to the state
+    setMedia((prevMedia) => {
+      const uniqueMediaData = mediaData.filter(
+        (mediaItem) =>
+          !prevMedia.some((prevItem) => prevItem.id === mediaItem.id)
       );
-      return [...prevMedia, ...newMedia];
+      return [...prevMedia, ...uniqueMediaData];
     });
   };
-  
-  
 
   useEffect(() => {
-    fetchPage();  
+    fetchPage();
   }, [page]);
+
+  useEffect(() => {
+    // Clear media state when the category changes
+    setMedia([]);
+  }, [category]);
 
 
   const renderMediaCards = () => {
-    return fetchedMedia.map((mediaItem) => (
+    return media.map((mediaItem) => (
       <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
         <MediaCard mediaData={mediaItem} />
       </Col>

@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { DarkModeContext } from "../contexts/DarkModeContext";
 import { getTopMedia, getPopularMedia } from "../components/API/getMedia";
-import Container from "react-bootstrap/Container";
-import styles from "./HomePage.module.css";
 import HomePageBackdrop from "../components/HomePage/HomePageBackdrop";
 import HomePageMain from "../components/HomePage/HomePageMain";
+import Container from "react-bootstrap/Container";
+import styles from "./HomePage.module.css";
 
 const HomePage = () => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(DarkModeContext)
   const [topTV, setTopTV] = useState([]);
   const [popularTV, setPopularTV] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
@@ -55,18 +55,22 @@ const HomePage = () => {
 
   return (
     <motion.div
-      className={`pb-5 ${darkMode ? styles.homePageDark : styles.homePageLight}`}
-      style={{ overflowX: "hidden" }}
+      // Apply dynamic styling based on dark mode state
+      className={darkMode ? styles.homePageDark : styles.homePageLight}
+      
+      // Animation configurations for page entry and exit
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-      
-      <HomePageBackdrop topTV={topTV} topMovies={topMovies} />
+      {/* Render homepage backdrop */}
+      <HomePageBackdrop topTV={topTV} topMovies={topMovies} popularTV={popularTV} popularMovies={popularMovies}/>
       <Container className={styles.container}>
+        {/* Render main homepage content */}
         <HomePageMain popularMovies={popularMovies} topMovies={topMovies} popularTV={popularTV} topTV={topTV} />
       </Container>
     </motion.div>
   );
 };
+
 export default HomePage;

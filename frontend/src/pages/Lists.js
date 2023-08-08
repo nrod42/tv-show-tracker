@@ -26,7 +26,7 @@ const Lists = () => {
           const data = await response.json();
           setUserData(data);
         } else {
-          console.log("Problem getting user info");
+          console.error("Problem getting user info");
         }
       } catch (error) {
         console.error("Error fetching user lists:", error);

@@ -1,32 +1,17 @@
-import React, { useState, useEffect} from "react";
+import React, { useEffect, useContext} from "react";
 import { Link } from "react-router-dom";
 import defaultMediaIcon from "../../img/default_media_icon.svg";
 import Row from "react-bootstrap/Row";
 import styles from './HomePageBackdrop.module.css';
-import { getMediaDetails } from "../API/getMedia";
+import { RandomBackdropContext } from "../../contexts/RandomBackdropContext";
 
-const HomePageBackdrop = ({topTV, topMovies}) => {
-
-  const [randomBackdrop, setRandomBackdrop] = useState("");
-  
-  // Fetches random media item from the combined list of top TV shows and top movies
-  const fetchRandomMedia = async () => {
-    const topMedia = [...topTV, ...topMovies];
-    const randomIndex = Math.floor(Math.random() * topMedia.length);
-    const randomTopMedia = topMedia[randomIndex] || [];
-
-    // Fetch details of the random media item
-    const randomDetails =
-      randomTopMedia.type === "tv"
-        ? await getMediaDetails(randomTopMedia.id, "tv")
-        : await getMediaDetails(randomTopMedia.id, "movie");
-    setRandomBackdrop(randomDetails);
-  };
+const HomePageBackdrop = ({topTV, topMovies, popularTV, popularMovies}) => {
+  const { randomBackdrop, setMedia } = useContext(RandomBackdropContext)
 
   useEffect(() => {
-    // Fetch random media when topTV state updates
-    fetchRandomMedia();
-  }, [topTV]);
+    setMedia([...topTV, ...topMovies, ...popularTV, ...popularMovies])
+  }, [topTV, topMovies, popularTV, popularMovies])
+
 
   return (
     <Row className={styles.randomBackdropWrapper}>

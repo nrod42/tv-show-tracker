@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./MediaPageInfoSection.module.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
   const {
@@ -17,62 +19,68 @@ const MediaPageInfoSection = ({ mediaInfo, mediaType }) => {
   return (
     <>
       {/* Render the title and year */}
-      <div className={styles.titleSection}>
-        <p>{title}</p>
-        <p>({year?.split("-")[0]})</p>
-      </div>
+      <Row className={styles.titleSection}>
+        <Col>
+          <p>{`${title} (${year?.split("-")[0]})`}</p>
+        </Col>
+      </Row>
 
-      <div>
-        <strong>{mediaType === "tv" ? "Creator: " : "Director: "}</strong>
+      {/* Render the creator or director depending on media type */}
+      <Row className="mt-3 mb-3">
         {mediaType === "tv" ? (
-          <span>{createdBy?.map((creator) => creator.name).join(", ")}</span>
+          <Col>
+            <strong>Creator: </strong>
+            {createdBy?.map((creator) => creator.name).join(", ")}
+          </Col>
         ) : (
-          <span>
+          <Col>
+            <strong>Director: </strong>
             {crew
               ?.filter((member) => member.job === "Director")
               .map((director) => director.name)
               .join(", ")}
-          </span>
+          </Col>
         )}
-      </div>
+      </Row>
 
-      <div>
-        <strong>Writers: </strong>
-        <span>
-          {[
-            ...new Set(
-              crew
-                ?.filter((member) =>
-                  ["Writer", "Screenplay", "Story"].includes(member.job)
-                )
-                .map((writer) => writer.name)
-            ),
-          ].join(", ")}
-        </span>
-      </div>
+      {/* Render the writers */}
+      <Row className="mt-3 mb-3">
+        <Col>
+          <strong>Writers: </strong>
+          <span>
+            {[
+              ...new Set(
+                crew
+                  ?.filter((member) =>
+                    ["Writer", "Screenplay", "Story"].includes(member.job)
+                  )
+                  .map((writer) => writer.name)
+              ),
+            ].join(", ")}
+          </span>
+        </Col>
+      </Row>
 
       {/* Render season information for TV shows */}
       {mediaType === "tv" && (
-        <div className={styles.seasonSection}>
-          <p>
-            <strong>Seasons:</strong> {seasonNum}
-          </p>
-          <p>
-            <strong>Episodes:</strong> {episodeNum}
-          </p>
-        </div>
+        <Row className="mt-3 mb-3">
+            <Col><strong>Seasons:</strong> {seasonNum}</Col>
+            <Col><strong>Episodes:</strong> {episodeNum}</Col>
+        </Row>
       )}
 
       {/* Render genres, rating, and plot */}
+      <Row className="mt-3 mb-3">
+        <Col>
+          <strong>Rating:</strong> {rating}
+        </Col>
+        <Col>
+          <strong>Genres:</strong> {genres}
+        </Col>
+      </Row>
 
-      <p>
-        <strong>Rating:</strong> {rating}
-      </p>
-      <p>
-        <strong>Genres:</strong> {genres}
-      </p>
-
-      <div className="plotSection">{plot}</div>
+      {/* Render media plot */}
+      <Row className="mt-3 mb-3"><Col>{plot}</Col></Row>
     </>
   );
 };
