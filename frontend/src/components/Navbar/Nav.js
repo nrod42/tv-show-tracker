@@ -39,7 +39,7 @@ const Nav = () => {
     >
       <Container fluid>
         <NavBrand />
-        <Navbar.Toggle onClick={handleCollapseToggle} />{" "}
+        <Navbar.Toggle onClick={handleCollapseToggle} />
         {/* Toggle collapsible */}
         <Navbar.Collapse in={collapseOpen}>
           <Row className="align-items-center w-100">

@@ -10,7 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "./RegisterPage.module.css";
 import { ColorRing } from "react-loader-spinner";
-import defaultMediaIcon from '../img/default_media_icon.svg';
+import defaultMediaIcon from "../img/default_media_icon.svg";
 
 const RegisterPage = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -76,7 +76,7 @@ const RegisterPage = () => {
           alt={`${randomBackdrop.title} poster`}
         />
         <div className={styles.registerPageInfo}>
-        <h2 className="text-center">Create Your Account</h2>
+          <h2 className="text-center">Create Your Account</h2>
           {loading ? (
             <ColorRing
               visible={true}
@@ -168,22 +168,18 @@ const RegisterPage = () => {
               </Button>
             </Form>
           )}
-        
 
-        <div className="text-center">
-          <Link to="/login">
-            <Button variant="link">Already have an account? Login</Button>
-          </Link>
-        </div>
+          <div className="text-center">
+            <Link to="/login">
+              <Button variant="link">Already have an account? Login</Button>
+            </Link>
+          </div>
         </div>
       </div>
 
       <Container className={`mt-5 mb-5 ${styles.container}`}>
+        {/* <div className={styles.registerBody}> */}
 
-      {/* <div className={styles.registerBody}> */}
-        
-
-      
         {/* </div> */}
       </Container>
     </div>

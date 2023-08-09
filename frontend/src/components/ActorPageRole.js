@@ -9,9 +9,8 @@ const ActorPageRole = ({ roleInfo }) => {
 
   return (
     <>
-      <Row className="mt-2 mb-2">
-        <Col
-          md={1}
+      <div className="d-flex flex-row flex-wrap align-items-center justify-content-between mt-2 mb-2">
+        <div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -23,11 +22,11 @@ const ActorPageRole = ({ roleInfo }) => {
             <img
               src={poster !== null ? poster : defaultMediaIcon}
               alt={`${title} poster`}
-              style={{ width: "45px", height: "auto" }}
+              style={{ width: "100%", height: "auto" }}
             />
           </Link>
-        </Col>
-        <Col
+        </div>
+        <div
           md={10}
           style={{
             display: "flex",
@@ -42,8 +41,8 @@ const ActorPageRole = ({ roleInfo }) => {
             </div>
           </Link>
           <div>{role}</div>
-        </Col>
-        <Col
+        </div>
+        <div
           md={1}
           style={{
             display: "flex",
@@ -53,8 +52,8 @@ const ActorPageRole = ({ roleInfo }) => {
           }}
         >
           <div>{year}</div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 };

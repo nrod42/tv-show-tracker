@@ -24,12 +24,12 @@ const CategoryPage = () => {
   const [media, setMedia] = useState([]); // State to store the fetched media
   const [page, setPage] = useState(1); // State to track the current page number
   const [title, setTitle] = useState("");
-  
+
   const addPage = () => {
     setPage((prev) => prev + 1);
   };
 
-   // Function to fetch a page of media based on the current page and type
+  // Function to fetch a page of media based on the current page and type
   const fetchPage = async () => {
     let mediaData = [];
 
@@ -55,7 +55,6 @@ const CategoryPage = () => {
         setTitle("Top Rated");
     }
 
-     
     // Filter out duplicate media items and add only the new ones to the state
     setMedia((prevMedia) => {
       const uniqueMediaData = mediaData.filter(
@@ -75,7 +74,6 @@ const CategoryPage = () => {
     setMedia([]);
   }, [category]);
 
-
   const renderMediaCards = () => {
     return media.map((mediaItem) => (
       <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
@@ -91,9 +89,7 @@ const CategoryPage = () => {
       <MediaNav />
       <Container className="text-center">
         <h2 className="mb-5">{title}</h2>
-        <Row>
-          {renderMediaCards()}
-        </Row>
+        <Row>{renderMediaCards()}</Row>
         <Button className="mt-5 mb-5" variant="success" onClick={addPage}>
           Show More
         </Button>

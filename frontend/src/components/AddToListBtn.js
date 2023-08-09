@@ -38,7 +38,6 @@ const AddToListBtn = ({ id, type }) => {
   };
 
   const handleListSelect = (list) => {
-    // setSelectedList(list);
     addToList(list);
     setIsDropdownOpen(false); // Close the dropdown after selection
   };
@@ -54,17 +53,33 @@ const AddToListBtn = ({ id, type }) => {
           >
             +
           </Dropdown.Toggle>
-          <Dropdown.Menu className={darkMode ? styles.dropdownMenuDark : styles.dropdownMenuLight}>
-            <Dropdown.Item className={styles.dropdownItem} onClick={() => handleListSelect("watching")}>
+          <Dropdown.Menu
+            className={
+              darkMode ? styles.dropdownMenuDark : styles.dropdownMenuLight
+            }
+          >
+            <Dropdown.Item
+              className={styles.dropdownItem}
+              onClick={() => handleListSelect("watching")}
+            >
               Watching
             </Dropdown.Item>
-            <Dropdown.Item className={styles.dropdownItem} onClick={() => handleListSelect("completed")}>
+            <Dropdown.Item
+              className={styles.dropdownItem}
+              onClick={() => handleListSelect("completed")}
+            >
               Completed
             </Dropdown.Item>
-            <Dropdown.Item className={styles.dropdownItem} onClick={() => handleListSelect("planning")}>
+            <Dropdown.Item
+              className={styles.dropdownItem}
+              onClick={() => handleListSelect("planning")}
+            >
               Planning
             </Dropdown.Item>
-            <Dropdown.Item className={styles.dropdownItem} onClick={() => handleListSelect("dropped")}>
+            <Dropdown.Item
+              className={styles.dropdownItem}
+              onClick={() => handleListSelect("dropped")}
+            >
               Dropped
             </Dropdown.Item>
           </Dropdown.Menu>

@@ -5,7 +5,6 @@ import { UserContextProvider } from "./contexts/UserContext";
 import Nav from "./components/Navbar/Nav";
 import AnimatedRoutes from "./AnimatedRoutes";
 
-
 const App = () => {
   return (
     <div className="App">
