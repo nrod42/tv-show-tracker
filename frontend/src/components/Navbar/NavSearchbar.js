@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResults } from "../API/getMedia";
 import Form from "react-bootstrap/Form";
@@ -12,9 +12,10 @@ const NavSearchbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
+  const [hideSuggestionsTimeout, setHideSuggestionsTimeout] = useState(null);
 
   const inputRef = useRef(null); // Create a ref for the input element
-  const suggestionsRef = useRef(null); // Create a ref for the suggestions dropdown
+  const suggestionRef = useRef(null);
 
   const handleInputChange = async (e) => {
     setSearchInput(e.target.value);
@@ -41,21 +42,44 @@ const NavSearchbar = () => {
     inputRef.current.blur();
   };
 
-  const handleParentBlur = () => {
-    // Delay the onBlur event to check if focus has moved to suggestions
-    setTimeout(() => {
-      // If the currently active element is not a child of the suggestions div, hide the suggestions
-      if (!suggestionsRef.current.contains(document.activeElement)) {
-        setIsFocused(false);
-      }
-    }, 0);
+  const handleBlur = () => {
+    const timeout = setTimeout(() => {
+      setIsFocused(false);
+      setHideSuggestionsTimeout(null);
+    }, 100); // Set an appropriate delay in milliseconds
+    setHideSuggestionsTimeout(timeout);
   };
+
+  const handleFocus = () => {
+    if (hideSuggestionsTimeout) {
+      clearTimeout(hideSuggestionsTimeout);
+      setHideSuggestionsTimeout(null);
+    }
+    setIsFocused(true);
+  };
+
+  // Escape keeps removes focus and hides suggestions
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        inputRef.current.blur();
+      }
+    };
+
+    // Add event listener when the component mounts
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div
       className={styles.searchbarWrapper}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => handleParentBlur}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       <Form onSubmit={handleSearch} className={styles.searchForm}>
         <div className={`${styles.inputContainer} me-2`}>
@@ -69,11 +93,12 @@ const NavSearchbar = () => {
             className="me-2"
           />
           {isFocused && suggestions.length > 0 && (
-            <NavSearchSuggestions
-              ref={suggestionsRef}
-              suggestions={suggestions}
-              setIsFocused={setIsFocused}
-            />
+            <div ref={suggestionRef}>
+              <NavSearchSuggestions
+                suggestions={suggestions}
+                setIsFocused={setIsFocused}
+              />
+            </div>
           )}
         </div>
         <Button variant="success" type="submit">

@@ -5,12 +5,8 @@ import Row from "react-bootstrap/Row";
 import styles from "./HomePageBackdrop.module.css";
 import { RandomBackdropContext } from "../../contexts/RandomBackdropContext";
 
-const HomePageBackdrop = ({ topTV, topMovies, popularTV, popularMovies }) => {
-  const { randomBackdrop, setMedia } = useContext(RandomBackdropContext);
-
-  useEffect(() => {
-    setMedia([...topTV, ...topMovies, ...popularTV, ...popularMovies]);
-  }, [topTV, topMovies, popularTV, popularMovies, setMedia]);
+const HomePageBackdrop = () => {
+  const { randomBackdrop } = useContext(RandomBackdropContext);
 
   return (
     <Row className={styles.randomBackdropWrapper}>

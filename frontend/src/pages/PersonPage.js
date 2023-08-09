@@ -99,9 +99,11 @@ const PersonPage = () => {
             </div>
           </Col>
         </Row>
-        <div>
-          <h2 className="text-center mt-3 mb-3">Acting Roles</h2>
-          <div>
+        <div className="d-flex flex-column align-items-center mt-5 mb-5">
+          <h2 className="mt-3 mb-3">Acting Roles</h2>
+          <div className="d-flex flex-column justify-content-between align-items-start"
+          style={{minWidth: '80%'}}
+          >
             {actorRoles
               .sort((a, b) => {
                 const yearA = parseInt(a.year, 10);

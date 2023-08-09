@@ -1,57 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { DarkModeContext } from "../contexts/DarkModeContext";
-import { getTopMedia, getPopularMedia } from "../components/API/getMedia";
 import HomePageBackdrop from "../components/HomePage/HomePageBackdrop";
 import HomePageMain from "../components/HomePage/HomePageMain";
 import Container from "react-bootstrap/Container";
 import styles from "./HomePage.module.css";
+import { RandomBackdropContext } from "../contexts/RandomBackdropContext";
 
 const HomePage = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const [topTV, setTopTV] = useState([]);
-  const [popularTV, setPopularTV] = useState([]);
-  const [topMovies, setTopMovies] = useState([]);
-  const [popularMovies, setPopularMovies] = useState([]);
-
-  const fetchTopMedia = async (type) => {
-    let topMedia = await getTopMedia(type);
-    let page = 1;
-    while (topMedia.length < 6) {
-      page++;
-      topMedia = [...topMedia, ...(await getTopMedia(type, page))];
-    }
-    return topMedia;
-  };
-
-  const fetchPopMedia = async (type) => {
-    let popMedia = await getPopularMedia(type);
-    let page = 1;
-    while (popMedia.length < 6) {
-      page++;
-      popMedia = [...popMedia, ...(await getPopularMedia(type, page))];
-    }
-    return popMedia;
-  };
-
-  // Fetches data for top TV shows, popular TV shows, top movies, and popular movies
-  const fetchData = async () => {
-    const topTVResult = await fetchTopMedia("tv");
-    const topMoviesResult = await fetchTopMedia("movie");
-    const popTVResult = await fetchPopMedia("tv");
-    const popMoviesResult = await fetchPopMedia("movie");
-
-    // Merge results of multiple API calls into respective state variables
-    setTopTV([...topTVResult]);
-    setPopularTV([...popTVResult]);
-    setTopMovies([...topMoviesResult]);
-    setPopularMovies([...popMoviesResult]);
-  };
-
-  useEffect(() => {
-    // Fetch data on component mount
-    fetchData();
-  }, []);
+  const { topTV, topMovies, popularTV, popularMovies } = useContext(RandomBackdropContext)
 
   return (
     <motion.div
@@ -69,7 +27,7 @@ const HomePage = () => {
         popularTV={popularTV}
         popularMovies={popularMovies}
       />
-      <Container className={styles.container}>
+      <Container className={`mb-5 ${styles.container}`}>
         {/* Render main homepage content */}
         <HomePageMain
           popularMovies={popularMovies}

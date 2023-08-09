@@ -50,7 +50,7 @@ const getAiringTodayTV = (page = 1) => {
 
 // Get upcoming movies based on page
 const getUpcomingMovies = (page = 1) => {
-  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
+  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&region=US&page=${page}`;
   return fetchMedia(url, "movie");
 };
 
