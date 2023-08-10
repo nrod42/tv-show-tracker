@@ -26,8 +26,8 @@
 }
 
 .loginPageInfoLight, .loginPageInfoDark {
-    padding: 25px;
-    border-radius: 5px;
+    padding: 50px;
+    border-radius: 25px;
     transition: background 0.2s;
 }
 

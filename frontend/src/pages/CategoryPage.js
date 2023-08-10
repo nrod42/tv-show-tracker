@@ -24,36 +24,65 @@ const CategoryPage = () => {
   const [media, setMedia] = useState([]); // State to store the fetched media
   const [page, setPage] = useState(1); // State to track the current page number
   const [title, setTitle] = useState("");
+  const [leftovers, setLeftovers] = useState([])
 
+  const targetResults = 18;
   const addPage = () => {
-    setPage((prev) => prev + 1);
+    // const addPage = () => {
+      const nextPage = page + 1;
+      fetchPage(nextPage);
+    // };
   };
 
-  // Function to fetch a page of media based on the current page and type
-  const fetchPage = async () => {
-    let mediaData = [];
 
-    switch (category) {
-      case "popular":
-        mediaData = await getPopularMedia(mediaType, page);
-        setTitle("Popular");
+  // Function to fetch a page of media based on the current page and type
+  const fetchPage = async (newPage) => {
+    let mediaData = [...leftovers]; // Include any leftover items from previous fetches
+    let newMedia = [];
+    let currentPage = newPage; // Use a separate variable to track the page
+
+    while (mediaData.length < targetResults) {
+      
+      switch (category) {
+        case "popular":
+          newMedia = await getPopularMedia(mediaType, currentPage);
+          setTitle("Popular");
+          break;
+        case "now-playing":
+          newMedia = await getNowPlayingMovies(currentPage);
+          setTitle("Now Playing");
+          break;
+        case "upcoming":
+          newMedia = await getUpcomingMovies(currentPage);
+          setTitle("Upcoming");
+          break;
+        case "airing-today":
+          newMedia = await getAiringTodayTV(currentPage);
+          setTitle("Airing Today");
+          break;
+        default:
+          newMedia = await getTopMedia(mediaType, currentPage);
+          setTitle("Top Rated");
+      }
+
+        // Add fetched media to mediaData and increment page
+      mediaData.push(...newMedia);
+
+      // Break the loop if no more data can be fetched
+      if (newMedia.length === 0) {
         break;
-      case "now-playing":
-        mediaData = await getNowPlayingMovies(page);
-        setTitle("Now Playing");
-        break;
-      case "upcoming":
-        mediaData = await getUpcomingMovies(page);
-        setTitle("Upcoming");
-        break;
-      case "airing-today":
-        mediaData = await getAiringTodayTV(page);
-        setTitle("Airing Today");
-        break;
-      default:
-        mediaData = await getTopMedia(mediaType, page);
-        setTitle("Top Rated");
+      }
+
+      currentPage++;
     }
+
+    // Set leftovers if mediaData exceeds 20 items
+    if (mediaData.length > targetResults) {
+      setLeftovers(mediaData.slice(targetResults));
+      mediaData = mediaData.slice(0, targetResults);
+    }
+
+    setPage(currentPage);
 
     // Filter out duplicate media items and add only the new ones to the state
     setMedia((prevMedia) => {
@@ -66,8 +95,8 @@ const CategoryPage = () => {
   };
 
   useEffect(() => {
-    fetchPage();
-  }, [page]);
+    fetchPage(page);
+  }, []);
 
   useEffect(() => {
     // Clear media state when the category changes

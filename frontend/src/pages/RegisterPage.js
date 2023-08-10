@@ -106,7 +106,7 @@ const RegisterPage = () => {
             />
           ) : (
             <Form
-              className="d-flex flex-column justify-content-center"
+              className="d-flex flex-column justify-content-center mt-5 mb-5"
               onSubmit={register}
             >
               <Row>
