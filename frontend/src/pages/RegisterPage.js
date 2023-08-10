@@ -33,7 +33,7 @@ const RegisterPage = () => {
       return;
     }
 
-    // sends valid registration to backend
+    // Sends valid registration to backend
     try {
       setLoading(true);
       const response = await fetch(`${API_URL}/register`, {
@@ -63,19 +63,36 @@ const RegisterPage = () => {
   return (
     <div
       className={darkMode ? styles.registerPageDark : styles.registerPageLight}
-      // style={{ backgroundImage: `url(${randomBackdrop.backdrop})` }}
+      style={{
+        backgroundImage: `url(${
+          randomBackdrop.backdrop !== null
+            ? randomBackdrop.backdrop
+            : defaultMediaIcon
+        })`,
+        backgroundSize: "cover",
+      }}
     >
-      <div className={styles.randomBackdropWrapper}>
-        <img
-          className={styles.randomBackdrop}
-          src={
+      <div
+        className={styles.backgroundImage}
+        style={{
+          backgroundImage: `url(${
             randomBackdrop.backdrop !== null
               ? randomBackdrop.backdrop
               : defaultMediaIcon
+          })`,
+          backgroundSize: "cover",
+        }}
+      >
+        <div className={styles.overlay}></div>
+      </div>
+      <Container className={styles.container}>
+        <div
+          className={
+            darkMode
+              ? styles.registerPageInfoDark
+              : styles.registerPageInfoLight
           }
-          alt={`${randomBackdrop.title} poster`}
-        />
-        <div className={styles.registerPageInfo}>
+        >
           <h2 className="text-center">Create Your Account</h2>
           {loading ? (
             <ColorRing
@@ -93,79 +110,86 @@ const RegisterPage = () => {
               onSubmit={register}
             >
               <Row>
-                <Col xs={12} md={6}>
-                  <Form.Group className="mb-3" controlId="formFirstName">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="First Name"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={6}>
-                  <Form.Group className="mb-3" controlId="formLastName">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Last Name"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
+                <Row className="mb-3">
+                  <Col md={6}>
+                    <Form.Group controlId="formFirstName">
+                      <Form.Label>First Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group controlId="formLastName">
+                      <Form.Label>Last Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row className="mb-3">
+                  <Col md={6}>
+                    <Form.Group controlId="formEmail">
+                      <Form.Label>E-Mail</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="E-Mail"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group controlId="formUsername">
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row className="mb-3">
+                  <Col md={6}>
+                    <Form.Group controlId="formPassword">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group
+                      // className="mb-3"
+                      controlId="formConfirmPassword"
+                    >
+                      <Form.Label>Confirm Password</Form.Label>
+                      <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
               </Row>
-              <Row>
-                <Col xs={12} md={6}>
-                  <Form.Group className="mb-3" controlId="formEmail">
-                    <Form.Label>E-Mail</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="E-Mail"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={6}>
-                  <Form.Group className="mb-3" controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                      placeholder="Username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={6}>
-                  <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={6}>
-                  <Form.Group className="mb-3" controlId="formConfirmPassword">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Confirm Password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Button variant="success" type="submit">
-                Register
-              </Button>
+              <div className="text-center mt-3">
+                <Button variant="success" type="submit">
+                  Register
+                </Button>
+              </div>
             </Form>
           )}
 
@@ -175,12 +199,6 @@ const RegisterPage = () => {
             </Link>
           </div>
         </div>
-      </div>
-
-      <Container className={`mt-5 mb-5 ${styles.container}`}>
-        {/* <div className={styles.registerBody}> */}
-
-        {/* </div> */}
       </Container>
     </div>
   );

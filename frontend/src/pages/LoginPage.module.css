@@ -2,27 +2,39 @@
 .loginPageLight {
     background: #F8F9FA ;
     color: black;
-    transition: background 0.3s, color 0.3s; 
 }
 
 .loginPageDark {
     background: #212529;
-    transition: background 0.3s;
 }
 
 .loginPageDark * {
     color: white;
-    transition: color 0.3s;
 }
 
 .loginPageLight, .loginPageDark {
-    min-height: 100vh;
+    height: 100vh;
+    transition: background 0.3s, color 0.3s; 
 }
 
 .container {
-    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.loginPageLight form, .loginPageDark form{
-    padding: 30px;
+.loginPageInfoLight, .loginPageInfoDark {
+    padding: 25px;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.loginPageInfoLight {
+    background: rgba(248, 249, 250, 0.8);
+}
+
+.loginPageInfoDark {
+    background: rgba(33, 37, 41, 0.9);
 }

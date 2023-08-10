@@ -3,16 +3,20 @@ import { useNavigate, Link } from "react-router-dom";
 import { API_URL } from "../apiConfig";
 import { DarkModeContext } from "../contexts/DarkModeContext";
 import { UserContext } from "../contexts/UserContext";
+import { RandomBackdropContext } from "../contexts/RandomBackdropContext";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import styles from "./LoginPage.module.css";
 import { ColorRing } from "react-loader-spinner";
+import defaultMediaIcon from "../img/default_media_icon.svg";
 
 const LoginPage = () => {
   // Context and State variables
   const { darkMode } = useContext(DarkModeContext);
+  const { randomBackdrop } = useContext(RandomBackdropContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -65,64 +69,83 @@ const LoginPage = () => {
   }, [shouldAutoSubmit, username, password]);
 
   return (
-    <div className={darkMode ? styles.loginPageDark : styles.loginPageLight}>
+    <div
+      className={darkMode ? styles.loginPageDark : styles.loginPageLight}
+      style={{
+        backgroundImage: `url(${
+          randomBackdrop.backdrop !== null
+            ? randomBackdrop.backdrop
+            : defaultMediaIcon
+        })`,
+        backgroundSize: "cover",
+      }}
+    >
+      <div className={styles.overlay}></div>
       <Container className={styles.container}>
-        <h2 className="text-center">Login To Your Account</h2>
+        <div
+          className={
+            darkMode ? styles.loginPageInfoDark : styles.loginPageInfoLight
+          }
+        >
+          <h2 className="text-center">Login To Your Account</h2>
+          {/* Show loading spinner or login form */}
+          {loading ? (
+            <div className="text-center mt-5 mb-5">
+              <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#198754", "#198754", "#198754", "#198754", "#198754"]}
+              />
+            </div>
+          ) : (
+            <Form
+              className="d-flex flex-column justify-content-center"
+              onSubmit={handleSubmit}
+            >
+              <Row>
+                <Col md={12}>
+                  <Form.Group className="mb-3" controlId="formUsername">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
 
-        {/* Show loading spinner or login form */}
-        {loading ? (
+                <Col md={12}>
+                  <Form.Group className="mb-3" controlId="formPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Button variant="success" type="submit">
+                Login
+              </Button>
+            </Form>
+          )}
+          {/* Guest login and registration links */}
           <div className="text-center mt-5 mb-5">
-            <ColorRing
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="blocks-loading"
-              wrapperStyle={{}}
-              wrapperClass="blocks-wrapper"
-              colors={["#198754", "#198754", "#198754", "#198754", "#198754"]}
-            />
-          </div>
-        ) : (
-          <Form
-            className="d-flex flex-column justify-content-center"
-            onSubmit={handleSubmit}
-          >
-            <Row>
-              <Form.Group className="mb-3" controlId="formUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group className="mb-3" controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-            </Row>
-            <Button variant="success" type="submit">
-              Login
+            <Button variant="success" onClick={handleGuestLogin}>
+              Login with Guest Account
             </Button>
-          </Form>
-        )}
-        {/* Guest login and registration links */}
-        <div className="text-center mt-5 mb-5">
-          <Button variant="success" onClick={handleGuestLogin}>
-            Login with Guest Account
-          </Button>
-        </div>
-        <div className="text-center">
-          <Link to="/register">
-            <Button variant="link">Don't have an account? Register</Button>
-          </Link>
+          </div>
+          <div className="text-center">
+            <Link to="/register">
+              <Button variant="link">Don't have an account? Register</Button>
+            </Link>
+          </div>
         </div>
       </Container>
     </div>
