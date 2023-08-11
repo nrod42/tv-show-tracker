@@ -23,60 +23,65 @@ const CategoryPage = () => {
   const { mediaType, category } = useParams();
   const [media, setMedia] = useState([]); // State to store the fetched media
   const [page, setPage] = useState(1); // State to track the current page number
-  const [title, setTitle] = useState("");
-  const [leftovers, setLeftovers] = useState([])
+  const [leftovers, setLeftovers] = useState([]); // State to store extra fetched media
+  const targetResults = 18; // Number of items you want to fetch and display
 
-  const targetResults = 18;
-  const addPage = () => {
-    // const addPage = () => {
-      const nextPage = page + 1;
-      fetchPage(nextPage);
-    // };
+  // Utility function to format category title
+  const formatTitle = (title) => {
+    return title
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
+  // Function to handle "Show More" button click
+  const addPage = () => {
+    const nextPage = page + 1;
+    fetchPage(nextPage);
+  };
 
-  // Function to fetch a page of media based on the current page and type
+  // Function to fetch media based on category and page
+  const fetchMedia = async (currentPage) => {
+    let newMedia = [];
+
+    switch (category) {
+      case "popular":
+        newMedia = await getPopularMedia(mediaType, currentPage);
+        break;
+      case "now-playing":
+        newMedia = await getNowPlayingMovies(currentPage);
+        break;
+      case "upcoming":
+        newMedia = await getUpcomingMovies(currentPage);
+        break;
+      case "airing-today":
+        newMedia = await getAiringTodayTV(currentPage);
+        break;
+      default:
+        newMedia = await getTopMedia(mediaType, currentPage);
+    }
+
+    return newMedia;
+  };
+
+  // Function to fetch a page of media and update state
   const fetchPage = async (newPage) => {
     let mediaData = [...leftovers]; // Include any leftover items from previous fetches
-    let newMedia = [];
     let currentPage = newPage; // Use a separate variable to track the page
 
     while (mediaData.length < targetResults) {
-      
-      switch (category) {
-        case "popular":
-          newMedia = await getPopularMedia(mediaType, currentPage);
-          setTitle("Popular");
-          break;
-        case "now-playing":
-          newMedia = await getNowPlayingMovies(currentPage);
-          setTitle("Now Playing");
-          break;
-        case "upcoming":
-          newMedia = await getUpcomingMovies(currentPage);
-          setTitle("Upcoming");
-          break;
-        case "airing-today":
-          newMedia = await getAiringTodayTV(currentPage);
-          setTitle("Airing Today");
-          break;
-        default:
-          newMedia = await getTopMedia(mediaType, currentPage);
-          setTitle("Top Rated");
-      }
-
-        // Add fetched media to mediaData and increment page
-      mediaData.push(...newMedia);
+      const newMedia = await fetchMedia(currentPage);
 
       // Break the loop if no more data can be fetched
       if (newMedia.length === 0) {
         break;
       }
 
+      mediaData.push(...newMedia);
       currentPage++;
     }
 
-    // Set leftovers if mediaData exceeds 20 items
+    // Set leftovers if mediaData exceeds targetResults
     if (mediaData.length > targetResults) {
       setLeftovers(mediaData.slice(targetResults));
       mediaData = mediaData.slice(0, targetResults);
@@ -87,22 +92,21 @@ const CategoryPage = () => {
     // Filter out duplicate media items and add only the new ones to the state
     setMedia((prevMedia) => {
       const uniqueMediaData = mediaData.filter(
-        (mediaItem) =>
-          !prevMedia.some((prevItem) => prevItem.id === mediaItem.id)
+        (mediaItem) => !prevMedia.some((prevItem) => prevItem.id === mediaItem.id)
       );
       return [...prevMedia, ...uniqueMediaData];
     });
   };
 
   useEffect(() => {
-    fetchPage(page);
+    fetchPage(page); // Fetch initial page on component mount
   }, []);
 
   useEffect(() => {
-    // Clear media state when the category changes
-    setMedia([]);
+    setMedia([]); // Clear media state when the category changes
   }, [category]);
 
+  // Function to render media cards
   const renderMediaCards = () => {
     return media.map((mediaItem) => (
       <Col key={uniqid()} lg={2} md={4} sm={6} xs={6}>
@@ -117,7 +121,7 @@ const CategoryPage = () => {
     >
       <MediaNav />
       <Container className="text-center">
-        <h2 className="mb-5">{title}</h2>
+        <h2 className="mb-5">{formatTitle(category)}</h2>
         <Row>{renderMediaCards()}</Row>
         <Button className="mt-5 mb-5" variant="success" onClick={addPage}>
           Show More
