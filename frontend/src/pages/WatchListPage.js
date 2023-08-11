@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import uniqid from "uniqid";
-import styles from "./ListPage.module.css";
+import styles from "./WatchListPage.module.css";
 
 const ListPage = () => {
   const { darkMode } = useContext(DarkModeContext);

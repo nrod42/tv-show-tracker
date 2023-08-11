@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../pages/Lists.module.css";
+import styles from "../pages/WatchListTabsPage.module.css";
 
 /**
  * WatchList component represents a single watch list item.

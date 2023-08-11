@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { API_URL } from "../apiConfig";
 import { DarkModeContext } from "../contexts/DarkModeContext";
 import { UserContext } from "../contexts/UserContext";
-import WatchList from "../components/WatchList";
-import styles from "./Lists.module.css";
+import WatchListTab from "../components/WatchListTab";
+import styles from "./WatchListTabsPage.module.css";
 
 /**
  * Lists component displays the user's watch lists.
@@ -43,28 +43,28 @@ const Lists = () => {
       <h2>Lists</h2>
 
       {/* Render the Currently Watching watch list */}
-      <WatchList
+      <WatchListTab
         title="Watching"
         link="/lists/watching"
         userData={userData?.watching}
       />
 
       {/* Render the Completed watch list */}
-      <WatchList
+      <WatchListTab
         title="Completed"
         link="/lists/completed"
         userData={userData?.completed}
       />
 
       {/* Render the Want To Watch watch list */}
-      <WatchList
+      <WatchListTab
         title="Planning"
         link="/lists/planning"
         userData={userData?.planning}
       />
 
       {/* Render the Dropped watch list */}
-      <WatchList
+      <WatchListTab
         title="Dropped"
         link="/lists/dropped"
         userData={userData?.dropped}

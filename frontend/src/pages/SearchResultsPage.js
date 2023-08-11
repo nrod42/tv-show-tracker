@@ -8,7 +8,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import MediaCard from "../components/Cards/MediaCard";
 import { getResults } from "../components/API/getMedia";
-import styles from "./ResultsPage.module.css";
+import styles from "./SearchResultsPage.module.css";
 import uniqid from "uniqid";
 
 const Results = () => {

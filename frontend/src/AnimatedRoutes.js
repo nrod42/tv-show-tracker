@@ -2,9 +2,9 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import HomePage from "./pages/HomePage";
-import Results from "./pages/Results";
-import Lists from "./pages/Lists";
-import ListPage from "./pages/ListPage";
+import SearchResultsPage from "./pages/SearchResultsPage";
+import WatchListTabsPage from "./pages/WatchListTabsPage";
+import WatchListPage from "./pages/WatchListPage";
 import CategoryPage from "./pages/CategoryPage";
 import MediaPage from "./pages/MediaPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -22,9 +22,9 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/results/:query" element={<Results />} />
-        <Route path="/lists" element={<Lists />} />
-        <Route path="/lists/:listType" element={<ListPage />} />
+        <Route path="/results/:query" element={<SearchResultsPage />} />
+        <Route path="/lists" element={<WatchListTabsPage />} />
+        <Route path="/lists/:listType" element={<WatchListPage />} />
         <Route path="/:mediaType/:id" element={<MediaPage />} />
         <Route path="/:mediaType/credits/:id" element={<FullCreditsPage />} />
         <Route

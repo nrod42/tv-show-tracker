@@ -69,6 +69,7 @@ const LoginPage = () => {
   }, [shouldAutoSubmit, username, password]);
 
   return (
+    // Main container for the Login Page
     <div
       className={darkMode ? styles.loginPageDark : styles.loginPageLight}
       style={{
@@ -80,16 +81,21 @@ const LoginPage = () => {
         backgroundSize: "cover",
       }}
     >
+      {/* Background overlay */}
       <div className={styles.overlay}></div>
       <Container className={styles.container}>
+        {/* Login form and information */}
         <div
           className={
             darkMode ? styles.loginPageInfoDark : styles.loginPageInfoLight
           }
         >
+          {/* Login header */}
           <h2 className="text-center">Login To Your Account</h2>
-          {/* Show loading spinner or login form */}
+
+          {/* Conditionally show loading spinner or login form */}
           {loading ? (
+            // Loading spinner when the login request is in progress
             <div className="text-center mt-5 mb-5">
               <ColorRing
                 visible={true}
@@ -102,10 +108,12 @@ const LoginPage = () => {
               />
             </div>
           ) : (
+            // Login form when not loading
             <Form
               className="d-flex flex-column justify-content-center mt-5 mb-5"
               onSubmit={handleSubmit}
             >
+              {/* Username and Password fields */}
               <Row>
                 <Col md={12}>
                   <Form.Group className="mb-3" controlId="formUsername">
@@ -130,11 +138,14 @@ const LoginPage = () => {
                   </Form.Group>
                 </Col>
               </Row>
+
+              {/* Submit button */}
               <Button variant="success" type="submit">
                 Login
               </Button>
             </Form>
           )}
+
           {/* Guest login and registration links */}
           <div className="text-center mt-5 mb-5">
             <Button variant="success" onClick={handleGuestLogin}>
