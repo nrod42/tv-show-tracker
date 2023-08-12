@@ -7,7 +7,6 @@ import styles from "./NavUserLinks.module.css";
 import { UserContext } from "../../contexts/UserContext";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../../apiConfig";
 
 const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
   const navigate = useNavigate();
@@ -18,27 +17,14 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
     const fetchUserProfile = async () => {
       try {
         const token = Cookies.get("token");
-        if (!token) {
-          setUserInfo(null); // Clear user info if token is not present
-          return;
-        }
-
-        const response = await fetch(`${API_URL}/profile`, {
-          credentials: "include",
-        });
-        if (response.ok) {
-          const userInfo = await response.json(); // Set user info if response is successful
-          setUserInfo(userInfo);
-        } else {
-          setUserInfo(null); // Clear user info if response is not successful
-        }
+        token ? setUserInfo(userInfo) : setUserInfo(null);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchUserProfile();
-  }, [setUserInfo]);
+  }, [userInfo, setUserInfo]);
 
   // Handle user logout
   const logout = () => {
