@@ -84,7 +84,7 @@ const MediaPage = () => {
   }, [id]);
 
   return (
-    <div className={darkMode ? styles.mediaPageDark : styles.mediaPageLight}>
+    <div className={`pb-5 ${darkMode ? styles.mediaPageDark : styles.mediaPageLight}`}>
       {/* Render the media backdrop */}
       <MediaPageBackdrop mediaInfo={mediaInfo} />
 

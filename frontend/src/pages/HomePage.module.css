@@ -2,12 +2,16 @@
 .homePageLight {
     background: #F8F9FA ;
     color: black;
-    transition: background 0.3s, color 0.3s; 
+    
 }
 
 .homePageDark {
     background: #212529;
+}
+
+.homePageLight, .homePageDark {
     transition: background 0.3s, color 0.3s;
+    /* margin-top: 54px; */
 }
 
 .homePageDark * {

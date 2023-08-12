@@ -1,0 +1,27 @@
+.backdropWrapper {
+    height: 700px;
+    position: relative;
+    overflow: hidden;
+}
+
+.backdrop {
+    filter: brightness(70%);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* Apply styles for screens with a maximum width of 768px (typical for mobile devices) */
+@media (max-width: 768px) {
+    .backdropWrapper {
+        height: 500px;
+        overflow: auto;   
+        /* padding-top: 70px; */
+    }
+    
+    .backdrop {
+        height: 100%;
+        object-position: top;
+    }
+}

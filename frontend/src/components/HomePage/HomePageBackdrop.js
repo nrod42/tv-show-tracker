@@ -1,15 +1,14 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import defaultMediaIcon from "../../img/default_media_icon.svg";
-import Row from "react-bootstrap/Row";
-import styles from "./HomePageBackdrop.module.css";
 import { RandomBackdropContext } from "../../contexts/RandomBackdropContext";
+import defaultMediaIcon from "../../img/default_media_icon.svg";
+import styles from "./HomePageBackdrop.module.css";
 
 const HomePageBackdrop = () => {
   const { randomBackdrop } = useContext(RandomBackdropContext);
 
   return (
-    <Row className={styles.randomBackdropWrapper}>
+    <div className={styles.randomBackdropWrapper}>
       <img
         className={styles.randomBackdrop}
         src={
@@ -30,7 +29,7 @@ const HomePageBackdrop = () => {
           {randomBackdrop.title} ({randomBackdrop.year})
         </div>
       </Link>
-    </Row>
+    </div>
   );
 };
 

@@ -1,72 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { API_URL } from "../apiConfig";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { DarkModeContext } from "../contexts/DarkModeContext";
-import { UserContext } from "../contexts/UserContext";
 import { RandomBackdropContext } from "../contexts/RandomBackdropContext";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
+
 import styles from "./LoginPage.module.css";
 import { ColorRing } from "react-loader-spinner";
 import defaultMediaIcon from "../img/default_media_icon.svg";
+import LoginPageForm from "../components/LoginPage/LoginPageForm";
 
 const LoginPage = () => {
   // Context and State variables
   const { darkMode } = useContext(DarkModeContext);
   const { randomBackdrop } = useContext(RandomBackdropContext);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [shouldAutoSubmit, setShouldAutoSubmit] = useState(false);
-
-  const navigate = useNavigate();
-  const { setUserInfo } = useContext(UserContext);
-
-  // Submit handler for form
-  const handleSubmit = async (e = null) => {
-    if (e) {
-      e.preventDefault();
-    }
-
-    try {
-      setLoading(true);
-      const response = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        body: JSON.stringify({ username, password }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        const userInfo = await response.json();
-        setUserInfo(userInfo);
-        navigate("/");
-      } else {
-        alert("Wrong credentials");
-      }
-    } catch (error) {
-      console.error("Error logging in", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Handle Guest Login button click
-  const handleGuestLogin = () => {
-    setUsername("Guest");
-    setPassword("Guest");
-    setShouldAutoSubmit(true);
-  };
-
-  // Automatically submit the form when auto-submit condition is met
-  useEffect(() => {
-    if (shouldAutoSubmit && username === "Guest" && password === "Guest") {
-      handleSubmit();
-    }
-  }, [shouldAutoSubmit, username, password]);
+  
 
   return (
     // Main container for the Login Page
@@ -108,50 +57,10 @@ const LoginPage = () => {
               />
             </div>
           ) : (
-            // Login form when not loading
-            <Form
-              className="d-flex flex-column justify-content-center mt-5 mb-5"
-              onSubmit={handleSubmit}
-            >
-              {/* Username and Password fields */}
-              <Row>
-                <Col md={12}>
-                  <Form.Group className="mb-3" controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                      placeholder="Username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-
-                <Col md={12}>
-                  <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-
-              {/* Submit button */}
-              <Button variant="success" type="submit">
-                Login
-              </Button>
-            </Form>
+            <LoginPageForm setLoading={setLoading}/>
           )}
 
-          {/* Guest login and registration links */}
-          <div className="text-center mt-5 mb-5">
-            <Button variant="success" onClick={handleGuestLogin}>
-              Login with Guest Account
-            </Button>
-          </div>
+
           <div className="text-center">
             <Link to="/register">
               <Button variant="link">Don't have an account? Register</Button>
