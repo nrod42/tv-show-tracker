@@ -6,7 +6,6 @@
 
 .listSectionDark {
     background:#393E41;
-    transition: background 0.3s;
 }
 
 
@@ -38,10 +37,6 @@
 .list:hover {
     filter: brightness(85%);
     cursor: pointer;
-}
-
-a {
-    text-decoration: none;
 }
 
 .listDetails {

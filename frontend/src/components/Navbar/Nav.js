@@ -33,12 +33,12 @@ const Nav = () => {
       bg={darkMode ? "dark" : "light"}
       variant={darkMode ? "dark" : "light"}
       expand="lg"
-      className={`mb-3 ${styles.navbar}`}
+      className={styles.navbar}
       fixed="top"
     >
       <Container fluid>
         <NavBrand />
-        <Navbar.Toggle />
+        <Navbar.Toggle onClick={handleCollapseToggle} />
         {/* Toggle collapsible */}
         <Navbar.Collapse in={collapseOpen}>
           <Row className="align-items-center w-100">

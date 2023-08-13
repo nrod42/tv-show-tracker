@@ -19,7 +19,7 @@ const HomePageBackdrop = () => {
         alt={`${randomBackdrop.title} poster`}
       />
       <div className={styles.titleWrapper}>
-        <h1 className={styles.title}>Welcome to Track TV</h1>
+        <h1 className={styles.title}>Welcome to Trackr</h1>
         <h2 className={styles.title}>
           Keep track of your favorite movies and shows
         </h2>

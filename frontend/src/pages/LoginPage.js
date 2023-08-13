@@ -2,13 +2,13 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../contexts/DarkModeContext";
 import { RandomBackdropContext } from "../contexts/RandomBackdropContext";
+import { ColorRing } from "react-loader-spinner";
+import LoginPageForm from "../components/LoginPage/LoginPageForm";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-
 import styles from "./LoginPage.module.css";
-import { ColorRing } from "react-loader-spinner";
 import defaultMediaIcon from "../img/default_media_icon.svg";
-import LoginPageForm from "../components/LoginPage/LoginPageForm";
+import logo from '../img/popcorn.png';
 
 const LoginPage = () => {
   // Context and State variables
@@ -40,7 +40,13 @@ const LoginPage = () => {
           }
         >
           {/* Login header */}
-          <h2 className="text-center">Login To Your Account</h2>
+          <h1 className={`mb-5 ${styles.brand}`}>
+            <div className={styles.logoWrapper}>
+              <img src={logo} alt="logo" className={styles.logoImg} />
+            </div>
+            Trackr
+          </h1>
+          <h2 className="text-center">Login</h2>
 
           {/* Conditionally show loading spinner or login form */}
           {loading ? (

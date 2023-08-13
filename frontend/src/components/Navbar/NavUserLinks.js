@@ -1,12 +1,11 @@
 import React, { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 import Nav from "react-bootstrap/Nav";
 import lightModeIcon from "../../img/light_mode_icon.svg";
 import darkModeIcon from "../../img/dark_mode_icon.svg";
 import styles from "./NavUserLinks.module.css";
-import { UserContext } from "../../contexts/UserContext";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
   const navigate = useNavigate();
@@ -24,8 +23,7 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
     };
 
     fetchUserProfile();
-    console.log(userInfo)
-  }, []);
+  }, [userInfo]);
 
   // Handle user logout
   const logout = () => {
@@ -57,7 +55,7 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
         alt="dark mode"
         className={`${styles.darkModeToggle} ms-3`}
         style={{ width: "30px", height: "auto" }}
-        onClick={handleDarkMode} // Handle dark mode toggle
+        onClick={handleDarkMode}
       />
     </Nav>
   );

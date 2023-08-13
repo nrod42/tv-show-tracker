@@ -26,7 +26,6 @@ footer {
 }
 
 .App {
-  background: #F8F9FA;
   max-width: 100vw;
   min-height: 100%;
   position: relative;
@@ -39,9 +38,9 @@ footer {
     text-decoration: none !important;
   }
 
-  form > div > div >  input {
-    border-radius: 0 !important;
-  }
+  // form > div > * {
+  //   border-radius: 0 !important;
+  // }
   
 
 }

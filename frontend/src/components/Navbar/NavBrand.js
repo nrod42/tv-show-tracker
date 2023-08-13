@@ -7,8 +7,10 @@ import logo from "../../img/popcorn.png";
 const NavBrand = () => {
   return (
     <Navbar.Brand as={Link} to="/" className={styles.navbarBrand}>
-      <img src={logo} alt="logo" className={styles.logo} />
-      Track TV
+      <div className={styles.logoWrapper}>
+        <img src={logo} alt="logo" className={styles.logoImg} />
+      </div>
+      Trackr
     </Navbar.Brand>
   );
 };

@@ -30,7 +30,7 @@ const WatchListTabsPage = () => {
     };
 
     fetchLists();
-  }, [userInfo.id]);
+  }, []);
 
   return (
     <div

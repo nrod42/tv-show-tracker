@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../apiConfig";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// import styles from './RegisterPageForm.module.css';
+import InputGroup from "react-bootstrap/InputGroup";
+import { BsEnvelope, BsPerson, BsLock } from "react-icons/bs";
+import styles from './RegisterPageForm.module.css'
 
 const RegisterPageForm = ({ setLoading }) => {
+    // State variables to store user input
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -24,75 +27,97 @@ const RegisterPageForm = ({ setLoading }) => {
         }
 
         try {
-        setLoading(true);
-        // Send registration data to the backend
-        const response = await fetch(`${API_URL}/register`, {
-            method: "POST",
-            body: JSON.stringify({
-            email,
-            username,
-            password,
-            }),
-            headers: { "Content-Type": "application/json" },
-        });
+            setLoading(true);
+            // Send registration data to the backend
+            const response = await fetch(`${API_URL}/register`, {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    username,
+                    password,
+                }),
+                headers: { "Content-Type": "application/json" },
+            });
 
-        // Handle registration success or failure
-        if (response.ok) {
-            alert("Registration successful");
-            navigate("/login");
-        } else {
-            alert("Registration failed");
-        }
+            // Handle registration success or failure
+            if (response.ok) {
+                alert("Registration successful");
+                navigate("/login");
+            } else {
+                alert("Registration failed");
+            }
         } catch (error) {
-        console.error("Error registering", error);
+            console.error("Error registering", error);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }
 
     return (
+        // Registration form
         <Form
-            className={`d-flex flex-column justify-content-center mt-5 mb-3`}
+            className={'d-flex flex-column justify-content-center mt-4 mb-3'}
             onSubmit={register}
-            style={{maxWidth: '300px'}}
+            style={{width: '275px'}}
         >
-            <div className="mb-3">
-                <Form.Group controlId="formEmail">
-                    <Form.Control
+            {/* Email input */}
+            <InputGroup>
+                <InputGroup.Text className={styles.registerInput}>
+                    <BsEnvelope />
+                </InputGroup.Text>
+                <Form.Control
                     type="email"
                     placeholder="Email"
+                    className={styles.registerInput}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formUsername">
-                    <Form.Control
+                />
+            </InputGroup>
+            
+            {/* Username input */}
+            <InputGroup>
+                <InputGroup.Text className={styles.registerInput}>
+                    <BsPerson />
+                </InputGroup.Text>
+                <Form.Control
                     placeholder="Username"
                     value={username}
+                    className={styles.registerInput}
                     onChange={(e) => setUsername(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formPassword">
-                    <Form.Control
+                />
+            </InputGroup>
+            
+            {/* Password input */}
+            <InputGroup>
+                <InputGroup.Text className={styles.registerInput}>
+                    <BsLock />
+                </InputGroup.Text>
+                <Form.Control
                     type="password"
                     placeholder="Password"
+                    className={styles.registerInput}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formConfirmPassword">
-                    <Form.Control
+                />
+            </InputGroup>
+            
+            {/* Confirm Password input */}
+            <InputGroup>
+                <InputGroup.Text className={styles.registerInput}>
+                    <BsLock style={{color: 'black'}}/>
+                </InputGroup.Text>
+                <Form.Control
                     type="password"
                     placeholder="Confirm Password"
                     value={confirmPassword}
+                    className={styles.registerInput}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </Form.Group>
-            </div>
+                />
+            </InputGroup>
 
             {/* Register button */}
-            <Button variant="success" type="submit" className="mt-3">
-                Register
+            <Button variant="success" type="submit" className="mt-4 mb-5">
+                Sign Up
             </Button>
 
         </Form>
