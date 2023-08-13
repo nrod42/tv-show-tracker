@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import Nav from "react-bootstrap/Nav";
@@ -10,20 +10,6 @@ import Cookies from "js-cookie";
 const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
   const navigate = useNavigate();
   const { userInfo, setUserInfo } = useContext(UserContext);
-
-  useEffect(() => {
-    // Verify User Profile
-    const fetchUserProfile = async () => {
-      try {
-        const token = Cookies.get("token");
-        token ? setUserInfo(userInfo) : setUserInfo(null);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserProfile();
-  }, [userInfo]);
 
   // Handle user logout
   const logout = () => {
