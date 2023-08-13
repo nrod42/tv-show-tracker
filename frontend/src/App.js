@@ -7,17 +7,20 @@ import AnimatedRoutes from "./AnimatedRoutes";
 
 const App = () => {
   return (
+    <UserContextProvider>
     <div className="App">
-      <DarkModeContextProvider>
-        <UserContextProvider>
+      
+        <DarkModeContextProvider>
           <RandomBackdropContextProvider>
             <Nav />
             <AnimatedRoutes />
             <footer>© {new Date().getFullYear()} - Nigel Rodriguez</footer>
           </RandomBackdropContextProvider>
-        </UserContextProvider>
-      </DarkModeContextProvider>
+        </DarkModeContextProvider>
+     
+
     </div>
+    </UserContextProvider>
   );
 };
 

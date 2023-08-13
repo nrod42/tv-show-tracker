@@ -12,16 +12,16 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
   const { userInfo, setUserInfo } = useContext(UserContext);
 
   // Handle user logout
-  const logout = () => {
-    Cookies.remove("token"); // Remove token from cookies
-    navigate("/"); // Navigate to home page
-    setUserInfo(null); // Clear user info
-    handleNavLinkClick(); // Handle navigation link click
+  const logout = () => {   
+    Cookies.remove("token");
+    setUserInfo(null);
+    navigate("/");
+    handleNavLinkClick(); 
   };
 
   return (
     <Nav className="text-center">
-      {!userInfo ? (
+      {!userInfo?.id ? (
         // Display registration and login links if user is not logged in
         <>
           <Nav.Link as={Link} to="/register" onClick={handleNavLinkClick}>
