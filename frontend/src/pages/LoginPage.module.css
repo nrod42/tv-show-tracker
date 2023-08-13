@@ -27,14 +27,13 @@
 
 .loginPageInfoLight, .loginPageInfoDark {
     padding: 50px;
-    border-radius: 25px;
     transition: background 0.2s;
 }
 
 .loginPageInfoLight {
-    background: rgba(248, 249, 250, 0.8);
+    background: rgb(248, 249, 250);
 }
 
 .loginPageInfoDark {
-    background: rgba(33, 37, 41, 0.9);
+    background: rgb(33, 37, 41);
 }

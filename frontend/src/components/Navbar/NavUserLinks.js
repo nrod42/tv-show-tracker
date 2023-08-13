@@ -24,7 +24,8 @@ const NavUserLinks = ({ darkMode, handleDarkMode, handleNavLinkClick }) => {
     };
 
     fetchUserProfile();
-  }, [userInfo, setUserInfo]);
+    console.log(userInfo)
+  }, []);
 
   // Handle user logout
   const logout = () => {

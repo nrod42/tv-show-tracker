@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { API_URL } from "../../apiConfig";
 import { UserContext } from "../../contexts/UserContext";
@@ -66,20 +64,15 @@ const LoginPageForm = ({setLoading}) => {
             onSubmit={login}
             >
             {/* Username and Password fields */}
-                <Row>
-                <Col md={12}>
-                    <Form.Group className="mb-3" controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
+                <div>
+                    <Form.Group controlId="formUsername">
                     <Form.Control
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     </Form.Group>
-                </Col>
-                <Col md={12}>
-                    <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Group controlId="formPassword">
                     <Form.Control
                         type="password"
                         placeholder="Password"
@@ -87,17 +80,17 @@ const LoginPageForm = ({setLoading}) => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     </Form.Group>
-                </Col>
-                </Row>
+                </div>
                 {/* Submit button */}
-                <Button variant="success" type="submit">
-                Login
+                <Button variant="success" type="submit" className="mt-3">
+                    Login
                 </Button>
             </Form>
+
             {/* Guest login and registration links */}
-                <div className="text-center mt-5 mb-5">
+            <div className="text-center mt-3 mb-5">
                 <Button variant="success" onClick={handleGuestLogin}>
-                Login with Guest Account
+                    Login with Guest Account
                 </Button>
             </div>
         </>

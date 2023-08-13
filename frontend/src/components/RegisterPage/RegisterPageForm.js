@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../apiConfig";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+// import styles from './RegisterPageForm.module.css';
 
 const RegisterPageForm = ({ setLoading }) => {
-
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -23,8 +19,8 @@ const RegisterPageForm = ({ setLoading }) => {
 
         // Check if passwords match
         if (password !== confirmPassword) {
-        alert("Passwords do not match. Please make sure they match.");
-        return;
+            alert("Passwords do not match. Please make sure they match.");
+            return;
         }
 
         try {
@@ -36,8 +32,6 @@ const RegisterPageForm = ({ setLoading }) => {
             email,
             username,
             password,
-            firstName,
-            lastName,
             }),
             headers: { "Content-Type": "application/json" },
         });
@@ -58,64 +52,27 @@ const RegisterPageForm = ({ setLoading }) => {
 
     return (
         <Form
-            className="d-flex flex-column justify-content-center mt-5 mb-5"
+            className={`d-flex flex-column justify-content-center mt-5 mb-3`}
             onSubmit={register}
+            style={{maxWidth: '300px'}}
         >
-            <Row>
-            {/* First Name and Last Name fields */}
-            <Row className="mb-3">
-                <Col md={6}>
-                <Form.Group controlId="formFirstName">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                    type="text"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    />
-                </Form.Group>
-                </Col>
-                <Col md={6}>
-                <Form.Group controlId="formLastName">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    />
-                </Form.Group>
-                </Col>
-            </Row>
-            {/* Email and Username fields */}
-            <Row className="mb-3">
-                <Col md={6}>
+            <div className="mb-3">
                 <Form.Group controlId="formEmail">
-                    <Form.Label>E-Mail</Form.Label>
                     <Form.Control
                     type="email"
-                    placeholder="E-Mail"
+                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     />
                 </Form.Group>
-                </Col>
-                <Col md={6}>
                 <Form.Group controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
                     <Form.Control
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Group>
-                </Col>
-            </Row>
-            {/* Password and Confirm Password fields */}
-            <Row className="mb-3">
-                <Col md={6}>
                 <Form.Group controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
                     <Form.Control
                     type="password"
                     placeholder="Password"
@@ -123,26 +80,21 @@ const RegisterPageForm = ({ setLoading }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                </Col>
-                <Col md={6}>
                 <Form.Group controlId="formConfirmPassword">
-                    <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
                     type="password"
-                    placeholder="Password"
+                    placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </Form.Group>
-                </Col>
-            </Row>
-            </Row>
+            </div>
+
             {/* Register button */}
-            <div className="text-center mt-3">
-            <Button variant="success" type="submit">
+            <Button variant="success" type="submit" className="mt-3">
                 Register
             </Button>
-            </div>
+
         </Form>
     )
 }

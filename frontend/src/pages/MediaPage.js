@@ -31,8 +31,6 @@ const MediaPage = () => {
   const [trailer, setTrailer] = useState("");
   const [lgShow, setLgShow] = useState(false);
 
-  // const mediaType = window.location.pathname.includes("shows") ? "tv" : "movie";
-
   // Fetch media details
   const fetchMediaDetails = async () => {
     const mediaInfo = await getMediaDetails(id, mediaType);

@@ -5,11 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 import WatchListTab from "../components/WatchListTab";
 import styles from "./WatchListTabsPage.module.css";
 
-/**
- * Lists component displays the user's watch lists.
- * It fetches the user's data from the API and renders the watch lists using the WatchList component.
- */
-const Lists = () => {
+const WatchListTabsPage = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { userInfo } = useContext(UserContext);
 
@@ -34,7 +30,7 @@ const Lists = () => {
     };
 
     fetchLists();
-  }, [userInfo]);
+  }, [userInfo.id]);
 
   return (
     <div
@@ -73,4 +69,4 @@ const Lists = () => {
   );
 };
 
-export default Lists;
+export default WatchListTabsPage;

@@ -27,16 +27,15 @@
 
 .registerPageInfoLight, .registerPageInfoDark {
     padding: 50px;
-    border-radius: 25px;
     transition: background 0.2s;
 }
 
 .registerPageInfoLight {
-    background: rgba(248, 249, 250, 0.8);
+    background: rgba(248, 249, 250);
 }
 
 .registerPageInfoDark {
-    background: rgba(33, 37, 41, 0.9);
+    background: rgba(33, 37, 41);
 }
 
 

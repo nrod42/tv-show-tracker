@@ -6,19 +6,13 @@ const jwt = require("jsonwebtoken");
 const salt = bcrypt.genSaltSync(10);
 const secret = "osdjkgfnesfg9-303";
 
-router.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/public", "index.html"));
-});
-
 router.post("/register", async function (req, res) {
-  const { email, username, password, firstName, lastName } = req.body;
+  const { email, username, password } = req.body;
   try {
     const userDoc = await User.create({
       email,
       username,
       password: bcrypt.hashSync(password, salt),
-      firstName,
-      lastName,
     });
     res.json(userDoc);
   } catch (err) {

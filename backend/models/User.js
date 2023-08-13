@@ -6,8 +6,6 @@ const UserSchema = new Schema(
     email: String,
     username: { type: String, required: true },
     password: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
     watching: {
       movies: [{ type: String }],
       tvShows: [{ type: String }],

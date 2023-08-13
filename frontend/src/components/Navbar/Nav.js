@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-
 import NavBrand from "./NavBrand";
 import NavCatLinks from "./NavCatLinks";
 import NavSearchbar from "./NavSearchbar";
@@ -39,7 +38,7 @@ const Nav = () => {
     >
       <Container fluid>
         <NavBrand />
-        <Navbar.Toggle onClick={handleCollapseToggle} />
+        <Navbar.Toggle />
         {/* Toggle collapsible */}
         <Navbar.Collapse in={collapseOpen}>
           <Row className="align-items-center w-100">
