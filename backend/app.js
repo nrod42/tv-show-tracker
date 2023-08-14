@@ -34,6 +34,9 @@ app.use(
       "https://cinetrakr.onrender.com/",
       "http://cinetrakr.onrender.com",
       "http://cinetrakr.onrender.com/",
+      "https://onrender.com",
+      "https://onrender.com/",
+      "http://onrender.com",
     ],
   })
 );
