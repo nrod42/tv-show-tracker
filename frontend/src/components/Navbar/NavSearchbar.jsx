@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { getResults } from "../API/getMedia";
+import getResults from "../API/getResults.tsx";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import searchIcon from "../../img/search_icon.svg";

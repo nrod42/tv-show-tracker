@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DarkModeContext } from "../contexts/DarkModeContext";
-import { getActorInfo, getActorRoles } from "../components/API/getMedia";
+import getActorRoles from "../components/API/getActorRoles.tsx";
+import getActorInfo from "../components/API/getActorInfo.tsx";
 import { format } from "date-fns";
 import ActorPageRole from "../components/ActorPageRole";
 import Container from "react-bootstrap/esm/Container";

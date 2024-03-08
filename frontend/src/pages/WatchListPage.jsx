@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { API_URL } from "../apiConfig";
-import { DarkModeContext } from "../contexts/DarkModeContext";
-import { UserContext } from "../contexts/UserContext";
-import { getMediaDetails } from "../components/API/getMedia";
-import MediaCard from "../components/Cards/MediaCard";
+import { API_URL } from "../apiConfig.jsx";
+import { DarkModeContext } from "../contexts/DarkModeContext.jsx";
+import { UserContext } from "../contexts/UserContext.jsx";
+import getMediaDetails from "../components/API/getMediaDetails.tsx";
+import MediaCard from "../components/Cards/MediaCard.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

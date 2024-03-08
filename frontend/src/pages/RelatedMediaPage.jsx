@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DarkModeContext } from "../contexts/DarkModeContext";
-import {
-  getMediaDetails,
-  getRecMedia,
-  getSimilarMedia,
-} from "../components/API/getMedia";
+import getMediaDetails from "../components/API/getMediaDetails.tsx";
+import getRecMedia from "../components/API/getRecMedia.tsx";
+import getSimilarMedia from "../components/API/getSimilarMedia.tsx";
 import MediaCard from "../components/Cards/MediaCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

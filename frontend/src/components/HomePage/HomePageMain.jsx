@@ -1,5 +1,5 @@
 import React from "react";
-import CardStripSection from "../../components/CardStripSection";
+import CardStripSection from "../CardStripSection";
 
 const HomePageMain = ({ popularMovies, topMovies, popularTV, topTV }) => {
   return (

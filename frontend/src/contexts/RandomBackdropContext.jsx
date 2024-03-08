@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getTopMedia, getPopularMedia, getMediaDetails } from "../components/API/getMedia";
+import { getTopMedia, getPopularMedia } from "../components/API/getMedia.tsx";
+import getMediaDetails from "../components/API/getMediaDetails.tsx";
 
 const RandomBackdropContext = createContext({});
 const RandomBackdropContextProvider = ({ children }) => {

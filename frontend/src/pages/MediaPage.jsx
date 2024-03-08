@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DarkModeContext } from "../contexts/DarkModeContext";
-import {
-  getMediaDetails,
-  getMediaCredits,
-  getSimilarMedia,
-  getRecMedia,
-  getMediaTrailer,
-} from "../components/API/getMedia";
+import getMediaDetails from "../components/API/getMediaDetails.tsx";
+import getMediaCredits from "../components/API/getMediaCredits.tsx";
+import getRecMedia from "../components/API/getRecMedia.tsx";
+import getSimilarMedia from "../components/API/getSimilarMedia.tsx";
+import getMediaTrailer from "../components/API/getMediaTrailer.tsx";
 import CardStripSection from "../components/CardStripSection";
 import MediaPageInfoSection from "../components/MediaPage/MediaPageInfoSection";
 import MediaPageBackdrop from "../components/MediaPage/MediaPageBackdrop";

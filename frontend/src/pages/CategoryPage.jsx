@@ -15,7 +15,7 @@ import {
   getAiringTodayTV,
   getUpcomingMovies,
   getNowPlayingMovies,
-} from "../components/API/getMedia";
+} from "../components/API/getMedia.tsx";
 import uniqid from "uniqid";
 
 const CategoryPage = () => {

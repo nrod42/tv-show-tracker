@@ -1,5 +1,5 @@
 import React from "react";
-import AddToListBtn from "../../components/AddToListBtn";
+import AddToListBtn from "../AddToListBtn";
 import Button from "react-bootstrap/Button";
 import defaultMediaIcon from "../../img/default_media_icon.svg";
 

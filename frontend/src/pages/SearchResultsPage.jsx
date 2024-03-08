@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import MediaCard from "../components/Cards/MediaCard";
-import { getResults } from "../components/API/getMedia";
+import MediaCard from "../components/Cards/MediaCard.jsx";
+import getResults from "../components/API/getResults.tsx";
 import styles from "./SearchResultsPage.module.css";
 import uniqid from "uniqid";
 
