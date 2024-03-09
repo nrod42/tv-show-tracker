@@ -4,7 +4,7 @@ import { DarkModeContext } from "../contexts/DarkModeContext";
 import getMediaDetails from "../components/API/getMediaDetails.tsx";
 import getRecMedia from "../components/API/getRecMedia.tsx";
 import getSimilarMedia from "../components/API/getSimilarMedia.tsx";
-import MediaCard from "../components/Cards/MediaCard";
+import MediaCard from "../components/Cards/MediaCard.tsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

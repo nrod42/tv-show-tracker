@@ -6,7 +6,19 @@ import RemoveFromListBtn from "../RemoveFromListBtn";
 import Card from "react-bootstrap/Card";
 import defaultMediaIcon from "../../img/default_media_icon.svg";
 
-const MediaCard = ({ mediaData, setReload }) => {
+interface MediaCard {
+  mediaData: {
+  id: string;
+  poster: string | null;
+  title: string;
+  role: string;
+  rating: string;
+  year: string;
+  type: string;
+  }
+}
+
+const MediaCard: React.FC<MediaCard> = ({ mediaData, setReload }) => {
   // Access dark mode state from context
   const { darkMode } = useContext(DarkModeContext);
 

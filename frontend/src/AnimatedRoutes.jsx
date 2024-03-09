@@ -5,12 +5,12 @@ import HomePage from "./pages/HomePage";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import WatchListTabsPage from "./pages/WatchListTabsPage";
 import WatchListPage from "./pages/WatchListPage";
-import CategoryPage from "./pages/CategoryPage";
+import CategoryPage from "./pages/CategoryPage.tsx";
 import MediaPage from "./pages/MediaPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import PersonPage from "./pages/PersonPage";
-import FullCreditsPage from "./pages/FullCreditsPage";
+import FullCreditsPage from "./pages/FullCreditsPage.tsx";
 import RelatedMediaPage from "./pages/RelatedMediaPage";
 
 const AnimatedRoutes = () => {
@@ -27,10 +27,7 @@ const AnimatedRoutes = () => {
         <Route path="/lists/:listType" element={<WatchListPage />} />
         <Route path="/:mediaType/:id" element={<MediaPage />} />
         <Route path="/:mediaType/credits/:id" element={<FullCreditsPage />} />
-        <Route
-          path="/:mediaType/category/:category"
-          element={<CategoryPage />}
-        />
+        <Route path="/:mediaType/category/:category" element={<CategoryPage />} />
         <Route
           path="/:mediaType/related/:relation/:id"
           element={<RelatedMediaPage />}

@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import MediaCard from "../components/Cards/MediaCard.jsx";
+import MediaCard from "../components/Cards/MediaCard.tsx";
 import getResults from "../components/API/getResults.tsx";
 import styles from "./SearchResultsPage.module.css";
 import uniqid from "uniqid";

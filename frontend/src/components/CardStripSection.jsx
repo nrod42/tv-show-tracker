@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../contexts/DarkModeContext";
 import PersonCard from "./Cards/PersonCard";
-import MediaCard from "./Cards/MediaCard";
+import MediaCard from "./Cards/MediaCard.tsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import rightArrowWhite from "../img/right_arrow_white.svg";

@@ -1,15 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext.jsx";
 import getMediaCredits from "../components/API/getMediaCredits.tsx";
-import PersonCard from "../components/Cards/PersonCard";
+import PersonCard from "../components/Cards/PersonCard.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import uniqid from "uniqid";
 import styles from "./FullCreditsPage.module.css";
 
-const FullCreditsPage = () => {
+interface Credits {
+  cast: Person[];
+  crew: Person[];
+}
+
+interface Person {
+  id: String;
+  name: String;
+  character: String;
+}
+interface FullCreditsPageProps {}
+
+const FullCreditsPage: React.FC<FullCreditsPageProps> = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { mediaType, id } = useParams();
 

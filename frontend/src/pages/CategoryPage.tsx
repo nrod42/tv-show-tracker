@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DarkModeContext } from "../contexts/DarkModeContext";
+import { DarkModeContext } from "../contexts/DarkModeContext.jsx";
 import { motion } from "framer-motion";
-import MediaNav from "../components/MediaNav";
-import MediaCard from "../components/Cards/MediaCard";
+import MediaNav from "../components/MediaNav.jsx";
+import MediaCard from "../components/Cards/MediaCard.tsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,16 +18,18 @@ import {
 } from "../components/API/getMedia.tsx";
 import uniqid from "uniqid";
 
-const CategoryPage = () => {
+interface CategoryPageProps {}
+
+const CategoryPage: React.FC<CategoryPageProps> = () => {
   const { darkMode } = useContext(DarkModeContext);
   const { mediaType, category } = useParams();
-  const [media, setMedia] = useState([]); // State to store the fetched media
-  const [page, setPage] = useState(1); // State to track the current page number
-  const [leftovers, setLeftovers] = useState([]); // State to store extra fetched media
+  const [media, setMedia] = useState<any[]>([]); // State to store the fetched media
+  const [page, setPage] = useState<number>(1); // State to track the current page number
+  const [leftovers, setLeftovers] = useState<any[]>([]); // State to store extra fetched media
   const targetResults = 18; // Number of items you want to fetch and display
 
   // Utility function to format category title
-  const formatTitle = (title) => {
+  const formatTitle = (title: string) => {
     return title
       .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -41,31 +43,31 @@ const CategoryPage = () => {
   };
 
   // Function to fetch media based on category and page
-  const fetchMedia = async (currentPage) => {
-    let newMedia = [];
+  const fetchMedia = async (currentPage: number) => {
+    // let newMedia = [];
 
     switch (category) {
       case "popular":
-        newMedia = await getPopularMedia(mediaType, currentPage);
-        break;
+        return await getPopularMedia(mediaType, currentPage);
+        // break;
       case "now-playing":
-        newMedia = await getNowPlayingMovies(currentPage);
-        break;
+        return await getNowPlayingMovies(currentPage);
+        // break;
       case "upcoming":
-        newMedia = await getUpcomingMovies(currentPage);
-        break;
+        return await getUpcomingMovies(currentPage);
+        // break;
       case "airing-today":
-        newMedia = await getAiringTodayTV(currentPage);
-        break;
+        return await getAiringTodayTV(currentPage);
+        // break;
       default:
-        newMedia = await getTopMedia(mediaType, currentPage);
+        return await getTopMedia(mediaType, currentPage);
     }
 
-    return newMedia;
+    // return newMedia;
   };
 
   // Function to fetch a page of media and update state
-  const fetchPage = async (newPage) => {
+  const fetchPage = async (newPage: number) => {
     let mediaData = [...leftovers]; // Include any leftover items from previous fetches
     let currentPage = newPage; // Use a separate variable to track the page
 

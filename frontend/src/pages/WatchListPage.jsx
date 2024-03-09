@@ -4,7 +4,7 @@ import { API_URL } from "../apiConfig.jsx";
 import { DarkModeContext } from "../contexts/DarkModeContext.jsx";
 import { UserContext } from "../contexts/UserContext.jsx";
 import getMediaDetails from "../components/API/getMediaDetails.tsx";
-import MediaCard from "../components/Cards/MediaCard.jsx";
+import MediaCard from "../components/Cards/MediaCard.tsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
