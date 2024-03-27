@@ -1,11 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-import getActorPics from "../API/getActorPics.tsx";
+import getActorPics from "../API/getActorPics";
 import Card from "react-bootstrap/Card";
 import defaultMediaIcon from "../../img/default_media_icon.svg";
 
-const PersonCard = ({ person }) => {
+interface PersonCardProps {
+  person: {
+    id: string;
+    name: string;
+    character: string;
+  };
+}
+
+const PersonCard: React.FC<PersonCardProps> = ({ person }) => {
   // Access dark mode state from context
   const { darkMode } = useContext(DarkModeContext);
 
@@ -13,14 +21,16 @@ const PersonCard = ({ person }) => {
   const { id, name, character } = person;
 
   // State to store actor's profile picture
-  const [actorPic, setActorPic] = useState("");
+  const [actorPic, setActorPic] = useState<string>("");
 
   // Fetch actor's profile picture on component mount or when ID changes
   useEffect(() => {
-    (async () => {
+    const fetchActorPic = async () => {
       const actorPic = await getActorPics(id);
       setActorPic(actorPic);
-    })();
+    };
+
+    fetchActorPic();
   }, [id]);
 
   return (
@@ -32,7 +42,7 @@ const PersonCard = ({ person }) => {
         <Card.Img
           variant="top"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          src={actorPic !== null ? actorPic : defaultMediaIcon}
+          src={actorPic || defaultMediaIcon}
         />
       </Card.Link>
       
